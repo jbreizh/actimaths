@@ -1,0 +1,60 @@
+<liste>
+  <onglet nom="Sixieme">
+    <categorie nom="Gestion de données">
+      
+    </categorie>
+    <categorie nom="Nombres et Calculs">
+      
+    </categorie>
+    <categorie nom="Géométrie">
+      <exercice commande="sixieme_geometrie_espace.main" description="Espace" nom="Représentation dans l'espace"/>
+    </categorie>
+    <categorie nom="Grandeurs et mesures">
+
+    </categorie>
+  </onglet>
+    <onglet nom="Cinquieme">
+    <categorie nom="Gestion de données">
+
+    </categorie>
+    <categorie nom="Nombres et Calculs">
+      
+    </categorie>
+    <categorie nom="Géométrie">
+
+
+    </categorie>
+    <categorie nom="Grandeurs et mesures">
+
+    </categorie>
+  </onglet>
+  <onglet nom="Quatrieme">
+    <categorie nom="Gestion de données">
+
+    </categorie>
+    <categorie nom="Nombres et Calculs">
+      
+    </categorie>
+    <categorie nom="Géométrie">
+
+
+    </categorie>
+    <categorie nom="Grandeurs et mesures">
+
+    </categorie>
+  </onglet>
+  <onglet nom="Troisieme">
+    <categorie nom="Gestion de données">
+
+    </categorie>
+    <categorie nom="Nombres et Calculs">
+     
+    </categorie>
+    <categorie nom="Géométrie">
+
+    </categorie>
+    <categorie nom="Grandeurs et mesures">
+
+    </categorie>
+  </onglet>
+</liste>

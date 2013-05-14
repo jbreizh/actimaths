@@ -1,0 +1,20 @@
+# Maintainer: Jean-Baptiste Le Coz <jb.lecoz@gmail.com>
+
+pkgname=actimaths
+pkgver=1.11
+pkgrel=1
+pkgdesc="Generates math exercises with LaTeX/Pstricks (only in french)"
+url='http://www.pyromaths.org/'
+license=('GPL2') 
+arch=('any')
+depends=('python2' 'python2-qt' 'python2-lxml' 'texlive-pstricks' 'texlive-latexextra')
+source=(http://mathsecaillou.ile.nc/actimaths/$pkgname-${pkgver}-sources.tar.bz2)
+
+build() {
+  chmod -R 755 $srcdir/${pkgname}/src
+  cd $srcdir/${pkgname}/src
+  python2 setup_linux.py install --root="$pkgdir" --prefix=/usr
+
+}
+
+md5sums=('4be9360f60bea6ac0d37027a6697f455')

@@ -1,0 +1,61 @@
+%%!TEX TS-program = latex
+\RequirePackage{etex}
+\documentclass[c]{beamer}
+
+% Package
+\usepackage[utf8]{inputenc} % UTF-8
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel} % francisation
+\usepackage{amssymb} % the amsfont symbols
+\usepackage{multicol} % Multi-colonnes
+\usepackage{calc} % Opérations
+\usepackage{cancel} % draw diagonal lines
+\usepackage{units} % typesetting units and nice fractions
+\usepackage{wrapfig} % allows figures or tables to have text wrapped around
+\usepackage{pst-all,pst-eucl}
+\usepackage{wasysym} % Symbole Euro
+\DecimalMathComma
+
+% Donnee
+\title{##{{TITRE}}##}
+\author{##{{AUTEUR}}##}
+\institute{##{{ETABLISSEMENT}}##}
+\date{##{{DATEACTIVITE}}##}
+
+% Fonction
+\newcounter{exo}
+\newcommand \question{
+  \only<1>{
+    \refstepcounter{exo}
+	\stepcounter{nocalcul}
+	\begin{center}
+		\begin{minipage}{50mm}
+		      \begin{block}{}
+		            \begin{center}
+		                  \textbf{Question \theexo}
+		            \end{center}
+		      \end{block}
+		\end{minipage}
+	\end{center}
+    \transduration{1}}
+  \only<2>{
+    \frametitle{Question \theexo}
+    \transduration{##{{TEMPSSLIDE}}##}}}
+
+% Theme
+\usetheme{Warsaw}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.5cm}
+\setbeamersize{text margin right=0.5cm}
+
+\begin{document}
+\newcounter{nocalcul}[exo]
+\renewcommand{\thenocalcul}{\Alph{nocalcul}}
+
+\begin{frame}
+	\titlepage
+	\begin{center}
+	Vous avez ##{{TEMPSSLIDE}}## secondes par question
+	\end{center}
+\end{frame}

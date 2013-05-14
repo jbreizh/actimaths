@@ -1,0 +1,4 @@
+#!/usr/bin/env python2
+
+from actimaths import actimaths
+actimaths.main()

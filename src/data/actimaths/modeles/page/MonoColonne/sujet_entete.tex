@@ -1,0 +1,33 @@
+%%!TEX TS-program = latex
+\RequirePackage{etex}
+\documentclass[a4paper,11pt]{article}
+
+% Package
+\usepackage[utf8]{inputenc} % UTF-8
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel} % francisation
+\usepackage{amssymb} % the amsfont symbols
+\usepackage{amsmath} % the amsfont symbols
+\usepackage{multicol} % Multi-colonnes
+\usepackage{calc} % Opérations
+\usepackage{cancel} % draw diagonal lines
+\usepackage{units} % typesetting units and nice fractions
+\usepackage{wrapfig} % allows figures or tables to have text wrapped around
+\usepackage{pst-all,pst-eucl}
+\usepackage{wasysym} % Symbole Euro
+\DecimalMathComma
+\usepackage{longtable}
+
+% Fonction
+\newcounter{exo}
+
+%theme
+\usepackage[a4paper, dvips, left=0.5cm, right=0.5cm, top=1cm,bottom=2cm]{geometry}
+\usepackage[pdfauthor={##{{AUTEUR}}##},pdftitle={##{{TITRE}}##} ]{hyperref}
+
+\begin{document}
+\newcounter{nocalcul}[exo]
+\renewcommand{\thenocalcul}{\Alph{nocalcul}}
+
+\begin{longtable}{|p{3cm}|p{15cm}|}

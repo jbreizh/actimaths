@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<liste>
+  <onglet nom = "Gestion de données">
+    <categorie nom = "Sixième">
+
+    </categorie>
+    <categorie nom = "Cinquième">
+      
+    </categorie>
+    <categorie nom = "Quatrième">
+
+    </categorie>
+    <categorie nom = "Troisième">
+
+    </categorie>
+  </onglet>
+  <onglet nom = "Nombres et Calculs">
+    <categorie nom = "Sixième">
+     
+    </categorie>
+    <categorie nom = "Cinquième">
+     
+    </categorie>
+    <categorie nom = "Quatrième">
+
+    </categorie>
+    <categorie nom = "Troisième">
+     
+    </categorie>
+  </onglet>
+  <onglet nom = "Géométrie">
+    <categorie nom = "Sixième">
+      <exercice commande="sixieme_geometrie_espace.main" description="Espace" nom="Représentation dans l'espace"/>
+    </categorie>
+    <categorie nom = "Cinquième">
+      
+    </categorie>
+    <categorie nom = "Quatrième">
+
+    </categorie>
+    <categorie nom = "Troisième">
+
+    </categorie>
+  </onglet>
+  <onglet nom = "Grandeurs et mesures">
+    <categorie nom = "Sixième">
+      
+    </categorie>
+    <categorie nom = "Cinquième">
+     
+    </categorie>
+    <categorie nom = "Quatrième">
+
+    </categorie>
+    <categorie nom = "Troisième">
+
+    </categorie>
+  </onglet>
+</liste>

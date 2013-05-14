@@ -1,0 +1,8 @@
+dependance:
+python (version 2.7.3 OK)
+pyQT (version 4.9.6 pour python 2.7 OK)
+lxml (version 3.0.2 pour python 2.7 OK)
+py2exe (version 0.6.10 pour python 2.7 OK)
+pywin32 (version 218 pour python 2.7 OK)
+innosetup (version 5.4.3 OK)
+
