@@ -104,7 +104,8 @@ def exo_quadrillage(f0, f1):
     pass
 
 
-def main():
+def main(parametre):
+    question = ""
     exo = ["\\exercice",
            u"Construire la symétrique de chacune des figures par rapport au point O en",
            "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
@@ -130,4 +131,4 @@ def main():
         if i < 2:
             exo.append("\\hfill")
             cor.append("\\hfill")
-    return (exo, cor)
+    return (exo, cor, question)
