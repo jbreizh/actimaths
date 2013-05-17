@@ -37,7 +37,7 @@ def choix_valeurs(min_prct, max_prct, min_nbre, max_nbre):
     tot = tot * randint( max(min_nbre / tot,1) , (max_nbre / tot ))
     return prct, tot
     
-def proportionnalite_3eme():
+def proportionnalite_3eme(parametre):
     #choix exercice
     i = randrange(2)
     #choix valeurs
@@ -97,8 +97,8 @@ def proportionnalite_3eme():
                    u" Le pourcentage d'élèves possédant un ordinateur est donc de $\\cfrac{%s}{%s}\\times 100 %s %s%s$"
                   %(nbTotal, Total, approx, decimaux(prct_final_arrondi), "\,\\%")],
                    ][i]
-    exo = ["\\exercice",
-           texte,
+    question = ""
+    exo = [texte,
            "\\begin{itemize}",
            ligne1,
            ligne2,
@@ -106,8 +106,7 @@ def proportionnalite_3eme():
            question,
            ]
         
-    cor = ["\\exercice*",
-           texte,
+    cor = [texte,
            "\\begin{itemize}",
            ligne1,
            ligne2,
@@ -117,7 +116,7 @@ def proportionnalite_3eme():
            ] + correction
     
     
-    return (exo,cor)
+    return (exo, cor, question)
 
 
 

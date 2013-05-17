@@ -127,13 +127,14 @@ def valeurs_puissances():  # renvoie un tuple contenant les valeurs pour les deu
     b = verifie_type((n1, n2, n3, e1, e2, e3, e4))
     return (a, b)
 
-def tex_puissances():
+def tex_puissances(parametre):
     sd = string.maketrans('.', ',')  # convertit les . en , (separateur decimal)
     valeurs = valeurs_puissances()
     i = randrange(2)
-    exo = ['\\exercice''', u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
+    question = ""
+    exo = [u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
     exo.append('\\begin{multicols}{2}\\noindent')
-    cor = ['\\exercice*''', u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
+    cor = [u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat."]
     cor.append('\\begin{multicols}{2}\\noindent')
     exo.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] ')
     cor.append(u'\\[ \\thenocalcul = ' + tex_puissances_0(valeurs[i]).translate(sd) + '\\] ')
@@ -155,4 +156,4 @@ def tex_puissances():
     cor.append(u'\\[ \\boxed{\\thenocalcul = ' + tex_puissances_4(valeurs[1 - i]).translate(sd) + '} \\] ')
     exo.append('\\end{multicols}')
     cor.append('\\end{multicols}')
-    return (exo, cor)
+    return (exo, cor, question)

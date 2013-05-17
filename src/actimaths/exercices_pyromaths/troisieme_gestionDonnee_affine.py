@@ -363,7 +363,7 @@ def exprfonc(f,i,A,B):
     return l
 
 
-def affine():
+def tex_affine(parametre):
     #Génère l'exercice
     xmin,xmax,ymin,ymax=-5,5,-5,5
     f=['f','g','h','k','l','u']
@@ -376,7 +376,8 @@ def affine():
     fonc3=f[(rgfonc1+2)%6]
     l3=exprfonc(fonc3,3,E,F)
     noms=nom3droites(A,B,C,D,E,F,xmin,xmax,ymin,ymax)
-    exo=["\\exercice", "\\parbox{0.5\\linewidth}{",
+    question = ""
+    exo=[ "\\parbox{0.5\\linewidth}{",
          u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
          "\\item "+l[0],
@@ -396,7 +397,7 @@ def affine():
          noms[2],
          "\\end{pspicture}}"]
 
-    cor=["\\exercice*", "\\setlength{\\columnsep}{2mm}",
+    cor=[ "\\setlength{\\columnsep}{2mm}",
          "\\begin{multicols}{2}\\noindent \\small",
          u"($d_1$) est la droite représentative de la fonction $"+fonc1+"$.",
          "\\begin{enumerate}",
@@ -446,7 +447,4 @@ def affine():
          "\\end{center}",
          "\\end{minipage}",
          "\\vspace{0.45cm}"]
-    return exo,cor
-
-def tex_affine():
-    return affine()
+    return (exo, cor, question)

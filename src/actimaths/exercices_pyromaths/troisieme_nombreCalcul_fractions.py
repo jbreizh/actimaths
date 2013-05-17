@@ -407,7 +407,7 @@ def valeurs_quotient_frac():  # cree 4 fractions et un tuple de signes (+,+)
     return ((n1, d1), (n2, 1), (n3, d3), (n4, 1), (s1, s2))
 
 
-def tex_fractions():
+def tex_fractions(parametre):
     nb_exos = 3
     tex_exos = (tex_somme_prod,
                 tex_prod_parenth,
@@ -416,9 +416,10 @@ def tex_fractions():
                     valeurs_prod_parenth,
                     valeurs_quotient_frac)
     ordre_exos = [i for i in range(nb_exos)]
-    exo = ['''\n\\exercice''', u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible."]
+    question = ""
+    exo = [ u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible."]
     exo.append('\\begin{multicols}{3}\\noindent')
-    cor = ['''\\exercice*''', u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible."]
+    cor = [ u"Calculer les expressions suivantes et donner le résultat sous la forme d'une fraction irréductible."]
     cor.append('\\begin{multicols}{3}\\noindent')
     for i in range(nb_exos):
         a = randrange(nb_exos - i)
@@ -429,4 +430,4 @@ def tex_fractions():
         else:
             exo.append('\\end{multicols}')
             cor.append('\\end{multicols}')
-    return (exo, cor)
+    return (exo, cor, question)

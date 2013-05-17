@@ -11,7 +11,8 @@
 
     </categorie>
     <categorie nom = "Troisième">
-
+      <exercice commande="exercices_pyromaths.troisieme_gestionDonnee_affine.tex_affine" description="" nom="Fonctions affines"/>
+      <exercice commande="exercices_pyromaths.troisieme_gestionDonnee_proba.tex_proba" description="" nom="Probabilités"/>
     </categorie>
   </onglet>
   <onglet nom = "Nombres et Calculs">
@@ -25,12 +26,13 @@
 
     </categorie>
     <categorie nom = "Troisième">
-     
+      <exercice commande="exercices_pyromaths.troisieme_nombreCalcul_fractions.tex_fractions" description="" nom="Fractions"/>
+      <exercice commande="exercices_pyromaths.troisieme_nombreCalcul_puissances.tex_puissances" description="" nom="Puissances"/>
     </categorie>
   </onglet>
   <onglet nom = "Géométrie">
     <categorie nom = "Sixième">
-      <exercice commande="sixieme_geometrie_espace.main" description="Espace" nom="Représentation dans l'espace"/>
+      <exercice commande="exercices_pyromaths.sixieme_geometrie_espace.main" description="Espace" nom="Représentation dans l'espace"/>
     </categorie>
     <categorie nom = "Cinquième">
       

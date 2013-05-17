@@ -33,8 +33,8 @@ from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 
 ## Import spécifique à Actimaths
-from exercices_actimaths import *
-from exercices_pyromaths import *
+import exercices_actimaths
+import exercices_pyromaths
 from values import CONFIGDIR, HOME, VERSION, DESCRIPTION, COPYRIGHTS, MAIL, WEBSITE
 
 ###==============================================================

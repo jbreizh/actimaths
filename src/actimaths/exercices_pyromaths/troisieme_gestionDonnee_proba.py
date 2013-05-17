@@ -67,7 +67,7 @@ def proba(exo, cor):
          u"\\item Quelle est la probabilité de tirer une boule %s au premier tirage?\\par " %c2,
          "Il y a %s boules dans l'urne dont %s boule%s %s%s. \\par"%(tot,n2,plur2,c2,plur2),
          u" La probabilité de tirer une boule %s au premier tirage est donc $\\dfrac{%s}{%s}$."%(c2,n2,tot),
-         u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.\\\ [0,3cm] ",
+         u"\\item Construire un arbre des probabilités décrivant l'expérience aléatoire.\\par [0,3cm] ",
          "\\psset{unit=1 mm}",
          "\\psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}",
          "\\psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}",
@@ -111,9 +111,10 @@ def proba(exo, cor):
     for st in cors:
         cor.append(st)
         
-def tex_proba():
-    exo=['\\exercice']
-    cor=['\\exercice*']
+def tex_proba(parametre):
+    question = ""
+    exo=[]
+    cor=[]
     proba(exo,cor)
-    return (exo, cor)
+    return (exo, cor, question)
 
