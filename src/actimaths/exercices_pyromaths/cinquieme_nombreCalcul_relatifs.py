@@ -71,10 +71,11 @@ def moins_dec(pyromax):
 
 
 
-def main():
-    exo = ["\\exercice", "Effectuer sans calculatrice :",
+def main(parametre):
+    question = ""
+    exo = ["Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    cor = ["\\exercice*", "Effectuer sans calculatrice :",
+    cor = ["Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     modules = (plus, moins, )
     modules_dec= (plus_dec, moins_dec, )
@@ -103,4 +104,4 @@ def main():
                        cor)
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
-    return (exo, cor)
+    return (exo, cor, question)

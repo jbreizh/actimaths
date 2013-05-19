@@ -41,7 +41,7 @@ def ncotation_h(A,B,longueur,couleur=""):
     return u"\\ncline[linestyle=dashed, offset = 1.5, linewidth = 0.4pt %s]{<->}{%s}{%s}  \\Aput{%s %s}" %(linecouleur,A, B,couleur,longueur )
 
 
-def exo_echelles():
+def exo_echelles(parametre):
     """À partir d'un plan tracé, déterminer l'échelle et des longueurs déterminées."""
 
     #Échelle
@@ -76,7 +76,8 @@ def exo_echelles():
     cotation_couleur[choix][1] = "enonce"
     
     #figure PSTricks en fonction des paramètres a, d, xE, XF, yF
-    figure = ["\\psset{PointName = none,  PointSymbol = none, unit = 1mm, linewidth = .5pt}",
+    figure = ["{",
+              "\\psset{PointName = none,  PointSymbol = none, unit = 1mm, linewidth = .5pt}",
               "\\definecolor{enonce}{rgb}{0.11,0.56,0.98}",
               "\\begin{pspicture}(-10mm, -10mm)(50mm ,50mm)",
               #le rectangle ABCD
@@ -98,16 +99,17 @@ def exo_echelles():
               ncotation("B", "G1", cotation_couleur[1][0], cotation_couleur[1][1]),
               ncotation("F1", "B", cotation_couleur[2][0], cotation_couleur[2][1]),
               ncotation_h("A", "D", cotation_couleur[3][0], cotation_couleur[3][1]),
-              "\\end{pspicture}"]
+              "\\end{pspicture}",
+              "}"]
 
-
-    exo = [u"\\exercice Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} :\n"%(enonce, decimaux(reels[choix]/1000.0))] \
+    question = ""
+    exo = [u"Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} :\n"%(enonce, decimaux(reels[choix]/1000.0))] \
           + figure +\
            ["\\begin{enumerate}",
            u"\\item Déterminer l'échelle de ce plan.",
            u"\\item Déterminer les longueurs réelles $%s$, $%s$ et $%s$."%(reponses[0], reponses[1], reponses[2]),
             "\\end{enumerate}"]
-    cor = [u"\\exercice* Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} : \n"%(enonce, decimaux(reels[choix]/1000.0))] \
+    cor = [u"Sur ce plan, la longueur $%s$ mesure en réalité \\unit[%s]{m} : \n"%(enonce, decimaux(reels[choix]/1000.0))] \
            + figure +\
           ["\\begin{enumerate}",
            u"\\item Déterminer l'échelle de ce plan.\\par",
@@ -131,9 +133,9 @@ def exo_echelles():
                    %tuple(map(lambda n:decimaux(n/1000.0),reels)),
            "\\end{enumerate}"]
             
-    return exo, cor
+    return (exo, cor, question)
 
-def exo_fruits():
+def exo_fruits(parametre):
     fruit = ["Cerises", "Tomates", "Pommes", "Poires", "Raisin", "Oranges"][randrange(6)]
     while 1:
         a, b, c = randint(10, 50)/10.0, randint(10, 50)/10.0, randint(10, 50)/10.0
@@ -160,14 +162,15 @@ def exo_fruits():
                u"%s (en \\euro)  & %s &  \\bf %s  & %s \\\\"%prix_c,
                "\hline",
                "\\end{tabular}"]
-    exo = [u"\\exercice Le prix à payer est proportionnel à la masse de fruits achetés.\\par",
+    question = ""
+    exo = [u"Le prix à payer est proportionnel à la masse de fruits achetés.\\par",
            u"Détermine la valeur des cases vides"]
-    cor = [u"\\exercice Le prix à payer est proportionnel à la masse de fruits achetés.\\par",
+    cor = [u"Le prix à payer est proportionnel à la masse de fruits achetés.\\par",
            u"Détermine la valeur des cases vides"]
     exo += ["\n"] + tableau_exo
     cor += ["\n"] + tableau_cor
     cor.append("$$\\frac{%s \\times %s}{%s} = %s \\quad;\\qquad"%(prix_e[1], fruits_e[2], fruits_e[1],prix_c[2]))
     cor.append("\\frac{%s \\times %s}{%s} = %s $$"%(fruits_c[1], prix_c[3], prix_e[1],fruits_c[3]))
     
-    return (exo, cor)
+    return (exo, cor, question)
 

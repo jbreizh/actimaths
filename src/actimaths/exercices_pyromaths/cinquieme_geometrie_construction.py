@@ -40,7 +40,7 @@ def shuffle_nom(polygone):
         nom+=polygone[i]
     return nom
 
-def exo_triangle(test=False):
+def exo_triangle(parametre,test=False):
     questions=[quest_equilateral,
            quest_LAL,
            quest_ALA,
@@ -50,10 +50,9 @@ def exo_triangle(test=False):
            quest_rectangle_hypo_cote,
            quest_rectangle_hypo_angle,
            ]
-    exo=["\\exercice",
-         "\\begin{enumerate}"]
-    cor=["\\exercice*",
-         "\\begin{enumerate}"]
+    question = ""
+    exo=["\\begin{enumerate}"]
+    cor=["\\begin{enumerate}"]
     cor.append("\\definecolor{enonce}{rgb}{0.11,0.56,0.98}")
     cor.append("\\definecolor{calcul}{rgb}{0.13,0.54,0.13}")
     cor.append(u"\\psset{MarkAngleRadius=0.6,PointSymbol=none}")
@@ -67,7 +66,7 @@ def exo_triangle(test=False):
 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
-    return exo,cor
+    return exo,cor,question
 
 def quest_equilateral(exo,cor):
     A,B,C=geo.choix_points(3)
@@ -158,7 +157,7 @@ def quest_AAL(exo,cor):
                %(nom,A,B,decimaux(c),B,A,C,angBAC,A,C,B,angACB))
     cor.append(u"\\item Trace un triangle $%s$ tel que $%s%s=\\unit[%s]{cm}$,  $\\widehat{%s%s%s}=%s\\degres$ et $\\widehat{%s%s%s}=%s\\degres$\\par"
                %(nom,A,B,decimaux(c),B,A,C,angBAC,A,C,B,angACB))
-    cor.append(u"On doit d'abord calculer la mesure de $\\widehat{%s%s%s}$.\\\\"
+    cor.append(u"On doit d'abord calculer la mesure de $\\widehat{%s%s%s}$.\\par"
                %(A,B,C))
     cor.append(u"Or la somme des trois angles d'un triangle est égale à 180\\degres donc $\\widehat{%s%s%s}=180\\degres-%s\\degres-%s\\degres=%s\\degres$.\\par"
                %(A,B,C,angBAC,angACB,angABC))
@@ -220,7 +219,7 @@ def quest_isocele_angprincipal(exo,cor):
                %(nom,C,A,B,decimaux(c),A,C,B,angACB))
     cor.append(u"Comme $%s%s%s$ est un triangle isocèle en $%s$, je sais que les angles adjacents à la base sont de même mesure \
 donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par"%(A,B,C,C,A,B,C,B,A,C))
-    cor.append(u"De plus, je sais que la somme des mesures des trois angles d'un triangle est égale à 180\\degres \\\\ \
+    cor.append(u"De plus, je sais que la somme des mesures des trois angles d'un triangle est égale à 180\\degres \\par \
 donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s\\degres)\\div 2=%s\\degres$. \\par"
                %(B,A,C,A,B,C,angACB,angBAC))
     cor.append(u"\\begin{pspicture}(-1,-1)(%s,%s)"%(c+1,y_C+1))
@@ -252,10 +251,9 @@ def quest_rectangle_hypo_angle(exo,cor):
     cor.append(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,C,A,B,decimaux(c),B,A,C,angBAC))
 ##    cor.append("\\begin{multicols}{2}")
-    cor.append(u"Je sais que dans un triangle rectangle, les deux angles aigus sont complémentaires \\\\ \
+    cor.append(u"Je sais que dans un triangle rectangle, les deux angles aigus sont complémentaires \\par \
 donc $\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres$.\\par"%(B,A,C,angBAC,angABC))
     
-    cor.append("\\figureadroite{")
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(c+0.4,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(A,C,B))
@@ -263,16 +261,13 @@ donc $\widehat{%s%s%s}=90\\degres-%s\\degres=%s\\degres$.\\par"%(B,A,C,angBAC,an
     cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
     cor.append(u"\\color{calcul}\\pstMarkAngle[linecolor=calcul]{%s}{%s}{%s}{%s\\degres}"%(C,B,A,angABC))
-    cor.append(u"\\end{pspicture}}{")
+    cor.append(u"\\end{pspicture}")
     cor.append("\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(c)))
     cor.append(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\widehat{%s%s%s}$ ;"%(A,C,B,A,C))
     cor.append(u"\\item puis la demi-droite $[%s%s)$ en traçant l'angle~$\widehat{%s%s%s}$ ;"%(B,C,A,B,C))
-##    cor.append(u"\\item enfin je vérifie les trois {\\color{enonce}conditions de l'énoncé}.")
     cor.append("\\end{enumerate}\n")
-##    cor.append("\\end{multicols}")
-    cor.append("}")
-    
+  
 def quest_rectangle_hypo_cote(exo,cor):
     """on donne un triangle ABC rectangle en B et l'hypotenuse AC et le coté AB"""
     A,B,C=geo.choix_points(3)
@@ -289,8 +284,7 @@ def quest_rectangle_hypo_cote(exo,cor):
                %(nom,B,A,B,decimaux(c),A,C,decimaux(b)))
     cor.append(u"\\item Trace un triangle $%s$ rectangle en $%s$ tel que $%s%s=\\unit[%s]{cm}$, $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,B,A,B,decimaux(c),A,C,decimaux(b)))
-##    cor.append("\\begin{multicols}{2}")
-    cor.append("\\figureadroite{")
+
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(c+0.4,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,c,B,x_C,y_C,C))
     cor.append(u"\\color{enonce}\\pstRightAngle[linecolor=enonce]{%s}{%s}{%s}"%(C,B,A))
@@ -300,14 +294,12 @@ def quest_rectangle_hypo_cote(exo,cor):
     cor.append(u"\\pstLineAB{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,B,B,C))
     cor.append(cotation((0,0),(c,0),decimaux(c),couleur="enonce"))
     cor.append(cotation_h((0,0),(x_C,y_C),decimaux(b),couleur="enonce"))
-    cor.append(u"\\end{pspicture}}{")
+    cor.append(u"\\end{pspicture}")
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(c)))
     cor.append(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"%(A,B,C))
     cor.append(u"\\item enfin, je reporte au compas la longueur \\mbox{$%s%s=\\unit[%s]{cm}$} à partir de $%s$."%(A,C,decimaux(b),A))
-    cor.append("\\end{enumerate}}")
-##    cor.append("\\end{multicols}")
-
+    cor.append("\\end{enumerate}")
 
 #################################################################################################
 #   Les construction sont faites avec [AB] horizontale (ou avec la diagonale [AC] horizontale)
@@ -324,12 +316,10 @@ def quest_rectangle_hypo_cote(exo,cor):
 #
 ###################################################################################################
 
-def exo_quadrilatere(test=False):
-    
-    exo=["\\exercice",
-         "\\begin{enumerate}"]
-    cor=["\\exercice*",
-         "\\begin{enumerate}"]
+def exo_quadrilatere(parametre,test=False):
+    question = ""
+    exo=["\\begin{enumerate}"]
+    cor=["\\begin{enumerate}"]
     cor.append("\\definecolor{enonce}{rgb}{0.11,0.56,0.98}")
     #couleur pour reporter les informations de la consigne
     cor.append("\\definecolor{calcul}{rgb}{0.13,0.54,0.13}")
@@ -364,7 +354,7 @@ def exo_quadrilatere(test=False):
         #questions[11], le carré n'est jamais proposé
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
-    return exo,cor
+    return exo,cor,question
 
 ################################################################
 
@@ -387,7 +377,6 @@ def quest_rectangle_diag(exo,cor):
     cor.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $%s%s=\\unit[%s]{cm}$.\\par"
                %(nom,A,B,decimaux(L),A,C,decimaux(Diag)))
     #figure
-    cor.append("\\figureadroite{")
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(L+0.4,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,L,B,x_C,y_C,C))
     cor.append(u"\\pstGeonode[PosAngle=135](0,%s){%s}"%(y_C,D))
@@ -401,16 +390,15 @@ def quest_rectangle_diag(exo,cor):
     cor.append(u"\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}\\pstLineAB{%s}{%s}\\pstLineAB[nodesepB=-1]{%s}{%s}"%(A,D,C,D,A,B,B,C))
     cor.append(cotation((0,0),(L,0),decimaux(L),couleur="enonce"))
     cor.append(cotation_h((0,0),(x_C,y_C),decimaux(Diag),couleur="enonce"))
-    cor.append(u"\\end{pspicture}}{")
+    cor.append(u"\\end{pspicture}")
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(L)))
     cor.append(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"%(A,B,C))
     cor.append(u"\\item je reporte au compas la longueur $%s%s=\\unit[%s]{cm}$ à partir de $%s$ ;"%(A,C,decimaux(Diag),A))
     cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le point $%s$."%(A,C,D))
-    cor.append("\\end{enumerate}}")
+    cor.append("\\end{enumerate}")
     
-
 def quest_rectangle_angle(exo,cor):
     """On donne un rectangle ABCD avec le côté AB et l'angle BAC"""
     A,B,C,D=geo.choix_points(4)
@@ -427,7 +415,6 @@ def quest_rectangle_angle(exo,cor):
     cor.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,B,decimaux(L),B,A,C,angBAC))
     
-    cor.append("\\figureadroite{")
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(L+0.4,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,L,B,x_C,y_C,C))
     cor.append(u"\\pstGeonode[PosAngle=135](0,%s){%s}"%(y_C,D))
@@ -438,14 +425,14 @@ def quest_rectangle_angle(exo,cor):
                %(A,D,C,D,A,B,B,C,A,C))
     cor.append(cotation((0,0),(L,0),decimaux(L),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
-    cor.append(u"\\end{pspicture}}{")
+    cor.append(u"\\end{pspicture}")
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,B,decimaux(L)))
     cor.append(u"\\item puis je trace l'angle droit $\\widehat{%s%s%s}$ ;"%(A,B,C))
     cor.append(u"\\item la demi-droite $[%s%s)$ en mesurant $\\widehat{%s%s%s}=%s\\degres$."%(A,C,B,A,C,angBAC))
     cor.append(u"\\item je trace enfin les angles droit en $%s$ et en $%s$ pour placer le point $%s$."%(A,C,D))
-    cor.append("\\end{enumerate}}")
+    cor.append("\\end{enumerate}")
 
 def quest_rectangle_angle_diag(exo,cor):
     """On donne un rectangle ABCD de centre E, la diagonale AC et l'angle AEB"""
@@ -465,8 +452,6 @@ def quest_rectangle_angle_diag(exo,cor):
                %(nom,E,A,C,decimaux(Diag),A,E,B,angAEB))
 ##    cor.append("\\begin{multicols}{2}")
     #Programme de construction
-    cor.append("\\figureadroite{")
-##    cor.append("\columnbreak")
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(L+0.4,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,L,B,x_C,y_C,C))
     cor.append(u"\\pstGeonode[PosAngle={135,0}](0,%s){%s}(%s,%s){%s}"%(y_C,D,x_C/2.0,y_C/2.0,E))
@@ -484,7 +469,7 @@ def quest_rectangle_angle_diag(exo,cor):
     cor.append(u"\\psarc[linecolor=calcul](%s,%s){%s}{%s}{%s} "%(x_C/2.0,y_C/2.0,Diag/2,180+angBAC-7,180+angBAC+7))
     cor.append("\\pcline[linestyle=none](0,0)(%s,%s)\\aput*{:U}{\\color{enonce}\\unit[%s]{cm}}"%(L,y_C,decimaux(Diag)))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(A,E,B,angAEB))
-    cor.append(u"\\end{pspicture}}{")
+    cor.append(u"\\end{pspicture}")
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(Diag)))
     cor.append(u"\\item le centre du rectangle est le milieu des diagonales donc $%s$ est le milieu de $[%s%s]$ ;"%(E,A,C))
@@ -492,9 +477,7 @@ def quest_rectangle_angle_diag(exo,cor):
                %(B,D,E,A,E,B,angAEB))
     cor.append(u"\\item Comme les diagonales du rectangle sont de même longueur, je reporte les longueurs $%s%s=%s%s=\\unit[%s]{cm}$."
                %(E,D,E,B,decimaux(Diag/2)))
-##    cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour palcer le point $%s$."%(A,C,D))
-    cor.append("\\end{enumerate}}")
-##    cor.append("\\end{multicols}")
+    cor.append("\\end{enumerate}")
 
 def quest_rectangle_diag_angle(exo,cor):
     """On donne un rectangle ABCD la diagonale AC et l'angle BAC"""
@@ -513,9 +496,7 @@ def quest_rectangle_diag_angle(exo,cor):
     cor.append(u"\\item Trace un rectangle $%s$ tel que $%s%s=\\unit[%s]{cm}$ et $\\widehat{%s%s%s}=%s\\degres$.\\par"
                %(nom,A,C,decimaux(Diag),B,A,C,angBAC))
     
-##    cor.append("\\begin{multicols}{2}")
-    cor.append("\\figureadroite{")
-##    cor.append("\columnbreak")
+
     #figure
     cor.append(u"\\begin{pspicture}(-0.4,-1)(%s,%s)"%(L+0.4,y_C+1))
     cor.append(u"\\pstTriangle(0,0){%s}(%s,0){%s}(%s,%s){%s}"%(A,L,B,x_C,y_C,C))
@@ -528,15 +509,14 @@ def quest_rectangle_diag_angle(exo,cor):
                %(A,D,C,D,A,B,B,C))
     cor.append(cotation_h((0,0),(L,y_C),decimaux(Diag),couleur="enonce"))
     cor.append(u"\\color{enonce}\\pstMarkAngle[linecolor=enonce]{%s}{%s}{%s}{%s\\degres}"%(B,A,C,angBAC))
-    cor.append(u"\\end{pspicture}}{")
+    cor.append(u"\\end{pspicture}")
     #Programme de construction
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item Je trace le segment $[%s%s]$ mesurant $\\unit[%s]{cm}$ ;"%(A,C,decimaux(Diag)))
     cor.append(u"\\item la demi-droite $[%s%s)$ en mesurant \\mbox{$\\widehat{%s%s%s}=%s\\degres$} ;"%(A,B,B,A,C,angBAC))
     cor.append(u"\\item puis la perpendiculaire à $[%s%s)$ passant par~$%s$ ;"%(A,B,C))
     cor.append(u"\\item je trace enfin les angles droits en $%s$ et en $%s$ pour placer le point~$%s$."%(A,C,D))
-    cor.append("\\end{enumerate}}")
-##    cor.append("\\end{multicols}")
+    cor.append("\\end{enumerate}")
 
 ################## PARALLÉLOGRAMMES QUELCONQUES ###########################
     
@@ -693,7 +673,6 @@ def quest_losange_DD(exo,cor):
     
     cor.append(u"Je note $%s$ le centre du losange.\\par"%E)
     
-    cor.append("\\figureadroite{")
     cor.append(u"\\begin{pspicture}(%s,%s)(%s,%s)"%(-BD/2-0.7,-AC/2-0.4,BD/2+0.4,AC/2+0.4))
     cor.append(u"\\pstGeonode[PosAngle={-90,0,90,180}](0,%s){%s}(%s,0){%s}(0,%s){%s}(%s,0){%s}"
                %(-AC/2,A,BD/2,B,AC/2,C,-BD/2,D))
@@ -710,13 +689,13 @@ def quest_losange_DD(exo,cor):
     cor.append("\\pstRightAngle[linecolor=calcul]{%s}{%s}{%s}"%(B,E,C))
     cor.append(cotation_h((-BD/2,0),(0,0),decimaux(BD/2),couleur="enonce"))
     cor.append(cotation_h((0,-AC/2),(0,0),decimaux(AC/2),couleur="enonce"))
-    cor.append(u"\\end{pspicture}}{")
+    cor.append(u"\\end{pspicture}")
     cor.append(u"Les diagonales du losange se coupent perpendiculairement en leur milieu~$%s$ ;  on a donc :"%E)
     cor.append(u"\\begin{enumerate}")
     cor.append(u"\\item $%s%s=%s%s=\\unit[%s]{cm}$ \\item $%s%s=%s%s=\\unit[%s]{cm}$ ;"
                %(A,E,C,E,decimaux(AC/2),B,E,E,D,decimaux(BD/2)))
     cor.append(u"\\item $(%s%s)\\perp(%s%s)$."%(A,C,B,D))
-    cor.append("\\end{enumerate}}\n")
+    cor.append("\\end{enumerate}\n")
 
 def quest_losange_CC(exo,cor):
     """On donne un losange avec la longueur d'un côté et un angle entre côtés"""
@@ -819,7 +798,7 @@ def quest_losange_CDbis(exo,cor):
     cor.append(u"Les quatre côtés du losange sont de même longueur donc $%s%s=%s%s=%s%s=%s%s$.\\par"%(A,B,B,C,C,D,D,A))
     cor.append(u"Ainsi, le triangle $%s%s%s$ est isocèle en $%s$ et je peux calculer la mesure des angles $\\widehat{%s%s%s}=\\widehat{%s%s%s}$.\\par"
                %(A,C,D,A,A,C,D,C,A,D))
-    cor.append(u"Dans un triangle, la somme des angles du triangle est égale à 180\\degres\\\\")
+    cor.append(u"Dans un triangle, la somme des angles du triangle est égale à 180\\degres \\par")
     cor.append(u"donc $\\widehat{%s%s%s}=\\widehat{%s%s%s}=(180\\degres-%s)\\div2=%s\\degres$"%(A,C,D,C,A,D,angCDA,angCAD))
     #Programme de construction
     cor.append(u"\\begin{enumerate}")

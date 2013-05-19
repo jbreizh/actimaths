@@ -271,14 +271,15 @@ def tex_produit(exo, cor):
     cor.append((u'\\[ \\boxed{%s} \\] ').expandtabs(2 * 3) % (formule))
 
 
-def Operations():
+def Operations(parametre):
     nb_exos = 3
     tex_exos = (tex_somme, tex_difference, tex_produit)
 
     ordre_exos = [i for i in range(nb_exos)]
 
-    exo = ["\\exercice", u'Poser et effectuer les opérations suivantes.', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
-    cor = ["\\exercice*", u'Poser et effectuer les opérations suivantes.', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+    question = ""
+    exo = [u'Poser et effectuer les opérations suivantes.', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+    cor = [u'Poser et effectuer les opérations suivantes.', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
 
     for i in range(nb_exos):
         a = random.randrange(nb_exos - i)
@@ -288,7 +289,7 @@ def Operations():
     exo.append('\\end{multicols}')
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
-    return (exo, cor)
+    return (exo, cor, question)
 
 #===============================================================================
 # Calcul mental
@@ -351,9 +352,10 @@ def div(valeurmax):
 
 
 
-def CalculMental():
-    exo = ["\\exercice", 'Effectuer sans calculatrice :', '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
-    cor = ["\\exercice*", 'Effectuer sans calculatrice :', '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
+def CalculMental(parametre):
+    question = ""
+    exo = ['Effectuer sans calculatrice :', '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
+    cor = ['Effectuer sans calculatrice :', '\\begin{multicols}{4}\\noindent', '\\begin{enumerate}']
 
     tex_calcul_mental(exo, cor)
 
@@ -361,7 +363,7 @@ def CalculMental():
     exo.append('\\end{multicols}')
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 #===============================================================================
@@ -449,9 +451,10 @@ def valeurs10(nb):  # renvoie nb valeur de chaque type : *10, /10, *0.1
 
 
 
-def ProduitPuissanceDix():
-    exo = ["\\exercice", u'Compléter sans calculatrice :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
-    cor = ["\\exercice*", u'Compléter sans calculatrice :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+def ProduitPuissanceDix(parametre):
+    question = ""
+    exo = [u'Compléter sans calculatrice :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
+    cor = [u'Compléter sans calculatrice :', '\\begin{multicols}{2}\\noindent', '\\begin{enumerate}']
 
     tex_dix(exo, cor)
 
@@ -459,4 +462,4 @@ def ProduitPuissanceDix():
     exo.append('\\end{multicols}')
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
-    return (exo, cor)
+    return (exo, cor, question)

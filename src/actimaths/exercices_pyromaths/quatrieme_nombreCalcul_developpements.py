@@ -28,12 +28,11 @@ from random import randrange
 # ------------------- DEVELOPPEMENTS -------------------
 
 
-def exo_distributivite():
-    exo = ["\\exercice",
-           u"Développer et réduire les expressions suivantes :",
+def exo_distributivite(parametre):
+    question = ""
+    exo = [u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
-    cor = ["\\exercice*",
-           u"Développer et réduire les expressions suivantes :",
+    cor = [u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     for i in range(8):
         (l1, l2) = tex_developpe1(valeurs_distr(10))
@@ -43,15 +42,14 @@ def exo_distributivite():
         cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
-def exo_double_distributivite():
-    exo = ["\\exercice",
-           u"Développer et réduire les expressions suivantes :",
+def exo_double_distributivite(parametre):
+    question = ""
+    exo = [u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
-    cor = ["\\exercice*",
-           u"Développer et réduire les expressions suivantes :",
+    cor = [u"Développer et réduire les expressions suivantes :",
            "\\begin{multicols}{2}", "  \\noindent%"]
     for i in range(6):
         (l1, l2) = tex_developpe1(valeurs_dbldistr(10))
@@ -61,7 +59,7 @@ def exo_double_distributivite():
         cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 def coef_opposes(a):  # renvoie un tuple dont les valeurs sont les opposees de celles de a

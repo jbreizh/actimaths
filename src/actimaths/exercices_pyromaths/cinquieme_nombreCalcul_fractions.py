@@ -27,10 +27,11 @@ import string
 from outils import Arithmetique
 
 
-def fractions_egales():
-    exo = ["\\exercice", u"Compléter :", "\\begin{multicols}{4}",
+def fractions_egales(parametre):
+    question = ""
+    exo = [u"Compléter :", "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
-    cor = ["\\exercice*", u"Compléter :", "\\begin{multicols}{4}",
+    cor = [u"Compléter :", "\\begin{multicols}{4}",
            "  \\begin{enumerate}"]
     for i in range(8):
         n = d = 1
@@ -64,15 +65,14 @@ def fractions_egales():
                        tuple(solution))
     exo.extend(["  \\end{enumerate}", "\end{multicols}\n"])
     cor.extend(["  \\end{enumerate}", "\end{multicols}\n"])
-    return (exo, cor)
+    return (exo, cor, question)
 
 
-def sommes_fractions():
-    exo = ["\\exercice",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+def sommes_fractions(parametre):
+    question = ""
+    exo = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
-    cor = ["\\exercice*",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+    cor = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
     for i in range(8):
         if random.randrange(2):
@@ -116,17 +116,16 @@ def sommes_fractions():
                        Fractions.TeX(fr))
         exo.append("\\stepcounter{nocalcul}%")
         cor.append("\\stepcounter{nocalcul}%")
-    exo.append("\end{multicols}\n")
-    cor.append("\end{multicols}\n")
-    return (exo, cor)
+    exo.append("\\end{multicols}\n")
+    cor.append("\\end{multicols}\n")
+    return (exo, cor, question)
 
 
-def produits_fractions():
-    exo = ["\\exercice",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+def produits_fractions(parametre):
+    question = ""
+    exo = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
-    cor = ["\\exercice*",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+    cor = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent"]
     for i in range(8):
         n1=d1=n2=d2=a=b=2
@@ -159,6 +158,6 @@ def produits_fractions():
         cor.append("\\[ \\boxed{\\thenocalcul = %s} \\]" % Fractions.TeX(frs))
         exo.append("\\stepcounter{nocalcul}%")
         cor.append("\\stepcounter{nocalcul}%")
-    exo.append("\end{multicols}\n")
-    cor.append("\end{multicols}\n")
-    return (exo, cor)
+    exo.append("\\end{multicols}\n")
+    cor.append("\\end{multicols}\n")
+    return (exo, cor, question)

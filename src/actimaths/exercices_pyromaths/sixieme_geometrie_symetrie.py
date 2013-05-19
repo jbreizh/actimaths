@@ -70,9 +70,10 @@ def place_pts(vals, angle):
     return ("").join(txt)
 
 
-def SymetrieQuadrillage():
-    exo = ["\\exercice", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
-    cor = ["\\exercice*", u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
+def SymetrieQuadrillage(parametre):
+    question = ""
+    exo = [u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
+    cor = [u"Construire la symétrique de chacune des figures par rapport à la droite en", "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
 
     nbpts = 5
     langles = [0, 90, 45, 135]
@@ -105,5 +106,5 @@ def SymetrieQuadrillage():
         if j < 2:
             exo.append("\\hfill")
             cor.append("\\hfill")
-    return (exo, cor)
+    return (exo, cor, question)
 

@@ -169,7 +169,7 @@ def tex_liste_co(liste_coord):
         i=i+1
     return tlc
 
-def main():
+def main(parametre):
     nbpts = 13
     noms_pts=(noms_sommets(nbpts))
     coord_pts=coordo_pts(nbpts)
@@ -178,8 +178,8 @@ def main():
     rg2=abs(rg1-1)
     while len(coord_pts)<nbpts:
         coord_pts=coordo_pts(nbpts)
-    exo=["\\exercice",
-         "\\parbox{0.4\\linewidth}{",
+    question = ""
+    exo=["\\parbox{0.4\\linewidth}{",
          "\\begin{enumerate}",
          u"\\item Donner les coordonnées des points %s, %s, %s, %s, %s et %s." % tuple(noms_pts[0:6]),
          u"\\item Placer dans le repère les points %s, %s, %s, %s, %s et %s" %noms_pts[6:12] +u" de coordonnées respectives %s, %s, %s, %s, %s et %s. " %tuple(tex_liste_co(coord_pts[6:12])),
@@ -193,8 +193,7 @@ def main():
          "\\psline[linewidth=1.2pt]{->}(0,-5)(0,5)",
          place_points(coord_pts[0:6],noms_pts[0:6]),
          "\\end{pspicture}}"]
-    cor=["\\exercice*",
-         "\\parbox{0.4\\linewidth}{",
+    cor=["\\parbox{0.4\\linewidth}{",
          "\\psset{unit=0.8cm}",
          "\\begin{pspicture}(-5,-5)(5,5)",
          "\\psgrid[subgriddiv=2, subgridcolor=lightgray, gridlabels=8pt](0,0)(-5,-5)(5,5)",
@@ -213,5 +212,5 @@ def main():
          u"\\item Placer dans le repère le point %s d'%s %s et d'%s %s" %(noms_pts[12],voc[rg1],decimaux(str(coord_pts[12][rg1])),voc[rg2],decimaux(str(coord_pts[12][rg2]))),
          "\\end{enumerate}"]
     cor.append("}")
-    return(exo,cor)
+    return(exo,cor,question)
 

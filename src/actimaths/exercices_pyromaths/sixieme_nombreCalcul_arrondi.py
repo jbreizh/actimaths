@@ -29,7 +29,7 @@ def valide_hasard():
     nbre, unite = randint(1000,100000), randint(1,9)
     return float(nbre)*10+unite
 
-def ArrondirNombreDecimal():
+def ArrondirNombreDecimal(parametre):
     """Crée et corrige un exercice d'arrondis avec les encadrements."""
     hasard = [valide_hasard() for i in range(4)]
 
@@ -61,8 +61,9 @@ def ArrondirNombreDecimal():
             (hasard[2])/(10**(-choix_precision[2]+4)),
             (hasard[3])/(10**(-choix_precision[3]+4))]
 
-    exo = ["\\exercice", '\\begin{enumerate}']
-    cor = ["\\exercice*", '\\begin{enumerate}']
+    question = ""
+    exo = ["\\begin{enumerate}"]
+    cor = ["\\begin{enumerate}"]
 
 
     for k in range(4):
@@ -98,4 +99,4 @@ def ArrondirNombreDecimal():
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
 
-    return (exo, cor)
+    return (exo, cor, question)

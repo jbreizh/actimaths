@@ -66,10 +66,11 @@ def div(pyromax):
     return (a * b, a)
 
 
-def main():
-    exo = ["\\exercice", "Effectuer sans calculatrice :",
+def main(parametre):
+    question = ""
+    exo = ["Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    cor = ["\\exercice*", "Effectuer sans calculatrice :",
+    cor = ["Effectuer sans calculatrice :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     modules = (plus, moins, plus, div)
     calculs = [i for i in range(20)]
@@ -91,4 +92,4 @@ def main():
         calculs.pop(j)
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
-    return (exo, cor)
+    return (exo, cor, question)

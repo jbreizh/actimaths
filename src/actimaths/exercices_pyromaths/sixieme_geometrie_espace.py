@@ -144,7 +144,7 @@ def main(parametre):
     ptc2= conn2[random.randrange(0,len(conn2))]
     rp2=u"%s, %s, %s et %s sont les arêtes perpendiculaires à %s."%reponse2(pt1,ptc1,F1,F2)
     rp3=u"%s, %s et %s sont les arêtes parallèles à %s."%reponse3(pt2,ptc2,F1,F2)
-    exo=[u"Les figures 1 et 2 représentent le même cube %s%s%s%s%s%s%s%s.\\ "%tuple(noms_pts),
+    exo=[u"Les figures 1 et 2 représentent le même cube %s%s%s%s%s%s%s%s. \\par"%tuple(noms_pts),
          "\\psset{xunit=1.0cm,yunit=1.0cm,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}",
          "\\begin{pspicture*}(-2,-0.38)(15,4.5)",
          "\\psframe[fillstyle=solid,fillcolor=darkgray,framearc=0.2](-1,3.5)(-0.5,4)",
@@ -190,7 +190,7 @@ def main(parametre):
          u"\\item Donner toutes les arêtes perpendiculaires à [%s%s]."%(pt1,ptc1),
          u"\\item Donner toutes les arêtes parallèles à [%s%s]."%(pt2,ptc2),
          "\\end{enumerate}"]
-    cor=[u"Les figures 1 et 2 représentent le même cube %s%s%s%s%s%s%s%s.\\ "%tuple(noms_pts),
+    cor=[u"Les figures 1 et 2 représentent le même cube %s%s%s%s%s%s%s%s.\\par "%tuple(noms_pts),
          "\\psset{xunit=1.0cm,yunit=1.0cm,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}",
          "\\begin{pspicture*}(-2,-0.38)(15,4.5)",
          "\\psframe[fillstyle=solid,fillcolor=darkgray,framearc=0.2](-1,3.5)(-0.5,4)",
@@ -245,6 +245,3 @@ def main(parametre):
          "\\end{enumerate}"]
     question = ""
     return (exo,cor,question)
-
-
-

@@ -231,11 +231,11 @@ def figure():
     cor.append("\\end{enumerate}")
     return("\n".join(exo), "\n".join(cor))
 
-def main():
-    exo, cor, sol = [], [], []
-    exo = ["\\exercice", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
-    cor = ["\\exercice*", u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
+def main(parametre):
+    question = ""
+    exo = [u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
+    cor = [u"Calculer l'aire de chacune des figures suivantes dans l'unité d'aire donnée :\\par"]
     exercice = figure()
     exo.append(exercice[0])
     cor.append(exercice[1])
-    return(exo, cor)
+    return(exo, cor, question)

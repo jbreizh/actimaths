@@ -252,12 +252,11 @@ def valeurs_priorites_fractions(nb, entier=1):  # renvoie les 2 listes contenant
     return exercice
 
 
-def exo_sommes_fractions():
-    exo = ["\\exercice",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+def exo_sommes_fractions(parametre):
+    question = ""
+    exo = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
-    cor = ["\\exercice*",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+    cor = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     op = ["+", "-","+", "-","+", "-","+", "-"]
     for i in range(8):
@@ -277,15 +276,14 @@ def exo_sommes_fractions():
         cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
-def exo_produits_fractions():
-    exo = ["\\exercice",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+def exo_produits_fractions(parametre):
+    question = ""
+    exo = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
-    cor = ["\\exercice*",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+    cor = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{4}", "  \\noindent%"]
     op = ["*", "/","*", "/","*", "/","*", "/"]
     for i in range(8):
@@ -304,15 +302,14 @@ def exo_produits_fractions():
         cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
-def exo_priorites_fractions():
-    exo = ["\\exercice",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+def exo_priorites_fractions(parametre):
+    question = ""
+    exo = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{3}", "  \\noindent%"]
-    cor = ["\\exercice*",
-           u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
+    cor = [u"Effectuer les calculs suivants et donner le résultat sous la forme d'une fraction simplifiée :",
            "\\begin{multicols}{3}", "  \\noindent%"]
     for i in range(6):
         while True:
@@ -331,6 +328,5 @@ def exo_priorites_fractions():
         cor.append("\\stepcounter{nocalcul}%")
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
-exo_sommes_fractions()

@@ -8,11 +8,12 @@ from outils.Arithmetique import pgcd
 Fractions=Fractions.Fractions
 
 
-def exo_racines_degre2():
+def exo_racines_degre2(parametre):
     '''exercice recherche de racines second degré'''
 
-    exo=["\\exercice"]
-    cor=["\\exercice*"]
+    question = ""
+    exo=[]
+    cor=[]
     #intervalle pour les racines entières ou fractionnaire
     rac_min=-10
     rac_max=10
@@ -64,13 +65,14 @@ def exo_racines_degre2():
 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
-    return exo,cor
+    return exo,cor,question
 
-def exo_factorisation_degre2():
+def exo_factorisation_degre2(parametre):
     '''exercice recherche de racines second degré'''
 
-    exo=["\\exercice"]
-    cor=["\\exercice*"]
+    question = ""
+    exo=[]
+    cor=[]
     #intervalle pour les racines entières ou fractionnaire
     rac_min=-10
     rac_max=10
@@ -139,9 +141,9 @@ def exo_factorisation_degre2():
 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
-    return exo,cor
+    return exo,cor,question
 
-def exo_factorisation_degre3():
+def exo_factorisation_degre3(parametre):
     '''exercice de factorisation degre3'''
 
     #intervalle pour les racines entières ou fractionnaire
@@ -156,10 +158,10 @@ def exo_factorisation_degre3():
     #X est le polynome P=x pour faciliter la construction des polynômes, TODO : changer  l'inconnue
     inconnues=['x','y','z','t']
     nom_poly=['P','Q','R','S']
-    exo=["\\exercice",
-        "\\begin{enumerate}"]
-    cor=["\\exercice*",
-         "\\begin{enumerate}"]
+
+    question = ""
+    exo=["\\begin{enumerate}"]
+    cor=["\\begin{enumerate}"]
 
     X=Polynome({1:1},var="x")
     racines_quelconques=[i for i in range(-10,11)]
@@ -170,9 +172,9 @@ def exo_factorisation_degre3():
 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
-    return exo,cor
+    return exo,cor,question
 
-def exo_tableau_de_signe():
+def exo_tableau_de_signe(parametre):
     #intervalle pour les racines entières ou fractionnaire
     rac_min=-10
     rac_max=10
@@ -193,10 +195,10 @@ def exo_tableau_de_signe():
           poly_racines_fractionnaires(rac_min,rac_max,denom1,X),
           poly_racines_quelconques(abs_a,abs_b,abs_c,X)]
     intervalles=[[0,5],[-5,5],[float("-inf"),float("inf")]]
-    exo=["\\exercice",
-        "\\begin{enumerate}"]
-    cor=["\\exercice*",
-         "\\begin{enumerate}"]
+    
+    question = ""
+    exo=["\\begin{enumerate}"]
+    cor=["\\begin{enumerate}"]
     nomP="P"
     for i in range(len(Poly)):
         P=Poly[i]
@@ -221,14 +223,13 @@ def exo_tableau_de_signe():
         tableau_de_signe(P,nomP,delta,racines,cor,borneinf,bornesup,detail=False)
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
-    return exo,cor
+    return exo,cor,question
 
-def exo_variation():
+def exo_variation(parametre):
 
-    exo=["\\exercice",
-         "\\begin{enumerate}"]
-    cor=["\\exercice*",
-         "\\begin{enumerate}"]
+    question = ""
+    exo=["\\begin{enumerate}"]
+    cor=["\\begin{enumerate}"]
     quest1,cor1=quest_fonctions_rationnelles()
     quest2,cor2=quest_variation_degre3(borneinf=-10,bornesup=10)
 
@@ -237,14 +238,14 @@ def exo_variation():
 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
-    return exo,cor
+    return exo,cor,question
 
-def exo_variation_lim():
+def exo_variation_lim(parametre):
     """Étude de fonctions avec calculs de limites"""
-    exo=["\\exercice",
-         "\\begin{enumerate}"]
-    cor=["\\exercice*",
-         "\\begin{enumerate}"]
+
+    question = ""
+    exo=["\\begin{enumerate}"]
+    cor=["\\begin{enumerate}"]
     quest3,cor3=quest_variation_degre3(borneinf=float("-inf"),bornesup=float("+inf"))
     quest4,cor4=quest_fonctions_rationnelles_sur_R()
     exo+=quest3+quest4
@@ -252,7 +253,7 @@ def exo_variation_lim():
 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
-    return exo,cor
+    return exo,cor,question
 
 def quest_fonctions_rationnelles():
 

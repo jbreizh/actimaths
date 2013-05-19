@@ -142,7 +142,7 @@ def repr_somme(u,v,u1,u2,cor,larg=0):
     cor.append(u"\\end{pspicture*}")
     return largeur ## récupérer la largeur pour éviter d'aligner des figures trop larges sur la feuille
 
-def vecteurs_add():
+def vecteurs_add(parametre):
     '''Exercice sur la définition des vecteurs et leurs sommes.'''
     t = None
     while not t:
@@ -166,8 +166,9 @@ def vecteurs_add():
 
         t = ChoixVecteur(u,v,w,pointx,pointy)
 
-    exo=["\\exercice"]
-    cor=["\\exercice*"]
+    question = ""
+    exo=[]
+    cor=[]
 
     exo.append(u"\\begin{pspicture*}(0,0)(18,10)")
     exo.append(u"\\psgrid[subgriddiv=2, gridlabels=0pt]")
@@ -298,4 +299,4 @@ def vecteurs_add():
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
 
-    return exo,cor
+    return (exo, cor, question)

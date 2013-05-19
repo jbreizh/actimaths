@@ -146,9 +146,10 @@ def diviseurs(n):
     return l
 
 
-def FractionPartage():
-    exo = ["\\exercice", '\\begin{multicols}{2}', '\\begin{enumerate}']
-    cor = ["\\exercice*", '\\begin{multicols}{2}', '\\begin{enumerate}']
+def FractionPartage(parametre):
+    question = ""
+    exo = ['\\begin{multicols}{2}', '\\begin{enumerate}']
+    cor = ['\\begin{multicols}{2}', '\\begin{enumerate}']
 
     lcas = ["nid", "un", "nsd", "nid", "nsd"]
     for i in range(4):
@@ -185,7 +186,7 @@ def FractionPartage():
     exo.append('\\end{multicols}')
     cor.append('\\end{enumerate}')
     cor.append('\\end{multicols}')
-    return (exo, cor)
+    return (exo, cor, question)
 
 #===============================================================================
 # Fractions et abscisses
@@ -348,9 +349,10 @@ def trouve_abscisses(exo, cor, div, subd, lnum):
              subd) // div, subd))
 
 
-def QuestionsAbscisses():
-    exo = ["\\exercice"]
-    cor = ["\\exercice*"]
+def QuestionsAbscisses(parametre):
+    question = ""
+    exo = []
+    cor = []
     (origine, div, subd, lpts, npts, lnum) = valeurs_abscisses()
     exo.append("\\begin{enumerate}")
     exo.append(u"\\item Compléter :")
@@ -398,4 +400,4 @@ def QuestionsAbscisses():
     trace_demi_droite(exo, cor, origine, div, subd, lpts, npts, lnum)
     exo.append("\\end{pspicture}")
     cor.append("\\end{pspicture}")
-    return (exo, cor)
+    return (exo, cor, question)

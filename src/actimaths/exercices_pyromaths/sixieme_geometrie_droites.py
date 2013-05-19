@@ -189,7 +189,7 @@ def tex_ligne_tableau(exo, cor, ligne):
     cor.append('\\hline')
 
 
-def Droites():
+def Droites(parametre):
     """
     Écrit les 5 lignes du tableau
     @param exo: fichier d'exercices
@@ -197,12 +197,13 @@ def Droites():
     @param cor: fichier de corrections
     @type cor: file
     """
-    exo = ["\\exercice", u"Compléter les pointillés et les figures :\\par",
+    question = ""
+    exo = [u"Compléter les pointillés et les figures :\\par",
             '\\renewcommand{\\tabularxcolumn}[1]{m{#1}}',
             '\\begin{tabularx}{\\linewidth}{|X|>{\\centering}m{5cm}|}',
             '\\hline',
             u'\\textbf{phrase} & \\textbf{Figure} \\tabularnewline \\hline']
-    cor = ["\\exercice*", u"Compléter les pointillés et les figures :\\par",
+    cor = [u"Compléter les pointillés et les figures :\\par",
             '\\renewcommand{\\tabularxcolumn}[1]{m{#1}}',
             '\\begin{tabularx}{\\linewidth}{|X|>{\\centering}m{5cm}|}',
             '\\hline',
@@ -214,7 +215,7 @@ def Droites():
 
     exo.append('\\end{tabularx}')
     cor.append('\\end{tabularx}')
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 #------------------------------------------------------------------------------
@@ -310,9 +311,10 @@ def enonce_perp(exo, cor):
     cor.append('\\end{enumerate}')
 
 
-def Perpendiculaires():
-    exo = ["\\exercice", u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
-    cor = ["\\exercice*", u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
+def Perpendiculaires(parametre):
+    question = ""
+    exo = [u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
+    cor = [u"Réaliser les figures suivantes :\\par", '\\begin{multicols}{2}']
 
     enonce_perp(exo, cor)
 
@@ -323,7 +325,7 @@ def Perpendiculaires():
 
     exo.append('\\end{multicols}')
     cor.append('\\end{multicols}')
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 #------------------------------------------------------------------------------
@@ -644,9 +646,10 @@ def enonce_prop(exo, cor):
     cor.append('\\end{tabularx}')
 
 
-def Proprietes():
-    exo = ["\\exercice", u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
-    cor = ["\\exercice*", u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
+def Proprietes(parametre):
+    question = ""
+    exo = [u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
+    cor = [u"Compléter le tableau suivant :\\par Les droites en gras sont parallèles.\\par """]
 
     enonce_prop(exo, cor)
-    return (exo, cor)
+    return (exo, cor, question)

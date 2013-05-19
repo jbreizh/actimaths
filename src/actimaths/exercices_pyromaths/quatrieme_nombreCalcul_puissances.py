@@ -57,13 +57,12 @@ def tex_proprietes_val(exp_max, nb_max, type):
     return (nb1, exp1, nb2, exp2)
 
 
-def tex_proprietes():
-    exo = ["\\exercice",
-           u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
+def tex_proprietes(parametre):
+    question = ""
+    exo = [u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
            "\\begin{multicols}{4}", "  \\noindent%",
            "  \\begin{enumerate}"]
-    cor = ["\\exercice*",
-           u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
+    cor = [u"Compléter par un nombre de la forme $a^n$ avec $a$ et $n$ entiers :",
            "\\begin{multicols}{4}", "  \\noindent%",
            "  \\begin{enumerate}"]
     lexos = [0, 1, 2, 3, 0, 1, 2, 3]
@@ -103,7 +102,7 @@ def tex_proprietes():
     exo.append("\\end{multicols}\n")
     cor.append("\\end{enumerate}")
     cor.append("\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 # ----PROPRIETES AVEC 10
@@ -139,13 +138,12 @@ def tex_proprietes_neg_val(exp_max, nb_max, type):
     return (nb1, exp1, nb2, exp2)
 
 
-def tex_proprietes_neg():
-    exo = ["\\exercice",
-           u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture",
+def tex_proprietes_neg(parametre):
+    question = ""
+    exo = [u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture",
            u" décimale de ces nombres :", "\\begin{multicols}{2}",
            "  \\noindent%", "  \\begin{enumerate}"]
-    cor = ["\\exercice*",
-           u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture",
+    cor = [u"Écrire sous la forme d'une puissance de 10 puis donner l'écriture",
            u" décimale de ces nombres :", "\\begin{multicols}{2}",
            "  \\noindent%", "  \\begin{enumerate}"]
     lexos = [0, 1, 2, 3, 0, 1, 2, 3]
@@ -192,7 +190,7 @@ def tex_proprietes_neg():
     exo.append("\\end{multicols}\n")
     cor.append("\\end{enumerate}")
     cor.append("\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 #------------------------------------------------------------------------------
@@ -213,13 +211,13 @@ def val_sc():
     return a
 
 
-def ecr_sc():
+def ecr_sc(parametre):
     from math import log10, floor
-    exo = ["\\exercice", u"Compléter par le nombre qui convient :",
+    question = ""
+    exo = [u"Compléter par le nombre qui convient :",
            "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
-    cor = ["\\exercice*",
-           u"Compléter par le nombre qui convient :",
+    cor = [u"Compléter par le nombre qui convient :",
            "\\begin{multicols}{3}", "  \\noindent%",
            "  \\begin{enumerate}"]
     for i in range(6):
@@ -245,20 +243,19 @@ def ecr_sc():
     exo.append("\\end{multicols}\n")
     cor.append("\\end{enumerate}")
     cor.append("\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 # ------------------- PUISSANCES de 10 -------------------
 
 
-def exo_puissances():
+def exo_puissances(parametre):
     from math import floor, log10
     sd = string.maketrans('.', ',')  # convertit les . en , (separateur decimal)
-    exo = ["\\exercice",
-           u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.",
+    question = ""
+    exo = [u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.",
            "\\begin{multicols}{2}", "  \\noindent%"]
-    cor = ["\\exercice*",
-           u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.",
+    cor = [u"Calculer les expressions suivantes et donner l'écriture scientifique du résultat.",
            "\\begin{multicols}{2}", "  \\noindent%"]
     valeurs = valeurs_puissances()
     i = randrange(2)
@@ -289,22 +286,22 @@ def exo_puissances():
                    tex_puissances_4(valeurs[1 - i]).translate(sd))
     exo.append("\\end{multicols}\n")
     cor.append("\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 def tex_puissances_0(a):
     if isinstance(a, tuple):
-        return '\\cfrac{\\nombre{%s} \\times 10^{%s} \\times \\nombre{%s} \\times 10^{%s}}{\\nombre{%s} \\times \\big( 10^{%s} \\big) ^%s}' % \
+        return '\\cfrac{%s \\times 10^{%s} \\times %s \\times 10^{%s}}{%s \\times \\big( 10^{%s} \\big) ^%s}' % \
             (a[0], a[3], a[1], a[4], a[2], a[5], a[6])
 
 
 def tex_puissances_1(a):
     if isinstance(a, tuple):
         if a[4] < 0:
-            return '\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+(%s)}}{10^{%s \\times %s}}' % \
+            return '\\cfrac{%s \\times %s}{%s} \\times \\cfrac{10^{%s+(%s)}}{10^{%s \\times %s}}' % \
                 (a[0], a[1], a[2], a[3], a[4], a[5], a[6])
         else:
-            return '\\cfrac{\\nombre{%s} \\times \\nombre{%s}}{\\nombre{%s}} \\times \\cfrac{10^{%s+%s}}{10^{%s \\times %s}}' % \
+            return '\\cfrac{%s \\times %s}{%s} \\times \\cfrac{10^{%s+%s}}{10^{%s \\times %s}}' % \
                 (a[0], a[1], a[2], a[3], a[4], a[5], a[6])
 
 
@@ -312,19 +309,19 @@ def tex_puissances_2(a):
     if isinstance(a, tuple):
         if ((a[0] * a[1]) * 1.) / a[2] == (a[0] * a[1]) / a[2]:
             if a[5] * a[6] < 0:
-                return '\\nombre{%s} \\times 10^{%s-(%s)}' % \
+                return '%s \\times 10^{%s-(%s)}' % \
                     verifie_type(((a[0] * a[1]) / a[2], a[3] + a[4], a[5] *
                                  a[6]))
             else:
-                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type(((a[0] *
+                return '%s \\times 10^{%s-%s}' % verifie_type(((a[0] *
                         a[1]) / a[2], a[3] + a[4], a[5] * a[6]))
         else:
             if a[5] * a[6] < 0:
-                return '\\nombre{%s} \\times 10^{%s-(%s)}' % \
+                return '%s \\times 10^{%s-(%s)}' % \
                     verifie_type((((a[0] * a[1]) * 1.) / a[2], a[3] + a[4],
                                  a[5] * a[6]))
             else:
-                return '\\nombre{%s} \\times 10^{%s-%s}' % verifie_type((((a[0] *
+                return '%s \\times 10^{%s-%s}' % verifie_type((((a[0] *
                         a[1]) * 1.) / a[2], a[3] + a[4], a[5] * a[6]))
 
 
@@ -332,7 +329,7 @@ def tex_puissances_3(a):
     from math import floor, log10
     b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
     if isinstance(a, tuple) and b != 0:
-        return '\\nombre{%s}  \\times 10^{%s} \\times 10^{%s}' % \
+        return '%s  \\times 10^{%s} \\times 10^{%s}' % \
             verifie_type(((((a[0] * a[1]) * 1.) / a[2]) / 10 ** b, b, (a[3] +
                          a[4]) - a[5] * a[6]))
 
@@ -341,7 +338,7 @@ def tex_puissances_4(a):
     from math import floor, log10
     b = int(floor(log10(((a[0] * a[1]) * 1.) / a[2])))
     if isinstance(a, tuple):
-        return '\\nombre{%s}  \\times 10^{%s}' % verifie_type(((((a[0] *
+        return '%s  \\times 10^{%s}' % verifie_type(((((a[0] *
                 a[1]) * 1.) / a[2]) / 10 ** b, (b + a[3] + a[4]) - a[5] *
                 a[6]))
 

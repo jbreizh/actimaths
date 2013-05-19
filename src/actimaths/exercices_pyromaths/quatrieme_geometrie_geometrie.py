@@ -76,13 +76,14 @@ def enonce_pythagore(noms, angles, longueurs, cotes, nom_tr, long0,
             )
 
 
-def exo_pythagore():
+def exo_pythagore(parametre):
     types_exercice = [[2, random.randrange(2)], [0, 1]]
     random.shuffle(types_exercice)
     random.shuffle(types_exercice[0])
     random.shuffle(types_exercice[1])
-    exo = ["\\exercice\n\\begin{multicols}{2}\n  \\begin{enumerate}"]
-    cor = ["\\exercice*\n\\begin{multicols}{2}\n  \\begin{enumerate}"]
+    question = ""
+    exo = ["\\begin{multicols}{2}", "\\begin{enumerate}"]
+    cor = ["\\begin{multicols}{2}", "\\begin{enumerate}"]
     for j in range(2):
         while True:
             longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
@@ -147,7 +148,7 @@ Calculer la longueur $%s$.""" % \
             cor.append("\\columnbreak")
     exo.append("\\end{enumerate}\n\\end{multicols}\n")
     cor.append("\\end{enumerate}\n\\end{multicols}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 def nom_triangle(noms):  # renvoie le nom du triangle dans un ordre aleatoire
@@ -166,9 +167,10 @@ def cotes_sommets(noms):  # renvoie les noms des 3 cotes du triangle en finissan
 #
 
 
-def exo_triangle_cercle():
-    exo = ["\\exercice"]
-    cor = ["\\exercice*"]
+def exo_triangle_cercle(parametre):
+    question = ""
+    exo = []
+    cor = []
     while True:
         longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
         longueurs = [longueurs[i] / 10.0 for i in range(3)]
@@ -243,7 +245,7 @@ Calculer la longueur $%s$.""" % \
                    2), nombre(longueurs[2])))
     exo.append("\\end{minipage}\n")
     cor.append("\\end{minipage}\n")
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 #
@@ -251,9 +253,10 @@ Calculer la longueur $%s$.""" % \
 #
 
 
-def exo_reciproque_pythagore():
-    exo = ["\\exercice"]
-    cor = ["\\exercice*"]
+def exo_reciproque_pythagore(parametre):
+    question = ""
+    exo = []
+    cor = []
     while True:
         longueurs = couples_pythagore[random.randrange(len(couples_pythagore))]
         longueurs = [longueurs[i] / 10.0 for i in range(3)]
@@ -291,7 +294,7 @@ Quelle est la nature du triangle $%s$?
 D'après la \\textbf{réciproque du théorème de Pythagore},
 \\fbox{le triangle $%s$ est rectangle en $%s$.}""" %
                (c[2], c[0], c[1], nom_tr, noms[2]))
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 #
@@ -387,9 +390,10 @@ def inegalite_triangulaire(a):  # renvoie 1 si c'est un triangle, 0 sinon
     return vrai
 
 
-def exo_thales():
-    exo = ["\\exercice"]
-    cor = ["\\exercice*"]
+def exo_thales(parametre):
+    question = ""
+    exo = []
+    cor = []
     noms = choix_points(5)  # les noms des sommets
     while True:
         valeurs = valeurs_thales(70)  # les longueurs en mm
@@ -403,7 +407,7 @@ def exo_thales():
     cor.append(tex_resolution_thales1(noms, valeurs))
     cor.append(tex_resolution_thales2(noms, valeurs))
     cor.append(tex_resolution_thales3(noms, valeurs))
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 def long_val(noms, valeurs):  # renvoie un tuple contenant les noms des segments et leur longueur puis les noms des longueurs a calculer
@@ -663,16 +667,14 @@ def fig_thales(noms, valeurs):
 def tex_fig_thales(noms, valeurs):
     donnees = fig_thales(noms, valeurs)
     enonce = \
-        '''\\figureadroite{
-  \\psset{PointSymbol=x,unit=%s}
+        '''\\psset{PointSymbol=x,unit=%s}
   \\begin{pspicture}(%s,%s)(%s,%s)
     \\SpecialCoor
     \\pstTriangle[PosAngleA=%s,PosAngleB=-45,PosAngleC=%s,PointNameA=%s,
       PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
     \\pstTriangle[PosAngleB=%s,PosAngleC=%s,PointSymbolA=none,
       PointName=none,PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
-  \\end{pspicture}
-}''' % \
+  \\end{pspicture}''' % \
         donnees
     return enonce
 
@@ -682,9 +684,10 @@ def tex_fig_thales(noms, valeurs):
 #
 
 
-def exo_trigo():
-    exo = ["\\exercice"]
-    cor = ["\\exercice*"]
+def exo_trigo(parametre):
+    question = ""
+    exo = []
+    cor = []
     s = choix_points(6)
     n1 = cotes_sommets(s[0:3])
     n2 = cotes_sommets(s[3:6])
@@ -692,7 +695,7 @@ def exo_trigo():
     (l1, l2) = enonce_trigo(((s[0:3], n1, v[0]), (s[3:6], n2, v[1])))
     exo.extend(l1)
     cor.extend(l2)
-    return (exo, cor)
+    return (exo, cor, question)
 
 
 def enonce_trigo(v):

@@ -52,11 +52,12 @@ def valeurs_reduire():
     p2 = "Polynome(\"%s%s^%s\")" % (a2, var, deg2)
     return p1 + op + p2
 
-def reduire():
+def reduire(parametre):
     """Travail sur les bases du calcul littéral en quatrième"""
-    exo = ["\\exercice", u"Réduire, si possible, les expressions suivantes :",
+    question = ""
+    exo = [u"Réduire, si possible, les expressions suivantes :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
-    cor = ["\\exercice*", u"Réduire, si possible, les expressions suivantes :",
+    cor = [u"Réduire, si possible, les expressions suivantes :",
            "\\begin{multicols}{3}\\noindent", "  \\begin{enumerate}"]
     for i in range(9):
         a = valeurs_reduire()
@@ -73,7 +74,7 @@ def reduire():
         cor.append("\\stepcounter{nocalcul}")
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
-    return (exo, cor)
+    return (exo, cor, question)
 
 def valeurs_reduire_somme():
     """Réduire une somme de six monômes de degrés 0, 1 et 2"""
@@ -112,11 +113,12 @@ def valeurs_reduire_sommeprod():
         else: t += "+-"[random.randrange(2)] + l[i]
     return t
 
-def reduire_expressions():
+def reduire_expressions(parametre):
     """Travail sur les bases du calcul littéral en quatrième"""
-    exo = ["\\exercice", u"Réduire les expressions littérales suivantes :",
+    question = ""
+    exo = [u"Réduire les expressions littérales suivantes :",
            "\\begin{multicols}{2}\\noindent", "  \\begin{enumerate}"]
-    cor = ["\\exercice*", u"Réduire les expressions littérales suivantes :",
+    cor = [u"Réduire les expressions littérales suivantes :",
            "\\begin{multicols}{2}\\noindent", "  \\begin{enumerate}"]
     for i in range(6):
         if i < 3: a = valeurs_reduire_somme()
@@ -134,5 +136,5 @@ def reduire_expressions():
         cor.append("\\stepcounter{nocalcul}")
     exo.extend(["  \\end{enumerate}", "\\end{multicols}"])
     cor.extend(["  \\end{enumerate}", "\\end{multicols}"])
-    return (exo, cor)
+    return (exo, cor, question)
 

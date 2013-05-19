@@ -146,11 +146,12 @@ def findrad(itv=1, neg=0, denom_simple=1):
     
     return [num,denom] # FIX Simplifier ?
 
-def cercle_trigonometrique():
+def cercle_trigonometrique(parametre):
     """Exercice de la fiche."""
     
-    exo = ["\\exercice"]
-    cor = ["\\exercice*"]  
+    question = ""
+    exo=[]
+    cor=[] 
     
     mes_deg = [] # Question 1
     while len(mes_deg)<5:
@@ -256,5 +257,5 @@ def cercle_trigonometrique():
     cor.append(rad2tex(radq5[3])[:-1]+"\\equiv"+rad2tex(mes_princ(radq5[3]))[1:-1]+"~(2\\pi)$.")
     cor.append(u"\\end{enumerate}\\par") 
     
-    return exo, cor
+    return (exo, cor, question)
 

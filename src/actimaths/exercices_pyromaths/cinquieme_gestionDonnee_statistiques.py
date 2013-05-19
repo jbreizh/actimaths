@@ -254,7 +254,7 @@ def exo_pi():
     cor.append(dec_tex)
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.")
+    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")
     cor.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")   
     exo.append("\\end{enumerate}")    
     exo.append(tableau)
@@ -267,7 +267,7 @@ def exo_pi():
     cor.append(tableau_cor)
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.")
+    exo.append(u"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.\\par")
     cor.append(u"\\item[$\\blacktriangleright$\\textbf{2.}] Représenter la répartition des chiffres dans un diagramme en bâtons avec 1~cm pour 10\\%.\\par") 
     exo.append("\\end{enumerate}")
     cor.append("\\end{enumerate}")
@@ -412,7 +412,7 @@ def exo_de():
     cor.append(u"\\bigskip")
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.")
+    exo.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")
     cor.append(u"\\item Compléter le tableau ci-dessous, sachant que les fréquences doivent être arrondies au centième.\\par")   
     exo.append(tableau)
     exo.append(u"\\bigskip")
@@ -517,7 +517,7 @@ def exo_vote():
     
     exo.append("\\begin{enumerate}")
     cor.append("\\begin{enumerate}")
-    exo.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :")
+    exo.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :\\par")
     cor.append(u"\\item Les données du vote du délégué de classe ont été malheureusement partiellement perdues, mais on a réussi à regrouper les informations du tableau ci-dessous ( sachant que chaque élève a voté ) :\\par")
     
     eff1 = random.randint(1,15)
@@ -651,12 +651,12 @@ def exo_sport():
     cor.append(u"\\end{enumerate}")
     return (exo, cor)
 
-def statistiques():
+def statistiques(parametre):
     """Construit au hasard l'un des six types d'exos de statistiques."""
     global exo, cor
-    
-    exo = ["\\exercice"]
-    cor = ["\\exercice*"]
+    question = ""
+    exo = []
+    cor = []
     
     exo.append("\\renewcommand{\\arraystretch}{2}")
     cor.append("\\renewcommand{\\arraystretch}{2}")
@@ -675,4 +675,4 @@ def statistiques():
     else:
         exo_ages()
 
-    return (exo, cor)
+    return (exo, cor, question)

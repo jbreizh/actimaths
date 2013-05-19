@@ -106,11 +106,9 @@ def exo_quadrillage(f0, f1):
 
 def main(parametre):
     question = ""
-    exo = ["\\exercice",
-           u"Construire la symétrique de chacune des figures par rapport au point O en",
+    exo = [u"Construire la symétrique de chacune des figures par rapport au point O en",
            "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
-    cor = ["\\exercice*",
-           u"Construire la symétrique de chacune des figures par rapport au point O en",
+    cor = [u"Construire la symétrique de chacune des figures par rapport au point O en",
            "utilisant le quadrillage :\\par", "\\psset{unit=.9cm}"]
     nbpts = 5
     langles = [0, 90, 45, 135]

@@ -228,13 +228,12 @@ def calcul(a, op, b, entier=1):  #retourne 'hp' (hors programme) ou le résultat
             return a / b
 
 
-def main():
+def main(parametre):
     nb = 9  # nombre de calculs
-    exo = ["\\exercice",
-           u"Calculer les expressions suivantes en détaillant les calculs.\n",
+    question = ""
+    exo = [u"Calculer les expressions suivantes en détaillant les calculs.\n",
            "\\begin{multicols}{3}", "\\noindent"]
-    cor = ["\\exercice*",
-           u"Calculer les expressions suivantes en détaillant les calculs.",
+    cor = [u"Calculer les expressions suivantes en détaillant les calculs.",
            "\\begin{multicols}{3}", "\\noindent"]
     i = 0
     while i < nb:
@@ -265,4 +264,4 @@ def main():
                                affichage(list[0][j], list[1][j]))
     exo.append("\\end{multicols}")
     cor.append("\\end{multicols}")
-    return (exo, cor)
+    return (exo, cor, question)

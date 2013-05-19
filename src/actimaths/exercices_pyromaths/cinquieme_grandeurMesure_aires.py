@@ -33,9 +33,10 @@ def arrondir(nombre):
     return int(partie_entiere) + (int(partie_decimale[0])>=5)
 
 
-def exo_aire_diques():
-    exo = ["\\exercice"]
-    cor = ["\\exercice*"]
+def exo_aire_diques(parametre):
+    question = ""
+    exo = []
+    cor = []
     rayon1 = 2*(random.randrange(33) + 1)
     rayon2 = int(1.5*rayon1)
     i=random.randrange(2)
@@ -78,4 +79,4 @@ Calculer l'aire de la couronne circulaire (partie colorée) comprise entre les d
     cor.append(u"\\[\\boxed{\\mathcal{A} \\approx  \\unit[%s]{cm^2}}\\]" % decimaux(aire_arrondie))
     exo.append("\\end{minipage}\n")
     cor.append("\\end{minipage}\n")
-    return (exo, cor)
+    return (exo, cor, question)

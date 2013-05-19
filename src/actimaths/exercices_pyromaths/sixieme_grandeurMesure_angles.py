@@ -233,7 +233,7 @@ def reponses(exo, cor, lpoints, lnoms):
     exo.append("\\end{tabularx}")
 
 
-def MesureAngles():
+def MesureAngles(parametre):
     nb_angles = 4
     (xmax, ymax) = (18, 8)  #taille de l'image en cm
     lnoms = []
@@ -248,8 +248,9 @@ def MesureAngles():
     tmpl = Geometrie.choix_points(3 * nb_angles)
     for i in range(nb_angles):
         lnoms.append(tuple(tmpl[3 * i:3 * i + 3]))
-    exo = ["\\exercice", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "]
-    cor = ["\\exercice*", "Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "]
+    question = ""
+    exo = ["Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "]
+    cor = ["Nommer, mesurer et donner la nature de chacun des angles suivants :\\par "]
     figure(exo, cor, lpoints, lnoms, xmax, ymax)
     reponses(exo, cor, lpoints, lnoms)
-    return (exo, cor)
+    return (exo, cor, question)
