@@ -1,18 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from os.path import join
-
 from actimaths.values import DATADIR
 from actimaths.system import creation, lire_liste_exercice
-
 from subprocess import call
 
+
+environnement = 'pyromaths'
 log = open('/tmp/preview-actimaths.log' , 'w')
-fichier_liste_exercice = join(DATADIR, "onglets" , 'niveau.xml')
+fichier_liste_exercice = join(DATADIR, environnement, 'onglets' , 'niveau.xml')
 liste_exercice = lire_liste_exercice(fichier_liste_exercice)
 
-parametres = {'liste_exos': [],
-              'sujet_presentation': True,
+parametres = {'sujet_presentation': True,
               'corrige_presentation': False,
               'sujet_page': False,
               'corrige_page': False,
@@ -24,9 +23,10 @@ parametres = {'liste_exos': [],
               'niveau': 'test',
               'nom_fichier': 'test',
               'chemin_fichier': '/tmp/',
-              'chemin_data': DATADIR,
+              'environnement': environnement,
+              'affichage': 'niveau',
               'chemin_csv': '',
-              'modele_presentation': 'vignette',
+              'modele_presentation': 'Vignette',
               'modele_page': ''}
 
 for onglet in range(len(liste_exercice)):
@@ -40,5 +40,8 @@ for onglet in range(len(liste_exercice)):
             print liste
             parametres['liste_exos'] = liste
             creation(parametres)
-            call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf[1]", "-resize", "25%","-crop", "182x210+0+40", "-trim", "/tmp/%s.png" % commande], stdout=log)
+            if environnement == 'pyromaths':
+                call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf", "-resize", "25%", "-crop", "710x560+0+0", "-trim", "/tmp/%s.png" % commande], stdout=log)
+            elif environnement == 'actimaths':
+                call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf[1]", "-resize", "25%", "-crop", "182x210+0+40", "-trim", "/tmp/%s.png" % commande], stdout=log)
 log.close()
