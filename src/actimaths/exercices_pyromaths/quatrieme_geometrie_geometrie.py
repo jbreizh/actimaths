@@ -460,13 +460,13 @@ def creer_noms(noms, i):
 
 def tex_enonce_thales(noms, valeurs):
     texte = \
-        u'{Sur la figure ci-contre, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
+        u'Sur la figure ci-contre, les droites $(%s)\\text{ et }(%s)$ sont parallèles.\\par\n' % \
         (lAB(noms[1:3]), lAB(noms[3:5]))
     liste = long_val(noms, valeurs)
     texte = texte + \
         'On donne $%s=\\unit[%s]{cm},\\quad %s=\\unit[%s]{cm}, \\quad %s=\\unit[%s]{cm}\\quad\\text{et}\\quad %s~=~\\unit[%s]{cm}$.\\par\n' % \
         tuple(liste[0:8])
-    texte = texte + 'Calculer $%s\\text{ et }%s$.}\n' % tuple(liste[8:10])
+    texte = texte + 'Calculer $%s\\text{ et }%s$.\n' % tuple(liste[8:10])
     return texte
 
 
@@ -674,8 +674,7 @@ def tex_fig_thales(noms, valeurs):
       PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
     \\pstTriangle[PosAngleB=%s,PosAngleC=%s,PointSymbolA=none,
       PointName=none,PointNameB=%s,PointNameC=%s](0,0){a}(%s,0){b}(%s;%s){c}
-  \\end{pspicture}''' % \
-        donnees
+  \\end{pspicture} \\par''' % donnees
     return enonce
 
 

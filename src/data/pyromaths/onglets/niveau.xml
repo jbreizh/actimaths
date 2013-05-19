@@ -75,7 +75,6 @@
       <exercice commande="exercices_pyromaths.quatrieme_geometrie_geometrie.exo_pythagore" description="" nom="Théorème de Pythagore"/>
       <exercice commande="exercices_pyromaths.quatrieme_geometrie_geometrie.exo_reciproque_pythagore" description="" nom="Réciproque du théorème de Pythagore"/>
       <exercice commande="exercices_pyromaths.quatrieme_geometrie_geometrie.exo_triangle_cercle" description="" nom="Cercle et théorème de Pythagore"/>
-      <exercice commande="exercices_pyromaths.quatrieme_geometrie_geometrie.exo_thales" description="" nom="Théorème de Thalès"/>
       <exercice commande="exercices_pyromaths.quatrieme_geometrie_geometrie.exo_trigo" description="" nom="Trigonométrie"/>
     </categorie>
     <categorie nom="Grandeurs et mesures">
