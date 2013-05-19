@@ -35,7 +35,7 @@ from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 ## Import spécifique à Actimaths
 import exercices_actimaths
 import exercices_pyromaths
-from values import CONFIGDIR, HOME, VERSION, DESCRIPTION, COPYRIGHTS, MAIL, WEBSITE
+from values import CONFIGDIR, DATADIR, HOME, VERSION, DESCRIPTION, COPYRIGHTS, MAIL, WEBSITE
 
 ###==============================================================
 ###        Gestion du fichier de configuration de actimaths
@@ -57,6 +57,8 @@ def create_config_file():
     etree.SubElement(child, "sujet_page").text="True"
     etree.SubElement(child, "corrige_page").text="True"
     etree.SubElement(child, "modele_page").text="BiColonneIdentique"
+    etree.SubElement(child, "environnement").text="actimaths"
+    etree.SubElement(child, "affichage").text="niveau"
     child = etree.SubElement(root, "informations")
     etree.SubElement(child, "version").text=VERSION
     etree.SubElement(child, "description").text=DESCRIPTION
@@ -181,7 +183,7 @@ def creation(parametres):
     ## Creation de la liste de question, sujet, corrigé
     (question, enonce, correction) = (['',''], ['',''], ['',''])
     for i in range(2):
-        if parametres['chemin_csv']:
+        if parametres['affichage'] == "csv":
             (question[i], enonce[i], correction[i]) = creation_liste_csv(parametres['chemin_csv'])
         else:
             (question[i], enonce[i], correction[i]) = creation_liste(parametres['liste_exos'])
@@ -197,26 +199,6 @@ def creation(parametres):
     ## Création et affichage du corrigé en PDF
     if parametres['corrige_page']:
         generation(parametres, question, enonce, correction, 'corrige','page')
-
-
-############## Generation complete
-def generation(parametres, question, enonce, correction, fiche, type):
-    ## Dossiers et fichiers d'enregistrement
-    dossierTex = unicode(parametres['chemin_fichier'])
-    nomTex= u"%s-%s-%s" % (parametres['nom_fichier'],fiche, type)
-    cheminTex = unicode(join(dossierTex, "%s.tex" % nomTex))
-    ## Ouverture du fichier teX
-    tex = open(cheminTex, encoding='utf-8', mode='w')
-    ## creation du fichier teX
-    creation_latex(tex, parametres, question, enonce, correction, fiche, type)
-    ## fermeture du fichier teX
-    tex.close()
-    ## indentation des fichiers teX créés
-    mise_en_forme(cheminTex)
-    ## creation du pdf
-    creation_pdf(dossierTex, nomTex)
-    nettoyage(dossierTex, nomTex)
-    affichage_pdf(dossierTex, nomTex)
 
 ############## Génère les exercice à partir du CSV
 def creation_liste_csv(chemin_csv):
@@ -265,10 +247,29 @@ def creation_liste(liste_exercice):
         question_liste.append(question)
     return  question_liste, enonce_liste, correction_liste
 
+############## Generation complete
+def generation(parametres, question, enonce, correction, fiche, type):
+    ## Dossiers et fichiers d'enregistrement
+    dossierTex = unicode(parametres['chemin_fichier'])
+    nomTex= u"%s-%s-%s" % (parametres['nom_fichier'],fiche, type)
+    cheminTex = unicode(join(dossierTex, "%s.tex" % nomTex))
+    ## Ouverture du fichier teX
+    tex = open(cheminTex, encoding='utf-8', mode='w')
+    ## creation du fichier teX
+    creation_latex(tex, parametres, question, enonce, correction, fiche, type)
+    ## fermeture du fichier teX
+    tex.close()
+    ## indentation des fichiers teX créés
+    mise_en_forme(cheminTex)
+    ## creation du pdf
+    creation_pdf(dossierTex, nomTex)
+    nettoyage(dossierTex, nomTex)
+    affichage_pdf(dossierTex, nomTex)
+
 ############## Copie des modèles latex en remplacant certaines variables
 def copie_modele(tex, parametres, fiche, type, master, texte=''):
     ## chemin du modele
-    source = join(parametres['chemin_data'], parametres['environnement'], 'modeles', type, parametres['modele_%s' % type] , fiche + '_' + master  + '.tex' )
+    source = join(DATADIR, parametres['environnement'], 'modeles', type, parametres['modele_%s' % type] , fiche + '_' + master  + '.tex' )
     ## Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
@@ -277,6 +278,11 @@ def copie_modele(tex, parametres, fiche, type, master, texte=''):
     tempsslide = parametres['temps_slide']
     tempscompteur = str(float(parametres['temps_slide'])/3)
     dateactivite = parametres['date_activite']
+    if os.name == 'nt':
+        os.environ['TEXINPUTS']= os.path.normpath(os.path.join(DATADIR,'packages'))
+        tabvar = 'tabvar.tex'
+    else:
+        tabvar = os.path.normpath(os.path.join(DATADIR,'packages', 'tabvar.tex'))
     ## Remplacement des variables et copie dans le fichier latex
     modele = open(source, encoding='utf-8', mode='r')
     for ligne in modele:

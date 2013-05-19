@@ -29,6 +29,7 @@ from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from time import strftime ,localtime
 from threading import Thread
+from sip import delete
 
 ## Import spécifique à Actimaths
 from system import creation, lire_config, lire_liste_exercice
@@ -69,13 +70,6 @@ class Ui_MainWindow(object):
         self.pushButton_ok.setToolTip(u"Créer à partir de sa sélection")
         self.pushButton_ok.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(46, 139, 87, 255), stop:1 rgba(255, 247, 177, 255));")
         QtCore.QObject.connect(self.pushButton_ok,QtCore.SIGNAL("clicked()"), self.creer_les_exercices)
-        ## Bouton Créer CSV
-        self.pushButton_ok_csv = QtGui.QPushButton(self.centralwidget)
-        self.verticalLayout.addWidget(self.pushButton_ok_csv)
-        self.pushButton_ok_csv.setText(u"Créer CSV")
-        self.pushButton_ok_csv.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(51, 51, 255, 255), stop:1 rgba(255, 247, 177, 255));")
-        self.pushButton_ok_csv.setToolTip(u"Créer à partir d'un fichier CSV")
-        QtCore.QObject.connect(self.pushButton_ok_csv,QtCore.SIGNAL("clicked()"), self.creer_les_exercices_csv)
         ## Bouton Quitter
         self.pushButton_quit = QtGui.QPushButton(self.centralwidget)
         self.verticalLayout.addWidget(self.pushButton_quit)
@@ -102,7 +96,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setAutoFillBackground(True)
         self.gridLayout_1.addWidget(self.tabWidget, 0, 0, 1, 1)
         ## Construction des onglets
-        self.construction_onglet("actimaths", "niveau")
+        self.construction_onglet(self.config['environnement'],self.config['affichage'])
 
         #============================================================
         #        Barre de menus
@@ -133,18 +127,18 @@ class Ui_MainWindow(object):
         ## Action Actimaths
         self.actionActimaths = QtGui.QAction(MainWindow)
         self.actionActimaths.setText("Actimaths")
-        QtCore.QObject.connect(self.actionActimaths, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet("actimaths", self.presentation))
+        QtCore.QObject.connect(self.actionActimaths, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet("actimaths", self.affichage))
         ## Action Pyromaths
         self.actionPyromaths = QtGui.QAction(MainWindow)
         self.actionPyromaths.setText("Pyromaths")
-        QtCore.QObject.connect(self.actionPyromaths, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet("pyromaths", self.presentation))
+        QtCore.QObject.connect(self.actionPyromaths, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet("pyromaths", self.affichage))
         ## Construction du menu Environnement
         self.menuEnvironnement.addAction(self.actionActimaths)
         self.menuEnvironnement.addAction(self.actionPyromaths)
         self.menubar.addAction(self.menuEnvironnement.menuAction())
         ## Menu Présentation
-        self.menuPresentation = QtGui.QMenu(self.menubar)
-        self.menuPresentation.setTitle(u"Présentation")
+        self.menuAffichage = QtGui.QMenu(self.menubar)
+        self.menuAffichage.setTitle(u"Affichage")
         ## Action Par niveaux
         self.actionPar_niveaux = QtGui.QAction(MainWindow)
         self.actionPar_niveaux.setText("Par niveaux")
@@ -153,16 +147,21 @@ class Ui_MainWindow(object):
         self.actionPar_domaine = QtGui.QAction(MainWindow)
         self.actionPar_domaine.setText("Par domaine")
         QtCore.QObject.connect(self.actionPar_domaine, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet(self.environnement, "domaine"))
+        ## Action CSV
+        self.actionCsv = QtGui.QAction(MainWindow)
+        self.actionCsv.setText("Csv")
+        QtCore.QObject.connect(self.actionCsv, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet(self.environnement, "csv"))
         ## Action Vide
         self.action_vide = QtGui.QAction(MainWindow)
         self.action_vide.setText("Vide")
         QtCore.QObject.connect(self.action_vide, QtCore.SIGNAL("triggered()"), lambda:self.construction_onglet(self.environnement, "vide"))
-        ## Construction du menu Presentation
-        self.menuPresentation.addAction(self.actionPar_niveaux)
-        self.menuPresentation.addAction(self.actionPar_domaine)
-        self.menuPresentation.addSeparator()
-        self.menuPresentation.addAction(self.action_vide)
-        self.menubar.addAction(self.menuPresentation.menuAction())
+        ## Construction du menu Affichage
+        self.menuAffichage.addAction(self.actionPar_niveaux)
+        self.menuAffichage.addAction(self.actionPar_domaine)
+        self.menuAffichage.addAction(self.actionCsv)
+        self.menuAffichage.addSeparator()
+        self.menuAffichage.addAction(self.action_vide)
+        self.menubar.addAction(self.menuAffichage.menuAction())
         ## Menu Aide
         self.menu_propos = QtGui.QMenu(self.menubar)
         self.menu_propos.setTitle("Aide")
@@ -194,16 +193,28 @@ class Ui_MainWindow(object):
     ###   Fonctions d'interface
     ###============================================================
     ############## Construit les onglets
-    def construction_onglet(self, environnement, presentation):
-        ## On supprime tous les onglets
+    def construction_onglet(self, environnement, affichage):
+        ## On supprime tous les onglets et on les supprime pour recuperer la memoire
         self.tabWidget.clear()
-        ## On met à jour dans la configuration mémoire la presentation actuelle
+        delete(self.tabWidget)
+        self.tabWidget = None
+        ## On reconstruit les onglets
+        self.tabWidget = QtGui.QTabWidget(self.centralwidget)
+        self.tabWidget.setAutoFillBackground(True)
+        self.gridLayout_1.addWidget(self.tabWidget, 0, 0, 1, 1)
+        ## On met à jour dans la configuration l'environnement et l'affichage
         self.environnement = environnement
-        self.presentation = presentation
-        self.fichier_liste_exercice = join(DATADIR, self.environnement, "onglets", self.presentation+".xml")
-        self.liste_exercice = lire_liste_exercice(self.fichier_liste_exercice)
-        ## On construit les onglets des exercices
-        self.construction_onglet_exercice()
+        self.affichage = affichage
+        ## 
+        if self.affichage == "csv":
+            self.liste_exercice = []
+            # On construit l'onglet Csv
+            self.construction_onglet_csv()
+        else:
+            self.fichier_liste_exercice = join(DATADIR, self.environnement, "onglets", self.affichage+".xml")
+            self.liste_exercice = lire_liste_exercice(self.fichier_liste_exercice)
+            # On construit les onglets des exercices
+            self.construction_onglet_exercice()
         ## On construit l'onglet option
         self.construction_onglet_option()
 
@@ -327,10 +338,6 @@ class Ui_MainWindow(object):
         self.onglet_option_label_chemin_fichier = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_chemin_fichier.setText(u"Chemin pour enregistrer les fichiers : ")
         self.verticalLayout_16.addWidget(self.onglet_option_label_chemin_fichier)
-        ## Label chemin par défaut pour l'enregistrement des fichiers
-        self.onglet_option_label_chemin_csv = QtGui.QLabel(self.onglet_option_widget)
-        self.onglet_option_label_chemin_csv.setText(u"Chemin du fichier .csv : ")
-        self.verticalLayout_16.addWidget(self.onglet_option_label_chemin_csv)
         ## Label titre des fiches
         self.onglet_option_label_titre_fiche = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_titre_fiche.setText("Titre de la fiche d'exercices : ")
@@ -364,31 +371,18 @@ class Ui_MainWindow(object):
         self.onglet_option_nom_fichier.setText(self.config['nom_fichier'])
         self.verticalLayout_17.addWidget(self.onglet_option_nom_fichier)
         ## LineEdit chemin par défaut pour l'enregistrement des fichiers
-        self.horizontalLayout_chemin_fichier = QtGui.QHBoxLayout()
-        self.onglet_option_chemin_fichier = QtGui.QLineEdit(self.onglet_option_widget)
-        self.onglet_option_chemin_fichier.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.onglet_option_chemin_fichier.setText(self.config['chemin_fichier'])
-        self.horizontalLayout_chemin_fichier.addWidget(self.onglet_option_chemin_fichier)
+        self.horizontalLayout_chemin = QtGui.QHBoxLayout()
+        self.onglet_option_chemin = QtGui.QLineEdit(self.onglet_option_widget)
+        self.onglet_option_chemin.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.onglet_option_chemin.setText(self.config['chemin_fichier'])
+        self.horizontalLayout_chemin.addWidget(self.onglet_option_chemin)
         ## Bouton parcourir
         self.onglet_option_pushButton_parcourir_chemin = QtGui.QPushButton(self.onglet_option_widget)
         self.onglet_option_pushButton_parcourir_chemin.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0  rgba(255, 127, 0, 255), stop:1 rgba(255, 247, 177, 255));")
         self.onglet_option_pushButton_parcourir_chemin.setText("Parcourir")
         QtCore.QObject.connect(self.onglet_option_pushButton_parcourir_chemin,QtCore.SIGNAL("clicked()"), self.option_parcourir_chemin)
-        self.horizontalLayout_chemin_fichier.addWidget(self.onglet_option_pushButton_parcourir_chemin)
-        self.verticalLayout_17.addLayout(self.horizontalLayout_chemin_fichier)
-        ## LineEdit chemin du fichier csv
-        self.horizontalLayout_chemin_csv = QtGui.QHBoxLayout()
-        self.onglet_option_chemin_csv = QtGui.QLineEdit(self.onglet_option_widget)
-        self.onglet_option_chemin_csv.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.onglet_option_chemin_csv.setText(self.config['chemin_csv'])
-        self.horizontalLayout_chemin_csv.addWidget(self.onglet_option_chemin_csv)
-        ## Bouton parcourir du fichier csv
-        self.onglet_option_pushButton_parcourir_csv = QtGui.QPushButton(self.onglet_option_widget)
-        self.onglet_option_pushButton_parcourir_csv.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0  rgba(255, 127, 0, 255), stop:1 rgba(255, 247, 177, 255));")
-        self.onglet_option_pushButton_parcourir_csv.setText("Parcourir")
-        QtCore.QObject.connect(self.onglet_option_pushButton_parcourir_csv,QtCore.SIGNAL("clicked()"), self.option_parcourir_csv)
-        self.horizontalLayout_chemin_csv.addWidget(self.onglet_option_pushButton_parcourir_csv)
-        self.verticalLayout_17.addLayout(self.horizontalLayout_chemin_csv)
+        self.horizontalLayout_chemin.addWidget(self.onglet_option_pushButton_parcourir_chemin)
+        self.verticalLayout_17.addLayout(self.horizontalLayout_chemin)
         ## LineEdit titre des fiches
         self.titre_fiche = QtGui.QLineEdit(self.onglet_option_widget)
         self.titre_fiche.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -446,6 +440,12 @@ class Ui_MainWindow(object):
         self.checkBox_corrige_presentation.setToolTip(u"Actimaths doit-il créer le corrigé sous forme de présentation ?")
         self.checkBox_corrige_presentation.setChecked(int(self.config['corrige_presentation']))
         self.verticalLayout_21.addWidget(self.checkBox_corrige_presentation)
+        ## Pas de presentation dans l'environnement pyromaths
+        if self.environnement == 'pyromaths':
+            self.checkBox_sujet_presentation.setChecked(False)
+            self.checkBox_sujet_presentation.setEnabled(False)
+            self.checkBox_corrige_presentation.setChecked(False)
+            self.checkBox_corrige_presentation.setEnabled(False)
         ## CheckBox "page sujet ou non"
         self.checkBox_sujet_page = QtGui.QCheckBox(self.onglet_option_widget)
         self.checkBox_sujet_page.setText(u"Créer le sujet (page)")
@@ -519,6 +519,37 @@ class Ui_MainWindow(object):
         spacerItem15 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.onglet_option_gridLayout.addItem(spacerItem15, 4, 0, 1, 1)
 
+    ############## Construit l'onglet csv
+    def construction_onglet_csv(self):
+        ## Creation d'une zone de scroll
+        self.onglet_csv_scroll = QtGui.QScrollArea(self.tabWidget)
+        self.onglet_csv_scroll.setFrameStyle(QtGui.QFrame.StyledPanel)
+        self.onglet_csv_scroll.setWidgetResizable(True)
+        self.tabWidget.addTab(self.onglet_csv_scroll, "CSV")
+        ## Creation d'un QWidget
+        self.onglet_csv_widget = QtGui.QWidget(self.onglet_csv_scroll)
+        self.onglet_csv_widget.setStyleSheet("background-color: rgb(251, 251, 210);")
+        self.onglet_csv_scroll.setWidget(self.onglet_csv_widget)
+        ## Creation d'une grille dans le QWidget
+        self.onglet_csv_verticalLayout = QtGui.QVBoxLayout(self.onglet_csv_widget)
+        ## Label chemin par défaut pour l'enregistrement des fichiers
+        self.onglet_csv_horizontalLayout_chemin = QtGui.QHBoxLayout()
+        self.onglet_csv_label_chemin = QtGui.QLabel(self.onglet_csv_widget)
+        self.onglet_csv_label_chemin.setText(u"Chemin du fichier .csv : ")
+        self.onglet_csv_horizontalLayout_chemin.addWidget(self.onglet_csv_label_chemin)
+        ## LineEdit chemin du fichier csv
+        self.onglet_csv_chemin = QtGui.QLineEdit(self.onglet_csv_widget)
+        self.onglet_csv_chemin.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.onglet_csv_chemin.setText(self.config['chemin_csv'])
+        self.onglet_csv_horizontalLayout_chemin.addWidget(self.onglet_csv_chemin)
+        ## Bouton parcourir du fichier csv
+        self.onglet_csv_pushButton_parcourir_csv = QtGui.QPushButton(self.onglet_csv_widget)
+        self.onglet_csv_pushButton_parcourir_csv.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0  rgba(255, 127, 0, 255), stop:1 rgba(255, 247, 177, 255));")
+        self.onglet_csv_pushButton_parcourir_csv.setText("Parcourir")
+        QtCore.QObject.connect(self.onglet_csv_pushButton_parcourir_csv,QtCore.SIGNAL("clicked()"), self.option_parcourir_csv)
+        self.onglet_csv_horizontalLayout_chemin.addWidget(self.onglet_csv_pushButton_parcourir_csv)
+        self.onglet_csv_verticalLayout.addLayout(self.onglet_csv_horizontalLayout_chemin)
+
     ############## Crée la boîte de dialogue "À propos de...
     def about(self):
         text = u"""<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
@@ -558,15 +589,15 @@ class Ui_MainWindow(object):
 
     ############## Modifie le chemin d'enregistrement des fiches
     def option_parcourir_chemin(self):
-        chemin = unicode(QtGui.QFileDialog().getExistingDirectory (self.centralwidget, u"Dossier où créer les fiches", unicode(self.onglet_option_chemin_fichier.text()), QtGui.QFileDialog.ShowDirsOnly))
+        chemin = unicode(QtGui.QFileDialog().getExistingDirectory (self.centralwidget, u"Dossier où créer les fiches", unicode(self.onglet_option_chemin.text()), QtGui.QFileDialog.ShowDirsOnly))
         if chemin:
-            self.onglet_option_chemin_fichier.setText(chemin)
+            self.onglet_option_chemin.setText(chemin)
 
     ############## Modifie le chemin vers le fichier csv
     def option_parcourir_csv(self):
-        chemin_csv = unicode(QtGui.QFileDialog().getOpenFileName(self.centralwidget, 'Fichier .csv',  unicode(self.onglet_option_chemin_fichier.text()), "Documents csv (*.csv)"))
+        chemin_csv = unicode(QtGui.QFileDialog().getOpenFileName(self.centralwidget, 'Fichier .csv',  unicode(self.onglet_option_chemin.text()), "Documents csv (*.csv)"))
         if chemin_csv:
-            self.onglet_option_chemin_csv.setText(chemin_csv)
+            self.onglet_csv_chemin.setText(chemin_csv)
 
     ############## Créé la liste d'exercice
     def valide_choix_exercices(self):
@@ -591,7 +622,7 @@ class Ui_MainWindow(object):
         root = tree.getroot()
         options = root.find('options')
         options .find('nom_fichier').text = unicode(self.onglet_option_nom_fichier.text())
-        options .find('chemin_fichier').text = unicode(self.onglet_option_chemin_fichier.text())
+        options .find('chemin_fichier').text = unicode(self.onglet_option_chemin.text())
         options .find('titre_fiche').text = unicode(self.titre_fiche.text())
         options .find('nom_etablissement').text = unicode(self.nom_etablissement.text())
         options .find('nom_auteur').text = unicode(self.nom_auteur.text())
@@ -602,104 +633,90 @@ class Ui_MainWindow(object):
         options .find('corrige_page').text = str(self.checkBox_corrige_page.isChecked())
         options .find('modele_presentation').text = unicode(self.comboBox_modele_presentation.currentText())
         options .find('modele_page').text = unicode(self.comboBox_modele_page.currentText())
+        options .find('environnement').text = self.environnement
+        options .find('affichage').text = self.affichage
         f = open(self.fichier_configuration, encoding='utf-8', mode='w')
         f.write(etree.tostring(root, pretty_print=True, encoding="UTF-8", xml_declaration=True).decode('utf-8', 'strict'))
         f.close()
 
     ###========================================================================
-    ### Fonction de création des listes d'exercices
+    ### Fonction de création des exercices
     ###========================================================================
     ############## Fonction créant des fiches exemples pour tous les niveaux avec tous les exercices
     def creer_tous_les_exercices(self):
-        ## Création d'une liste d'exercice contenant tous les exercices
-        liste = []
-        for onglet in range(len(self.liste_exercice)):
-            for categorie in range(len(self.liste_exercice[onglet][1])):
-                for exercice in range(len(self.liste_exercice[onglet][1][categorie][1])):
-                    valeur_parametre = []
-                    commande = self.liste_exercice[onglet][1][categorie][1][exercice][2]
-                    for parametre in range(len(self.liste_exercice[onglet][1][categorie][1][exercice][1])):
-                        valeur_parametre.append(int(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][3]))
-                    liste.append((commande, valeur_parametre))
-        ## Synchronisation des paramètres
-        parametres = {'liste_exos': liste,
-                      'sujet_presentation': self.checkBox_sujet_presentation.isChecked(),
+        ## synchronisation des paramètres
+        parametres = {'sujet_presentation': self.checkBox_sujet_presentation.isChecked(),
                       'corrige_presentation': self.checkBox_corrige_presentation.isChecked(),
                       'sujet_page': self.checkBox_sujet_page.isChecked(),
                       'corrige_page': self.checkBox_corrige_page.isChecked(),
-                      'titre': "Exemple de fiche",
+                      'titre': unicode(self.titre_fiche.text()),
                       'nom_etablissement': unicode(self.nom_etablissement.text()),
                       'nom_auteur': unicode(self.nom_auteur.text()),
                       'temps_slide': unicode(self.temps_slide.text()),
                       'date_activite': unicode(self.date_activite.text()),
-                      'niveau': "Tous les niveaux",
+                      'niveau': unicode(self.comboBox_niveau.currentText()),
                       'nom_fichier': unicode(self.onglet_option_nom_fichier.text()),
-                      'chemin_fichier': unicode(self.onglet_option_chemin_fichier.text()),
-                      'chemin_data': DATADIR,
-                      'chemin_csv': "",
-                      'environnement': "actimaths",
+                      'chemin_fichier': unicode(self.onglet_option_chemin.text()),
+                      'environnement': self.environnement,
+                      'affichage': self.affichage,
                       'modele_presentation': unicode(self.comboBox_modele_presentation.currentText()),
                       'modele_page': unicode(self.comboBox_modele_page.currentText())}
-        ## Lancement de la création
-        creation_exercice = Thread(None, creation, "creation_exercice", (parametres, ), None)
-        creation_exercice.start()
-
-    ############## Fonction créant des fiches à partir d'un fichier .csv de la forme question,enonce,corrige
-    def creer_les_exercices_csv(self):
-        ## Test de l'existence du fichier 
-        if not(isfile(unicode(self.onglet_option_chemin_csv.text()))):
-            QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Fichier csv non valide.", QtGui.QMessageBox.Ok ) 
+        ## Creation
+        if self.affichage == "csv":
+            QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Impossible de créer tous les exercices dans le mode CSV.", QtGui.QMessageBox.Ok ) 
         else:
-            # Synchronisation des paramètres
-            parametres = {'liste_exos': [],
-                          'sujet_presentation': self.checkBox_sujet_presentation.isChecked(),
-                          'corrige_presentation': self.checkBox_corrige_presentation.isChecked(),
-                          'sujet_page': self.checkBox_sujet_page.isChecked(),
-                          'corrige_page': self.checkBox_corrige_page.isChecked(),
-                          'titre': unicode(self.titre_fiche.text()),
-                          'nom_etablissement': unicode(self.nom_etablissement.text()),
-                          'nom_auteur': unicode(self.nom_auteur.text()),
-                          'temps_slide': unicode(self.temps_slide.text()),
-                          'date_activite': unicode(self.date_activite.text()),
-                          'niveau': unicode(self.comboBox_niveau.currentText()),
-                          'nom_fichier': unicode(self.onglet_option_nom_fichier.text()),
-                          'chemin_fichier': unicode(self.onglet_option_chemin_fichier.text()),
-                          'chemin_data': DATADIR,
-                          'chemin_csv': unicode(self.onglet_option_chemin_csv.text()),
-                          'environnement': "actimaths",                 
-                          'modele_presentation': unicode(self.comboBox_modele_presentation.currentText()),
-                          'modele_page': unicode(self.comboBox_modele_page.currentText())}
-            # Lancement de la création
+            # Création de la liste contenant tous les exercices de l'environnement
+            self.liste_creation = []
+            for onglet in range(len(self.liste_exercice)):
+                for categorie in range(len(self.liste_exercice[onglet][1])):
+                    for exercice in range(len(self.liste_exercice[onglet][1][categorie][1])):
+                        valeur_parametre = []
+                        commande = self.liste_exercice[onglet][1][categorie][1][exercice][2]
+                        for parametre in range(len(self.liste_exercice[onglet][1][categorie][1][exercice][1])):
+                            valeur_parametre.append(int(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][3]))
+                        self.liste_creation.append((commande, valeur_parametre))
+            parametres ['liste_exos'] = self.liste_creation
+            parametres ['chemin_csv'] = ""
             creation_exercice = Thread(None, creation, "creation_exercice", (parametres, ), None)
             creation_exercice.start()
 
     ############## Fonction créant des fiches à partir de la liste d'exercices
     def creer_les_exercices(self):
-        ## Création de la liste d'exercices
-        self.valide_choix_exercices()
-        ## Test de l'existence de la liste
-        if self.liste_creation == []:
-            QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Veuillez sélectionner des exercices...", QtGui.QMessageBox.Ok )    
+        ## synchronisation des paramètres
+        parametres = {'sujet_presentation': self.checkBox_sujet_presentation.isChecked(),
+                      'corrige_presentation': self.checkBox_corrige_presentation.isChecked(),
+                      'sujet_page': self.checkBox_sujet_page.isChecked(),
+                      'corrige_page': self.checkBox_corrige_page.isChecked(),
+                      'titre': unicode(self.titre_fiche.text()),
+                      'nom_etablissement': unicode(self.nom_etablissement.text()),
+                      'nom_auteur': unicode(self.nom_auteur.text()),
+                      'temps_slide': unicode(self.temps_slide.text()),
+                      'date_activite': unicode(self.date_activite.text()),
+                      'niveau': unicode(self.comboBox_niveau.currentText()),
+                      'nom_fichier': unicode(self.onglet_option_nom_fichier.text()),
+                      'chemin_fichier': unicode(self.onglet_option_chemin.text()),
+                      'environnement': self.environnement,
+                      'affichage': self.affichage,
+                      'modele_presentation': unicode(self.comboBox_modele_presentation.currentText()),
+                      'modele_page': unicode(self.comboBox_modele_page.currentText())}
+        ## Creation
+        if self.affichage == "csv":
+            # Test de l'existence du fichier
+            if not(isfile(unicode(self.onglet_csv_chemin.text()))):
+                QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Fichier csv non valide.", QtGui.QMessageBox.Ok ) 
+            else:
+                parametres ['liste_exos'] = []
+                parametres ['chemin_csv'] = unicode(self.onglet_csv_chemin.text())
+                creation_exercice = Thread(None, creation, "creation_exercice", (parametres, ), None)
+                creation_exercice.start()
         else:
-            # synchronisation des paramètres
-            parametres = {'liste_exos': self.liste_creation,
-                          'sujet_presentation': self.checkBox_sujet_presentation.isChecked(),
-                          'corrige_presentation': self.checkBox_corrige_presentation.isChecked(),
-                          'sujet_page': self.checkBox_sujet_page.isChecked(),
-                          'corrige_page': self.checkBox_corrige_page.isChecked(),
-                          'titre': unicode(self.titre_fiche.text()),
-                          'nom_etablissement': unicode(self.nom_etablissement.text()),
-                          'nom_auteur': unicode(self.nom_auteur.text()),
-                          'temps_slide': unicode(self.temps_slide.text()),
-                          'date_activite': unicode(self.date_activite.text()),
-                          'niveau': unicode(self.comboBox_niveau.currentText()),
-                          'nom_fichier': unicode(self.onglet_option_nom_fichier.text()),
-                          'chemin_fichier': unicode(self.onglet_option_chemin_fichier.text()),
-                          'chemin_data': DATADIR,
-                          'chemin_csv': "",
-                          'environnement': "actimaths",
-                          'modele_presentation': unicode(self.comboBox_modele_presentation.currentText()),
-                          'modele_page': unicode(self.comboBox_modele_page.currentText())}
-            # Lancement de la création
-            creation_exercice = Thread(None, creation, "creation_exercice", (parametres, ), None)
-            creation_exercice.start()
+            # Création de la liste d'exercices
+            self.valide_choix_exercices()
+            # Test de l'existence de la liste
+            if self.liste_creation == []:
+                QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Veuillez sélectionner des exercices...", QtGui.QMessageBox.Ok )    
+            else:
+                parametres ['liste_exos'] = self.liste_creation
+                parametres ['chemin_csv'] = ""
+                creation_exercice = Thread(None, creation, "creation_exercice", (parametres, ), None)
+                creation_exercice.start()
