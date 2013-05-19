@@ -1,6 +1,6 @@
 %%!TEX TS-program = latex
 \RequirePackage{etex}
-\documentclass[a4paper,11pt]{article}
+\documentclass[11pt]{article}
 
 % Package
 \usepackage[utf8]{inputenc} % UTF-8
@@ -9,15 +9,20 @@
 \usepackage[frenchb]{babel} % francisation
 \usepackage{amssymb} % the amsfont symbols
 \usepackage{amsmath} % the amsfont symbols
+\usepackage[table, usenames, svgnames]{xcolor} % Couleurs
 \usepackage{multicol} % Multi-colonnes
 \usepackage{calc} % Opérations
 \usepackage{cancel} % draw diagonal lines
 \usepackage{units} % typesetting units and nice fractions
+\usepackage{tabularx} % creates a paragraph-like column whose width
+                          % automatically expands
 \usepackage{wrapfig} % allows figures or tables to have text wrapped around
 \usepackage{pst-all,pst-eucl}
 \usepackage{wasysym} % Symbole Euro
 \DecimalMathComma
-\usepackage{longtable}
+
+% Package externe
+\input{##{{TABVAR}}##}
 
 % Fonction
 \newcounter{exo}
@@ -29,5 +34,3 @@
 \begin{document}
 \newcounter{nocalcul}[exo]
 \renewcommand{\thenocalcul}{\Alph{nocalcul}}
-
-\begin{longtable}{|p{3cm}|p{15cm}|}
