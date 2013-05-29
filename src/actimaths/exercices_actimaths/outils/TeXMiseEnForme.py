@@ -25,7 +25,7 @@ import string
 import math
 import os
 from .Conversions import radians, degres
-from ..classes.Fractions import Fractions
+from Fractions import Fractions
 
 
 class TeXMiseEnForme:

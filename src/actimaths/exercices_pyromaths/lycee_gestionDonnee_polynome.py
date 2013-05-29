@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from random import randrange
-from classes.Polynome import Fractions,Polynome, pTeX, TeX,simplifie_racine, RacineDegre2, radicalTeX, sqrt, fTeX
+from outils.Polynome import Fractions,Polynome, pTeX, TeX,simplifie_racine, RacineDegre2, radicalTeX, sqrt, fTeX
 from outils.Polynomes import poly_racines_entieres, poly_racines_fractionnaires, poly_racines_quelconques, poly_id_remarquables,poly_degre3_racines_entieres, TeX_division, poly_degre3_racines_fractionnaires, randint
 from outils.decimaux import decimaux
 from outils.Arithmetique import pgcd

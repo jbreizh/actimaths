@@ -22,8 +22,8 @@
 #
 
 import re
-from .decimaux import decimaux
-from ..classes import Racine, Fractions
+from decimaux import decimaux
+import Racine, Fractions
 
         
 def tex_coef(coef, var, bplus=0, bpn=0, bpc=0):

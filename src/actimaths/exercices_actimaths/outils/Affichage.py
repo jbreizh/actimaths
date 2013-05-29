@@ -23,7 +23,7 @@
 
 import re
 from .decimaux import decimaux
-from ..classes import Racine, Fractions
+import Racine, Fractions
 from .Arithmetique import  signe, pgcd
 
 def is_int(a):

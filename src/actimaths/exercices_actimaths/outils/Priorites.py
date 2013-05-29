@@ -336,7 +336,7 @@ def priorites_operations(calcul, pre = "", post = "", solution = []):
 ##print(priorites("-3**+2"))
 ##print(priorites("9+8*7"))
 
-from ..classes.Fractions import Fractions
+from Fractions import Fractions
 from . import Arithmetique, Affichage
 import random
 import math

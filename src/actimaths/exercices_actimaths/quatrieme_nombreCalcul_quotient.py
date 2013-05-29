@@ -25,7 +25,7 @@ import random
 from outils import Arithmetique
 from outils.Priorites import OperateurPrioritaire
 from outils.TeXMiseEnForme import Affichage
-from classes.Fractions import Fractions
+from outils.Fractions import Fractions
 
 def produits_fractions_4e(nombre_min, nombre_max, level):
     while True:

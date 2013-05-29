@@ -24,7 +24,7 @@ import random
 from outils import Arithmetique
 from outils.Priorites import OperateurPrioritaire
 from outils.TeXMiseEnForme import Affichage
-from classes.Fractions import Fractions
+from outils.Fractions import Fractions
 
 #Choisit des valeurs aléatoires pour effectuer un produit de fractions en fonction du niveau de difficulté souhaité (de 1 à 4)
 def produits_fractions_4e(nombre_min, nombre_max, level):

@@ -25,7 +25,7 @@ from outils import Arithmetique
 from outils.Priorites import OperateurPrioritaire
 from outils.TeXMiseEnForme import Affichage
 import random
-from classes.Fractions import Fractions #Classe Fractions de pyromaths
+from outils.Fractions import Fractions #Classe Fractions de pyromaths
 
 # Choisit des valeurs aléatoires pour effectuer une somme de fractions en fonction du niveau de difficulté souhaité (de 1 à 4)
 def sommes_fractions_4e(nombre_min, nombre_max, level):

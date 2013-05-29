@@ -25,7 +25,7 @@ from outils import Arithmetique
 from outils.Priorites import OperateurPrioritaire
 from outils.TeXMiseEnForme import Affichage
 import random
-from classes.Fractions import Fractions #Classe Fractions de pyromaths
+from outils.Fractions import Fractions #Classe Fractions de pyromaths
 
 
 def sommes_fractions_4e(op, level):

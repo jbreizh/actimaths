@@ -22,7 +22,7 @@
 
 ## Import globaux
 from os import listdir
-from os.path import join, isfile, isdir
+from os.path import join, isfile, isdir, dirname
 from PyQt4 import QtGui, QtCore
 from codecs import open
 from lxml import etree
@@ -32,8 +32,10 @@ from threading import Thread
 from sip import delete
 
 ## Import spécifique à Actimaths
-from system import creation, lire_config, lire_liste_exercice
-from values import HOME, CONFIGDIR, DATADIR, COPYRIGHTS, VERSION, WEBSITE, DESCRIPTION, CREDITS
+from system import lire_config, lire_liste_exercice
+from values import CONFIGDIR, COPYRIGHTS, VERSION, WEBSITE, DESCRIPTION, CREDITS
+import exercices_actimaths
+import exercices_pyromaths
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -46,7 +48,7 @@ class Ui_MainWindow(object):
         #============================================================
         #        Initialisation
         #============================================================
-        MainWindow.setWindowIcon(QtGui.QIcon(join(DATADIR, 'images','actimaths.png')))
+        MainWindow.setWindowIcon(QtGui.QIcon(join(dirname(__file__), 'images','actimaths.png')))
         MainWindow.setWindowTitle("Actimaths")
         MainWindow.setGeometry(0, 44, 1000, 600)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
@@ -132,9 +134,14 @@ class Ui_MainWindow(object):
         self.actionPyromaths = QtGui.QAction(MainWindow)
         self.actionPyromaths.setText("Pyromaths")
         QtCore.QObject.connect(self.actionPyromaths, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet("pyromaths", self.affichage))
+        ## Action Moodle
+        self.actionMoodle = QtGui.QAction(MainWindow)
+        self.actionMoodle.setText("Moodle")
+        QtCore.QObject.connect(self.actionMoodle, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet("moodle", self.affichage))
         ## Construction du menu Environnement
         self.menuEnvironnement.addAction(self.actionActimaths)
         self.menuEnvironnement.addAction(self.actionPyromaths)
+        self.menuEnvironnement.addAction(self.actionMoodle)      
         self.menubar.addAction(self.menuEnvironnement.menuAction())
         ## Menu Présentation
         self.menuAffichage = QtGui.QMenu(self.menubar)
@@ -211,7 +218,7 @@ class Ui_MainWindow(object):
             # On construit l'onglet Csv
             self.construction_onglet_csv()
         else:
-            self.fichier_liste_exercice = join(DATADIR, self.environnement, "onglets", self.affichage+".xml")
+            self.fichier_liste_exercice = join(dirname(__file__),"exercices_%s" % self.environnement, "onglets", self.affichage+".xml")
             self.liste_exercice = lire_liste_exercice(self.fichier_liste_exercice)
             # On construit les onglets des exercices
             self.construction_onglet_exercice()
@@ -281,8 +288,8 @@ class Ui_MainWindow(object):
                     self.onglet_exercice_gridLayout[onglet][categorie].addWidget(self.onglet_exercice_spinBox_nombre[onglet][categorie][exercice], exercice, 1)
                     ## Bulle d'aide
                     self.onglet_exercice_label_aide[onglet][categorie].append(QtGui.QLabel(self.onglet_exercice_ligne[onglet][categorie][exercice]))
-                    self.onglet_exercice_label_aide[onglet][categorie][exercice].setText(r'<img src="%s" />' %  join(DATADIR, 'images','whatsthis.png'))
-                    self.onglet_exercice_label_aide[onglet][categorie][exercice].setToolTip(r'<img src="%s" />' % join(DATADIR, 'images', 'vignettes','%s.png' % self.liste_exercice[onglet][1][categorie][1][exercice][2]))
+                    self.onglet_exercice_label_aide[onglet][categorie][exercice].setText(r'<img src="%s" />' %  join(dirname(__file__), 'images','whatsthis.png'))
+                    self.onglet_exercice_label_aide[onglet][categorie][exercice].setToolTip(r'<img src="%s" />' % join(dirname(__file__), "exercices_%s" % self.environnement, 'vignettes','%s.png' % self.liste_exercice[onglet][1][categorie][1][exercice][2]))
                     self.onglet_exercice_gridLayout[onglet][categorie].addWidget(self.onglet_exercice_label_aide[onglet][categorie][exercice], exercice, 2)
                     ## Intitulé de l'exercice
                     self.onglet_exercice_label_nom[onglet][categorie].append(QtGui.QLabel(self.onglet_exercice_ligne[onglet][categorie][exercice]))
@@ -440,8 +447,8 @@ class Ui_MainWindow(object):
         self.checkBox_corrige_presentation.setToolTip(u"Actimaths doit-il créer le corrigé sous forme de présentation ?")
         self.checkBox_corrige_presentation.setChecked(int(self.config['corrige_presentation']))
         self.verticalLayout_21.addWidget(self.checkBox_corrige_presentation)
-        ## Pas de presentation dans l'environnement pyromaths
-        if self.environnement == 'pyromaths':
+        ## Pas de presentation dans l'environnement pyromaths et moodle
+        if self.environnement != 'actimaths':
             self.checkBox_sujet_presentation.setChecked(False)
             self.checkBox_sujet_presentation.setEnabled(False)
             self.checkBox_corrige_presentation.setChecked(False)
@@ -485,8 +492,8 @@ class Ui_MainWindow(object):
         self.comboBox_modele_presentation = QtGui.QComboBox(self.onglet_option_widget)
         self.comboBox_modele_presentation.setStyleSheet("background-color: rgb(255, 255, 255);")
         modeles_presentation = []
-        for fichier in listdir(join(DATADIR, self.environnement, 'modeles','presentation')):
-            if isdir(join(join(DATADIR, self.environnement, 'modeles','presentation', fichier))):
+        for fichier in listdir(join(dirname(__file__),"exercices_%s" % self.environnement, 'modeles','presentation')):
+            if isdir(join(join(dirname(__file__),"exercices_%s" % self.environnement, 'modeles','presentation', fichier))):
                 modeles_presentation.append(fichier)
 
         for i in range(len(modeles_presentation)):
@@ -498,8 +505,8 @@ class Ui_MainWindow(object):
         self.comboBox_modele_page = QtGui.QComboBox(self.onglet_option_widget)
         self.comboBox_modele_page.setStyleSheet("background-color: rgb(255, 255, 255);")
         modeles_page = []
-        for fichier in listdir(join(DATADIR, self.environnement, 'modeles', 'page')):
-            if isdir(join(join(DATADIR, self.environnement,'modeles', 'page', fichier))):
+        for fichier in listdir(join(dirname(__file__),"exercices_%s" % self.environnement, 'modeles', 'page')):
+            if isdir(join(join(dirname(__file__),"exercices_%s" % self.environnement,'modeles', 'page', fichier))):
                 modeles_page.append(fichier)
 
         for i in range(len(modeles_page)):
@@ -638,7 +645,7 @@ class Ui_MainWindow(object):
         f = open(self.fichier_configuration, encoding='utf-8', mode='w')
         f.write(etree.tostring(root, pretty_print=True, encoding="UTF-8", xml_declaration=True).decode('utf-8', 'strict'))
         f.close()
-
+	
     ###========================================================================
     ### Fonction de création des exercices
     ###========================================================================
@@ -660,7 +667,8 @@ class Ui_MainWindow(object):
                       'environnement': self.environnement,
                       'affichage': self.affichage,
                       'modele_presentation': unicode(self.comboBox_modele_presentation.currentText()),
-                      'modele_page': unicode(self.comboBox_modele_page.currentText())}
+                      'modele_page': unicode(self.comboBox_modele_page.currentText()),
+                      'afficher_pdf' : True}
         ## Creation
         if self.affichage == "csv":
             QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Impossible de créer tous les exercices dans le mode CSV.", QtGui.QMessageBox.Ok ) 
@@ -675,9 +683,9 @@ class Ui_MainWindow(object):
                         for parametre in range(len(self.liste_exercice[onglet][1][categorie][1][exercice][1])):
                             valeur_parametre.append(int(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][3]))
                         self.liste_creation.append((commande, valeur_parametre))
-            parametres ['liste_exos'] = self.liste_creation
+            parametres ['liste_exercice'] = self.liste_creation
             parametres ['chemin_csv'] = ""
-            creation_exercice = Thread(None, creation, "creation_exercice", (parametres, ), None)
+            creation_exercice = Thread(None, eval("exercices_%s.creation.creation" % self.environnement), "creation_exercice", (parametres, ), None)
             creation_exercice.start()
 
     ############## Fonction créant des fiches à partir de la liste d'exercices
@@ -698,16 +706,17 @@ class Ui_MainWindow(object):
                       'environnement': self.environnement,
                       'affichage': self.affichage,
                       'modele_presentation': unicode(self.comboBox_modele_presentation.currentText()),
-                      'modele_page': unicode(self.comboBox_modele_page.currentText())}
+                      'modele_page': unicode(self.comboBox_modele_page.currentText()),
+                      'afficher_pdf' : True}
         ## Creation
         if self.affichage == "csv":
             # Test de l'existence du fichier
             if not(isfile(unicode(self.onglet_csv_chemin.text()))):
                 QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Fichier csv non valide.", QtGui.QMessageBox.Ok ) 
             else:
-                parametres ['liste_exos'] = []
+                parametres ['liste_exercice'] = []
                 parametres ['chemin_csv'] = unicode(self.onglet_csv_chemin.text())
-                creation_exercice = Thread(None, creation, "creation_exercice", (parametres, ), None)
+                creation_exercice = Thread(None, eval("exercices_%s.creation.creation" % self.environnement), "creation_exercice", (parametres, ), None)
                 creation_exercice.start()
         else:
             # Création de la liste d'exercices
@@ -716,7 +725,7 @@ class Ui_MainWindow(object):
             if self.liste_creation == []:
                 QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Veuillez sélectionner des exercices...", QtGui.QMessageBox.Ok )    
             else:
-                parametres ['liste_exos'] = self.liste_creation
+                parametres ['liste_exercice'] = self.liste_creation
                 parametres ['chemin_csv'] = ""
-                creation_exercice = Thread(None, creation, "creation_exercice", (parametres, ), None)
+                creation_exercice = Thread(None, eval("exercices_%s.creation.creation" % self.environnement), "creation_exercice", (parametres, ), None)
                 creation_exercice.start()

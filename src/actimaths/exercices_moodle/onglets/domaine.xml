@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<liste>
+  <onglet nom = "Gestion de données">
+    <categorie nom = "Sixième">
+
+    </categorie>
+    <categorie nom = "Cinquième">
+
+    </categorie>
+    <categorie nom = "Quatrième">
+
+    </categorie>
+    <categorie nom = "Troisième">
+
+    </categorie>
+    <categorie nom = "Lycée">
+
+    </categorie>
+  </onglet>
+  <onglet nom = "Nombres et Calculs">
+    <categorie nom = "Sixième">
+
+    </categorie>
+    <categorie nom = "Cinquième">
+
+    </categorie>
+    <categorie nom = "Quatrième">
+
+    </categorie>
+    <categorie nom = "Troisième">
+
+    </categorie>
+    <categorie nom = "Lycée">
+
+    </categorie>
+  </onglet>
+  <onglet nom = "Géométrie">
+    <categorie nom = "Sixième">
+
+    </categorie>
+    <categorie nom = "Cinquième">
+
+    </categorie>
+    <categorie nom = "Quatrième">
+
+    </categorie>
+    <categorie nom = "Troisième">
+
+    </categorie>
+    <categorie nom = "Lycée">
+
+    </categorie>
+  </onglet>
+  <onglet nom = "Grandeurs et mesures">
+    <categorie nom = "Sixième">
+      <exercice commande="sixieme_grandeurMesure_angles.MesureAngles" description="" nom="Mesurer des angles"/>
+    </categorie>
+    <categorie nom = "Cinquième">
+
+    </categorie>
+    <categorie nom = "Quatrième">
+
+    </categorie>
+    <categorie nom = "Troisième">
+
+    </categorie>
+    <categorie nom = "Lycée">
+
+    </categorie>
+  </onglet>
+</liste>

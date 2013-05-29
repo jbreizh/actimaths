@@ -25,7 +25,7 @@ from outils import Arithmetique
 from outils.Priorites import OperateurPrioritaire
 from outils.TeXMiseEnForme import Affichage
 import random
-from classes.Fractions import Fractions #Classe Fractions de pyromaths
+from outils.Fractions import Fractions #Classe Fractions de pyromaths
 
 
 def valeurs_priorites_fractions(nb, nombre_min, nombre_max, entier=1):  # renvoie les 2 listes contenant les opérateurs et les opérandes.

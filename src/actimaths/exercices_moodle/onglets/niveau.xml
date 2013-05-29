@@ -1,0 +1,71 @@
+<liste>
+  <onglet nom="Sixieme">
+    <categorie nom="Gestion de données">
+    </categorie>
+    <categorie nom="Nombres et Calculs">
+      
+    </categorie>
+    <categorie nom="Géométrie">
+      
+    </categorie>
+    <categorie nom="Grandeurs et mesures">
+      <exercice commande="sixieme_grandeurMesure_angles.MesureAngles" description="" nom="Mesurer des angles"/>
+    </categorie>
+  </onglet>
+    <onglet nom="Cinquieme">
+    <categorie nom="Gestion de données">
+
+    </categorie>
+    <categorie nom="Nombres et Calculs">
+      
+    </categorie>
+    <categorie nom="Géométrie">
+      
+    </categorie>
+    <categorie nom="Grandeurs et mesures">
+       
+    </categorie>
+  </onglet>
+  <onglet nom="Quatrieme">
+    <categorie nom="Gestion de données">
+
+    </categorie>
+    <categorie nom="Nombres et Calculs">
+      
+    </categorie>
+    <categorie nom="Géométrie">
+      
+    </categorie>
+    <categorie nom="Grandeurs et mesures">
+
+    </categorie>
+  </onglet>
+  <onglet nom="Troisieme">
+    <categorie nom="Gestion de données">
+      
+    </categorie>
+    <categorie nom="Nombres et Calculs">
+      
+    </categorie>
+    <categorie nom="Géométrie">
+
+    </categorie>
+    <categorie nom="Grandeurs et mesures">
+
+    </categorie>
+  </onglet>
+  <onglet nom="Lycée">
+    <categorie nom="Gestion de données">
+     
+    </categorie>
+    <categorie nom="Nombres et Calculs">
+      
+    </categorie>
+    <categorie nom="Géométrie">
+      
+    </categorie>
+    <categorie nom="Grandeurs et mesures">
+
+    </categorie>
+  </onglet>
+</liste>

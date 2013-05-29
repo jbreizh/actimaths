@@ -1,16 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from os.path import join
-from actimaths.values import DATADIR
 from actimaths.system import creation, lire_liste_exercice
 from subprocess import call
 
 
 environnement = 'pyromaths'
-log = open('/tmp/preview-actimaths.log' , 'w')
-fichier_liste_exercice = join(DATADIR, environnement, 'onglets' , 'niveau.xml')
+fichier_liste_exercice = join(dirname(__file__), "exercices_%s" % environnement, 'onglets' , 'niveau.xml')
 liste_exercice = lire_liste_exercice(fichier_liste_exercice)
-
 parametres = {'sujet_presentation': True,
               'corrige_presentation': False,
               'sujet_page': False,
@@ -29,6 +26,7 @@ parametres = {'sujet_presentation': True,
               'modele_presentation': 'Vignette',
               'modele_page': ''}
 
+log = open('/tmp/preview-actimaths.log' , 'w')
 for onglet in range(len(liste_exercice)):
     for categorie in range(len(liste_exercice[onglet][1])):
         for exercice in range(len(liste_exercice[onglet][1][categorie][1])):

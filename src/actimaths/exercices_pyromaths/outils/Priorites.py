@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import re, sys
+import re, sys, math
 from Affichage import decimaux
-from . import Arithmetique, Affichage
-import math
-from .Fractions import EffectueSommeFractions, EffectueQuotientFractions, EffectueProduitFractions
+from Fractions import EffectueSommeFractions, EffectueQuotientFractions, EffectueProduitFractions
+import Arithmetique, Affichage
 
 def EffectueCalcul(op, nb1, nb2, pre="", post=""):
     denominateur_max = 20
@@ -335,8 +334,8 @@ def priorites_operations(calcul, pre = "", post = "", solution = []):
 ##print(priorites("-3**+2"))
 ##print(priorites("9+8*7"))
 
-from ..classes.Fractions import Fractions
-from . import Arithmetique, Affichage
+from Fractions import Fractions
+import Arithmetique, Affichage
 import random
 import math
 from TeXMiseEnForme import Affichage
