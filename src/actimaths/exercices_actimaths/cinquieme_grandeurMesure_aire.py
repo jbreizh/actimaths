@@ -72,7 +72,7 @@ def tex_disque(enonce,rayon,unite):
     enonce.append("\\begin{pspicture}(-5,-3)(5,3)")
     enonce.append("\\pstGeonode[PosAngle=-90,PointSymbol=x](0,0){O}")
     enonce.append("\\pscircle(O){2.5}")
-    enonce.append("\\uput{0.25}[0]{45}(0,0){$\\unit[%s]{%s}$}" % (rayon,uniteAire[unite]))
+    enonce.append("\\uput{0.25}[0]{45}(0,0){$\\unit[%s]{%s}$}" % (rayon,uniteLongueur[unite]))
     enonce.append("\\rput{45}(0,0){\\psline{<->}(O)(2.5,0)}")
     enonce.append("\\end{pspicture}")
     enonce.append("\\end{center}")
