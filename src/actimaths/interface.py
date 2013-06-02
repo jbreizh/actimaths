@@ -406,9 +406,9 @@ class Ui_MainWindow(object):
         self.nom_auteur.setText(self.config['nom_auteur'])
         self.verticalLayout_17.addWidget(self.nom_auteur)
         ## LineEdit temps d'un slide
-        self.temps_slide = QtGui.QLineEdit(self.onglet_option_widget)
+        self.temps_slide = QtGui.QSpinBox(self.onglet_option_widget)
         self.temps_slide.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.temps_slide.setText(self.config['temps_slide'])
+        self.temps_slide.setValue(int(self.config['temps_slide']))
         self.verticalLayout_17.addWidget(self.temps_slide)
         ## LineEdit date de l'activité mentale
         self.date_activite = QtGui.QLineEdit(self.onglet_option_widget)
