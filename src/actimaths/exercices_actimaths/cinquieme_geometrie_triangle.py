@@ -21,10 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import random
+import random, math
 
 #------------------methode---------------------------------------------
-def nom_point(nb):
+def nom_sommet(nb):
     (listenb, listepts) = ([], [])
     for i in range(26):
         listenb.append(i + 65)
@@ -47,162 +47,296 @@ def nom_cote(nomPoint):
     nomCote.append("%s%s" % (nomPoint[2],nomPoint[0]))
     return nomCote
 
-def tex_itemize(enonce,listCaracteristique):
+def mesure_angle(type):
+    if type == 'isocele':
+        while True:
+            a = random.randrange(20,100,10)
+            if a != 60 and a != 90:
+                break
+        mesure = [(180-a)/2, (180-a)/2, a]
+    elif type == 'rectangle':
+        while True:
+            a = random.randrange(20,60,5)
+            if a != 45:
+                break
+        mesure = [a, 90 - a, 90]
+    elif type == 'quelconque':
+        while True:
+            a = random.randrange(20,80,5)
+            b = random.randrange(20,80,5)
+            c = 180 - a - b
+            if a != 90 and b != 90 and c != 90 and a != b and b != c and c != a :
+                break
+        mesure = [a, b, c]
+    return mesure
+
+def choix_angle(type):
+    if type == 'isocele':
+        while True:
+            choix = random.sample(range(3),3)
+            if choix[2] != 1:
+                break
+    elif type == 'rectangle':
+        while True:
+            choix = random.sample(range(3),3)
+            if choix[2] != 2:
+                break
+    elif type == 'quelconque':
+        choix = random.sample(range(3),3)
+    return choix
+
+def tex_mesure_angle(mesure, choix):
+    tex_mesure_enonce = []
+    tex_mesure_corrige = []
+    for i in range(len(mesure)):
+        if i == choix[2]:
+            tex_mesure_enonce.append("?^\\circ")
+            tex_mesure_corrige.append("\\boxed{%s^\\circ}" % mesure[i])
+        else:
+            tex_mesure_enonce.append("%s^\\circ" % mesure[i])
+            tex_mesure_corrige.append("%s^\\circ" % mesure[i])
+    return tex_mesure_enonce, tex_mesure_corrige
+
+def tex_triangle(tex, sommet, mesure, tex_mesure):
+    # Coefficient tel que hauteur = gamma * base
+    gamma = math.tan(math.radians(mesure[0]))*math.tan(math.radians(mesure[1]))/(math.tan(math.radians(mesure[0]))+math.tan(math.radians(mesure[1])))
+    # Coordonnée des sommets pour que la base ou la hauteur mesure (max-min) cm
+    min = -4
+    max = 4
+    if gamma < 1:
+        coordonnee = [min, min, max, min, round((max-min)*gamma/math.tan(math.radians(mesure[0]))+min, 4),round((max-min)*gamma+min,4)]
+    else:
+        coordonnee = [min, min, round((max-min)/gamma+min, 4), min, round((max-min)/math.tan(math.radians(mesure[0])) +min, 4) ,max]
+    # Angle des symboles des angles
+    angle = [0, mesure[0], 180 - mesure[1], 180, 180 + mesure[0], 180 + mesure[0] + mesure[2]]
+    ## Construction
+    tex.append("\\begin{center}")
+    tex.append("\\psset{unit=0.5cm}")
+    tex.append("\\begin{pspicture}(%s,%s)(%s,%s)" %(coordonnee[0]-1, coordonnee[1]-1, coordonnee[2]+1, coordonnee[5]+1))
+    # Triangle
+    tex.append("\\pstTriangle(%s,%s){%s}(%s,%s){%s}(%s,%s){%s}" %(coordonnee[0], coordonnee[1], sommet[0], coordonnee[2], coordonnee[3], sommet[1], coordonnee[4], coordonnee[5], sommet[2]))
+    # Symbole et légende de chaque angle
+    for i in range(len(mesure)):
+        if mesure[i] == 90:
+           tex.append("\\pstRightAngle{%s}{%s}{%s}" % ( sommet[(i+1)%3], sommet[i], sommet[(i-1)%3]))
+        elif mesure[0] == mesure[1] and i < 2:
+           tex.append("\\pstMarkAngle{%s}{%s}{%s}{}" % ( sommet[(i+1)%3], sommet[i], sommet[(i-1)%3]))
+           tex.append("\\uput{0.75}[%s]{%s}(%s,%s){\\psline(0,0)(0.5,0)}" % ((angle[2*i]+angle[2*i+1])/2, (angle[2*i]+angle[2*i+1])/2, coordonnee[2*i], coordonnee[2*i+1]))
+           if i == 0:
+               tex.append("\\pstMarkAngle{%s}{%s}{%s}{$%s$}" % ( sommet[(i+1)%3], sommet[i], sommet[(i-1)%3], tex_mesure[i]))
+        else:
+           tex.append("\\pstMarkAngle{%s}{%s}{%s}{$%s$}" % ( sommet[(i+1)%3], sommet[i], sommet[(i-1)%3], tex_mesure[i]))
+    tex.append("\\end{pspicture}")
+    tex.append("\\end{center}")
+
+def tex_itemize(enonce,liste):
     enonce.append("\\begin{itemize}")
-    for caracteristique in listCaracteristique:
-        enonce.append("\\item %s"  % caracteristique)
+    for element in liste:
+        enonce.append("\\item %s"  % element)
     enonce.append("\\end{itemize}")
 
 #------------------construction-----------------------------------------
-
-
 def SommeQuelconque(parametre):
-    nomSommet=nom_point(3)
-    nomAngle=nom_angle(nomSommet)
-    question = u"%s est un triangle :" % nomAngle[0]
+    ## Choix des variables
+    sommet = nom_sommet(3)
+    mesure = mesure_angle('quelconque')
+    choix = choix_angle('quelconque')
+    (tex_mesure_enonce, tex_mesure_corrige) = tex_mesure_angle(mesure, choix)
+    ## Initialisation
+    question = "Calculer $\\widehat{%s}$" % (sommet[choix[2]])
     exo = []
     cor = []
-    a=random.randrange(20,80,5)
-    b=random.randrange(20,80,5)
-    c=180-a-b
-    angle=random.sample(range(3),3)
-    listCaracteristique = ["Quelconque",
-                           "$\\widehat{%s}=%s^\\circ$" %(nomAngle[angle[0]],a),
-                           "$\\widehat{%s}=%s^\\circ$" %(nomAngle[angle[1]],b)]
-    tex_itemize(exo,listCaracteristique)
-    exo.append("Calculer $\\widehat{%s}$" % (nomAngle[angle[2]]))
-    cor.append("$$\\widehat{%s}+\\widehat{%s}+\\widehat{%s}=180^\\circ$$" % (nomAngle[angle[0]],nomAngle[angle[1]],nomAngle[angle[2]]))
-    cor.append("$$%s^\\circ+%s^\\circ+\\widehat{%s}=180^\\circ$$" % (a,b,nomAngle[angle[2]]))
-    cor.append("$$\\widehat{%s}=180^\\circ-%s^\\circ-%s^\\circ$$" % (nomAngle[angle[2]],a,b))
-    cor.append("$$\\boxed{\\widehat{%s}=%s^\\circ}$$" % (nomAngle[angle[2]],c))
+    exo.append(u"%s%s%s est un triangle tel que:" % (sommet[0], sommet[1], sommet[2]))
+    cor.append(u"%s%s%s est un triangle tel que:" % (sommet[0], sommet[1], sommet[2]))
+    ## Enonce
+    liste_caracteristique_enonce = []
+    liste_caracteristique_corrige = []
+    for i in range(len(mesure)):
+        liste_caracteristique_enonce.append("$\\widehat{%s}=%s$" %(sommet[i],tex_mesure_enonce[i]))
+        liste_caracteristique_corrige.append("$\\widehat{%s}=%s$" %(sommet[i],tex_mesure_corrige[i]))
+    tex_itemize(exo,liste_caracteristique_enonce)
+    tex_itemize(cor,liste_caracteristique_corrige)
+    ## Corrigé
+    cor.append("$$%s+%s+%s=180^\\circ$$" % (tex_mesure_enonce[choix[2]],tex_mesure_enonce[choix[0]], tex_mesure_enonce[choix[1]]))
+    cor.append("$$\\widehat{%s}=180^\\circ - %s - %s = %s$$" % (sommet[choix[2]],tex_mesure_corrige[choix[0]],tex_mesure_corrige[choix[1]], tex_mesure_corrige[choix[2]]))
     return (exo, cor, question)
 
-def SommeIsoceleBase(parametre):
-    nomSommet=nom_point(3)
-    nomAngle=nom_angle(nomSommet)
-    question = u"%s est un triangle :" % nomAngle[0]
+def SommeQuelconqueSchema(parametre):
+    ## Choix des variables
+    sommet = nom_sommet(3)
+    mesure = mesure_angle('quelconque')
+    choix = choix_angle('quelconque')
+    (tex_mesure_enonce, tex_mesure_corrige) = tex_mesure_angle(mesure, choix)
+    ## Initialisation
+    question = "Calculer $\\widehat{%s}$" % sommet[choix[2]]
     exo = []
     cor = []
-    a=random.randrange(20,100,10)
-    b=(180-a)/2
-    c=(180-a)/2
-    angle=random.sample(range(3),3)
-    listCaracteristique = [u"Isocèle en %s" % nomSommet[angle[0]],
-                           "$\\widehat{%s}=%s^\\circ$" % (nomAngle[angle[0]],a)]
-    tex_itemize(exo,listCaracteristique)
-    exo.append("Calculer $\\widehat{%s}$" % (nomAngle[angle[2]]))
-    cor.append("$$\\widehat{%s}+\\widehat{%s}+\\widehat{%s}=180^\\circ$$" % (nomAngle[angle[0]],nomAngle[angle[1]],nomAngle[angle[2]]))
-    cor.append("$$\\widehat{%s}+\\widehat{%s}+\\widehat{%s}=180^\\circ$$" % (nomAngle[angle[0]],nomAngle[angle[2]],nomAngle[angle[2]]))
-    cor.append("$$%s^\\circ+2\\times\\widehat{%s}=180^\\circ$$" % (a,nomAngle[angle[2]]))
-    cor.append("$$2\\times\\widehat{%s}=180^\\circ-%s^\\circ=%s^\\circ$$" % (nomAngle[angle[2]],a,2*b))
-    cor.append("$$\\widehat{%s}=%s^\\circ \\div 2$$" % (nomAngle[angle[2]],2*b))
-    cor.append("$$\\boxed{\\widehat{%s}=%s^\\circ}$$" % (nomAngle[angle[2]],b))
+    ## Figure
+    tex_triangle(exo, sommet, mesure, tex_mesure_enonce)
+    tex_triangle(cor, sommet, mesure, tex_mesure_corrige)
+    ## Corrigé
+    cor.append("$$%s+%s+%s=180^\\circ$$" % (tex_mesure_enonce[choix[2]],tex_mesure_enonce[choix[0]], tex_mesure_enonce[choix[1]]))
+    cor.append("$$\\widehat{%s}=180^\\circ - %s - %s = %s$$" % (sommet[choix[2]],tex_mesure_corrige[choix[0]],tex_mesure_corrige[choix[1]], tex_mesure_corrige[choix[2]]))
     return (exo, cor, question)
 
-def SommeIsoceleSommet(parametre):
-    nomSommet=nom_point(3)
-    nomAngle=nom_angle(nomSommet)
-    question = u"%s est un triangle :" % nomAngle[0]
+def SommeIsocele(parametre):
+    ## Choix des variables
+    sommet = nom_sommet(3)
+    mesure = mesure_angle('isocele')
+    choix = choix_angle('isocele')
+    (tex_mesure_enonce, tex_mesure_corrige) = tex_mesure_angle(mesure, choix)
+    ## Initialisation
+    question = "Calculer $\\widehat{%s}$" % (sommet[choix[2]])
     exo = []
     cor = []
-    a=random.randrange(20,100,10)
-    b=(180-a)/2
-    c=(180-a)/2
-    angle=random.sample(range(3),3)
-    listCaracteristique = [u"Isocèle en %s" % nomSommet[angle[0]],
-                           "$\\widehat{%s}=%s^\\circ$" % (nomAngle[angle[2]],b)]
-    tex_itemize(exo,listCaracteristique)
-    exo.append("Calculer $\\widehat{%s}$" % (nomAngle[angle[0]]))
-    cor.append("$$\\widehat{%s}+\\widehat{%s}+\\widehat{%s}=180^\\circ$$" % (nomAngle[angle[0]],nomAngle[angle[1]],nomAngle[angle[2]]))
-    cor.append("$$\\widehat{%s}+\\widehat{%s}+\\widehat{%s}=180^\\circ$$" % (nomAngle[angle[0]],nomAngle[angle[2]],nomAngle[angle[2]]))
-    cor.append("$$\\widehat{%s}+%s^\\circ+%s^\\circ=180^\\circ$$" % (nomAngle[angle[0]],b,b))
-    cor.append("$$\\widehat{%s}+%s^\\circ=180^\\circ$$" % (nomAngle[angle[0]],2*b))
-    cor.append("$$\\widehat{%s}=180^\\circ-%s^\\circ$$" % (nomAngle[angle[0]],2*b))
-    cor.append("$$\\boxed{\\widehat{%s}=%s^\\circ}$$" % (nomAngle[angle[0]],a))
+    exo.append(u"%s%s%s est isocèle en %s tel que:" % (sommet[0], sommet[1], sommet[2], sommet[2]))
+    cor.append(u"%s%s%s est isocèle en %s tel que:" % (sommet[0], sommet[1], sommet[2], sommet[2]))
+    ## Enonce
+    liste_caracteristique_enonce = []
+    liste_caracteristique_corrige = []
+    for i in [0,2]:
+        liste_caracteristique_enonce.append("$\\widehat{%s}=%s$" %(sommet[i],tex_mesure_enonce[i]))
+        liste_caracteristique_corrige.append("$\\widehat{%s}=%s$" %(sommet[i],tex_mesure_corrige[i]))
+    tex_itemize(exo,liste_caracteristique_enonce)
+    tex_itemize(cor,liste_caracteristique_corrige)
+    ## Corrigé
+    if choix[2] == 2:
+        cor.append("$$%s + 2\\times %s=180^\\circ$$" % (tex_mesure_enonce[choix[2]], tex_mesure_enonce[0]))
+        cor.append("$$\\widehat{%s}=180^\\circ - 2\\times %s = %s$$" % (sommet[choix[2]],tex_mesure_corrige[0], tex_mesure_corrige[choix[2]]))
+    else:
+        cor.append("$$2\\times %s + %s =180^\\circ$$" % (tex_mesure_enonce[choix[2]], tex_mesure_enonce[2]))
+        cor.append("$$\\widehat{%s}= (180^\\circ - %s) \\div 2 = %s$$" % (sommet[choix[2]],tex_mesure_corrige[2], tex_mesure_corrige[choix[2]]))
+    return (exo, cor, question)
+
+def SommeIsoceleSchema(parametre):
+    ## Choix des variables
+    sommet = nom_sommet(3)
+    mesure = mesure_angle('isocele')
+    choix = choix_angle('isocele')
+    (tex_mesure_enonce, tex_mesure_corrige) = tex_mesure_angle(mesure, choix)
+    ## Initialisation
+    question = "Calculer $\\widehat{%s}$" % sommet[choix[2]]
+    exo = []
+    cor = []
+    ## Figure
+    tex_triangle(exo, sommet, mesure, tex_mesure_enonce)
+    tex_triangle(cor, sommet, mesure, tex_mesure_corrige)
+    ## Corrigé
+    if choix[2] == 2:
+        cor.append("$$%s + 2\\times %s=180^\\circ$$" % (tex_mesure_enonce[choix[2]], tex_mesure_enonce[0]))
+        cor.append("$$\\widehat{%s}=180^\\circ -2\\times %s = %s$$" % (sommet[choix[2]],tex_mesure_corrige[0], tex_mesure_corrige[choix[2]]))
+    else:
+        cor.append("$$2\\times %s + %s =180^\\circ$$" % (tex_mesure_enonce[choix[2]], tex_mesure_enonce[2]))
+        cor.append("$$\\widehat{%s}= (180^\\circ - %s) \\div 2 = %s$$" % (sommet[choix[2]],tex_mesure_corrige[2], tex_mesure_corrige[choix[2]]))
     return (exo, cor, question)
 
 def SommeRectangle(parametre):
-    nomSommet=nom_point(3)
-    nomAngle=nom_angle(nomSommet)
-    question = u"%s est un triangle :" % nomAngle[0]
+    ## Choix des variables
+    sommet = nom_sommet(3)
+    mesure = mesure_angle('rectangle')
+    choix = choix_angle('rectangle')
+    (tex_mesure_enonce, tex_mesure_corrige) = tex_mesure_angle(mesure, choix)
+    ## Initialisation
+    question = "Calculer $\\widehat{%s}$" % (sommet[choix[2]])
     exo = []
     cor = []
-    a = 90
-    b = random.randrange(20,60,5)
-    c = 90 - b
-    angle=random.sample(range(3),3)
-    listCaracteristique = ["Rectangle en %s" % nomSommet[angle[0]],
-                           "$\\widehat{%s}=%s^\\circ$" %(nomAngle[angle[1]],b)]
-    tex_itemize(exo,listCaracteristique)
-    exo.append("Calculer $\\widehat{%s}$" % (nomAngle[angle[2]]))
-    cor.append("$$\\widehat{%s}+\\widehat{%s}+\\widehat{%s}=180^\\circ$$" % (nomAngle[angle[0]],nomAngle[angle[1]],nomAngle[angle[2]]))
-    cor.append("$$%s^\\circ+%s^\\circ+\\widehat{%s}=180^\\circ$$" % (a,b,nomAngle[angle[2]]))
-    cor.append("$$\\widehat{%s}=180^\\circ-%s^\\circ-%s^\\circ$$" % (nomAngle[angle[2]],a,b))
-    cor.append("$$\\boxed{\\widehat{%s}=%s^\\circ}$$" % (nomAngle[angle[2]],c))
+    exo.append(u"%s%s%s est rectangle en %s tel que:" % (sommet[0], sommet[1], sommet[2], sommet[2]))
+    cor.append(u"%s%s%s est rectangle en %s tel que:" % (sommet[0], sommet[1], sommet[2], sommet[2]))
+    ## Enonce
+    liste_caracteristique_enonce = []
+    liste_caracteristique_corrige = []
+    for i in [0,2]:
+        liste_caracteristique_enonce.append("$\\widehat{%s}=%s$" %(sommet[i],tex_mesure_enonce[i]))
+        liste_caracteristique_corrige.append("$\\widehat{%s}=%s$" %(sommet[i],tex_mesure_corrige[i]))
+    tex_itemize(exo,liste_caracteristique_enonce)
+    tex_itemize(cor,liste_caracteristique_corrige)
+    ## Corrigé
+    cor.append("$$ %s + %s + %s =180^\\circ$$" % (tex_mesure_enonce[choix[2]],tex_mesure_enonce[choix[0]],tex_mesure_enonce[choix[1]]))
+    cor.append("$$\\widehat{%s}=180^\\circ - %s - %s = %s$$" % (sommet[choix[2]],tex_mesure_enonce[choix[0]],tex_mesure_enonce[choix[1]], tex_mesure_corrige[choix[2]]))
     return (exo, cor, question)
 
+def SommeRectangleSchema(parametre):
+    ## Choix des variables
+    sommet = nom_sommet(3)
+    mesure = mesure_angle('rectangle')
+    choix = choix_angle('rectangle')
+    (tex_mesure_enonce, tex_mesure_corrige) = tex_mesure_angle(mesure, choix)
+    ## Initialisation
+    question = "Calculer $\\widehat{%s}$" % (sommet[choix[2]])
+    exo = []
+    cor = []
+    ## Figure
+    tex_triangle(exo, sommet, mesure, tex_mesure_enonce)
+    tex_triangle(cor, sommet, mesure, tex_mesure_corrige)
+    ## Corrigé
+    cor.append("$$ %s + %s + %s =180^\\circ$$" % (tex_mesure_enonce[choix[2]],tex_mesure_enonce[choix[0]],tex_mesure_enonce[choix[1]]))
+    cor.append("$$\\widehat{%s}=180^\\circ - %s - %s = %s$$" % (sommet[choix[2]],tex_mesure_enonce[choix[0]],tex_mesure_enonce[choix[1]], tex_mesure_corrige[choix[2]]))
+    return (exo, cor, question)
 
 def ConstruireQuelconque(parametre):
-    nomSommet=nom_point(3)
-    nomAngle=nom_angle(nomSommet)
-    question = u"Peut-on construire %s :" % nomAngle[0]
+    ## Choix des variables
+    sommet= nom_sommet(3)
+    mesure = mesure_angle('quelconque')
+    if random.randrange(2):
+        mesure[2] = mesure[2] + random.randrange(5,25,5)
+    somme_angle = mesure[0] + mesure[1] + mesure[2]
+    tex_mesure = []
+    for i in range(len(mesure)):
+        tex_mesure.append("%s^\\circ" % mesure[i])
+    ## Initialisation
+    question = u"Peut-on construire un triangle %s%s%s tel que:" % (sommet[0], sommet[1], sommet[2])
     exo = []
     cor = []
-    a=random.randrange(20,80,5)
-    b=random.randrange(20,80,5)
-    c=180 - a - b
-    possible = random.randrange(2)
-    if possible == 0:
-        c= c + random.randrange(5,25,5)
-    angle=random.sample(range(3),3)
-    listCaracteristique = ["$\\widehat{%s} = %s^\\circ$" %(nomAngle[angle[0]],a),
-                           "$\\widehat{%s} = %s^\\circ$" %(nomAngle[angle[1]],b),
-                           "$\\widehat{%s} = %s^\\circ$" %(nomAngle[angle[2]],c)]
-    tex_itemize(exo,listCaracteristique)
-    cor.append("$$\\widehat{%s}+\\widehat{%s}+\\widehat{%s}$$" % (nomAngle[angle[0]],nomAngle[angle[1]],nomAngle[angle[2]]))
-    cor.append("$$= %s^\\circ+%s^\\circ+%s^\\circ$$" % (a,b,c))
-    if possible:
-        cor.append("$$= %s^\\circ $$" % (a+b+c))
-        cor.append("Un triangle %s est donc constructible." % nomAngle[0])
+    ## Enonce
+    liste_caracteristique = []
+    for i in range(len(mesure)):
+        liste_caracteristique.append("$\\widehat{%s}=%s$" %(sommet[i],tex_mesure[i]))
+    tex_itemize(exo,liste_caracteristique)
+    tex_itemize(cor,liste_caracteristique)
+    ## Corrigé
+    if somme_angle == 180:
+        cor.append("$$ \\widehat{%s} + \\widehat{%s} + \\widehat{%s} = %s + %s + %s = %s^\\circ$$" % (sommet[0], sommet[1], sommet[2], tex_mesure[0], tex_mesure[1], tex_mesure[2], somme_angle))
+        cor.append("Un triangle %s%s%s est constructible." % (sommet[0], sommet[1], sommet[2]))
     else:
-        cor.append("$$= %s^\\circ \\neq 180^\\circ $$" % (a+b+c))
-        cor.append("Un triangle %s n'est pas donc constructible." % nomAngle[0])  
+        cor.append("$$ \\widehat{%s} + \\widehat{%s} + \\widehat{%s} = %s + %s + %s = %s^\\circ \\neq 180^\\circ$$" % (sommet[0], sommet[1], sommet[2], tex_mesure[0], tex_mesure[1], tex_mesure[2], somme_angle))
+        cor.append("Un triangle %s%s%s n'est pas constructible." % (sommet[0], sommet[1], sommet[2]))
     return (exo, cor, question)
 
-def ConstruireRectangle(parametre):
-    nomSommet=nom_point(3)
-    nomAngle=nom_angle(nomSommet)
-    question = u"Peut-on construire %s :" % nomAngle[0]
+def ConstruireQuelconqueSchema(parametre):
+    ## Choix des variables
+    sommet= nom_sommet(3)
+    mesure = mesure_angle('quelconque')
+
+    mesure_2 = []
+    for angle in mesure:
+        mesure_2.append(angle)
+    if random.randrange(2):
+        mesure_2[2] = mesure_2[2] + random.randrange(5,25,5)
+
+    somme_angle = mesure_2[0] + mesure_2[1] + mesure_2[2]
+    tex_mesure = []
+    for i in range(len(mesure)):
+        tex_mesure.append("%s^\\circ" % mesure_2[i])
+    ## Initialisation
+    question = u"Peut-on construire un triangle %s%s%s tel que:" % (sommet[0], sommet[1], sommet[2])
     exo = []
     cor = []
-    a = 90
-    b = random.randrange(20,60,5)
-    c = 90 - b
-    possible = random.randrange(2)
-    if possible == 0:
-        c= c + random.randrange(5,25,5)
-    angle=random.sample(range(3),3)
-    listCaracteristique = ["Rectangle en %s" % nomSommet[angle[0]],
-                           "$\\widehat{%s} = %s^\\circ$" %(nomAngle[angle[1]],b),
-                           "$\\widehat{%s} = %s^\\circ$" %(nomAngle[angle[2]],c)]
-    tex_itemize(exo,listCaracteristique)
-    cor.append("$$\\widehat{%s}+\\widehat{%s}+\\widehat{%s}$$" % (nomAngle[angle[0]],nomAngle[angle[1]],nomAngle[angle[2]]))
-    cor.append("$$= %s^\\circ+%s^\\circ+%s^\\circ$$" % (a,b,c))
-    if possible:
-        cor.append("$$= %s^\\circ $$" % (a+b+c))
-        cor.append("Un triangle %s est donc constructible." % nomAngle[0])
+    ## Figure
+    tex_triangle(exo, sommet, mesure, tex_mesure)
+    tex_triangle(cor, sommet, mesure, tex_mesure)
+    ## Corrigé
+    if somme_angle == 180:
+        cor.append("$$ \\widehat{%s} + \\widehat{%s} + \\widehat{%s} = %s + %s + %s = %s^\\circ$$" % (sommet[0], sommet[1], sommet[2], tex_mesure[0], tex_mesure[1], tex_mesure[2], somme_angle))
+        cor.append("Un triangle %s%s%s est constructible." % (sommet[0], sommet[1], sommet[2]))
     else:
-        cor.append("$$= %s^\\circ \\neq 180^\\circ $$" % (a+b+c))
-        cor.append("Un triangle %s n'est pas donc constructible." % nomAngle[0])  
+        cor.append("$$ \\widehat{%s} + \\widehat{%s} + \\widehat{%s} = %s + %s + %s = %s^\\circ \\neq 180^\\circ$$" % (sommet[0], sommet[1], sommet[2], tex_mesure[0], tex_mesure[1], tex_mesure[2], somme_angle))
+        cor.append("Un triangle %s%s%s n'est pas constructible." % (sommet[0], sommet[1], sommet[2]))
     return (exo, cor, question)
 
 def InequaliteTriangulaire(parametre):
-    nomSommet=nom_point(3)
-    nomAngle=nom_angle(nomSommet)
-    nomCote=nom_cote(nomSommet)
-    question = u"Peut-on construire %s :" % nomAngle[0]
-    exo = []
-    cor = []
+    ## Choix des variables
+    sommet=nom_sommet(3)
+    nomCote=nom_cote(sommet)
     a = random.randrange(2,6)
     b = a + random.randrange(2,5)
     possible = random.randrange(3)
@@ -212,21 +346,28 @@ def InequaliteTriangulaire(parametre):
         c= a + b
     else:
         c= random.randrange( a + b - a, a + b )
+    mesure = [a, b, c]
     cote = random.sample(range(3),3)
-    listCaracteristique = ["$ %s =  \\unit[%s]{%s} $" %(nomCote[cote[0]],a,'cm'),
-                           "$ %s =  \\unit[%s]{%s} $" %(nomCote[cote[1]],b,'cm'),
-                           "$ %s =  \\unit[%s]{%s} $" %(nomCote[cote[2]],c,'cm')]
-    tex_itemize(exo,listCaracteristique)
+    ## Initialisation
+    question = u"Peut-on construire %s%s%s :"  % (sommet[0], sommet[1], sommet[2])
+    exo = []
+    cor = []
+    ## Enonce
+    liste_caracteristique = []
+    for i in range(len(mesure)):
+        liste_caracteristique.append("$ %s =  \\unit[%s]{cm} $" %(nomCote[cote[i]], mesure[i]))
+    tex_itemize(exo,liste_caracteristique)
+    ## Corrigé
     cor.append("$$ %s + %s = %s + %s = \\unit[%s]{%s} $$" % (nomCote[cote[0]],nomCote[cote[1]],a,b,a+b,'cm'))
     cor.append("$$ %s = \\unit[%s]{%s} $$" % (nomCote[cote[2]],c,'cm'))
     if possible == 0:
         cor.append("$$ %s + %s < %s $$" % (nomCote[cote[0]],nomCote[cote[1]],nomCote[cote[2]]))
-        cor.append("%s n'est pas constructible" % nomAngle[0])
+        cor.append("%s%s%s n'est pas constructible" % (sommet[0], sommet[1], sommet[2]))
     elif possible == 1:
         cor.append("$$ %s + %s = %s $$" % (nomCote[cote[0]],nomCote[cote[1]],nomCote[cote[2]]))
-        cor.append("%s n'est pas constructible \\newline" % nomAngle[0])
-        cor.append(u"Les points %s, %s et %s sont alignés" % (nomSommet[0],nomSommet[1],nomSommet[2]))
+        cor.append("%s%s%s n'est pas constructible \\newline"  % (sommet[0], sommet[1], sommet[2]))
+        cor.append(u"Les points %s, %s et %s sont alignés" % (sommet[0],sommet[1],sommet[2]))
     else:
         cor.append("$$ %s + %s > %s $$" % (nomCote[cote[0]],nomCote[cote[1]],nomCote[cote[2]]))
-        cor.append("%s est constructible" % nomAngle[0])
+        cor.append("%s%s%s est constructible" % (sommet[0], sommet[1], sommet[2]))
     return (exo, cor, question)
