@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 import random
-import math
 
 uniteLongueur = [ "mm", "cm", "dm", "m", "dam", "hm", "km"]
 uniteAire = [ "mm^2", "cm^2", "dm^2", "m^2", "dam^2", "hm^2", "km^2"]
@@ -66,17 +65,6 @@ def tex_triangle(enonce,base,hauteur,unite):
     enonce.append("\\end{pspicture}")
     enonce.append("\\end{center}")
 
-def tex_disque(enonce,rayon,unite):
-    enonce.append("\\begin{center}")
-    enonce.append("\\psset{unit=0.5cm}")
-    enonce.append("\\begin{pspicture}(-5,-3)(5,3)")
-    enonce.append("\\pstGeonode[PosAngle=-90,PointSymbol=x](0,0){O}")
-    enonce.append("\\pscircle(O){2.5}")
-    enonce.append("\\uput{0.25}[0]{45}(0,0){$\\unit[%s]{%s}$}" % (rayon,uniteLongueur[unite]))
-    enonce.append("\\rput{45}(0,0){\\psline{<->}(O)(2.5,0)}")
-    enonce.append("\\end{pspicture}")
-    enonce.append("\\end{center}")
-
 def Parallelogramme(parametre):
     question = u"Calculer l\'aire du parallèlogramme :"
     exo = []
@@ -99,18 +87,4 @@ def Triangle(parametre):
     cor.append("$$ Aire = ( Base \\times hauteur ) \\div 2 $$")
     cor.append("$$ Aire = ( %s \\times %s ) \\div 2 = %s \\div 2 = %s $$" % (base,hauteur,base*hauteur,float(base*hauteur)/2))
     cor.append("$$ Aire = \\unit[%s]{%s} $$" % (float(base*hauteur)/2,uniteAire[unite]))
-    return (exo, cor, question)
-
-def Disque(parametre):
-    question = u"Calculer l\'aire du disque :"
-    exo = []
-    cor = []
-    rayon = random.randrange(2,10)
-    unite = random.randrange(7)
-    tex_disque(exo,rayon,unite)
-    tex_disque(cor,rayon,unite)
-    cor.append("$$ Aire = \\pi \\times r \\times r $$")
-    cor.append("$$ Aire = \\pi \\times %s \\times %s = \\pi \\times %s $$" % (rayon,rayon,rayon*rayon))
-    cor.append("$$ Aire = \\unit[%s \\pi]{%s}( \\approx \\unit[%s]{%s}) $$"
-               % (rayon*rayon,uniteAire[unite],round(math.pi*rayon*rayon,2),uniteAire[unite]))
     return (exo, cor, question)

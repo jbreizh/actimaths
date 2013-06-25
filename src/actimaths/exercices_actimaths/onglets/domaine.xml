@@ -311,6 +311,14 @@
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
+      <exercice commande="cinquieme_nombreCalcul_numeration.Oppose" description="Nombres Relatifs" nom="Donner l'opposé d'un nombre relatif">
+        <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="cinquieme_nombreCalcul_numeration.Signe" description="Nombres Relatifs" nom="Donner le signe d'un nombre relatif">
+        <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+      </exercice>  
       <exercice commande="cinquieme_nombreCalcul_operations.Addition" description="Nombres Relatifs" nom="Addition d'entiers relatifs">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
@@ -515,13 +523,15 @@
       <exercice commande="cinquieme_geometrie_angle.SupplementaireSchema" description="Géometrie" nom="Calculer la valeur de l'angle supplémentaire (schéma)"/>
       <exercice commande="cinquieme_geometrie_angle.Complementaire" description="Géometrie" nom="Calculer la valeur de l'angle complémentaire (texte)"/>
       <exercice commande="cinquieme_geometrie_angle.ComplementaireSchema" description="Géometrie" nom="Calculer la valeur de l'angle complémentaire (schéma)"/>
-      <exercice commande="cinquieme_geometrie_triangle.SommeQuelconque" description="Géometrie" nom="Somme des angles dans un triangle quelconque"/>
-      <exercice commande="cinquieme_geometrie_triangle.SommeIsoceleBase" description="Géometrie" nom="Somme des angles dans un triangle isocèle(base)"/>
-      <exercice commande="cinquieme_geometrie_triangle.SommeIsoceleSommet" description="Géometrie" nom="Somme des angles dans un triangle isocèle(sommet)"/>
-      <exercice commande="cinquieme_geometrie_triangle.SommeRectangle" description="Géometrie" nom="Somme des angles dans un triangle rectangle"/>
-      <exercice commande="cinquieme_geometrie_triangle.ConstruireQuelconque" description="Géometrie" nom="Peut-on construire ce triangle quelconque"/>
-      <exercice commande="cinquieme_geometrie_triangle.ConstruireRectangle" description="Géometrie" nom="Peut-on construire ce triangle rectangle"/>
-      <exercice commande="cinquieme_geometrie_triangle.InequaliteTriangulaire" description="Géometrie" nom="Inégalité triangulaire"/>
+      <exercice commande="cinquieme_geometrie_triangle.SommeQuelconque" description="Géometrie" nom="Somme des angles dans un triangle quelconque (texte)"/>
+      <exercice commande="cinquieme_geometrie_triangle.SommeQuelconqueSchema" description="Géometrie" nom="Somme des angles dans un triangle quelconque (schéma)"/>  
+      <exercice commande="cinquieme_geometrie_triangle.SommeIsocele" description="Géometrie" nom="Somme des angles dans un triangle isocèle (texte)"/>
+      <exercice commande="cinquieme_geometrie_triangle.SommeIsoceleSchema" description="Géometrie" nom="Somme des angles dans un triangle isocèle (schéma)"/>  
+      <exercice commande="cinquieme_geometrie_triangle.SommeRectangle" description="Géometrie" nom="Somme des angles dans un triangle rectangle (texte)"/>
+      <exercice commande="cinquieme_geometrie_triangle.SommeRectangleSchema" description="Géometrie" nom="Somme des angles dans un triangle rectangle (schéma)"/>    
+      <exercice commande="cinquieme_geometrie_triangle.ConstruireQuelconque" description="Géometrie" nom="Constructibilité d'un triangle quelconque (texte)"/>
+      <exercice commande="cinquieme_geometrie_triangle.ConstruireQuelconqueSchema" description="Géometrie" nom="Constructibilité d'un triangle quelconque (schema)"/>   
+      <exercice commande="cinquieme_geometrie_triangle.InequaliteTriangulaire" description="Géometrie" nom="Inégalité triangulaire (texte)"/>
     </categorie>
     <categorie nom = "Quatrième">
 
@@ -537,15 +547,20 @@
       <exercice commande="sixieme_grandeurMesure_conversion.Conversion" description="Unités" nom="Conversions unités"/>
       <exercice commande="sixieme_grandeurMesure_conversion.ConversionAire" description="Unités" nom="Conversions unités d'aires"/>
       <exercice commande="sixieme_grandeurMesure_conversion.ConversionVolume" description="Unités" nom="Conversions unités de volumes"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Comptage" description="Unités" nom="Donner le périmètre par comptage"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Carre" description="Unités" nom="Calculer le périmètre d'un carré"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Rectangle" description="Unités" nom="Calculer le périmètre d'un rectangle"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Disque" description="Unités" nom="Calculer le périmètre d'un cercle"/>    
       <exercice commande="sixieme_grandeurMesure_aire.Comptage" description="Unités" nom="Donner l'aire par comptage"/>
+      <exercice commande="sixieme_grandeurMesure_aire.Carre" description="Unités" nom="Calculer l'aire d'un carré"/>
       <exercice commande="sixieme_grandeurMesure_aire.Rectangle" description="Unités" nom="Calculer l'aire d'un rectangle"/>
       <exercice commande="sixieme_grandeurMesure_aire.TriangleRectangle" description="Unités" nom="Calculer l'aire d'un triangle rectangle"/>
+      <exercice commande="sixieme_grandeurMesure_aire.Disque" description="Unités" nom="Calculer l'aire d'un disque"/>      
       <exercice commande="sixieme_grandeurMesure_volume.PaveDroit" description="Unités" nom="Calculer le volume d'un pavé droit"/>
     </categorie>
     <categorie nom = "Cinquième">
       <exercice commande="cinquieme_grandeurMesure_aire.Parallelogramme" description="Unités" nom="Calculer l'aire d'un parallélogramme"/>
       <exercice commande="cinquieme_grandeurMesure_aire.Triangle" description="Unités" nom="Calculer l'aire d'un triangle"/>
-      <exercice commande="cinquieme_grandeurMesure_aire.Disque" description="Unités" nom="Calculer l'aire d'un disque"/>
       <exercice commande="cinquieme_grandeurMesure_volume.PaveDroit" description="Unités" nom="Calculer le volume d'un pavé droit"/>
       <exercice commande="cinquieme_grandeurMesure_volume.Cylindre" description="Unités" nom="Calculer le volume d'un cylindre"/>
       <exercice commande="cinquieme_grandeurMesure_volume.PrismeTriangleRectangle" description="Unités" nom="Calculer le volume d'un prisme (rectangle)"/>
