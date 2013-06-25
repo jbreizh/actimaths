@@ -25,31 +25,31 @@ import random
 
 #------------------methode---------------------------------------------
 def tex_schema(enonce, mesure, tex_mesure, choix):
-     enonce.append("\\begin{center}")
-     enonce.append("\\psset{unit=0.5cm}")
-     enonce.append("\\begin{pspicture}(-5,-1)(5,5.5)")
-     # Affichage des 3 côtés
-     enonce.append("\\SpecialCoor")
-     enonce.append("\\psline[linewidth=0.05](0;0)(5.2;0)")
-     enonce.append("\\rput(5.5;0){$x$}")
-     enonce.append("\\psline[linewidth=0.05](0;0)(5.2;%s)" % mesure[0])
-     enonce.append("\\rput(5.5;%s){$y$}" % mesure[0])
-     enonce.append("\\psline[linewidth=0.05](0;0)(5.2;%s)" % mesure[2])
-     enonce.append("\\rput(5.5;%s){$z$}" % mesure[2])
-     enonce.append("\\rput(0.5;-90){$O$}")
-     # symbole de l'angle
-     enonce.append("\\psarc(0,0){1}{%s}{%s}" % (0,mesure[2]))
-     enonce.append("\\psarc(0,0){1.2}{%s}{%s}" % (0,mesure[0]))
-     # affichage de la valeur de l'angle connue et d'un ? sinon
-     if choix:
-         enonce.append("\\rput(2;%s){$%s$}" % (mesure[0]/2, tex_mesure[0]))
-         enonce.append("\\rput(2;%s){$?$}" % ((mesure[2]+ mesure[0])/2))
-     else:
-         enonce.append("\\rput(2;%s){$?$}" % (mesure[0]/2))
-         enonce.append("\\rput(2;%s){$%s$}" % ((mesure[2]+ mesure[0])/2, tex_mesure[1])) 
-     enonce.append("\\NormalCoor") 
-     enonce.append("\\end{pspicture}")
-     enonce.append("\\end{center}")
+    enonce.append("\\begin{center}")
+    enonce.append("\\psset{unit=0.5cm}")
+    enonce.append("\\begin{pspicture}(-5,-1)(5,5.5)")
+    # Affichage des 3 côtés
+    enonce.append("\\SpecialCoor")
+    enonce.append("\\psline[linewidth=0.05](0;0)(5.2;0)")
+    enonce.append("\\rput(5.5;0){$x$}")
+    enonce.append("\\psline[linewidth=0.05](0;0)(5.2;%s)" % mesure[0])
+    enonce.append("\\rput(5.5;%s){$y$}" % mesure[0])
+    enonce.append("\\psline[linewidth=0.05](0;0)(5.2;%s)" % mesure[2])
+    enonce.append("\\rput(5.5;%s){$z$}" % mesure[2])
+    enonce.append("\\rput(0.5;-90){$O$}")
+    # symbole de l'angle
+    enonce.append("\\psarc(0,0){1}{%s}{%s}" % (0,mesure[2]))
+    enonce.append("\\psarc(0,0){1.2}{%s}{%s}" % (0,mesure[0]))
+    # affichage de la valeur de l'angle connue et d'un ? sinon
+    if choix:
+        enonce.append("\\rput(2;%s){$%s$}" % (mesure[0]/2, tex_mesure[0]))
+        enonce.append("\\rput(2;%s){$?$}" % ((mesure[2]+ mesure[0])/2))
+    else:
+        enonce.append("\\rput(2;%s){$?$}" % (mesure[0]/2))
+        enonce.append("\\rput(2;%s){$%s$}" % ((mesure[2]+ mesure[0])/2, tex_mesure[1])) 
+    enonce.append("\\NormalCoor") 
+    enonce.append("\\end{pspicture}")
+    enonce.append("\\end{center}")
 
 #------------------construction-----------------------------------------
 def Supplementaire(parametre):
