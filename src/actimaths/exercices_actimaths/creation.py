@@ -43,7 +43,6 @@ import cinquieme_nombreCalcul_developpements
 import cinquieme_nombreCalcul_difference
 import cinquieme_nombreCalcul_ecrire
 import cinquieme_nombreCalcul_egale
-import cinquieme_nombreCalcul_numeration
 import cinquieme_nombreCalcul_operations
 import cinquieme_nombreCalcul_priorites
 import cinquieme_nombreCalcul_produit
@@ -59,7 +58,6 @@ import sixieme_geometrie_droiteDemidroiteSegment
 import sixieme_gestionDonnee_abscisse
 import sixieme_gestionDonnee_pourcentage
 import sixieme_gestionDonnee_tableau
-import sixieme_grandeurMesure_perimetre
 import sixieme_grandeurMesure_aire
 import sixieme_grandeurMesure_angle
 import sixieme_grandeurMesure_conversion

@@ -20,7 +20,7 @@
 # along with this program; if notPopen, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
-import random, math
+import random
 
 uniteLongueur = [ "mm", "cm", "dm", "m", "dam", "hm", "km"]
 uniteAire = [ "mm^2", "cm^2", "dm^2", "m^2", "dam^2", "hm^2", "km^2"]
@@ -46,17 +46,6 @@ def parametre_comptage():
     dimension_figure = [random.randrange(2,dimension_grille-5,dimension_unite[0]),  random.randrange(2,dimension_grille-5,dimension_unite[1])]
     return dimension_grille,taille_grille,dimension_unite,nombre_unite,unite,dimension_figure
 
-def tex_carre(enonce,cote,unite):
-    enonce.append("\\begin{center}")
-    enonce.append("\\psset{unit=0.5cm}")
-    enonce.append("\\begin{pspicture}(-5,-3)(5,3)")
-    enonce.append("\\pstGeonode[PosAngle={-135,-45,45,135},PointSymbol=none](-2,-2){A}(2,-2){B}(2,2){C}(-2,2){D}")
-    enonce.append("\\pspolygon(A)(B)(C)(D)")
-    enonce.append("\\pstRightAngle{B}{A}{D}")
-    enonce.append("\\rput[t]{%s}(%s,%s){$\\unit[%s]{%s}$}" % (0,0,-2,cote,uniteLongueur[unite]))
-    enonce.append("\\end{pspicture}")
-    enonce.append("\\end{center}")
-
 def tex_rectangle(enonce,longueur,largeur,unite):
     enonce.append("\\begin{center}")
     enonce.append("\\psset{unit=0.5cm}")
@@ -81,18 +70,8 @@ def tex_triangle_rectangle(enonce,base,hauteur,unite):
     enonce.append("\\end{pspicture}")
     enonce.append("\\end{center}")
 
-def tex_disque(enonce,rayon,unite):
-    enonce.append("\\begin{center}")
-    enonce.append("\\psset{unit=0.5cm}")
-    enonce.append("\\begin{pspicture}(-5,-3)(5,3)")
-    enonce.append("\\pstGeonode[PosAngle=-90,PointSymbol=x](0,0){O}")
-    enonce.append("\\pscircle(O){2.5}")
-    enonce.append("\\uput{0.25}[0]{45}(0,0){$\\unit[%s]{%s}$}" % (rayon,uniteLongueur[unite]))
-    enonce.append("\\rput{45}(0,0){\\psline{<->}(O)(2.5,0)}")
-    enonce.append("\\end{pspicture}")
-    enonce.append("\\end{center}")
-
 def tex_comptage(enonce,dimension_grille,taille_grille,dimension_unite,nombre_unite,unite,dimension_figure):
+
     enonce.append("\\begin{center}")
     enonce.append("\\psset{unit=%scm}" % taille_grille)
     enonce.append("\\begin{pspicture}(%s,%s)" % (dimension_grille,dimension_grille))
@@ -102,18 +81,6 @@ def tex_comptage(enonce,dimension_grille,taille_grille,dimension_unite,nombre_un
     enonce.append("\\rput[t]{%s}(%s,%s){$\\unit[%s]{%s}$}" % (0,1+float(dimension_unite[0])/2,1,nombre_unite,uniteAire[unite]))
     enonce.append("\\end{pspicture}")
     enonce.append("\\end{center}")
-
-def Carre(parametre):
-    question = u"Calculer l\'aire du carré :"
-    exo = []
-    cor = []
-    (longueur,largeur,unite) = dimension()
-    tex_carre(exo,longueur,unite)
-    tex_carre(cor,longueur,unite)
-    cor.append(u"$$ Aire = côté \\times côté $$")
-    cor.append("$$ Aire = %s \\times %s = %s $$" % (longueur,longueur,longueur*longueur))
-    cor.append("$$ Aire = \\unit[%s]{%s} $$" % (longueur*longueur,uniteAire[unite]))
-    return (exo, cor, question)
 
 def Rectangle(parametre):
     question = "Calculer l\'aire du rectangle :"
@@ -137,19 +104,6 @@ def TriangleRectangle(parametre):
     cor.append("$$ Aire = ( Base \\times hauteur ) \\div 2 $$")
     cor.append("$$ Aire = ( %s \\times %s ) \\div 2 = %s \\div 2 = %s $$" % (base,hauteur,base*hauteur,float(base*hauteur)/2))
     cor.append("$$ Aire = \\unit[%s]{%s} $$" % (float(base*hauteur)/2,uniteAire[unite]))
-    return (exo, cor, question)
-
-def Disque(parametre):
-    question = u"Calculer l\'aire du disque :"
-    exo = []
-    cor = []
-    rayon = random.randrange(2,10)
-    unite = random.randrange(7)
-    tex_disque(exo,rayon,unite)
-    tex_disque(cor,rayon,unite)
-    cor.append("$$ Aire = \\pi \\times rayon \\times rayon $$")
-    cor.append("$$ Aire = \\pi \\times %s \\times %s = \\pi \\times %s $$" % (rayon,rayon,rayon*rayon))
-    cor.append("$$ Aire = \\unit[%s \\pi]{%s}( \\approx \\unit[%s]{%s}) $$" % (rayon*rayon,uniteAire[unite],round(math.pi*rayon*rayon,2),uniteAire[unite]))
     return (exo, cor, question)
 
 def Comptage(parametre):
