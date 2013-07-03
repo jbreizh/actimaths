@@ -134,14 +134,9 @@ class Ui_MainWindow(object):
         self.actionPyromaths = QtGui.QAction(MainWindow)
         self.actionPyromaths.setText("Pyromaths")
         QtCore.QObject.connect(self.actionPyromaths, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet("pyromaths", self.affichage))
-        ## Action Moodle
-        self.actionMoodle = QtGui.QAction(MainWindow)
-        self.actionMoodle.setText("Moodle")
-        QtCore.QObject.connect(self.actionMoodle, QtCore.SIGNAL("triggered()"), lambda: self.construction_onglet("moodle", self.affichage))
         ## Construction du menu Environnement
         self.menuEnvironnement.addAction(self.actionActimaths)
-        self.menuEnvironnement.addAction(self.actionPyromaths)
-        self.menuEnvironnement.addAction(self.actionMoodle)      
+        self.menuEnvironnement.addAction(self.actionPyromaths) 
         self.menubar.addAction(self.menuEnvironnement.menuAction())
         ## Menu Présentation
         self.menuAffichage = QtGui.QMenu(self.menubar)
@@ -437,17 +432,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addLayout(self.verticalLayout_21)
         ## CheckBox "présentation sujet ou non"
         self.checkBox_sujet_presentation = QtGui.QCheckBox(self.onglet_option_widget)
-        self.checkBox_sujet_presentation.setText(u"Créer le sujet (présentation)")
-        self.checkBox_sujet_presentation.setToolTip(u"Actimaths doit-il créer le sujet sous forme de présentation ?")
+        self.checkBox_sujet_presentation.setText(u"Créer le sujet vidéoprojetable")
+        self.checkBox_sujet_presentation.setToolTip(u"Actimaths doit-il créer le sujet vidéoprojetable ?")
         self.checkBox_sujet_presentation.setChecked(int(self.config['sujet_presentation']))
         self.verticalLayout_21.addWidget(self.checkBox_sujet_presentation)
         ## CheckBox "présentation corrigés ou non"
         self.checkBox_corrige_presentation = QtGui.QCheckBox(self.onglet_option_widget)
-        self.checkBox_corrige_presentation.setText(u"Créer le corrigé (présentation)")
-        self.checkBox_corrige_presentation.setToolTip(u"Actimaths doit-il créer le corrigé sous forme de présentation ?")
+        self.checkBox_corrige_presentation.setText(u"Créer le corrigé vidéoprojetable")
+        self.checkBox_corrige_presentation.setToolTip(u"Actimaths doit-il créer le corrigé vidéoprojetable ?")
         self.checkBox_corrige_presentation.setChecked(int(self.config['corrige_presentation']))
         self.verticalLayout_21.addWidget(self.checkBox_corrige_presentation)
-        ## Pas de presentation dans l'environnement pyromaths et moodle
+        ## Pas de presentation dans l'environnement pyromaths
         if self.environnement != 'actimaths':
             self.checkBox_sujet_presentation.setChecked(False)
             self.checkBox_sujet_presentation.setEnabled(False)
@@ -455,14 +450,14 @@ class Ui_MainWindow(object):
             self.checkBox_corrige_presentation.setEnabled(False)
         ## CheckBox "page sujet ou non"
         self.checkBox_sujet_page = QtGui.QCheckBox(self.onglet_option_widget)
-        self.checkBox_sujet_page.setText(u"Créer le sujet (page)")
-        self.checkBox_sujet_page.setToolTip(u"Actimaths doit-il créer le sujet sous forme de page ?")
+        self.checkBox_sujet_page.setText(u"Créer le sujet papier")
+        self.checkBox_sujet_page.setToolTip(u"Actimaths doit-il créer le sujet papier imprimable ?")
         self.checkBox_sujet_page.setChecked(int(self.config['sujet_page']))
         self.verticalLayout_21.addWidget(self.checkBox_sujet_page)
         ## CheckBox "page corrigés ou non"
         self.checkBox_corrige_page = QtGui.QCheckBox(self.onglet_option_widget)
-        self.checkBox_corrige_page.setText(u"Créer le corrigé (page)")
-        self.checkBox_corrige_page.setToolTip(u"Actimaths doit-il créer le corrigé sous forme de page ?")
+        self.checkBox_corrige_page.setText(u"Créer le corrigé papier")
+        self.checkBox_corrige_page.setToolTip(u"Actimaths doit-il créer le corrigé papier imprimable ?")
         self.checkBox_corrige_page.setChecked(int(self.config['corrige_page']))
         self.verticalLayout_21.addWidget(self.checkBox_corrige_page)
         ## Espace
