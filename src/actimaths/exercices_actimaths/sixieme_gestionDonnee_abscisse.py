@@ -57,12 +57,14 @@ def tex_axe_gradue(enonce,abscisse,points,abscisse_min,abscisse_max,pas,ecartGra
     unite=float(4.5)/(abscisse_max-abscisse_min)
     hauteur=float(1)/unite
     Graduation= int(ecartGraduation/pas)
+    enonce.append("\\begin{center}")
     enonce.append("\\psset{unit=%scm}" % unite)
     enonce.append("\\begin{pspicture}(%s,%s)(%s,%s)" % (abscisse_min,-hauteur,abscisse_max,hauteur))
     enonce.append("\\psaxes[yAxis=false,Ox=%s,Dx=%s,subticks=%s]{->}(%s,0)(%s,-1)(%s,1)"
                   % (abscisse_min,ecartGraduation,Graduation,abscisse_min,abscisse_min,abscisse_max))
     enonce.append(place_points(abscisse,points,0.3*hauteur))
     enonce.append("\\end{pspicture}")
+    enonce.append("\\end{center}")
 
 def tex_lire(abscisse_min,abscisse_max,pas,ecartGraduation):
     question="Donner les abscisses :"
@@ -71,10 +73,13 @@ def tex_lire(abscisse_min,abscisse_max,pas,ecartGraduation):
     points=(noms_sommets(4))
     abscisse=abscissePoint(4,abscisse_min,abscisse_max,pas)
     tex_axe_gradue(exo,abscisse,points,abscisse_min,abscisse_max,pas,ecartGraduation)
+    exo.append("\\begin{center}")
+    exo.append("du point %s"% points[0])
+    exo.append("\\end{center}")
     tex_axe_gradue(cor,abscisse,points,abscisse_min,abscisse_max,pas,ecartGraduation)
-    exo.append("\\newline Des points %s et %s"% (points[0],points[1]))
-    cor.append("\\newline L\'abscisse de %s est %s ou %s(%s)" % (points[0],abscisse[0],points[0],abscisse[0]))
-    cor.append("\\newline L\'abscisse de %s est %s ou %s(%s)" % (points[1],abscisse[1],points[1],abscisse[1]))
+    cor.append("\\begin{center}")
+    cor.append("L\'abscisse de %s est %s ou \\boxed{%s(%s)}" % (points[0],abscisse[0],points[0],abscisse[0]))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def LireAbscisseEntierOrigine(parametre):

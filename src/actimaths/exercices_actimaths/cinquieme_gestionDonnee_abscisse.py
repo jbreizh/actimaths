@@ -73,10 +73,13 @@ def tex_lire(abscisse_min,abscisse_max,pas,ecartGraduation):
     points=(noms_sommets(4))
     abscisse=abscissePoint(4,abscisse_min,abscisse_max,pas)
     tex_axe_gradue(exo,abscisse,points,abscisse_min,abscisse_max,pas,ecartGraduation)
-    exo.append(u"\\newline Des points %s et %s" % (points[0],points[1]))
+    exo.append("\\begin{center}")
+    exo.append(u"du point %s" % points[0])
+    exo.append("\\end{center}")
     tex_axe_gradue(cor,abscisse,points,abscisse_min,abscisse_max,pas,ecartGraduation)
-    cor.append("l\'abscisse de %s est %s ou %s(%s) \\newline" % (points[0],abscisse[0],points[0],abscisse[0]))
-    cor.append("l\'abscisse de %s est %s ou %s(%s)" % (points[1],abscisse[1],points[1],abscisse[1]))
+    cor.append("\\begin{center}")
+    cor.append(" L\'abscisse de %s est %s ou \\boxed{%s(%s)}" % (points[0],abscisse[0],points[0],abscisse[0]))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def tex_distance(abscisse_min,abscisse_max,pas,ecartGraduation):
