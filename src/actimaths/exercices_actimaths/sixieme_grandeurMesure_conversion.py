@@ -53,14 +53,34 @@ def nbre_to_dict(nbre ,div0,div1,exposant):
         curseur -= 1
     return nb_dict
 
-def tex_tableau_conversion(div0, div1, nb0, u, exposant):
+def tex_ligne_corrige(div0, div1, nb0, exposant):
     nb_dict = nbre_to_dict(nb0,div0,div1,exposant)
     nblist = [str(nb_dict.get(i,"")) for i in range(7*exposant)]
     nblist[exposant*(div0 + 1)-1] =  "%s\\Rnode{virg0}{}"% nb_dict.get(exposant*(div0+1)-1,"0")
     nblist[exposant*(div1 + 1)-1] = "%s\\Rnode{virg1}{,}"% nb_dict.get(exposant*(div1+1)-1,"0")
     return [("%s " + "& %s"*(7*exposant-1)) % tuple(nblist)]
 
-def tex_conversion(exo, cor, exposant, u):
+def tex_tableau_conversion(tex, ligne_tab, exposant, unite):
+    #ouverture du groupe dans lequel PSSET_FLECHE portait
+    tex.append("{")
+    tex.append(PSSET_FLECHE)
+    # entete du tableau
+    tex.append("\\begin{tiny}")
+    tex.append("\\tabcolsep=3pt")
+    tex.append("\\begin{tabular}{*{%s}{p{%smm}|}p{%smm}}" % (exposant*7-1, 5.0/(exposant*exposant), 5.0/(exposant*exposant)))
+    tex.append(((" \\multicolumn{%s}{c|}"%exposant +"{$\\rm %s$} &")*6 +"\\multicolumn{%s}{c}"%exposant+"{$\\rm %s$}" )%unite)
+    tex.append("\\\\")
+    tex.append("\\hline")
+    #ajoute les lignes affichant les conversions
+    tex += ligne_tab
+    tex.append("\\end{tabular}")
+    tex.append("\\end{tiny}")
+    #fermeture du groupe dans lequel PSSET_FLECHE portait
+    tex.append("}")
+
+##############################Construction###################################
+def tex_exercice(exo,cor,exposant):
+    # variable
     a = random.randint(101,999)
     p = random.randint(-2,-1)
     while True:
@@ -71,37 +91,16 @@ def tex_conversion(exo, cor, exposant, u):
             break
     nb0 = a * 10 ** p
     nb1 = nb0 * 10 ** ( exposant * ( div1- div0))
-
-    exo.append("$$\\unit[%s]{%s}=\\unit[\\ldots]{%s}$$"%(Affichage.decimaux(nb0), u[div0], u[div1]))
-    cor.append("$$\\unit[%s]{%s}=\\unit[%s]{%s}$$" % (Affichage.decimaux(nb0), u[div0], Affichage.decimaux(nb1), u[div1]))
-
-    return tex_tableau_conversion(div0, div1, nb0, u, exposant)
-
-
-##############################Construction###################################
-
-
-def tex_exercice(exo,cor,exposant):
-
-    #ajoute le ² ou ³ si nécessaire
-    str_exposant=(u"^%s"%(exposant))*(exposant > 1)
-    u = tuple([division[i]+"m%s"%str_exposant for i in range(7)])
-    entete_tableau = ((" \\multicolumn{%s}{c|}"%exposant +"{$\\rm %s$} &")*6 +"\\multicolumn{%s}{c}"%exposant+"{$\\rm %s$}" )%u
-
-    #imprime la correction et sauvegarde la ligne et la flèche pour le tableau imprimé ensuite
-    ligne_tab = tex_conversion(exo, cor,exposant, u) + ["\\ncline{->}{virg0}{virg1} \\\\"]
-    cor.append("{")
-    cor.append("\\begin{tiny}")
-    cor.append(PSSET_FLECHE)
-    cor.append("\\tabcolsep=3pt")
-    cor.append("\\begin{tabular}{*{%s}{p{%smm}|}p{%smm}}" % (exposant*7-1, 5.0/(exposant*exposant), 5.0/(exposant*exposant)))
-    cor.append(entete_tableau + "\\\\ \\hline")
-    #ajoute les lignes affichant les conversions
-    cor += ligne_tab
-    cor.append("\\end{tabular}")
-    cor.append("\\end{tiny}")
-    #ferme le groupe dans lequel PSSET_FLECHE portait
-    cor.append("}")
+    # unité
+    str_exposant=(u"^%s"%(exposant))*(exposant > 1) #ajoute le ² ou ³ si nécessaire
+    unite = tuple([division[i]+"m%s"%str_exposant for i in range(7)])
+    ligne_enonce = [("" + "& "*(7*exposant-1))]
+    ligne_corrige = tex_ligne_corrige(div0, div1, nb0, exposant) + ["\\ncline{->}{virg0}{virg1} \\\\"]
+    #construction
+    exo.append("$$\\unit[%s]{%s}=\\unit[\\ldots]{%s}$$"%(Affichage.decimaux(nb0), unite[div0], unite[div1]))
+    cor.append("$$\\unit[%s]{%s}=\\unit[%s]{%s}$$" % (Affichage.decimaux(nb0), unite[div0], Affichage.decimaux(nb1), unite[div1]))
+    tex_tableau_conversion(exo, ligne_enonce, exposant, unite)
+    tex_tableau_conversion(cor, ligne_corrige, exposant, unite)
 
 def Conversion(parametre):
     question = "Effectuer la conversion :"

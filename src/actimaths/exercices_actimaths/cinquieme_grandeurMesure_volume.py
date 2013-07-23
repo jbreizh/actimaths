@@ -138,9 +138,9 @@ def PaveDroit(parametre):
     (longueur,largeur,hauteur,unite) = dimension_pavedroit()
     tex_pave_droit(exo,longueur,largeur,hauteur,unite)
     tex_pave_droit(cor,longueur,largeur,hauteur,unite)
-    cor.append("$$ V = L \\times l \\times h $$")
-    cor.append("$$ V = %s \\times %s \\times %s= %s $$" % (longueur,largeur,hauteur,longueur*largeur*hauteur))
-    cor.append("$$ V = \\unit[%s]{%s} $$" % (longueur*largeur*hauteur,uniteVolume[unite]))
+    cor.append("Volume = $L \\times l \\times h$ \\newline")
+    cor.append("Volume = $%s \\times %s \\times %s$ \\newline" % (longueur,largeur,hauteur))
+    cor.append("Volume = $\\boxed{\\unit[%s]{%s}}$" % (longueur*largeur*hauteur,uniteVolume[unite]))
     return (exo, cor, question)
 
 def Cylindre(parametre):
@@ -150,11 +150,10 @@ def Cylindre(parametre):
     (rayon,hauteur,unite) = dimension_cylindre()
     tex_cylindre(exo,rayon,hauteur,unite)
     tex_cylindre(cor,rayon,hauteur,unite)
-    cor.append("$$ V = 2 \\times \\pi \\times r \\times h $$")
-    cor.append("$$ V = 2 \\times \\pi \\times %s \\times %s $$" % (rayon,hauteur))
-    cor.append("$$ V = %s \\times \\pi $$" % (2*rayon*hauteur))
-    cor.append("$$ V = \\unit[%s \\pi]{%s} (\\approx \\unit[%s]{%s})$$"
-               % (2*rayon*hauteur,uniteVolume[unite],round(2*math.pi*rayon*hauteur,2),uniteVolume[unite]))
+    cor.append("Volume = $2 \\times \\pi \\times r \\times h$ \\newline")
+    cor.append("Volume = $2 \\times \\pi \\times %s \\times %s$ \\newline" % (rayon,hauteur))
+    cor.append("Volume = $\\boxed{\\unit[%s \\pi]{%s}}$ \\newline" % (2*rayon*hauteur,uniteVolume[unite]))
+    cor.append("Volume $\\approx \\unit[%s]{%s}$" % (round(2*math.pi*rayon*hauteur,2),uniteVolume[unite]))
     return (exo, cor, question)
 
 def PrismeTriangleRectangle(parametre):
@@ -164,10 +163,9 @@ def PrismeTriangleRectangle(parametre):
     (baseTriangle,hauteurTriangle,hauteur,unite) = dimension_prisme()
     tex_prisme_triangle_rectangle(exo,baseTriangle,hauteurTriangle,hauteur,unite)
     tex_prisme_triangle_rectangle(cor,baseTriangle,hauteurTriangle,hauteur,unite)
-    cor.append("$$ V = Base \\times hauteur \\times hauteur \\div 2 $$")
-    cor.append("$$ V = %s \\times %s \\times %s \\div 2 $$" % (baseTriangle,hauteurTriangle,hauteur))
-    cor.append("$$ V \\approx %s $$" % (round(baseTriangle*hauteurTriangle*hauteur/2)))
-    cor.append("$$ V = \\unit[%s]{%s} $$" % (round(baseTriangle*hauteurTriangle*hauteur/2),uniteVolume[unite]))
+    cor.append("Volume = $B \\times h \\times h \\div 2 $ \\newline")
+    cor.append("Volume = $%s \\times %s \\times %s \\div 2 $ \\newline" % (baseTriangle,hauteurTriangle,hauteur))
+    cor.append("Volume = $\\boxed{\\unit[%s]{%s}}$" % (round(baseTriangle*hauteurTriangle*hauteur/2),uniteVolume[unite]))
     return (exo, cor, question)
 
 def PrismeTriangle(parametre):
@@ -177,8 +175,7 @@ def PrismeTriangle(parametre):
     (baseTriangle,hauteurTriangle,hauteur,unite) = dimension_prisme()
     tex_prisme_triangle(exo,baseTriangle,hauteurTriangle,hauteur,unite)
     tex_prisme_triangle(cor,baseTriangle,hauteurTriangle,hauteur,unite)
-    cor.append("$$ V = Base \\times hauteur \\times hauteur \\div 2 $$")
-    cor.append("$$ V = %s \\times %s \\times %s \\div 2 $$" % (baseTriangle,hauteurTriangle,hauteur))
-    cor.append("$$ V \\approx %s $$" % (round(baseTriangle*hauteurTriangle*hauteur/2)))
-    cor.append("$$ V = \\unit[%s]{%s} $$" % (round(baseTriangle*hauteurTriangle*hauteur/2),uniteVolume[unite]))
+    cor.append("Volume = $B \\times h \\times h \\div 2$ \\newline")
+    cor.append("Volume = $%s \\times %s \\times %s \\div 2$ \\newline" % (baseTriangle,hauteurTriangle,hauteur))
+    cor.append("Volume = $\\boxed{\\unit[%s]{%s}}$" % (round(baseTriangle*hauteurTriangle*hauteur/2),uniteVolume[unite]))
     return (exo, cor, question)

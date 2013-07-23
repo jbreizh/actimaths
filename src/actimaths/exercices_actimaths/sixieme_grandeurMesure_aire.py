@@ -110,9 +110,9 @@ def Carre(parametre):
     (longueur,largeur,unite) = dimension()
     tex_carre(exo,longueur,unite)
     tex_carre(cor,longueur,unite)
-    cor.append(u"$$ Aire = côté \\times côté $$")
-    cor.append("$$ Aire = %s \\times %s = %s $$" % (longueur,longueur,longueur*longueur))
-    cor.append("$$ Aire = \\unit[%s]{%s} $$" % (longueur*longueur,uniteAire[unite]))
+    cor.append(u"Aire = $\\text{côté} \\times \\text{côté}$ \\newline")
+    cor.append("Aire = $%s \\times %s$ = $%s$ \\newline" % (longueur,longueur,longueur*longueur))
+    cor.append("Aire = $\\boxed{\\unit[%s]{%s}}$" % (longueur*longueur,uniteAire[unite]))
     return (exo, cor, question)
 
 def Rectangle(parametre):
@@ -122,9 +122,9 @@ def Rectangle(parametre):
     (longueur,largeur,unite) = dimension()
     tex_rectangle(exo,longueur,largeur,unite)
     tex_rectangle(cor,longueur,largeur,unite)
-    cor.append("$$ Aire = Longueur \\times largeur $$")
-    cor.append("$$ Aire = %s \\times %s = %s $$" % (longueur,largeur,longueur*largeur))
-    cor.append("$$ Aire = \\unit[%s]{%s} $$" % (longueur*largeur,uniteAire[unite]))
+    cor.append("Aire = $\\text{Longueur} \\times \\text{largeur}$ \\newline")
+    cor.append("Aire = $%s \\times %s$ = $%s$ \\newline" % (longueur,largeur,longueur*largeur))
+    cor.append("Aire = $\\boxed{\\unit[%s]{%s}}$" % (longueur*largeur,uniteAire[unite]))
     return (exo, cor, question)
 
 def TriangleRectangle(parametre):
@@ -134,9 +134,10 @@ def TriangleRectangle(parametre):
     (base,hauteur,unite) = dimension()
     tex_triangle_rectangle(exo,base,hauteur,unite)
     tex_triangle_rectangle(cor,base,hauteur,unite)
-    cor.append("$$ Aire = ( Base \\times hauteur ) \\div 2 $$")
-    cor.append("$$ Aire = ( %s \\times %s ) \\div 2 = %s \\div 2 = %s $$" % (base,hauteur,base*hauteur,float(base*hauteur)/2))
-    cor.append("$$ Aire = \\unit[%s]{%s} $$" % (float(base*hauteur)/2,uniteAire[unite]))
+    cor.append("Aire = $(\\text{Base} \\times \\text{hauteur}) \\div 2$ \\newline")
+    cor.append("Aire = $( %s \\times %s ) \\div 2$ \\newline" % (base,hauteur))
+    cor.append("Aire = $%s \\div 2$ \\newline" % (base*hauteur))
+    cor.append("Aire = $\\boxed{\\unit[%s]{%s}}$" % (float(base*hauteur)/2,uniteAire[unite]))
     return (exo, cor, question)
 
 def Disque(parametre):
@@ -147,9 +148,10 @@ def Disque(parametre):
     unite = random.randrange(7)
     tex_disque(exo,rayon,unite)
     tex_disque(cor,rayon,unite)
-    cor.append("$$ Aire = \\pi \\times rayon \\times rayon $$")
-    cor.append("$$ Aire = \\pi \\times %s \\times %s = \\pi \\times %s $$" % (rayon,rayon,rayon*rayon))
-    cor.append("$$ Aire = \\unit[%s \\pi]{%s}( \\approx \\unit[%s]{%s}) $$" % (rayon*rayon,uniteAire[unite],round(math.pi*rayon*rayon,2),uniteAire[unite]))
+    cor.append("Aire = $\\pi \\times \\text{rayon} \\times \\text{rayon}$ \\newline")
+    cor.append("Aire = $\\pi \\times %s \\times %s$ \\newline" % (rayon,rayon))
+    cor.append("Aire = $\\boxed{\\unit[%s \\pi]{%s}}$ \\newline" % (rayon*rayon,uniteAire[unite]))
+    cor.append("Aire $\\approx \\unit[%s]{%s}$" % (round(math.pi*rayon*rayon,2),uniteAire[unite]))
     return (exo, cor, question)
 
 def Comptage(parametre):
@@ -160,6 +162,6 @@ def Comptage(parametre):
     tex_comptage(exo,dimension_grille,taille_grille,dimension_unite,nombre_unite,unite,dimension_figure)
     tex_comptage(cor,dimension_grille,taille_grille,dimension_unite,nombre_unite,unite,dimension_figure)
     nombrepavage= (dimension_figure[0]*dimension_figure[1])/(dimension_unite[0]*dimension_unite[1])
-    cor.append(u"Il y a %s rectangles rouges dans le rectangle bleu" % nombrepavage)
-    cor.append("$$ Aire = %s \\times %s = \\unit[%s]{%s} $$" % (nombrepavage,nombre_unite,nombrepavage*nombre_unite,uniteAire[unite]))
+    cor.append(u"Il y a %s rectangles rouges dans le rectangle bleu \\newline" % nombrepavage)
+    cor.append("Aire = $%s \\times %s$ = $\\boxed{\\unit[%s]{%s}}$" % (nombrepavage,nombre_unite,nombrepavage*nombre_unite,uniteAire[unite]))
     return (exo, cor, question)
