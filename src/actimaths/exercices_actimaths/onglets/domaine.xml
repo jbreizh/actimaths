@@ -523,6 +523,8 @@
       <exercice commande="cinquieme_geometrie_angle.SupplementaireSchema" description="Géometrie" nom="Calculer la valeur de l'angle supplémentaire (schéma)"/>
       <exercice commande="cinquieme_geometrie_angle.Complementaire" description="Géometrie" nom="Calculer la valeur de l'angle complémentaire (texte)"/>
       <exercice commande="cinquieme_geometrie_angle.ComplementaireSchema" description="Géometrie" nom="Calculer la valeur de l'angle complémentaire (schéma)"/>
+      <exercice commande="cinquieme_geometrie_angle.CorrespondantSchema" description="Géometrie" nom="Calculer la valeur de l'angle correspondant (schéma)"/>
+      <exercice commande="cinquieme_geometrie_angle.AlterneInterneSchema" description="Géometrie" nom="Calculer la valeur de l'angle alterne-interne (schéma)"/>
       <exercice commande="cinquieme_geometrie_triangle.SommeQuelconque" description="Géometrie" nom="Somme des angles dans un triangle quelconque (texte)"/>
       <exercice commande="cinquieme_geometrie_triangle.SommeQuelconqueSchema" description="Géometrie" nom="Somme des angles dans un triangle quelconque (schéma)"/>  
       <exercice commande="cinquieme_geometrie_triangle.SommeIsocele" description="Géometrie" nom="Somme des angles dans un triangle isocèle (texte)"/>
@@ -542,29 +544,30 @@
   </onglet>
   <onglet nom = "Grandeurs et mesures">
     <categorie nom = "Sixième">
-      <exercice commande="sixieme_grandeurMesure_angle.MesureSimple" description="Geometrie" nom="Donner la mesure d'un angle partant de 0 ou 180"/>
-      <exercice commande="sixieme_grandeurMesure_angle.MesureComplique" description="Geometrie" nom="Donner la mesure d'un angle"/>
-      <exercice commande="sixieme_grandeurMesure_conversion.Conversion" description="Unités" nom="Conversions unités"/>
-      <exercice commande="sixieme_grandeurMesure_conversion.ConversionAire" description="Unités" nom="Conversions unités d'aires"/>
-      <exercice commande="sixieme_grandeurMesure_conversion.ConversionVolume" description="Unités" nom="Conversions unités de volumes"/>
-      <exercice commande="sixieme_grandeurMesure_perimetre.Comptage" description="Unités" nom="Donner le périmètre par comptage"/>
-      <exercice commande="sixieme_grandeurMesure_perimetre.Carre" description="Unités" nom="Calculer le périmètre d'un carré"/>
-      <exercice commande="sixieme_grandeurMesure_perimetre.Rectangle" description="Unités" nom="Calculer le périmètre d'un rectangle"/>
-      <exercice commande="sixieme_grandeurMesure_perimetre.Disque" description="Unités" nom="Calculer le périmètre d'un cercle"/>    
-      <exercice commande="sixieme_grandeurMesure_aire.Comptage" description="Unités" nom="Donner l'aire par comptage"/>
-      <exercice commande="sixieme_grandeurMesure_aire.Carre" description="Unités" nom="Calculer l'aire d'un carré"/>
-      <exercice commande="sixieme_grandeurMesure_aire.Rectangle" description="Unités" nom="Calculer l'aire d'un rectangle"/>
-      <exercice commande="sixieme_grandeurMesure_aire.TriangleRectangle" description="Unités" nom="Calculer l'aire d'un triangle rectangle"/>
-      <exercice commande="sixieme_grandeurMesure_aire.Disque" description="Unités" nom="Calculer l'aire d'un disque"/>      
-      <exercice commande="sixieme_grandeurMesure_volume.PaveDroit" description="Unités" nom="Calculer le volume d'un pavé droit"/>
+      <exercice commande="sixieme_grandeurMesure_angle.MesureSimple" description="Angle" nom="Donner la mesure d'un angle partant de 0 ou 180"/>
+      <exercice commande="sixieme_grandeurMesure_angle.MesureComplique" description="Angle" nom="Donner la mesure d'un angle"/>
+      <exercice commande="sixieme_grandeurMesure_conversion.Conversion" description="Unité" nom="Conversion d'unités de longueur"/>
+      <exercice commande="sixieme_grandeurMesure_conversion.ConversionAire" description="Unité" nom="Conversion d'unités d'aire"/>
+      <exercice commande="sixieme_grandeurMesure_conversion.ConversionVolume" description="Unité" nom="Conversion unités de volume"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Comptage" description="Périmètre" nom="Donner le périmètre par comptage"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Carre" description="Périmètre" nom="Calculer le périmètre d'un carré"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Rectangle" description="Périmètre" nom="Calculer le périmètre d'un rectangle"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Disque" description="Périmètre" nom="Calculer le périmètre d'un cercle"/>   
+      <exercice commande="sixieme_grandeurMesure_aire.Comptage" description="Aire" nom="Donner l'aire par comptage"/>
+      <exercice commande="sixieme_grandeurMesure_aire.Carre" description="Aire" nom="Calculer l'aire d'un carré"/>
+      <exercice commande="sixieme_grandeurMesure_aire.Rectangle" description="Aire" nom="Calculer l'aire d'un rectangle"/>
+      <exercice commande="sixieme_grandeurMesure_aire.TriangleRectangle" description="Aire" nom="Calculer l'aire d'un triangle rectangle"/>
+      <exercice commande="sixieme_grandeurMesure_aire.Disque" description="Aire" nom="Calculer l'aire d'un disque"/> 
+      <exercice commande="sixieme_grandeurMesure_volume.PaveDroit" description="Volume" nom="Calculer le volume d'un pavé droit"/>
+      <exercice commande="sixieme_grandeurMesure_duree.LectureHorloge" description="Durée" nom="Lire l'heure sur une horloge"/>  
     </categorie>
     <categorie nom = "Cinquième">
-      <exercice commande="cinquieme_grandeurMesure_aire.Parallelogramme" description="Unités" nom="Calculer l'aire d'un parallélogramme"/>
-      <exercice commande="cinquieme_grandeurMesure_aire.Triangle" description="Unités" nom="Calculer l'aire d'un triangle"/>
-      <exercice commande="cinquieme_grandeurMesure_volume.PaveDroit" description="Unités" nom="Calculer le volume d'un pavé droit"/>
-      <exercice commande="cinquieme_grandeurMesure_volume.Cylindre" description="Unités" nom="Calculer le volume d'un cylindre"/>
-      <exercice commande="cinquieme_grandeurMesure_volume.PrismeTriangleRectangle" description="Unités" nom="Calculer le volume d'un prisme (rectangle)"/>
-      <exercice commande="cinquieme_grandeurMesure_volume.PrismeTriangle" description="Unités" nom="Calculer le volume d'un prisme (quelconque)"/>
+      <exercice commande="cinquieme_grandeurMesure_aire.Parallelogramme" description="Aire" nom="Calculer l'aire d'un parallélogramme"/>
+      <exercice commande="cinquieme_grandeurMesure_aire.Triangle" description="Aire" nom="Calculer l'aire d'un triangle"/>
+      <exercice commande="cinquieme_grandeurMesure_volume.PaveDroit" description="Volume" nom="Calculer le volume d'un pavé droit"/>
+      <exercice commande="cinquieme_grandeurMesure_volume.Cylindre" description="Volume" nom="Calculer le volume d'un cylindre"/>
+      <exercice commande="cinquieme_grandeurMesure_volume.PrismeTriangleRectangle" description="Volume" nom="Calculer le volume d'un prisme à base triangulaire rectangle"/>
+      <exercice commande="cinquieme_grandeurMesure_volume.PrismeTriangle" description="Volume" nom="Calculer le volume d'un prisme à base triangulaire"/>
     </categorie>
     <categorie nom = "Quatrième">
 

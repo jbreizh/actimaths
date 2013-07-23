@@ -127,3 +127,25 @@ def ComplementaireSchema(parametre):
     cor.append("$$ %s = %s - %s $$" % (tex_nom[choix], tex_mesure[2],tex_mesure[1 - choix]))
     cor.append("$$ \\boxed{%s = %s} $$" % (tex_nom[choix],tex_mesure[choix]))
     return (exo, cor, question)
+
+def CorrespondantSchema(parametre):
+    angle = random.randrange(20,80,5)
+    mesure = [angle, 180 - angle, angle, 180 - angle, angle, 180 - angle, angle, 180 - angle]
+    choix = random.randrange(8)
+    mesure_enonce = []
+    mesure_corrige = []
+    for i in range(len(mesure)):
+        if i == choix or i == choix+4 or i == choix - 4:
+            mesure_enonce.append("?")
+            mesure_corrige.append("%s^\\circ" % mesure[i])
+        else:
+            mesure_enonce.append("")
+            mesure_corrige.append("")
+    print mesure, choix, mesure_enonce, mesure_corrige
+    # initialisation
+    question = u"Calculer la mesure de l'angle :"
+    exo = []
+    cor = []
+
+
+    return (exo, cor, question)

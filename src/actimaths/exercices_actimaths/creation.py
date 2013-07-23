@@ -63,6 +63,7 @@ import sixieme_grandeurMesure_perimetre
 import sixieme_grandeurMesure_aire
 import sixieme_grandeurMesure_angle
 import sixieme_grandeurMesure_conversion
+import sixieme_grandeurMesure_duree
 import sixieme_grandeurMesure_volume
 import sixieme_nombreCalcul_arrondi
 import sixieme_nombreCalcul_classerNombres

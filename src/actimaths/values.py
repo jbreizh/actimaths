@@ -22,7 +22,7 @@ def configdir():
 	else:
 		return join(home(), ".config", "actimaths")
 
-VERSION = "1.12"
+VERSION = "1.13"
 WEBSITE = "http://mathecailloux.ile.nc/article147/aide-en-ligne-d-actimaths"
 HOME = home()
 CONFIGDIR = configdir()
