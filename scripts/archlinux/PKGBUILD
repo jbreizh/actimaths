@@ -13,7 +13,7 @@ source=(http://mathsecaillou.ile.nc/actimaths/$pkgname-${pkgver}-sources.tar.bz2
 build() {
   chmod -R 755 $srcdir/${pkgname}/src
   cd $srcdir/${pkgname}/src
-  python2 setup_linux.py install --root="$pkgdir" --prefix=/usr
+  python2 setup.py install --root="$pkgdir" --prefix=/usr
 
 }
 
