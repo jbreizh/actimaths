@@ -1,0 +1,5 @@
+dependance pour le build:
+
+build: ./build
+
+installation: pacman -U actimaths-1.xx-1-any.pkg.tar.xz

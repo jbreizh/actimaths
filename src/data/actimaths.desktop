@@ -1,0 +1,11 @@
+[Desktop Entry]
+Icon=/usr/share/actimaths/images/actimaths.png
+Version=1.0
+Name=Actimaths
+Comment=Générateur de présentation de maths
+Exec=/usr/bin/actimaths-gui
+Terminal=false
+Type=Application
+Categories=GNOME;Education;
+StartupNotify=true
+Name[fr_FR]=Actimaths
