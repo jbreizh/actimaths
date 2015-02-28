@@ -116,10 +116,10 @@ def choix_trou(nb1, nb2, tot, operateur, exo, cor):
     nbaleatoire = random.randrange(2)
     if nbaleatoire == 0:
         exo.append('$$%s %s \\ldots\\ldots = %s$$' % (nb1, operateur, tot))
-        cor.append('$$%s %s \\mathbf{%s} = %s$$' % (nb1, operateur, nb2, tot))
+        cor.append('$$%s %s \\boxed{%s} = %s$$' % (nb1, operateur, nb2, tot))
     else:
         exo.append('$$\\ldots\\ldots %s %s = %s$$' % (operateur, nb2, tot))
-        cor.append('$$\\mathbf{%s} %s %s = %s$$' % (nb1, operateur, nb2, tot))
+        cor.append('$$\\boxed{%s} %s %s = %s$$' % (nb1, operateur, nb2, tot))
 
 #-----------------------Construction-----------------------
 

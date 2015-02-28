@@ -114,7 +114,7 @@ def tex_calcul_mental(operation, nombre_min, nombre_max):
 
 def choix_trou(nb1, nb2, tot, operateur, exo, cor):
     exo.append('$$%s %s %s = \\ldots\\ldots$$' % (nb1, operateur, nb2))
-    cor.append('$$%s %s %s = \\mathbf{%s}$$' % (nb1, operateur, nb2, tot))
+    cor.append('$$%s %s %s = \\boxed{%s}$$' % (nb1, operateur, nb2, tot))
 
 #-----------------------Construction-----------------------
 

@@ -37,13 +37,13 @@ def choix_trou_frac(exo, cor, n1, p1):
     p2 = random.randrange(2)  #sert à compliquer un peu l'exercice
     if i > 1:
         exo.append('$$\\cfrac{%s}{%s}=\\ldots$$' % (Affichage.decimaux(n1 * 10 ** p2), Affichage.decimaux(10 ** (p1 + p2))))
-        cor.append('$$\\cfrac{%s}{%s}=\\mathbf{%s}$$' % (Affichage.decimaux(n1 * 10 ** p2), Affichage.decimaux(10 ** (p1 + p2)), Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+        cor.append('$$\\cfrac{%s}{%s}=\\boxed{%s}$$' % (Affichage.decimaux(n1 * 10 ** p2), Affichage.decimaux(10 ** (p1 + p2)), Affichage.decimaux(n1 * 10 ** (-p1), 1)))
     elif i > 0:
         exo.append('$$\\cfrac{%s}{\ldots}=%s$$' % (Affichage.decimaux(n1 * 10 ** p2), Affichage.decimaux(n1 * 10 ** (-p1), 1)))
-        cor.append('$$\\cfrac{%s}{\\mathbf{%s}}=%s$$' % (Affichage.decimaux(n1 * 10 ** p2), Affichage.decimaux(10 ** (p1 + p2)), Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+        cor.append('$$\\cfrac{%s}{\\boxed{%s}}=%s$$' % (Affichage.decimaux(n1 * 10 ** p2), Affichage.decimaux(10 ** (p1 + p2)), Affichage.decimaux(n1 * 10 ** (-p1), 1)))
     else:
         exo.append('$$\\cfrac{\ldots}{%s}=%s$$' % (Affichage.decimaux(10 ** (p1 + p2)), Affichage.decimaux(n1 * 10 ** (-p1), 1)))
-        cor.append('$$\\cfrac{\\mathbf{%s}}{%s}=%s$$' % (Affichage.decimaux(n1 * 10 ** p2), Affichage.decimaux(10 ** (p1 + p2)), Affichage.decimaux(n1 * 10 ** (-p1), 1)))
+        cor.append('$$\\cfrac{\\boxed{%s}}{%s}=%s$$' % (Affichage.decimaux(n1 * 10 ** p2), Affichage.decimaux(10 ** (p1 + p2)), Affichage.decimaux(n1 * 10 ** (-p1), 1)))
 
 def EcritureFractionnaire(parametre):
     question = u"Compléter :"

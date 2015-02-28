@@ -136,6 +136,28 @@ def combinaison(n, k):
         i += 1
     return x
 
+def calcul_liste_combinaison(items, k):
+    """genère la liste des combinaisons de longueur k d'une liste"""
+    if k==0: 
+        yield []
+    else:
+        for i in xrange( len(items) - k+1 ):
+            for j in calcul_liste_combinaison( items[i+1:], k-1 ):
+                yield [items[i]] + j
+
+def liste_combinaison(items, k):
+    """renvoie la liste des combinaisons de longueur k d'une liste"""
+    res = []
+    res += calcul_liste_combinaison(items,k)
+    return res
+
+def liste_toute_combinaison(items):
+    """renvoie la liste des combinaisons d'une liste"""
+    res = []
+    for k in xrange(1,len(items)+1):
+        res += calcul_liste_combinaison(items,k)
+    return res
+
 def signe(a):
     """renvoie 1 si a est>0, -1 si a<0"""
     if a < 0:

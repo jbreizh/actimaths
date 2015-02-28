@@ -78,7 +78,7 @@ def tex_lire(abscisse_min,abscisse_max,pas,ecartGraduation):
     exo.append("\\end{center}")
     tex_axe_gradue(cor,abscisse,points,abscisse_min,abscisse_max,pas,ecartGraduation)
     cor.append("\\begin{center}")
-    cor.append("L\'abscisse de %s est %s ou \\boxed{%s(%s)}" % (points[0],abscisse[0],points[0],abscisse[0]))
+    cor.append("L\'abscisse de %s est %s ou \\fbox{%s(%s)}" % (points[0],abscisse[0],points[0],abscisse[0]))
     cor.append("\\end{center}")
     return (exo, cor, question)
 

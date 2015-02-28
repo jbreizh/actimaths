@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+#
 
 from sys import argv, exit
 from os import access, R_OK, makedirs
@@ -29,7 +30,6 @@ from PyQt4 import QtGui, QtCore
 from values import CONFIGDIR
 from system import create_config_file, modify_config_file, test
 from interface import Ui_MainWindow
-
 
 ## class StartQT4
 class StartQT4(QtGui.QMainWindow, Ui_MainWindow):

@@ -99,13 +99,17 @@ def tex_type0(valeurs, variable, cor, exo=None):  # ecrit toutes les etapes de l
     (a, b, nega, negb) = valeurs
     f = facteur_commun(a, b)
     if exo:
-        exo.append(u'$$ A = ' + tex_type0_0(valeurs, variable) + '$$')
-    cor.append(u'$$ A = ' + tex_type0_0(valeurs, variable) + '$$')
-    cor.append(u'$$ A = ' + tex_type123_1(f, variable, nega, negb) + '$$')
+        exo.append("$$A = %s$$" %tex_type0_0(valeurs, variable))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" %tex_type0_0(valeurs, variable))
+    cor.append("A & = %s \\\\" %tex_type123_1(f, variable, nega, negb))
     f2 = facteur_commun2(f, nega, negb)
     if nega and f2[1][0] != 0 and f2[1][1] != 0 or negb and f2[2][0] != 0 and f2[2][0] != 0:
-        cor.append(u'$$ A = ' + tex_type123_2(f2, variable) + '$$')
-    cor.append(u'$$ \\boxed{A = ' + tex_dev0((f2[0], somme_polynomes(f2[1], f2[2])), variable) + '} $$')
+        cor.append("A & = %s \\\\" %tex_type123_2(f2, variable))
+    cor.append("A & = \\boxed{%s} \\\\" %tex_dev0((f2[0], somme_polynomes(f2[1], f2[2])), variable))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
 
 def tex_type0_0(valeurs, variable):  #renvoie -(2x+3)+(2x+3)(3x+6)
     ligne = ''
@@ -134,13 +138,17 @@ def tex_type123(valeurs, variable, cor, exo=None):  # ecrit toutes les etapes de
     (a, b, nega, negb) = valeurs
     f = facteur_commun(a, b)
     if exo:
-        exo.append(u'$$ A = ' + tex_type123_0(valeurs, variable) + '$$')
-    cor.append(u'$$ A = ' + tex_type123_0(valeurs, variable) + '$$')
-    cor.append(u'$$ A = ' + tex_type123_1(f, variable, nega, negb) + '$$')
+        exo.append("$$A = %s$$" %tex_type123_0(valeurs, variable))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" %tex_type123_0(valeurs, variable))
+    cor.append("A & = %s \\\\" %tex_type123_1(f, variable, nega, negb))
     f2 = facteur_commun2(f, nega, negb)
     if nega and f2[1][0] != 0 and f2[1][1] != 0 or negb and f2[2][0] != 0 and f2[2][0] != 0:
-        cor.append(u'$$ A = ' + tex_type123_2(f2, variable) + '$$')
-    cor.append(u'$$ \\boxed{A = ' + tex_dev0((f2[0], somme_polynomes(f2[1], f2[2])), variable) + '} $$')
+        cor.append("A & = %s \\\\" %tex_type123_2(f2, variable))
+    cor.append("A & = \\boxed{%s} \\\\" %tex_dev0((f2[0], somme_polynomes(f2[1], f2[2])), variable))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
 
 def tex_type123_0(valeurs, variable):  #renvoie -(2x+3)(x+5)+(2x+3)(3x+6)
     if valeurs[2]:
@@ -179,14 +187,17 @@ def tex_type123_2(valeurs, variable):  # renvoie renvoie (2x+3)(-x-5+3x+6)
 #Type5
 def tex_type5(valeurs, variable, cor, exo):  # ecrit toutes les etapes de la factorisation
     if exo:
-        exo.append(u'$$ A = ' + tex_type5_0(valeurs, variable) + '$$')
-    cor.append(u'$$ A = ' + tex_type5_0(valeurs, variable) + '$$')
-    cor.append(u'$$ A = ' + '%s^2-%s^2' % (tex_binome(valeurs[0], variable, bpar=1), tex_binome(valeurs[1], variable, bpar=1)) + '$$')
-    cor.append(u'$$ A = ' + tex_type5_2(valeurs, variable) + '$$')
+        exo.append("$$A = %s$$" %tex_type5_0(valeurs, variable))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" %tex_type5_0(valeurs, variable))
+    cor.append("A & = %s^2-%s^2 \\\\" % (tex_binome(valeurs[0], variable, bpar=1), tex_binome(valeurs[1], variable, bpar=1)))
+    cor.append("A & = %s \\\\" %tex_type5_2(valeurs, variable))
     if valeurs[0][0] == 0:
-        cor.append(u'$$ A = ' + tex_type5_3(valeurs, variable) + '$$')
-    cor.append(u'$$ \\boxed{A = ' + tex_dev0((somme_polynomes(valeurs[0], valeurs[1]), somme_polynomes(valeurs[0], coef_opposes(valeurs[1]))), variable) + '} $$')
-
+        cor.append("A & = %s \\\\" %tex_type5_3(valeurs, variable))
+    cor.append("A & = \\boxed{%s} \\\\" %tex_dev0((somme_polynomes(valeurs[0], valeurs[1]), somme_polynomes(valeurs[0], coef_opposes(valeurs[1]))), variable))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
 
 def tex_type5_0(valeurs, variable):  # renvoie 16-(2x+3)²
     if valeurs[0][0] == 0:
@@ -208,10 +219,14 @@ def tex_type5_3(valeurs, variable):  # renvoie (4+2x+3)(4-2x-3)
 #Type 4; 6 et 7
 def tex_type467(valeurs, variable, cor, exo):  # ecrit toutes les etapes de la factorisation
     if exo:
-        exo.append(u'$$ A = ' + tex_trinome(dev(valeurs), variable) + '$$')
-    cor.append(u'$$ A = ' + tex_trinome(dev(valeurs), variable) + '$$')
-    cor.append(u'$$ A = ' + tex_dev1(valeurs, variable) + '$$')
-    cor.append(u'$$  \\boxed{A = ' + tex_dev0(valeurs, variable) + '} $$')
+        exo.append("$$A = %s$$" %tex_trinome(dev(valeurs), variable))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" %tex_trinome(dev(valeurs), variable))
+    cor.append("A & = %s \\\\" %tex_dev1(valeurs, variable))
+    cor.append("A & = \\boxed{%s} \\\\" %tex_dev0(valeurs, variable))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
 
 #
 # ------------------- GENERATION DES VALEURS -------------------

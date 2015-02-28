@@ -61,40 +61,40 @@ def produitNombreIdentique(parametre):
     question = u"Compléter par $a^n$ ($a$ et $n$ entiers):"
     exo = [ ]
     cor = [ ]
-    lval = tex_proprietes_val(12, 12, 0)
+    lval = tex_proprietes_val(parametre[0],parametre[1], 0)
     exo.append("$$%s^{%s}\\times%s^{%s}=\\ldots$$" % lval)
     cor.append("$$%s^{%s}\\times%s^{%s}=" % lval)
-    cor.append("%s^{%s}$$" % (lval[0], lval[1] + lval[3]))
+    cor.append("\\boxed{%s^{%s}}$$" % (lval[0], lval[1] + lval[3]))
     return (exo, cor, question)
 
 def produitExposantIdentique(parametre):
     question = u"Compléter par $a^n$ ($a$ et $n$ entiers):"
     exo = [ ]
     cor = [ ]
-    lval = tex_proprietes_val(12, 12, 1)
+    lval = tex_proprietes_val(parametre[0],parametre[1], 1)
     exo.append("$$%s^{%s}\\times%s^{%s}=\\ldots$$" % lval)
     cor.append("$$%s^{%s}\\times%s^{%s}=" % lval)
-    cor.append("%s^{%s}$$" % (lval[0] * lval[2], lval[1]))
+    cor.append("\\boxed{%s^{%s}}$$" % (lval[0] * lval[2], lval[1]))
     return (exo, cor, question)
 
 def quotient(parametre): 
     question = u"Compléter par $a^n$ ($a$ et $n$ entiers):"
     exo = [ ]
     cor = [ ]
-    lval = tex_proprietes_val(12, 12, 0)
+    lval = tex_proprietes_val(parametre[0],parametre[1], 0)
     exo.append("$$\\dfrac{%s^{%s}}{%s^{%s}}=\\ldots$$" % lval)
     cor.append("$$\\dfrac{%s^{%s}}{%s^{%s}}=" % lval)
-    cor.append("%s^{%s}$$" % (lval[0], lval[1] - lval[3]))
+    cor.append("\\boxed{%s^{%s}}$$" % (lval[0], lval[1] - lval[3]))
     return (exo, cor, question)
 
 def puissance(parametre):
     question = u"Compléter par $a^n$ ($a$ et $n$ entiers):"
     exo = [ ]
     cor = [ ]
-    lval = tex_proprietes_val(12, 12, 0)
+    lval = tex_proprietes_val(parametre[0],parametre[1], 0)
     exo.append("$$(%s^{%s})^{%s}=\\ldots$$" % (lval[0], lval[1], lval[3]))
     cor.append("$$(%s^{%s})^{%s}=" % (lval[0], lval[1], lval[3]))
-    cor.append("%s^{%s}$$" % (lval[0], lval[1] * lval[3]))
+    cor.append("\\boxed{%s^{%s}}$$" % (lval[0], lval[1] * lval[3]))
     return (exo, cor, question)
 
 
@@ -102,28 +102,28 @@ def produitDix(parametre):
     question = u"Compléter par $a^n$ ($a$ et $n$ entiers):"
     exo = [ ]
     cor = [ ]
-    lval = tex_proprietes_val(12, 12, 0)
+    lval = tex_proprietes_val(parametre[0],parametre[1], 0)
     exo.append("$$10^{%s}\\times10^{%s}=\\ldots$$" % (lval[1], lval[3]))
     cor.append("$$10^{%s}\\times10^{%s}=" % (lval[1], lval[3]))
-    cor.append("10^{%s}$$" % (lval[1] + lval[3]))
+    cor.append("\\boxed{10^{%s}}$$" % (lval[1] + lval[3]))
     return (exo, cor, question)
 
 def quotientDix(parametre): 
     question = u"Compléter par $a^n$ ($a$ et $n$ entiers):"
     exo = [ ]
     cor = [ ]
-    lval = tex_proprietes_val(12, 12, 0)
+    lval = tex_proprietes_val(parametre[0],parametre[1], 0)
     exo.append("$$\\dfrac{10^{%s}}{10^{%s}}=\\ldots$$" % (lval[1], lval[3]))
     cor.append("$$\\dfrac{10^{%s}}{10^{%s}}=" % (lval[1], lval[3]))
-    cor.append("10^{%s}$$" % (lval[1] - lval[3]))
+    cor.append("\\boxed{10^{%s}}$$" % (lval[1] - lval[3]))
     return (exo, cor, question)
 
 def puissanceDix(parametre):
     question = u"Compléter par $a^n$ ($a$ et $n$ entiers):"
     exo = [ ]
     cor = [ ]
-    lval = tex_proprietes_val(12, 12, 0)
+    lval = tex_proprietes_val(parametre[0],parametre[1], 0)
     exo.append("$$(10^{%s})^{%s}=\\ldots$$" % (lval[1], lval[3]))
     cor.append("$$(10^{%s})^{%s}=" % (lval[1], lval[3]))
-    cor.append("10^{%s}$$" % (lval[1] * lval[3]))
+    cor.append("\\boxed{10^{%s}}$$" % (lval[1] * lval[3]))
     return (exo, cor, question)

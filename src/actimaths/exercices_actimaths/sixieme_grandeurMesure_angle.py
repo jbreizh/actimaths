@@ -20,9 +20,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-#----------------------------------------------------------------------
-# Pyromaths : Poser des opérations
-#----------------------------------------------------------------------
+
 import random
 
 #------------------methode---------------------------------------------
@@ -43,20 +41,35 @@ def tex_rapporteur(enonce):
 
 
 def tex_angle(enonce, angle, nom_angle):
-     enonce.append("\\SpecialCoor")
-     enonce.append("\\psline[linewidth=0.05](0;0)(5.2;%s)" % angle)
-     enonce.append("\\rput(5.5;%s){$%s$}" % (angle, nom_angle))
-     enonce.append("\\NormalCoor")
+    enonce.append("\\SpecialCoor")
+    enonce.append("\\psline[linewidth=0.05](0;0)(5.2;%s)" % angle)
+    enonce.append("\\rput(5.5;%s){$%s$}" % (angle, nom_angle))
+    enonce.append("\\NormalCoor")
 
 def tex_mesure(enonce, angle, nom_angle):
-     enonce.append("\\begin{center}")
-     enonce.append("\\psset{unit=0.5cm}")
-     enonce.append("\\begin{pspicture}(-5,-1)(5,5.5)")
-     tex_rapporteur(enonce)
-     for i in range(len(angle)):
-         tex_angle(enonce,angle[i],nom_angle[i])
-     enonce.append("\\end{pspicture}")
-     enonce.append("\\end{center}")
+    enonce.append("\\begin{center}")
+    enonce.append("\\psset{unit=0.5cm}")
+    enonce.append("\\begin{pspicture}(-5,-1)(5,5.5)")
+    tex_rapporteur(enonce)
+    for i in range(len(angle)):
+        tex_angle(enonce,angle[i],nom_angle[i])
+    enonce.append("\\end{pspicture}")
+    enonce.append("\\end{center}")
+
+def tex_nature(enonce, angle):
+    angle_rotation = random.randrange(5,175,5)
+    enonce.append("\\begin{center}")
+    enonce.append("\\psset{unit=0.5cm}")
+    enonce.append("\\begin{pspicture}(-5,-5)(5,5)")
+    enonce.append("\\SpecialCoor")
+    enonce.append("\\pstGeonode[PointName=none,PointSymbol=x](0;0){O}")
+    enonce.append("\\pstGeonode[PointName=none,PointSymbol=none](5.2;%s){A}(5.2;%s){B}" %(angle_rotation,angle_rotation+angle))
+    enonce.append("\\pstLineAB{O}{A}")
+    enonce.append("\\pstLineAB{O}{B}")
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=1]{A}{O}{B}")
+    enonce.append("\\NormalCoor")
+    enonce.append("\\end{pspicture}")
+    enonce.append("\\end{center}")
 
 #------------------construction-----------------------------------------
 def MesureSimple(parametre):
@@ -73,11 +86,19 @@ def MesureSimple(parametre):
     tex_mesure(cor, [0,angle,180],["x","y","z"])
     if choix:
         cor.append("$$ %s= %s^\\circ$$ " %(nom_angle, angle))
-        cor.append("La mesure de $%s$ est $%s^\\circ$ " %(nom_angle, angle))
+        cor.append("\\begin{center}")
+        cor.append("La mesure de $%s$ est $\\boxed{%s^\\circ}$ " %(nom_angle, angle))
+        cor.append("\\end{center}")
     else:
-        cor.append("$$ %s= %s^\\circ - %s^\\circ$$ " %(nom_angle, 180, angle))
-        cor.append("$$ %s= %s^\\circ$$ " %(nom_angle, 180 - angle))
-        cor.append("La mesure de $%s$ est $%s^\\circ$ " %(nom_angle, 180 - angle))          
+        cor.append("\\begin{center}")
+        cor.append("$\\begin{aligned}")
+        cor.append("%s & = %s^\\circ - %s^\\circ \\\\" %(nom_angle, 180, angle))
+        cor.append("%s & = %s^\\circ \\\\" %(nom_angle, 180 - angle))
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
+        cor.append("\\begin{center}")
+        cor.append("La mesure de $%s$ est $\\boxed{%s^\\circ}$" %(nom_angle, 180 - angle))
+        cor.append("\\end{center}")
     return (exo, cor, question)
 
 def MesureComplique(parametre):
@@ -97,15 +118,108 @@ def MesureComplique(parametre):
     tex_mesure(exo, angle ,["x","y","z"])
     tex_mesure(cor, angle ,["x","y","z"])
     if choix == 0:
-        cor.append("$$ %s = %s^\\circ-%s^\\circ$$ " %(nom_angle, angle[1], angle[0]))
-        cor.append("$$ %s = %s^\\circ$$ " %(nom_angle, angle[1]-angle[0]))
-        cor.append("La mesure de $%s$ est $%s^\\circ$ " %(nom_angle, angle[1]-angle[0]))
+        cor.append("\\begin{center}")
+        cor.append("$\\begin{aligned}")
+        cor.append("%s & = %s^\\circ-%s^\\circ \\\\" %(nom_angle, angle[1], angle[0]))
+        cor.append("%s & = %s^\\circ \\\\" %(nom_angle, angle[1]-angle[0]))
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
+        cor.append("\\begin{center}")
+        cor.append("La mesure de $%s$ est $\\boxed{%s^\\circ}$ " %(nom_angle, angle[1]-angle[0]))
+        cor.append("\\end{center}")
     elif choix == 1:
-        cor.append("$$ %s = %s^\\circ-%s^\\circ$$ " %(nom_angle, angle[2], angle[1]))
-        cor.append("$$ %s = %s^\\circ$$ " %(nom_angle, angle[2]-angle[1]))
-        cor.append("La mesure de $%s$ est $%s^\\circ$ " %(nom_angle, angle[2]-angle[1]))
+        cor.append("\\begin{center}")
+        cor.append("$\\begin{aligned}")
+        cor.append("%s & = %s^\\circ-%s^\\circ \\\\" %(nom_angle, angle[2], angle[1]))
+        cor.append("%s & = %s^\\circ \\\\" %(nom_angle, angle[2]-angle[1]))
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
+        cor.append("\\begin{center}")
+        cor.append("La mesure de $%s$ est $\\boxed{%s^\\circ}$ " %(nom_angle, angle[2]-angle[1]))
+        cor.append("\\end{center}")
     else:
-        cor.append("$$ %s = %s^\\circ-%s^\\circ$$ " %(nom_angle, angle[2], angle[0]))
-        cor.append("$$ %s = %s^\\circ$$ " %(nom_angle, angle[2]-angle[0]))
-        cor.append("La mesure de $%s$ est $%s^\\circ$ " %(nom_angle, angle[2]-angle[0]))
+        cor.append("\\begin{center}")
+        cor.append("$\\begin{aligned}")
+        cor.append("%s & = %s^\\circ-%s^\\circ \\\\" %(nom_angle, angle[2], angle[0]))
+        cor.append("%s & = %s^\\circ \\\\" %(nom_angle, angle[2]-angle[0]))
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
+        cor.append("\\begin{center}")
+        cor.append("La mesure de $%s$ est $\\boxed{%s^\\circ}$ " %(nom_angle, angle[2]-angle[0]))
+        cor.append("\\end{center}")
     return (exo, cor, question)
+
+def NatureQuestion(parametre):
+    #choix du type d'angle
+    choix = random.randrange(5)
+    if choix == 0:
+        angle = 90
+        nature = "droit"
+    elif choix == 1:
+        angle = 180
+        nature = "plat"
+    elif choix == 2:
+        angle = 0
+        nature = "nul"
+    elif choix == 3:
+        angle = random.randrange(1,90)
+        nature = "aigu"
+    else:
+        angle = random.randrange(91,180)
+        nature = "obtus"
+    #initialisation
+    question = "Quelle est la nature de l'angle :"
+    exo = []
+    cor = []
+    # Sujet
+    exo.append("\\begin{center}")
+    exo.append("de mesure $%s^\\circ$" %angle)
+    exo.append("\\end{center}")
+    # Corrigé
+    if choix <= 2:
+        cor.append("\\begin{center}")
+        cor.append("Un angle de mesure $%s^\\circ$ est un \\fbox{angle %s}" %(angle, nature))
+        cor.append("\\end{center}")
+    elif choix == 3:
+        cor.append("$$ 0^\\circ < %s^\\circ <  90^\\circ $$" %angle)
+        cor.append("\\begin{center}")
+        cor.append("Un angle dont la mesure est entre $0^\\circ$ et $90^\\circ$ est un \\fbox{angle aigu}")
+        cor.append("\\end{center}")
+    else:
+        cor.append("$$ 90^\\circ < %s^\\circ <  180^\\circ\ $$" %angle)
+        cor.append("\\begin{center}")
+        cor.append("Un angle dont la mesure est entre $90^\\circ$ et $180^\\circ$ est un \\fbox{angle obtus}")
+        cor.append("\\end{center}")
+    return (exo, cor, question)
+
+def NatureSchema(parametre):
+    #choix du type d'angle
+    choix = random.randrange(5)
+    if choix == 0:
+        angle = 90
+        nature = "droit"
+    elif choix == 1:
+        angle = 180
+        nature = "plat"
+    elif choix == 2:
+        angle = 0
+        nature = "nul"
+    elif choix == 3:
+        angle = random.randrange(1,70)
+        nature = "aigu"
+    else:
+        angle = random.randrange(110,160)
+        nature = "obtus"
+    #initialisation
+    question = "Quelle est la nature de l'angle :"
+    exo = []
+    cor = []
+    # Sujet
+    tex_nature(exo, angle)
+    # Corrigé
+    tex_nature(cor, angle)
+    cor.append("\\begin{center}")
+    cor.append("C'est un \\fbox{angle %s}" %nature)
+    cor.append("\\end{center}")
+    return (exo, cor, question)
+

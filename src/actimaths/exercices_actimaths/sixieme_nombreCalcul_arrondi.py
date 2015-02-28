@@ -26,33 +26,40 @@ from outils.Affichage import decimaux
 
 nom_precision = [u"au cent-millionième", u"au dix-millionième", u"au millionième", u"au cent-millième", u"au dix-millième", u"au millième", u"au centième", u"au dixième",
                  u"à l\'unité",
-                 u"à la dizaine", u"à la centaine", u"au millier", u"à la dizaines de millier", u"à la centaines de millier", u"au million", u"à la dizaines de million", u"à la centaines de million"]
+                 u"à la dizaine", u"à la centaine", u"au millier", u"à la dizaine de milliers", u"à la centaine de milliers", u"au million", u"à la dizaine de millions", u"à la centaine de millions"]
 
 nom_type = ['au plus proche', u'par défaut', u'par excès']
 
 #
 ##----------------Fonction--------------------------------
-def valeurs(rang_partie_decimal, rang_partie_entier):
+def valeurs(rang_partie_decimale, rang_partie_entiere):
+    #choix de la precision
+    precision = randint(rang_partie_decimale + 1, rang_partie_entiere - 1)
+    index_precision = precision + 8
+    #choix du nombre
     nombre = 0
-    for rang in range(rang_partie_decimal, rang_partie_entier):
+    rang_min = max(rang_partie_decimale,precision - 2)
+    rang_max = min(rang_partie_entiere,precision + 2)
+    for rang in range(rang_min, rang_max):
+        # On génère le chiffre
+        chiffre = randint(1,9)
         # On génère le chiffre
         chiffre = randint(1,9)
         # On regénère le chiffre pour ne pas avoir un 5 en dernier 
-        while chiffre == 5 and rang == rang_partie_decimal:
+        while chiffre == 5 and rang == rang_min:
             chiffre = randint(1,9)
         # On place le chiffre au rang donné
-        nombre += chiffre * 10 ** rang     
-    return nombre
-
-def encadrement(nombres, precision):
-    arrondi = round(nombres, precision)
-    if (arrondi > nombres):
-        defaut = arrondi - 10 ** -precision
+        nombre += chiffre * 10 ** rang
+    #Valeur par defaut, exces et arrondie
+    arrondi = round(nombre, -precision)
+    if (arrondi > nombre):
+        defaut = arrondi - 10 ** precision
         exces = arrondi
     else:
         defaut = arrondi
-        exces = arrondi + 10 ** -precision
-    return defaut, exces, arrondi
+        exces = arrondi + 10 ** precision
+    return nombre, index_precision, defaut, exces, arrondi
+
 #
 ##----------------Construction--------------------------------
 
@@ -60,12 +67,8 @@ def ArrondirDecimal(parametre):
     question = "Arrondir :"
     exo = []
     cor = []
-    # choix d'une precision
-    precision = randint(8 + parametre[0], 7 + parametre[1])
-    precision_nombre = 8 - precision
     # Génération des variables
-    nombre = valeurs(parametre[0], parametre[1])
-    (defaut, exces, arrondi) = encadrement(nombre, precision_nombre)
+    (nombre, index_precision, defaut, exces, arrondi) = valeurs(parametre[0], parametre[1])
     # Choix du type d'arrondi
     type = randrange(3)
     if type == 0:
@@ -75,43 +78,49 @@ def ArrondirDecimal(parametre):
     elif type == 2:
         solution = exces
     # Affichage
-    exo.append("%s %s %s" % (decimaux(nombre),nom_precision[precision],nom_type[type]))
+    exo.append("\\begin{center}")
+    exo.append("%s %s %s" % (decimaux(nombre),nom_precision[index_precision],nom_type[type]))
+    exo.append("\\end{center}")
     cor.append("$$ %s < %s < %s $$" % (decimaux(defaut),decimaux(nombre),decimaux(exces)))
-    cor.append("L\'arrondi %s %s est $ \\boxed{%s} $" % (nom_precision[precision], nom_type[type], decimaux(solution)))
+    cor.append("\\begin{center}")
+    cor.append("L\'arrondi %s %s est $ \\boxed{%s} $" % (nom_precision[index_precision], nom_type[type], decimaux(solution)))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def EncadrerDecimal(parametre):
     question = u"Compléter l\'encadrement de :"
     exo = []
     cor = []
-    # choix d'une precision
-    precision = randint(8 + parametre[0], 7 + parametre[1])
-    precision_nombre = 8 - precision
     # Génération des variables
-    nombre = valeurs(parametre[0], parametre[1])
-    (defaut, exces, arrondi) = encadrement(nombre, precision_nombre)
+    (nombre, index_precision, defaut, exces, arrondi) = valeurs(parametre[0], parametre[1])
     # Affichage
-    exo.append("%s %s" % (decimaux(nombre),nom_precision[precision]))
+    exo.append("\\begin{center}")
+    exo.append("%s %s" % (decimaux(nombre),nom_precision[index_precision]))
+    exo.append("\\end{center}")
     if randrange(2):
         exo.append("$$ \\ldots < %s < %s $$" % (decimaux(nombre),decimaux(exces)))
         cor.append("$$ \\boxed{%s} < %s < %s $$" % (decimaux(defaut),decimaux(nombre),decimaux(exces)))
+        cor.append("\\begin{center}")
+        cor.append(u"La valeur par défaut %s est $ \\boxed{%s} $" % (nom_precision[index_precision],decimaux(defaut)))
+        cor.append("\\end{center}")
     else:
         exo.append("$$ %s < %s <  \\ldots $$" % (decimaux(defaut),decimaux(nombre)))
         cor.append("$$ %s < %s < \\boxed{%s} $$" % (decimaux(defaut),decimaux(nombre),decimaux(exces)))
+        cor.append("\\begin{center}")
+        cor.append(u"La valeur par excès %s est $ \\boxed{%s} $" % (nom_precision[index_precision],decimaux(exces)))
+        cor.append("\\end{center}")
     return (exo, cor, question)
 
 def IntercalerDecimal(parametre):
     question = "Intercaler un nombre entre :"
     exo = []
     cor = []
-    # choix d'une precision
-    precision = randint(8 + parametre[0], 7 + parametre[1])
-    precision_nombre = 8 - precision
     # Génération des variables
-    nombre = valeurs(parametre[0], parametre[1])
-    (defaut, exces, arrondi) = encadrement(nombre, precision_nombre)
+    (nombre, index_precision, defaut, exces, arrondi) = valeurs(parametre[0], parametre[1])
     # Affichage
+    exo.append("\\begin{center}")
     exo.append("%s et %s" % (decimaux(defaut),decimaux(exces)))
+    exo.append("\\end{center}")
     exo.append("$$ %s < \\ldots < %s $$" % (decimaux(defaut),decimaux(exces)))
     cor.append("$$ %s < \\boxed{%s} < %s $$" % (decimaux(defaut),decimaux(nombre),decimaux(exces)))
     return (exo, cor, question)

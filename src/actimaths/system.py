@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+#
 
 ## Import globaux
 from os.path import join, isfile
@@ -51,6 +52,9 @@ def create_config_file():
     etree.SubElement(child, "modele_page").text="BiColonneIdentique"
     etree.SubElement(child, "environnement").text="actimaths"
     etree.SubElement(child, "affichage").text="niveau"
+    etree.SubElement(child, "creer_pdf").text="True"
+    etree.SubElement(child, "effacer_tex").text="True"
+    etree.SubElement(child, "afficher_pdf").text="True"
     return etree.tostring(root, pretty_print=True, encoding=unicode)
 
 ############## Indente correctement les fichiers xml. By Filip Salomonsson; published on February 06, 2007.  http://infix.se/2007/02/06/gentlemen-indent-your-xml

@@ -84,9 +84,13 @@ def DistributiviteSimple(parametre):
     exo = []
     cor = []
     valeur = valeurs_distr(parametre[0], parametre[1])
-    exo.append(u'$$ A = ' + tex_dev0(valeur, '') + '$$')
-    cor.append(u'$$ A = ' + tex_dev0(valeur, '') + '$$')
-    cor.append(u'$$ A = \\boxed{' + tex_dev1(valeur, '') + '} $$')
+    exo.append("$$ A = %s $$" %tex_dev0(valeur, ''))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" %tex_dev0(valeur, ''))
+    cor.append("A & = \\boxed{%s} \\\\" %tex_dev1(valeur, ''))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def CalculDistributivite(parametre):
@@ -94,13 +98,17 @@ def CalculDistributivite(parametre):
     exo = []
     cor = []
     valeur = valeurs_calcul_distr(parametre[0], parametre[1])
-    exo.append(u'$$ A = %s \\times %s $$' % (tex_coef(valeur[0][0]+valeur[0][1], ''), tex_coef(valeur[1][0]+valeur[1][1], '', 0, 1)))
-    cor.append(u'$$ A = %s \\times %s $$' % (tex_coef(valeur[0][0]+valeur[0][1], ''), tex_coef(valeur[1][0]+valeur[1][1], '', 0, 1)))
+    exo.append("$$ A = %s \\times %s $$" % (tex_coef(valeur[0][0]+valeur[0][1], ''), tex_coef(valeur[1][0]+valeur[1][1], '', 0, 1)))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\times %s \\\\" % (tex_coef(valeur[0][0]+valeur[0][1], ''), tex_coef(valeur[1][0]+valeur[1][1], '', 0, 1)))
     if abs(valeur[0][0])+ abs(valeur[1][0]):
-        cor.append(u'$$ A = ' + tex_dev0(valeur, '') + '$$')
-        cor.append(u'$$ A = ' + tex_dev1(valeur, '') + '$$')
-        cor.append(u'$$ A = ' + tex_trinome(dev(valeur), '') + '$$')
-    cor.append(u'$$ \\boxed{ A = %s } $$'% (dev(valeur)[0]+dev(valeur)[1]+dev(valeur)[2]))
+        cor.append("A & = %s \\\\" %tex_dev0(valeur, ''))
+        cor.append("A & = %s \\\\" %tex_dev1(valeur, ''))
+        cor.append("A & = %s \\\\" %tex_trinome(dev(valeur), ''))
+    cor.append("A & = \\boxed{%s} \\\\" %(dev(valeur)[0]+dev(valeur)[1]+dev(valeur)[2]))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def FactorisationSimple(parametre):
@@ -108,7 +116,11 @@ def FactorisationSimple(parametre):
     exo = []
     cor = []
     valeur = valeurs_facto(parametre[0], parametre[1])
-    exo.append(u'$$ A = ' + tex_dev1(valeur, '') + '$$')
-    cor.append(u'$$ A = ' + tex_dev1(valeur, '') + '$$')
-    cor.append(u'$$ A = \\boxed{' + tex_dev0(valeur, '') + '} $$')
+    exo.append("$$ A = %s $$" %tex_dev1(valeur, ''))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" %tex_dev1(valeur, ''))
+    cor.append("A & = \\boxed{%s} \\\\" %tex_dev0(valeur, ''))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)

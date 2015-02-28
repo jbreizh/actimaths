@@ -41,7 +41,6 @@ def valeurs(rang_partie_decimal, rang_partie_entier):
 
 #
 ##------------------AFFICHAGE--------------------------------------------------
-
 def tex_nombre_list(nombre_list, rang_partie_decimal, rang_partie_entier):
     nombre_sans_virgule = ''.join([num for num in reversed(nombre_list)])
     if rang_partie_entier == 0:
@@ -58,7 +57,6 @@ def tex_nombre_list(nombre_list, rang_partie_decimal, rang_partie_entier):
 
 #
 ##---------------------CONSTRUCTION----------------------------------------------
-
 def Chiffre(parametre):
     question = u"Compléter :"
     exo = []
@@ -70,10 +68,14 @@ def Chiffre(parametre):
     rang = random.randint(8 + parametre[0], 7 + parametre[1])
     rang_nombre = rang - 8 - parametre[0]
     # affichage
-    exo.append("Pour le nombre $%s$ \\newline" % nombre)
+    exo.append("\\textbf{Pour le nombre $%s$ :}" % nombre)
+    cor.append("\\textbf{Pour le nombre $%s$ :}" % nombre)
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
     exo.append("Le chiffre des %s est $\\ldots$" % nom_rang[rang])
-    cor.append("Pour le nombre $%s$ \\newline" % nombre)
     cor.append("Le chiffre des %s est $ \\boxed{%s} $" % (nom_rang[rang],nombre_list[rang_nombre]))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def Nombre(parametre):
@@ -87,10 +89,14 @@ def Nombre(parametre):
     rang = random.randint(8 + parametre[0], 7 + parametre[1])
     rang_nombre = rang - 8 - parametre[0]
     # affichage
-    exo.append("Pour le nombre $%s$ \\newline" % nombre)
+    exo.append("\\textbf{Pour le nombre $%s$ :}" % nombre)
+    cor.append("\\textbf{Pour le nombre $%s$ :}" % nombre)
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
     exo.append("Le nombre %s%s est $\\ldots$" % (pronom[min(abs(rang- 8),1)], nom_rang[rang]))
-    cor.append("Pour le nombre $%s$ \\newline" % nombre)
     cor.append("Le nombre %s%s est $ \\boxed{%s} $" % (pronom[min(abs(rang- 8),1)], nom_rang[rang], nombre_sans_virgule[0:len(nombre_sans_virgule)-rang_nombre]))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def EntierNom(parametre):
@@ -112,9 +118,9 @@ def EntierNom(parametre):
     rang_list.sort()
     rang_nombre_list.sort()
     # affichage
-    exo.append("Pour le nombre $%s$ \\newline" % nombre)
+    exo.append("\\textbf{Pour le nombre $%s$ :} \\newline" % nombre)
+    cor.append("\\textbf{Pour le nombre $%s$ :} \\newline" % nombre)
     exo.append("%s est le chiffre des $\\ldots$" % nombre_list[rang_nombre_list[0]])
-    cor.append("Pour le nombre $%s$ \\newline" % nombre)
     cor.append("%s est le chiffre des :" % nombre_list[rang_nombre_list[0]])
     cor.append("\\begin{itemize}")
     for rang in rang_list:

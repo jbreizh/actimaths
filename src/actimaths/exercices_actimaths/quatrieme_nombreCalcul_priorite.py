@@ -94,12 +94,16 @@ def Relatif3Operande(parametre):
     l = valeurs_priorites_fractions(3, parametre[0], parametre[1])
     (sol, res, niveau) = OperateurPrioritaire(l, 4, solution=[])
     exo.append("$$ A = %s $$" % Affichage(l))
-    cor.append("$$ A = %s $$" % Affichage(l))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" % Affichage(l))
     for l in sol:
         if l == sol[-1]:
-            cor.append("$$ \\boxed{A = %s} $$" % l)
+            cor.append("A & = \\boxed{%s} \\\\" %l)
         else:
-            cor.append("$$ A = %s $$" % l)
+            cor.append("A & = %s \\\\" %l)
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def Relatif4Operande(parametre):
@@ -109,10 +113,14 @@ def Relatif4Operande(parametre):
     l = valeurs_priorites_fractions(4, parametre[0], parametre[1])
     (sol, res, niveau) = OperateurPrioritaire(l, 4, solution=[])
     exo.append("$$ A = %s $$" % Affichage(l))
-    cor.append("$$ A = %s $$" % Affichage(l))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" % Affichage(l))
     for l in sol:
         if l == sol[-1]:
-            cor.append("$$ \\boxed{A = %s} $$" % l)
+            cor.append("A & = \\boxed{%s} \\\\" %l)
         else:
-            cor.append("$$ A = %s $$" % l)
+            cor.append("A & = %s \\\\" %l)
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)

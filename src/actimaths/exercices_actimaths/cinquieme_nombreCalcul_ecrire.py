@@ -47,7 +47,7 @@ def valeurs(nombre_min, nombre_max):  # renvoie les 2 listes contenant les opér
     nom_expression[5]= separateur_operateur[choix[0]]
     nom_expression[8]= separateur_operateur[choix[2]]
 
-    if choix[0] > 1:
+    if choix[0] > 0:
         nom_expression[6]= nom_operateur1[choix[2]]
         if choix[1] < 2:
             expression[0]= '('
@@ -87,8 +87,11 @@ def Expression(parametre):
     exo = []
     cor = []
     (expression, nom_expression) = valeurs(parametre[0], parametre[1])
+    exo.append("\\begin{center}")
     exo.append(nom_expression)
-    cor.append("$$ %s $$" % expression)
+    exo.append("\\end{center}")
+    cor.append(u"\\textbf{%s s'écrit :}" %nom_expression)
+    cor.append("$$ \\boxed{%s} $$" % expression)
     return (exo, cor, question)
 
 def NomExpression(parametre):
@@ -97,6 +100,9 @@ def NomExpression(parametre):
     cor = []
     (expression, nom_expression) = valeurs(parametre[0], parametre[1])
     exo.append("$$ %s $$" % expression)
+    cor.append(u"\\textbf{$ %s $ se lit :}" %expression)
+    cor.append("\\begin{center}")
     cor.append(nom_expression)
+    cor.append("\\end{center}")
     return (exo, cor, question)
 

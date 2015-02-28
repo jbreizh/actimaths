@@ -95,29 +95,29 @@ def NombreEnLettres(n, France=True):
             if d > 1:
                 if France:
                     if n:
-                        temp = '-' + dizaineF[d]
+                        temp = ' ' + dizaineF[d]
                     else:
                         temp = dizaineF[d]
 
             # Ajout du cas particulier de 'et' entre la dizaine et 1
 
                     if d < 8 and (u == 1 or u == 11):
-                        temp = temp + '-et'
+                        temp = temp + ' et'
                 else:
                     if n:
-                        temp = '-' + dizaineB[d]
+                        temp = ' ' + dizaineB[d]
                     else:
                         temp = dizaineB[d]
 
               # Ajout du cas particulier de 'et' entre la dizaine et 1
 
                     if u == 1:
-                        temp = temp + '-et'
+                        temp = temp + ' et'
 
         # ajout du texte de l'unité
 
             if u > 0 and (d or n):
-                temp = temp + '-' + unite[u]
+                temp = temp + ' ' + unite[u]
             elif u > 0:
                 temp = unite[u]
 
@@ -136,13 +136,13 @@ def NombreEnLettres(n, France=True):
             if c > 0:
                 temp = ""
                 if c > 1 and n:
-                    temp = '-' + unite[c]
+                    temp = ' ' + unite[c]
                 elif c > 1:
                     temp = unite[c]
                 if c == 1 and not n:
                     temp = coefs[0]
                 else:
-                    temp = temp + '-' + coefs[0]
+                    temp = temp + ' ' + coefs[0]
 
           # Traitement du cas particulier du 's' à cent si rien ne suit
 
@@ -165,7 +165,7 @@ def NombreEnLettres(n, France=True):
                     result = coefs[coef] + result
                 elif i > 0:
 
-                    result = '-' + coefs[coef] + result
+                    result = ' ' + coefs[coef] + result
     return result
 
 def EcritNombreDecimal(n):
@@ -202,8 +202,12 @@ def EcritEnChiffreEntier(parametre):
     exo = []
     cor = []
     lnb = nombreATrouver(parametre[0], parametre[1], 0)
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
     exo.append(EcritNombreDecimal(lnb))
-    cor.append(Affichage.decimaux(lnb, 0) + '')
+    cor.append(Affichage.decimaux(lnb, 0))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def EcritEnLettreEntier(parametre):
@@ -211,8 +215,12 @@ def EcritEnLettreEntier(parametre):
     exo = []
     cor = []
     lnb = nombreATrouver(parametre[0], parametre[1], 0 )
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
     exo.append(Affichage.decimaux(lnb, 0))
-    cor.append(EcritNombreDecimal(lnb) + '')
+    cor.append(EcritNombreDecimal(lnb))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def EcritEnChiffreDecimal(parametre):
@@ -220,8 +228,12 @@ def EcritEnChiffreDecimal(parametre):
     exo = []
     cor = []
     lnb = nombreATrouver(parametre[0], parametre[1], 1)
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
     exo.append(EcritNombreDecimal(lnb))
-    cor.append(Affichage.decimaux(lnb, 0) + '')
+    cor.append(Affichage.decimaux(lnb, 0))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def EcritEnLettreDecimal(parametre):
@@ -229,6 +241,10 @@ def EcritEnLettreDecimal(parametre):
     exo = []
     cor = []
     lnb = nombreATrouver(parametre[0], parametre[1], 1)
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
     exo.append(Affichage.decimaux(lnb, 0))
-    cor.append(EcritNombreDecimal(lnb) + '')
+    cor.append(EcritNombreDecimal(lnb))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
     return (exo, cor, question)

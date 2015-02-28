@@ -98,7 +98,7 @@ def tex_exercice(exo,cor,exposant):
     ligne_corrige = tex_ligne_corrige(div0, div1, nb0, exposant) + ["\\ncline{->}{virg0}{virg1} \\\\"]
     #construction
     exo.append("$$\\unit[%s]{%s}=\\unit[\\ldots]{%s}$$"%(Affichage.decimaux(nb0), unite[div0], unite[div1]))
-    cor.append("$$\\unit[%s]{%s}=\\unit[%s]{%s}$$" % (Affichage.decimaux(nb0), unite[div0], Affichage.decimaux(nb1), unite[div1]))
+    cor.append("$$\\unit[%s]{%s}=\\unit[\\boxed{%s}]{%s}$$" % (Affichage.decimaux(nb0), unite[div0], Affichage.decimaux(nb1), unite[div1]))
     tex_tableau_conversion(exo, ligne_enonce, exposant, unite)
     tex_tableau_conversion(cor, ligne_corrige, exposant, unite)
 

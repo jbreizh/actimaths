@@ -59,12 +59,9 @@ def valeurEntier(nombre_min, nombre_max):
     nombre = random.randrange(nombre_min, nombre_max)
     return nombre
 
-def valeurDecimal(nombre_min, nombre_max):
+def valeurDecimal(rang_min, rang_max):
     #Generation du nombre
-    e = random.randrange(3,6)
-    partieEntiere = random.randrange(nombre_min, nombre_max)
-    partieDecimale = random.randrange(100, 1000) * 10 ** -e
-    nombre = partieEntiere + partieDecimale
+    nombre = random.randrange(100, 1000) * 10 ** random.randrange(rang_min-2, rang_max-1)
     return nombre
 
 def valeurNumerateur(numerateur, denominateurArrondi):
@@ -73,34 +70,28 @@ def valeurNumerateur(numerateur, denominateurArrondi):
     numerateur_partieDecimale           = numerateur - numerateur_partieEntiere
     numerateur_partieEntiere_precision  = min(len(str(numerateur_partieEntiere)),2) - len(str(numerateur_partieEntiere))
     numerateur_partieDecimale_precision = 1 + rang_premiere_decimale(numerateur_partieDecimale)
-
     #Partie entière et décimale + rang du premier chiffre pour le denominateurArrondi
     denominateurArrondi_partieEntiere            = int(floor(denominateurArrondi))
     denominateurArrondi_partieDecimale           = denominateurArrondi - denominateurArrondi_partieEntiere
     denominateurArrondi_partieEntiere_precision  = 1 - len(str(denominateurArrondi_partieEntiere))
     denominateurArrondi_partieDecimale_precision = rang_premiere_decimale(denominateurArrondi_partieDecimale)
-
     #On ne prend que les 2 premiers chiffres du numerateur
     if numerateur_partieEntiere:
         numerateur_chiffre = int(floor(numerateur_partieEntiere * 10 ** numerateur_partieEntiere_precision))
     else:
         numerateur_chiffre = int(floor(numerateur_partieDecimale * 10 ** numerateur_partieDecimale_precision))
-
     #On ne prend que le 1er chiffre du denominateurArrondi
     if denominateurArrondi_partieEntiere:
         denominateurArrondi_chiffre = int(floor(denominateurArrondi_partieEntiere * 10 ** denominateurArrondi_partieEntiere_precision))
     else:
         denominateurArrondi_chiffre = int(floor(denominateurArrondi_partieDecimale * 10 ** denominateurArrondi_partieDecimale_precision))
-
     #On choisi le multiple de denominateurArrondi_chiffre le plus proche de numerateur_chiffre
     numerateurArrondi_chiffre = int(round(float(numerateur_chiffre) / denominateurArrondi_chiffre) * denominateurArrondi_chiffre)
-
     #On complète numerateurArrondi_chiffre pour qu'il fasse la même taille que numerateur
     if numerateur_partieEntiere:
          numerateurArrondi = int(numerateurArrondi_chiffre * 10 ** (- numerateur_partieEntiere_precision))
     else:
          numerateurArrondi = numerateurArrondi_chiffre * 10 ** (- numerateur_partieDecimale_precision)
-
     return (numerateurArrondi, denominateurArrondi_chiffre, numerateurArrondi_chiffre)
 
 ############################Construction####################################################
@@ -112,8 +103,14 @@ def NombreEntier(parametre):
     nombre = valeurEntier(parametre[0], parametre[1])
     (defaut, arrondi, exces) = encadrement(nombre)
     exo.append("$$ %s $$" % nombre)
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut, nombre, exces, nombre, arrondi))
-    cor.append("L'ordre de grandeur de %s est %s" % (nombre, arrondi))
+    cor.append("\\textbf{Pour le nombre %s :}" %nombre)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut, nombre, exces, nombre, arrondi))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("L'ordre de grandeur de %s est \\fbox{%s}" % (nombre, arrondi))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def NombreDecimal(parametre):
@@ -123,8 +120,14 @@ def NombreDecimal(parametre):
     nombre = valeurDecimal(parametre[0], parametre[1])
     (defaut, arrondi, exces) = encadrement(nombre)
     exo.append("$$ %s $$" % nombre)
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut, nombre, exces, nombre, arrondi))
-    cor.append("L'ordre de grandeur de %s est %s" % (nombre, arrondi))
+    cor.append("\\textbf{Pour le nombre %s :}" %nombre)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut, nombre, exces, nombre, arrondi))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("L'ordre de grandeur de %s est \\fbox{%s}" % (nombre, arrondi))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def AdditionEntier(parametre):
@@ -136,9 +139,18 @@ def AdditionEntier(parametre):
     nombre2 = valeurEntier(parametre[0], parametre[1])
     (defaut2, arrondi2, exces2) = encadrement(nombre2)
     exo.append("$$ %s + %s $$" % (nombre1, nombre2))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut1, nombre1, exces1, nombre1, arrondi1))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut2, nombre2, exces2, nombre2, arrondi2))
-    cor.append("$%s + %s \\approx  %s + %s \\approx %s $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 + arrondi2))
+    cor.append("\\textbf{Pour le premier terme %s :}" %nombre1)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut1, nombre1, exces1, nombre1, arrondi1))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Pour le deuxième terme %s :}" %nombre2)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut2, nombre2, exces2, nombre2, arrondi2))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("$%s + %s \\approx  %s + %s \\approx \\boxed{%s} $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 + arrondi2))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def AdditionDecimal(parametre):
@@ -150,9 +162,18 @@ def AdditionDecimal(parametre):
     nombre2 = valeurDecimal(parametre[0], parametre[1])
     (defaut2, arrondi2, exces2) = encadrement(nombre2)
     exo.append("$$ %s + %s $$" % (nombre1, nombre2))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut1, nombre1, exces1, nombre1, arrondi1))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut2, nombre2, exces2, nombre2, arrondi2))
-    cor.append("$%s + %s \\approx  %s + %s \\approx %s $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 + arrondi2))
+    cor.append("\\textbf{Pour le premier terme %s :}" %nombre1)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut1, nombre1, exces1, nombre1, arrondi1))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Pour le deuxième terme %s :}" %nombre2)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut2, nombre2, exces2, nombre2, arrondi2))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("$%s + %s \\approx  %s + %s \\approx \\boxed{%s} $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 + arrondi2))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def SoustractionEntier(parametre):
@@ -170,9 +191,18 @@ def SoustractionEntier(parametre):
     (defaut1, arrondi1, exces1) = encadrement(nombre1)
     (defaut2, arrondi2, exces2) = encadrement(nombre2)
     exo.append("$$ %s - %s $$" % (nombre1, nombre2))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut1, nombre1, exces1, nombre1, arrondi1))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut2, nombre2, exces2, nombre2, arrondi2))
-    cor.append("$%s - %s \\approx  %s - %s \\approx %s $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 - arrondi2))
+    cor.append("\\textbf{Pour le premier terme %s :}" %nombre1)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut1, nombre1, exces1, nombre1, arrondi1))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Pour le deuxième terme %s :}" %nombre2)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut2, nombre2, exces2, nombre2, arrondi2))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("$%s - %s \\approx  %s - %s \\approx \\boxed{%s} $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 - arrondi2))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def SoustractionDecimal(parametre):
@@ -190,9 +220,18 @@ def SoustractionDecimal(parametre):
     (defaut1, arrondi1, exces1) = encadrement(nombre1)
     (defaut2, arrondi2, exces2) = encadrement(nombre2)
     exo.append("$$ %s - %s $$" % (nombre1, nombre2))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut1, nombre1, exces1, nombre1, arrondi1))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut2, nombre2, exces2, nombre2, arrondi2))
-    cor.append("$%s - %s \\approx  %s - %s \\approx %s $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 - arrondi2))
+    cor.append("\\textbf{Pour le premier terme %s :}" %nombre1)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut1, nombre1, exces1, nombre1, arrondi1))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Pour le deuxième terme %s :}" %nombre2)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut2, nombre2, exces2, nombre2, arrondi2))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("$%s - %s \\approx  %s - %s \\approx \\boxed{%s} $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 - arrondi2))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def MultiplicationEntier(parametre):
@@ -204,9 +243,18 @@ def MultiplicationEntier(parametre):
     nombre2 = valeurEntier(parametre[0], parametre[1])
     (defaut2, arrondi2, exces2) = encadrement(nombre2)
     exo.append("$$ %s \\times %s $$" % (nombre1, nombre2))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut1, nombre1, exces1, nombre1, arrondi1))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut2, nombre2, exces2, nombre2, arrondi2))
-    cor.append("$%s \\times %s \\approx  %s \\times %s \\approx %s $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 * arrondi2))
+    cor.append("\\textbf{Pour le premier facteur %s :}" %nombre1)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut1, nombre1, exces1, nombre1, arrondi1))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Pour le deuxième facteur %s :}" %nombre2)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut2, nombre2, exces2, nombre2, arrondi2))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("$%s \\times %s \\approx  %s \\times %s \\approx \\boxed{%s} $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 * arrondi2))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def MultiplicationDecimal(parametre):
@@ -218,9 +266,18 @@ def MultiplicationDecimal(parametre):
     nombre2 = valeurDecimal(parametre[0], parametre[1])
     (defaut2, arrondi2, exces2) = encadrement(nombre2)
     exo.append("$$ %s \\times %s $$" % (nombre1, nombre2))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut1, nombre1, exces1, nombre1, arrondi1))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline" % (defaut2, nombre2, exces2, nombre2, arrondi2))
-    cor.append("$%s \\times %s \\approx  %s \\times %s \\approx %s $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 * arrondi2))
+    cor.append("\\textbf{Pour le premier facteur %s :}" %nombre1)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut1, nombre1, exces1, nombre1, arrondi1))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Pour le deuxième facteur %s :}" %nombre2)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$" % (defaut2, nombre2, exces2, nombre2, arrondi2))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("$%s \\times %s \\approx  %s \\times %s \\approx \\boxed{%s} $" % (nombre1, nombre2, arrondi1, arrondi2, arrondi1 * arrondi2))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def DivisionEntier(parametre):
@@ -232,11 +289,20 @@ def DivisionEntier(parametre):
     numerateur =  valeurEntier(parametre[0], parametre[1])
     (numerateur_arrondi, denominateur_arrondi_chiffre, numerateur_arrondi_chiffre) = valeurNumerateur(numerateur, denominateur_arrondi)
     exo.append("$$ %s \\div %s $$" % (numerateur, denominateur))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline"  % (denominateur_defaut, denominateur, denominateur_exces, denominateur, denominateur_arrondi))
-    cor.append("$ %s \\times %s = %s $ donc $ %s \\approx %s $ \\newline" 
-               % (denominateur_arrondi_chiffre, numerateur_arrondi_chiffre/denominateur_arrondi_chiffre, numerateur_arrondi_chiffre, numerateur, numerateur_arrondi) )
-    cor.append("donc $%s \\div %s \\approx  %s \\div %s \\approx %s $" 
+    cor.append("\\textbf{Pour le diviseur %s :}" %denominateur)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$"  % (denominateur_defaut, denominateur, denominateur_exces, denominateur, denominateur_arrondi))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Pour le dividende %s :}" %numerateur)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\times %s = %s $ donc $ %s \\approx %s $" 
+               % (denominateur_arrondi_chiffre, numerateur_arrondi_chiffre/denominateur_arrondi_chiffre, numerateur_arrondi_chiffre, numerateur, numerateur_arrondi))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("donc $%s \\div %s \\approx  %s \\div %s \\approx \\boxed{%s} $" 
                % (numerateur, denominateur, numerateur_arrondi, denominateur_arrondi, float(numerateur_arrondi)/ denominateur_arrondi))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def DivisionDecimal(parametre):
@@ -248,9 +314,18 @@ def DivisionDecimal(parametre):
     numerateur =  valeurDecimal(parametre[0], parametre[1])
     (numerateur_arrondi, denominateur_arrondi_chiffre, numerateur_arrondi_chiffre) = valeurNumerateur(numerateur, denominateur_arrondi)
     exo.append("$$ %s \\div %s $$" % (numerateur, denominateur))
-    cor.append("$ %s < %s < %s $ donc $ %s \\approx %s$ \\newline"  % (denominateur_defaut, denominateur, denominateur_exces, denominateur, denominateur_arrondi))
-    cor.append("$ %s \\times %s = %s $ donc $ %s \\approx %s $ \\newline" 
-               % (denominateur_arrondi_chiffre, numerateur_arrondi_chiffre/denominateur_arrondi_chiffre, numerateur_arrondi_chiffre, numerateur, numerateur_arrondi) )
-    cor.append("donc $%s \\div %s \\approx  %s \\div %s \\approx %s $" 
+    cor.append("\\textbf{Pour le diviseur %s :}" %denominateur)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\leq %s < %s $ donc $ %s \\approx %s$"  % (denominateur_defaut, denominateur, denominateur_exces, denominateur, denominateur_arrondi))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Pour le dividende %s :}" %numerateur)
+    cor.append("\\begin{center}")
+    cor.append("$ %s \\times %s = %s $ donc $ %s \\approx %s $" 
+               % (denominateur_arrondi_chiffre, numerateur_arrondi_chiffre/denominateur_arrondi_chiffre, numerateur_arrondi_chiffre, numerateur, numerateur_arrondi))
+    cor.append("\\end{center}")
+    cor.append(u"\\textbf{Conclusion :}")
+    cor.append("\\begin{center}")
+    cor.append("donc $%s \\div %s \\approx  %s \\div %s \\approx \\boxed{%s} $" 
                % (numerateur, denominateur, numerateur_arrondi, denominateur_arrondi, float(numerateur_arrondi)/ denominateur_arrondi))
+    cor.append("\\end{center}")
     return (exo, cor, question)

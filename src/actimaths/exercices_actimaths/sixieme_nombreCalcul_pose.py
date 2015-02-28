@@ -62,8 +62,6 @@ def valeurs(nbre_min, nbre_max, nbre_decimal_1, nbre_decimal_2):
     laprvirg = max(len(deca) - posa, len(decb) - posb)
     return (nba, nbb, deca, decb, lavtvirg, laprvirg)
 
-
-
 def lignes(ligne, deca, lavtvirg, laprvirg):
     if deca.count('.'):
         posa = deca.index('.')
@@ -85,7 +83,6 @@ def lignes(ligne, deca, lavtvirg, laprvirg):
     return ligne
 
 #---------------methode pour la somme--------------------------------
-
 def retenues_somme(ligne1, ligne2):
     lg = len(ligne1)
     ligne0 = ['' for i in range(lg)]
@@ -120,6 +117,7 @@ def tex_somme(exo, cor,nbre_min, nbre_max, nbre_decimal_1, nbre_decimal_2):
     if ligne0[0] == '1':
         ligne0[0] = '\\tiny 1'
     exo.append('$$ %s + %s = \\ldots $$' % (Affichage.decimaux(nba), Affichage.decimaux(nbb)))
+    cor.append('\\begin{center}')
     cor.append('\\begin{footnotesize}')
     cor.append('\\begin{tabular}[t]{*{%s}{c}}' % (lavtvirg + laprvirg + 1))
     cor.append('%s \\\\' % ' & \\tiny '.join(ligne0))
@@ -128,11 +126,11 @@ def tex_somme(exo, cor,nbre_min, nbre_max, nbre_decimal_1, nbre_decimal_2):
     cor.append('%s \\\\' % ' & '.join(ligne3))
     cor.append('\\end{tabular}\\par')
     cor.append('\\end{footnotesize}')
+    cor.append('\\end{center}')
     formule = '%s+%s = %s' % (Affichage.decimaux(nba, 1), Affichage.decimaux(nbb, 1), Affichage.decimaux(nba + nbb, 1))
     cor.append((u'\\[ \\boxed{%s} \\] ').expandtabs(2 * 3) % (formule))
 
 #---------------methode pour la difference--------------------------------
-
 def retenues_diff(ligne1, ligne2):
     lg = len(ligne1)
     ret = 0
@@ -170,6 +168,7 @@ def tex_difference(exo, cor, nbre_min, nbre_max, nbre_decimal_1, nbre_decimal_2)
     ligne3 = lignes(ligne3, dectotal, lavtvirg, laprvirg)
     (ligne1, ligne2) = retenues_diff(ligne1, ligne2)
     exo.append('$$ %s - %s = \\ldots $$' % (Affichage.decimaux(nba), Affichage.decimaux(nbb)))
+    cor.append('\\begin{center}')
     cor.append('\\begin{footnotesize}')
     cor.append('\\begin{tabular}[t]{*{%s}{c}}' % (lavtvirg + laprvirg + 1))
     cor.append('%s \\\\' % ' & '.join(ligne1))
@@ -177,11 +176,11 @@ def tex_difference(exo, cor, nbre_min, nbre_max, nbre_decimal_1, nbre_decimal_2)
     cor.append('%s \\\\' % ' & '.join(ligne3))
     cor.append('\\end{tabular}\\par')
     cor.append('\\end{footnotesize}')
+    cor.append('\\end{center}')
     formule = '%s-%s = %s' % (Affichage.decimaux(nba, 1), Affichage.decimaux(nbb, 1), Affichage.decimaux(nba - nbb, 1))
     cor.append((u'\\[ \\boxed{%s} \\] ').expandtabs(2 * 3) % (formule))
 
 #---------------methode pour le produit--------------------------------
-
 def valeurs_prod(nbre_min, nbre_max, nbre_decimal_1 , nbre_decimal_2):
     while 1:
         nba = Arithmetique.valeur_alea(nbre_min*10**nbre_decimal_1, nbre_max*10**nbre_decimal_1)
@@ -233,6 +232,7 @@ def tex_produit(exo, cor, nbre_min, nbre_max, nbre_decimal_1, nbre_decimal_2):
         dec4[i - 1] = '%s ,' % dec4[i - 1]  # et ajoute une virgule au chiffre des unités
     lg = max(len(dec4), len(deca), len(decb)+1)  # nombre de colonnes dans le tableau
     exo.append('$$ %s \\times %s = \\ldots $$' % (Affichage.decimaux(nba *10 ** puisa), Affichage.decimaux(nbb * 10 ** puisb)))
+    cor.append('\\begin{center}')
     cor.append('\\begin{tabular}[t]{*{%s}{c}}' % lg)
     cor.append('%s \\\\' % ' & '.join(ligneprod([], deca,lg)))
     cor.append('%s \\\\\n\\hline' % ' & '.join(ligneprod(['$\\times$'], decb, lg)))
@@ -245,7 +245,7 @@ def tex_produit(exo, cor, nbre_min, nbre_max, nbre_decimal_1, nbre_decimal_2):
 
     cor.append('%s \\\\' % ' & '.join(ligneprod([], dec4, lg)))
     cor.append('\\end{tabular}')
-
+    cor.append('\\end{center}')
     formule = '%s\\times%s = %s' % (Affichage.decimaux(nba *10 ** puisa, 1), Affichage.decimaux(nbb * 10 **puisb, 1), Affichage.decimaux((nba * nbb) * 10 ** (puisa + puisb), 1))
     cor.append((u'\\[ \\boxed{%s} \\] ').expandtabs(2 * 3) % (formule))
 
@@ -260,10 +260,7 @@ def valeurs_quot(nbre_min, nbre_max, nbre_decimal):
 
     return (nba, nbb, puisa)
 
-
-
 #--------------Construction des exercices-----------------------
-
 def AdditionEntier(parametre):
     question = "Poser l'addition suivante :"
     exo = [ ]

@@ -1,8 +1,8 @@
-#!/usr/bin/python
+# Pyromaths
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
-# Un programme en Python qui permet de créer des fiches d'exercices types de
+# Un programme en Python qui permet de créer des fiches d"exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
 # Copyright (C) 2006 -- Jérôme Ortais (jerome.ortais@pyromaths.org)
 #
@@ -17,109 +17,181 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
+# along with this program; if notPopen, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-import random, math
+import random
 
-#------------------methode---------------------------------------------
-def nom_sommet(nb):
-    (listenb, listepts) = ([], [])
-    for i in range(26):
-        listenb.append(i + 65)
-    for i in range(nb):
-        listepts.append(str(chr(listenb.pop(random.randrange(26 - i)))))
-    listepts.sort()
-    return tuple(listepts)
-
-def nom_angle(nomPoint):
-    nomAngle = []
-    nomAngle.append("%s%s%s" % (nomPoint[2],nomPoint[0],nomPoint[1]))
-    nomAngle.append("%s%s%s" % (nomPoint[0],nomPoint[1],nomPoint[2]))
-    nomAngle.append("%s%s%s" % (nomPoint[1],nomPoint[2],nomPoint[0]))
-    return nomAngle
-
-def nom_cote(nomPoint):
-    nomCote = []
-    nomCote.append("%s%s" % (nomPoint[0],nomPoint[1]))
-    nomCote.append("%s%s" % (nomPoint[1],nomPoint[2]))
-    nomCote.append("%s%s" % (nomPoint[2],nomPoint[0]))
-    return nomCote
-
-def mesure_angle(type):
-    if type == 'isocele':
-        while True:
-            a = random.randrange(20,100,10)
-            if a != 60 and a != 90:
-                break
-        mesure = [(180-a)/2, (180-a)/2, a]
-    elif type == 'rectangle':
-        while True:
-            a = random.randrange(20,60,5)
-            if a != 45:
-                break
-        mesure = [a, 90 - a, 90]
-    elif type == 'quelconque':
-        while True:
-            a = random.randrange(20,80,5)
-            b = random.randrange(20,80,5)
-            c = 180 - a - b
-            if a != 90 and b != 90 and c != 90 and a != b and b != c and c != a :
-                break
-        mesure = [a, b, c]
-    return mesure
-
-def tex_triangle(tex, sommet, mesure, tex_mesure):
-    # Coefficient tel que hauteur = gamma * base
-    gamma = math.tan(math.radians(mesure[0]))*math.tan(math.radians(mesure[1]))/(math.tan(math.radians(mesure[0]))+math.tan(math.radians(mesure[1])))
-    # Coordonnée des sommets pour que la base ou la hauteur mesure (max-min) cm
-    min = -4
-    max = 4
-    if gamma < 1:
-        coordonnee = [min, min, max, min, round((max-min)*gamma/math.tan(math.radians(mesure[0]))+min, 4),round((max-min)*gamma+min,4)]
+def caracteristique_sommet():
+    choix = random.randrange(3)
+    if choix == 0:
+        nom = ["A","B","C"]
+    elif choix == 1:
+        nom = ["C","A","B"]
     else:
-        coordonnee = [min, min, round((max-min)/gamma+min, 4), min, round((max-min)/math.tan(math.radians(mesure[0])) +min, 4) ,max]
-    # Angle des symboles des angles
-    angle = [0, mesure[0], 180 - mesure[1], 180, 180 + mesure[0], 180 + mesure[0] + mesure[2]]
+        nom = ["B","C","A"]
+    coordonnee = (random.uniform(-1.5,1.5),random.uniform(1.5,2.5),random.uniform(-2.5,-1.5),random.uniform(-2.5,-1.5),random.uniform(1.5,2.5),random.uniform(-2.5,-1.5))
+    return (nom,coordonnee)
+
+def tex_debut(enonce,nom,coordonnee):
+    enonce.append("\\begin{center}")
+    enonce.append("\\psset{unit=0.5cm}")
+    enonce.append("\\begin{pspicture}(-3,-3)(3,3)")
+    enonce.append("\\pstTriangle[PointName=none](%s,%s){%s}(%s,%s){%s}(%s,%s){%s}" %(coordonnee[0],coordonnee[1],nom[0],coordonnee[2],coordonnee[3],nom[1],coordonnee[4],coordonnee[5],nom[2]))
+
+def tex_fin(enonce):
+    enonce.append("\\end{pspicture}")
+    enonce.append("\\end{center}")
+
+def tex_quelconque_cote(enonce):
+    ## Paramètre
+    codage = random.sample(["SegmentSymbol=None","SegmentSymbol=pstslash","SegmentSymbol=pstslashh","SegmentSymbol=pstslashhh"],3)
     ## Construction
-    tex.append("\\begin{center}")
-    tex.append("\\psset{unit=0.5cm}")
-    tex.append("\\begin{pspicture}(%s,%s)(%s,%s)" %(coordonnee[0]-1, coordonnee[1]-1, coordonnee[2]+1, coordonnee[5]+1))
-    # Triangle
-    tex.append("\\pspolygon(%s,%s)(%s,%s)(%s,%s)" %(coordonnee[0], coordonnee[1], coordonnee[2], coordonnee[3], coordonnee[4], coordonnee[5]))
-    # Symbole et légende de chaque angle
-    for i in range(len(mesure)):
-        if mesure[i] == 90:
-           tex.append("\\rput[t]{%s}(%s,%s){\\psframe(0,0)(0.5,0.5)}" % (angle[2*i], coordonnee[2*i], coordonnee[2*i+1]))
-        elif mesure[0] == mesure[1] and i < 2:
-           tex.append("\\psarc(%s,%s){1}{%s}{%s}" % (coordonnee[2*i], coordonnee[2*i+1], angle[2*i], angle[2*i+1]))
-           tex.append("\\uput{0.75}[%s]{%s}(%s,%s){\\psline(0,0)(0.5,0)}" % ((angle[2*i]+angle[2*i+1])/2, (angle[2*i]+angle[2*i+1])/2, coordonnee[2*i], coordonnee[2*i+1]))
-           if i == 0:
-               tex.append("\\uput{1.2}[%s]{%s}(%s,%s){$%s$}" % ((angle[2*i]+angle[2*i+1])/2, (angle[2*i]+angle[2*i+1])/2, coordonnee[2*i], coordonnee[2*i+1], tex_mesure[i]))
-        else:
-           tex.append("\\psarc(%s,%s){1}{%s}{%s}" % (coordonnee[2*i], coordonnee[2*i+1], angle[2*i], angle[2*i+1]))
-           tex.append("\\uput{1.2}[%s]{%s}(%s,%s){$%s$}" % ((angle[2*i]+angle[2*i+1])/2, (angle[2*i]+angle[2*i+1])/2, coordonnee[2*i], coordonnee[2*i+1], tex_mesure[i]))
-        tex.append("\\uput{0.5}[%s](%s,%s){$%s$}" % ((angle[2*i]+angle[2*i+1])/2 + 180 ,coordonnee[2*i], coordonnee[2*i+1], sommet[i]))
-    tex.append("\\end{pspicture}")
-    tex.append("\\end{center}")
+    enonce.append("\\pstSegmentMark[%s]{A}{B}" %codage[0])
+    enonce.append("\\pstSegmentMark[%s]{B}{C}" %codage[1])
+    enonce.append("\\pstSegmentMark[%s]{C}{A}" %codage[2])
 
+def tex_quelconque_angle(enonce):
+    ## Paramètre
+    codage = random.sample(["Mark=None","Mark=pstslash","Mark=pstslashh","Mark=pstslashhh"],3)
+    ## Construction
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{C}{B}{A}{}" %codage[0])
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{B}{A}{C}{}" %codage[1])
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{A}{C}{B}{}" %codage[2])
 
+def tex_isocele_cote(enonce):
+    ## Paramètre
+    codage = random.sample(["SegmentSymbol=None","SegmentSymbol=pstslash","SegmentSymbol=pstslashh","SegmentSymbol=pstslashhh"],2)
+    while codage[0] == "SegmentSymbol=None":
+        codage = random.sample(["SegmentSymbol=None","SegmentSymbol=pstslash","SegmentSymbol=pstslashh","SegmentSymbol=pstslashhh"],2)
+    ## Construction
+    enonce.append("\\pstSegmentMark[%s]{A}{B}" %codage[0])
+    enonce.append("\\pstSegmentMark[%s]{B}{C}" %codage[0])
+    enonce.append("\\pstSegmentMark[%s]{C}{A}" %codage[1])
 
-#------------------construction-----------------------------------------
-def SommeQuelconqueSchema(parametre):
-    ## Choix des variables
-    sommet = nom_sommet(3)
-    mesure = mesure_angle('quelconque')
-    (tex_mesure_enonce, tex_mesure_corrige) = tex_mesure_angle(mesure, choix)
-    ## Initialisation
-    question = "Calculer $\\widehat{%s}$" % sommet[choix[2]]
+def tex_isocele_angle(enonce):
+    ## Paramètre
+    codage = random.sample(["Mark=None","Mark=pstslash","Mark=pstslashh","Mark=pstslashhh"],2)
+    while codage[0] == "Mark=None":
+        codage = random.sample(["Mark=None","Mark=pstslash","Mark=pstslashh","Mark=pstslashhh"],2)
+    ## Construction
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{C}{B}{A}{}" %codage[0])
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{B}{A}{C}{}" %codage[0])
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{A}{C}{B}{}" %codage[1])
+
+def tex_equilateral_cote(enonce):
+    ## Paramètre
+    codage = random.sample(["SegmentSymbol=pstslash","SegmentSymbol=pstslashh","SegmentSymbol=pstslashhh"],1)
+    ## Construction
+    enonce.append("\\pstSegmentMark[%s]{A}{B}" %codage[0])
+    enonce.append("\\pstSegmentMark[%s]{B}{C}" %codage[0])
+    enonce.append("\\pstSegmentMark[%s]{C}{A}" %codage[0])
+
+def tex_equilateral_angle(enonce):
+    ## Paramètre
+    codage = random.sample(["Mark=pstslash","Mark=pstslashh","Mark=pstslashhh"],1)
+    ## Construction
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{C}{B}{A}{}" %codage[0])
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{B}{A}{C}{}" %codage[0])
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{A}{C}{B}{}" %codage[0])
+
+def tex_rectangle_cote(enonce):
+    ## Paramètre
+    codage = random.sample(["SegmentSymbol=None","SegmentSymbol=pstslash","SegmentSymbol=pstslashh","SegmentSymbol=pstslashhh"],3)
+    ## Construction
+    enonce.append("\\pstSegmentMark[%s]{A}{B}" %codage[0])
+    enonce.append("\\pstSegmentMark[%s]{B}{C}" %codage[1])
+    enonce.append("\\pstSegmentMark[%s]{C}{A}" %codage[2])
+    enonce.append("\\pstRightAngle{C}{B}{A}")
+
+def tex_rectangle_angle(enonce):
+    ## Paramètre
+    codage = random.sample(["Mark=None","Mark=pstslash","Mark=pstslashh","Mark=pstslashhh"],2)
+    ## Construction
+    enonce.append("\\pstRightAngle{C}{B}{A}")
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{B}{A}{C}{}" %codage[0])
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{A}{C}{B}{}" %codage[1])
+
+def tex_isocele_rectangle_cote(enonce):
+    ## Paramètre
+    codage = random.sample(["SegmentSymbol=None","SegmentSymbol=pstslash","SegmentSymbol=pstslashh","SegmentSymbol=pstslashhh"],2)
+    while codage[0] == "SegmentSymbol=None":
+        codage = random.sample(["SegmentSymbol=None","SegmentSymbol=pstslash","SegmentSymbol=pstslashh","SegmentSymbol=pstslashhh"],2)
+    ## Construction
+    enonce.append("\\pstSegmentMark[%s]{A}{B}" %codage[0])
+    enonce.append("\\pstSegmentMark[%s]{B}{C}" %codage[0])
+    enonce.append("\\pstSegmentMark[%s]{C}{A}" %codage[1])
+    enonce.append("\\pstRightAngle{C}{B}{A}")
+
+def tex_isocele_rectangle_angle(enonce):
+    ## Paramètre
+    codage = random.sample(["Mark=pstslash","Mark=pstslashh","Mark=pstslashhh"],1)
+    ## Construction
+    enonce.append("\\pstRightAngle{C}{B}{A}")
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{B}{A}{C}{}" %codage[0])
+    enonce.append("\\pstMarkAngle[MarkAngleRadius=.6,%s]{A}{C}{B}{}" %codage[0])
+
+def CodageCote(parametre):
+    question = u"Quelle est la nature du triangle :"
     exo = []
     cor = []
-    ## Figure
-    tex_triangle(exo, sommet, mesure, tex_mesure_enonce)
-    tex_triangle(cor, sommet, mesure, tex_mesure_corrige)
-    ## Corrigé
-    cor.append("$$%s+%s+%s=180^\\circ$$" % (tex_mesure_enonce[choix[2]],tex_mesure_enonce[choix[0]], tex_mesure_enonce[choix[1]]))
-    cor.append("$$\\widehat{%s}=180^\\circ - %s - %s = %s$$" % (sommet[choix[2]],tex_mesure_corrige[choix[0]],tex_mesure_corrige[choix[1]], tex_mesure_corrige[choix[2]]))
+    ## Paramètre
+    style = ["quelconque",u"isocèle",u"équilatéral","rectangle",u"isocèle rectangle"]
+    choix = random.randrange(5)
+    (nom_sommet,coordonnee_sommet) = caracteristique_sommet()
+    tex_debut(exo, nom_sommet,coordonnee_sommet)
+    tex_debut(cor, nom_sommet,coordonnee_sommet)
+    if choix == 0:
+        tex_quelconque_cote(exo)
+        tex_quelconque_cote(cor)
+    if choix == 1:
+        tex_isocele_cote(exo)
+        tex_isocele_cote(cor)
+    if choix == 2:
+        tex_equilateral_cote(exo)
+        tex_equilateral_cote(cor)
+    if choix == 3:
+        tex_rectangle_cote(exo)
+        tex_rectangle_cote(cor)
+    if choix == 4:
+        tex_isocele_rectangle_cote(exo)
+        tex_isocele_rectangle_cote(cor)
+    tex_fin(exo)
+    tex_fin(cor)
+    cor.append("\\begin{center}")
+    cor.append(u"C'est un triangle \\fbox{%s}" %style[choix])
+    cor.append("\\end{center}")
+    return (exo, cor, question)
+
+def CodageAngle(parametre):
+    question = u"Quelle est la nature du triangle :"
+    exo = []
+    cor = []
+    ## Paramètre
+    style = ["quelconque",u"isocèle",u"équilatéral","rectangle",u"isocèle rectangle"]
+    choix = random.randrange(5)
+    (nom_sommet,coordonnee_sommet) = caracteristique_sommet()
+    tex_debut(exo, nom_sommet,coordonnee_sommet)
+    tex_debut(cor, nom_sommet,coordonnee_sommet)
+    if choix == 0:
+        tex_quelconque_angle(exo)
+        tex_quelconque_angle(cor)
+    if choix == 1:
+        tex_isocele_angle(exo)
+        tex_isocele_angle(cor)
+    if choix == 2:
+        tex_equilateral_angle(exo)
+        tex_equilateral_angle(cor)
+    if choix == 3:
+        tex_rectangle_angle(exo)
+        tex_rectangle_angle(cor)
+    if choix == 4:
+        tex_isocele_rectangle_angle(exo)
+        tex_isocele_rectangle_angle(cor)
+    tex_fin(exo)
+    tex_fin(cor)
+    cor.append("\\begin{center}")
+    cor.append(u"C'est un triangle \\fbox{%s}" %style[choix])
+    cor.append("\\end{center}")
     return (exo, cor, question)

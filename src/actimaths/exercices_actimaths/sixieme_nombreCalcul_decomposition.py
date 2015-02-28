@@ -54,8 +54,8 @@ def tex_decomposition(v, p):
         else:
             exo.append('=')
             cor.append('=')
-    exo.append('$$')
-    cor.append('%s$$' % Affichage.decimaux(v[0] * 10 ** p[0] + v[1] * 10 ** p[1] + v[2] * 10 ** p[2], 1))
+    exo.append('\\ldots$$')
+    cor.append('\\boxed{%s}$$' % Affichage.decimaux(v[0] * 10 ** p[0] + v[1] * 10 ** p[1] + v[2] * 10 ** p[2], 1))
     return " ".join(exo), " ".join(cor)
 
 

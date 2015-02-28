@@ -54,8 +54,8 @@ def ecritureScientifique(parametre):
     s_a_sc = decimaux(a_sc, 1)
     if randrange(2):  # forme : a=a_sc*...
         exo.append("$$%s=%s\\times\\ldots$$" % (s_a, s_a_sc))
-        cor.append("$$%s=%s\\times\\mathbf{10^{%s}}$$" % (s_a, s_a_sc, decimaux(exp, 1)))
+        cor.append("$$%s=%s\\times\\boxed{10^{%s}}$$" % (s_a, s_a_sc, decimaux(exp, 1)))
     else:  # forme : a_sc*...=a
         exo.append("$$%s\\times\\ldots=%s$$" % (s_a_sc, s_a))
-        cor.append("$$%s\\times\\mathbf{10^{%s}}=%s$$" % (s_a_sc, decimaux(exp, 1), s_a))
+        cor.append("$$%s\\times\\boxed{10^{%s}}=%s$$" % (s_a_sc, decimaux(exp, 1), s_a))
     return (exo, cor, question)

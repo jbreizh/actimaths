@@ -91,19 +91,23 @@ def den_com0(a, b):  #renvoie un tuple contenant les 2 nombres par lesquels mult
 #
 # ------------------- AFFICHAGE -------------------
 def tex_valeur(a, nb, cor):  # repond a la question sur la valeur de x
-    cor.append(u'$$ A = ' + tex_valeurx0(a, nb) + '$$')
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" %tex_valeurx0(a, nb))
     if nb == (0, 1):
-        cor.append(u'$$ \\boxed{A = ' + tex_valeurx1(a, nb) + '} $$')
+        cor.append("A & = \\boxed{%s} \\\\" %tex_valeurx1(a, nb))
     else:
-        cor.append(u'$$ A = ' + tex_valeurx1(a, nb) + '$$')
+        cor.append("A & = %s \\\\" %tex_valeurx1(a, nb))
         b = decomp_prod((a[0], 1), (nb[0] ** 2, nb[1] ** 2))[0:2]
         c = decomp_prod((a[1], 1), (nb[0], nb[1]))[0:2]
         a = (produit(b[0], b[1]), produit(c[0], c[1]), (a[2], 1))
         if a[0][1] == a[1][1] == 1:
-            cor.append(u'$$ \\boxed{A = ' + tex_valeurx2(a, nb) + '} $$')
+            cor.append("A & = \\boxed{%s} \\\\" %tex_valeurx2(a, nb))
         else:
-            cor.append(u'$$ A = ' + tex_valeurx2(a, nb) + '$$')
-            cor.append(u'$$ \\boxed{A = ' + tex_valeurx3(a, nb) + '} $$')
+            cor.append("A & = %s \\\\" %tex_valeurx2(a, nb))
+            cor.append("A & = \\boxed{%s} \\\\" %tex_valeurx3(a, nb))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
 
 def tex_valeurx0(a, nb):
     if nb == (0, 1):
@@ -188,8 +192,9 @@ def tex_exercice(expression, valeurs):
     exo = []
     cor = []
     variable = variable_list[ random.randrange(7) ]
+    exo.append("\\begin{center}")
     exo.append("$ A = %s $ pour $ %s = %s $" % (tex_trinome(expression, variable), variable, tex_frac(valeurs)))
-    cor.append("$ A = %s $ pour $ %s = %s $" % (tex_trinome(expression, variable), variable, tex_frac(valeurs)))
+    exo.append("\\end{center}")
     tex_valeur(expression, valeurs, cor)
     return (exo, cor, question)
 

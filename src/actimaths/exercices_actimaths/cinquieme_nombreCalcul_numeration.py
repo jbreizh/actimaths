@@ -31,7 +31,6 @@ def Oppose(parametre):
     nombre = random.randrange(parametre[0],parametre[1])
     oppose = - nombre
     exo.append("$$ %s $$" % nombre)
-    cor.append("$$ %s $$"% nombre)
     cor.append(u"L'opposé de $%s$ est $\\boxed{%s}$" % (nombre, oppose))
     return (exo, cor, question)
 
@@ -41,11 +40,10 @@ def Signe(parametre):
     cor = []
     nombre = random.randrange(parametre[0],parametre[1])
     exo.append("$$ %s $$" % nombre)
-    cor.append("$$ %s $$"% nombre)
     if nombre == 0:
-        cor.append(u"Le nombre $%s$ est \\textbf{positif} ou \\textbf{négatif}" % nombre )
+        cor.append(u"Le nombre $%s$ est \\fbox{positif ou négatif}" % nombre )
     elif nombre > 0:
-        cor.append(u"Le nombre $%s$ est \\textbf{positif}" % nombre )
+        cor.append(u"Le nombre $%s$ est \\fbox{positif}" % nombre )
     else:
-        cor.append(u"Le nombre $%s$ est \\textbf{négatif}" % nombre )
+        cor.append(u"Le nombre $%s$ est \\fbox{négatif}" % nombre )
     return (exo, cor, question)

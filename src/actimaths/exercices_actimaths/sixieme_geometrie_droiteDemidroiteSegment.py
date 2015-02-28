@@ -23,133 +23,133 @@
 
 import random
 import math
+from outils.Geometrie import choix_points
+from outils.Arithmetique import liste_combinaison
 
+#------------------methode---------------------------------------------
+def coordonnees_points():
+    coordonnee_point = []
+    coordonnee_point.append([random.uniform(-4,-1),random.uniform(1,4)])
+    coordonnee_point.append([random.uniform(1,4),random.uniform(1,4)])
+    coordonnee_point.append([random.uniform(1,4),random.uniform(-4,-1)])
+    coordonnee_point.append([random.uniform(-4,-1),random.uniform(-4,-1)])
+    return coordonnee_point
 
-def nodesep(ligne):
-    """
-    Défini les valeurs nodesep : 0 pour une extrémité, -0.5 pour une continuité
-    @param ligne: droite, demi-droite, segment
-    @type ligne: string
-    """
+def carateristique_duo_point(nom_point):
+    #liste des combinaisons de 2 points
+    duo_point = liste_combinaison(nom_point,2)
+    #nature et noms des combinaisons de 2 points
+    nom_duo_point = []
+    nature_duo_point = []
+    for i in range(len(duo_point)):
+        temp = random.randrange(3)
+        if temp == 0:
+            nom_duo_point.append("(%s%s)" %(duo_point[i][0],duo_point[i][1]))
+            nature_duo_point.append("une droite")
+        elif temp == 1:
+            nom_duo_point.append("[%s%s)" %(duo_point[i][0],duo_point[i][1]))
+            nature_duo_point.append("une demi-droite")
+        else:
+            nom_duo_point.append("[%s%s]" %(duo_point[i][0],duo_point[i][1]))
+            nature_duo_point.append("un segment")
+    return (duo_point,nom_duo_point,nature_duo_point)
 
-    if ligne == 'une droite':
-        retour = ['-6', '-6']
-    elif ligne == 'une demi-droite':
-        retour = ['0', '-6']
-    else:
-        retour = ['0', '0']
-    return retour
+def tex_figure(enonce,nom_point,coordonnee_point,duo_point,nature_duo_point,choix_duo_point):
+    enonce.append("\\begin{center}")
+    enonce.append("\\psset{unit=0.5cm}")
+    enonce.append('\\begin{pspicture*}(-5,-5)(5,5)')
+    for i in range(len(nom_point)-1):
+        enonce.append("\\pstGeonode(%s,%s){%s}" %(coordonnee_point[i][0],coordonnee_point[i][1],nom_point[i]))
+    for i in range(len(duo_point)):
+        ligne = "\\pstLineAB["
+        if nature_duo_point[i] == "une droite":
+            ligne += "nodesepA=-3, nodesepB=-3"
+        elif nature_duo_point[i] == "une demi-droite":
+                ligne += "nodesepB=-3"
+        if i == choix_duo_point:
+                ligne += ",linecolor=red]"
+        else:
+                ligne += "]"
+        ligne +="{%s}{%s}" %(duo_point[i][0],duo_point[i][1])
+        enonce.append(ligne)
+    enonce.append("\\pstInterLL{%s}{%s}{%s}{%s}{%s}" %(nom_point[0],nom_point[2],nom_point[1],nom_point[3],nom_point[4]))
+    enonce.append('\\end{pspicture*}')
+    enonce.append("\\end{center}")
 
-
-def nom_points(n):
-    """
-    choisit n points parmi A, B, C, ..., Z
-    @param n: nombre de points à choisir
-    @type n: integer
-    """
-
-    points = [chr(i + 65) for i in range(26)]
-    liste = []
-    for i in range(n):
-        liste.append(points.pop(random.randrange(len(points))))
-    return liste
-
-def coord_points(lpoints):
-    """Définit les ordonnées de trois points nommés dont les noms sont dans lpoints"""
-    ordonnees = [random.randrange(5, 16)/10.for i in range(3)]
-    while abs(2*ordonnees[1]-ordonnees[0]-ordonnees[2])<.5:
-        ordonnees = [random.randrange(5, 16)/10.for i in range(3)]
-    random.shuffle(ordonnees)
-    for i in range(3):
-        ordonnees.insert(2*i+1,  lpoints[i])
-    return tuple(ordonnees)
-
-def symboles(ligne):
-    """
-    Retourne les couples (), [] ou [) correspondant au type de ligne
-    @param ligne: droite, demi-droite ou segment
-    @type ligne: string
-    """
-
-    if ligne == 'une droite':
-        retour = ['(', ')']
-    elif ligne == 'une demi-droite':
-        retour = ['[', ')']
-    else:
-        retour = ['[', ']']
-    return retour
-
-
-def prepare_tuple(lpoints, ligne):
-    """
-    Prepare deux tuples pour permettre l'affichage de la question et
-    de la solution
-    @param lpoints: les points de la figure
-    @type lpoints: liste de lettres
-    @param ligne: droite, demi-droite ou segment
-    @type ligne: string
-    """
-
-    (retour_exo, retour_sol) = ([], [])
-
-    #choix des deux points permettant de tracer la ligne :
-    templist = [i for i in range(len(lpoints))]
-    deuxpoints = []
-    for i in range(2):
-        deuxpoints.append(lpoints[templist.pop(random.randrange(len(templist)))])
-
-    #choix des symbole correspondant à la ligne :
-    lsymboles = symboles(ligne)
-    retour_sol.append(lsymboles[0])
-    retour_sol.extend(deuxpoints)
-    retour_sol.append(lsymboles[1])
-    retour_sol.append(ligne)
-
-    #choix des trous pour l'exercice :
-    retour_exo = ['\\ldots', '\\ldots', '\\ldots', '\\ldots', '$\\ldots$']
-    return (tuple(retour_exo), tuple(retour_sol))
-
-
-def tex_figure(liste, lpoints, points_coord, nodesep=0):
-    """
-    Écrit dans un fichier tex la construction de 3 points et éventuellement
-    une droite, une demi-droite ou un segment.
-    @param liste: liste d'exos ou corrigés
-    @type liste: liste
-    @param lpoints: liste de 3 points
-    @type lpoints: liste de 3 strings
-    @param nodesep: liste des dépassements pour pstricks
-    @type nodesep: liste de 2 strings
-    """
-    liste.append('\\begin{pspicture*}(-0.5,0.2)(4.5,2.2)')
-    liste.append('\\psset{PointSymbol=x}')
-    liste.append('\\pstGeonode[PosAngle=90](0.5,%s){%s}(2,%s){%s}(3.5,%s){%s}' %
-               points_coord)
-    if nodesep:
-        liste.append('\\pstLineAB[nodesepA=%s, nodesepB=%s]{%s}{%s}' %
-                   tuple(nodesep))
-    liste.append('\\end{pspicture*}')
-
-
-def DroiteDemidroiteSegment(parametre):
-    question = u"Compléter :"
+#------------------construction-----------------------------------------
+def Nature(parametre):
+    ## ---Initialisation---
+    question = u"Donner la nature de l'objet rouge :"
     exo = []
     cor = []
+    ## ---Calcul des paramètres---
+    nom_point = choix_points(5)
+    coordonnee_point = coordonnees_points()
+    (duo_point,nom_duo_point,nature_duo_point) = carateristique_duo_point(nom_point[0:4])
+    choix_duo_point = random.randrange(len(duo_point))
+    ## ---Redaction---
+    tex_figure(exo,nom_point,coordonnee_point,duo_point,nature_duo_point,choix_duo_point)
+    tex_figure(cor,nom_point,coordonnee_point,duo_point,nature_duo_point,choix_duo_point)
+    cor.append("\\begin{center}")
+    cor.append(u"L'objet rouge est \\fbox{%s}" % nature_duo_point[choix_duo_point])
+    cor.append("\\end{center}")
+    return (exo, cor, question)
 
-    lignes = ['une droite', 'une demi-droite', 'un segment']
-    ligne = lignes[random.randrange(3)]
-    nom = nom_points(3)
-    coordonnee = coord_points(nom)
-    (exer, solution) = prepare_tuple(nom, ligne)
-    lnodesep = nodesep(ligne)
-    lnodesep.extend(solution[1:3])
+def Nommer(parametre):
+    ## ---Initialisation---
+    question = u"Donner l'écriture de l'objet rouge :"
+    exo = []
+    cor = []
+    ## ---Calcul des paramètres---
+    nom_point = choix_points(5)
+    coordonnee_point = coordonnees_points()
+    (duo_point,nom_duo_point,nature_duo_point) = carateristique_duo_point(nom_point[0:4])
+    choix_duo_point = random.randrange(len(duo_point))
+    ## ---Redaction---
+    tex_figure(exo,nom_point,coordonnee_point,duo_point,nature_duo_point,choix_duo_point)
+    tex_figure(cor,nom_point,coordonnee_point,duo_point,nature_duo_point,choix_duo_point)
+    cor.append("\\begin{center}")
+    cor.append(u"L'objet rouge s'écrit \\fbox{%s}" % nom_duo_point[choix_duo_point])
+    cor.append("\\end{center}")
+    return (exo, cor, question)
 
-    tex_figure(exo, nom, coordonnee, lnodesep)
-    tex_figure(cor, nom, coordonnee, lnodesep)
-    exo.append('\\begin{center}')
-    cor.append('\\begin{center}')
-    exo.append('$%s %s%s %s$ est %s' % exer)
-    cor.append('$%s %s%s %s$ est %s' % solution)
-    exo.append('\\end{center}')
-    cor.append('\\end{center}')
+def Appartient(parametre):
+    ## ---Initialisation---
+    question = u"Compléter en utilisant $\\in$ ou $\\notin$ :"
+    exo = []
+    cor = []
+    ## ---Calcul des paramètres---
+    nom_point = choix_points(5)
+    coordonnee_point = coordonnees_points()
+    #liste des combinaisons de 2 points
+    duo_point = liste_combinaison(nom_point[0:4],2)
+    #nature et noms des combinaisons de 2 points
+    nom_duo_point = []
+    nature_duo_point = []
+    for i in range(len(duo_point)):
+        nom_duo_point.append("(%s%s)" %(duo_point[i][0],duo_point[i][1]))
+        nature_duo_point.append("une droite")
+    choix_duo_point = len(duo_point)+1
+    #
+    diagonale = [[nom_point[0],nom_point[2]],[nom_point[1],nom_point[3]]]
+    choix_diagonale = random.randrange(2)
+    choix_type = random.randrange(5)
+    ## ---Redaction---
+    tex_figure(exo,nom_point,coordonnee_point,duo_point,nature_duo_point,choix_duo_point)
+    tex_figure(cor,nom_point,coordonnee_point,duo_point,nature_duo_point,choix_duo_point)
+    if choix_type== 0:
+         exo.append("$$ %s \\ldots (%s%s) $$" %(diagonale[choix_diagonale][0],nom_point[4],diagonale[choix_diagonale][1]))
+         cor.append("$$ %s \\boxed{\\in} (%s%s) $$" %(diagonale[choix_diagonale][0],nom_point[4],diagonale[choix_diagonale][1]))
+    elif choix_type == 1:
+         exo.append("$$ %s \\ldots [%s%s) $$" %(diagonale[choix_diagonale][0],nom_point[4],diagonale[choix_diagonale][1]))
+         cor.append("$$ %s \\boxed{\\notin} [%s%s) $$" %(diagonale[choix_diagonale][0],nom_point[4],diagonale[choix_diagonale][1]))
+    elif choix_type == 2:
+         exo.append("$$ %s \\ldots [%s%s) $$" %(diagonale[choix_diagonale][0],diagonale[choix_diagonale][1],nom_point[4]))
+         cor.append("$$ %s \\boxed{\\in} [%s%s) $$" %(diagonale[choix_diagonale][0],diagonale[choix_diagonale][1],nom_point[4]))
+    elif choix_type == 3:
+         exo.append("$$ %s \\ldots [%s%s] $$" %(diagonale[choix_diagonale][0],nom_point[4],diagonale[choix_diagonale][1]))
+         cor.append("$$ %s \\boxed{\\notin} [%s%s] $$" %(diagonale[choix_diagonale][0],nom_point[4],diagonale[choix_diagonale][1]))
+    else:
+         exo.append("$$ %s \\ldots [%s%s] $$" %(nom_point[4],diagonale[choix_diagonale][0],diagonale[choix_diagonale][1]))
+         cor.append("$$ %s \\boxed{\\in} [%s%s] $$" %(nom_point[4],diagonale[choix_diagonale][0],diagonale[choix_diagonale][1]))
     return (exo, cor, question)

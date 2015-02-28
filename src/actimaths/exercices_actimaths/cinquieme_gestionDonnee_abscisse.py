@@ -89,50 +89,66 @@ def tex_distance(abscisse_min,abscisse_max,pas,ecartGraduation):
     points=(noms_sommets(4))
     abscisse=abscissePoint(4,abscisse_min,abscisse_max,pas)
     tex_axe_gradue(exo,abscisse,points,abscisse_min,abscisse_max,pas,ecartGraduation)
-    exo.append(u"\\newline Entre les points %s et %s" % (points[0],points[1]))
+    exo.append("\\begin{center}")
+    exo.append(u"entre les points %s et %s" % (points[0],points[1]))
+    exo.append("\\end{center}")
     tex_axe_gradue(cor,abscisse,points,abscisse_min,abscisse_max,pas,ecartGraduation)
+    cor.append("\\begin{center}")
     cor.append("Les abscisses de %s et %s sont %s et %s" % (points[0],points[1],abscisse[0],abscisse[1]))
+    cor.append("\\end{center}")
     min_abscisse=min(abscisse[0],abscisse[1])
     max_abscisse=max(abscisse[0],abscisse[1])
     solution = abs(abscisse[1]-abscisse[0])
     if min_abscisse == 0:
         cor.append("$$ d = %s $$" % (max_abscisse))
     elif min_abscisse < 0:
-        cor.append("$$ d = %s - ( %s ) $$" % (max_abscisse,min_abscisse))
-        cor.append("$$ d = %s + %s = %s $$" % (max_abscisse,abs(min_abscisse),solution))
+        cor.append("\\begin{center}")
+        cor.append("$\\begin{aligned}")
+        cor.append("d & = %s - ( %s ) \\\\" % (max_abscisse,min_abscisse))
+        cor.append("d & = %s + %s \\\\" % (max_abscisse,abs(min_abscisse)))
+        cor.append("d & = %s \\\\" %solution)
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
     else:
-        cor.append("$$ d = %s - %s = %s $$" % (max_abscisse,min_abscisse,solution))
-    cor.append(u"La distance de %s à %s est %s" % (points[0],points[1],solution))
+        cor.append("\\begin{center}")
+        cor.append("$\\begin{aligned}")
+        cor.append("d & = %s - %s \\\\" % (max_abscisse,min_abscisse))
+        cor.append("d & = %s \\\\" %solution)
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
+    cor.append("\\begin{center}")
+    cor.append(u"La distance de %s à %s est \\fbox{%s}" % (points[0],points[1],solution))
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def LireEntier(parametre):
     pas = 1
-    abscisse_min=random.randrange(-10,-5)
-    abscisse_max=random.randrange(5,11)
+    abscisse_min=random.randrange(parametre[0],-4)
+    abscisse_max=random.randrange(5,parametre[1]+1)
     ecartGraduation = random.randrange(2,5)
     (exo, cor, question) = tex_lire(abscisse_min,abscisse_max,pas,ecartGraduation)
     return (exo, cor, question)
 
 def LireDecimal(parametre):
     pas = randrange_float(0.1, 0.2, 0.1)
-    abscisse_min=randrange_float(-3,-1,1)
-    abscisse_max=randrange_float(1,3,pas)
+    abscisse_min=randrange_float(parametre[0],-1,1)
+    abscisse_max=randrange_float(1,parametre[1],pas)
     ecartGraduation = 1
     (exo, cor, question) = tex_lire(abscisse_min,abscisse_max,pas,ecartGraduation)
     return (exo, cor, question)
 
 def DistanceEntier(parametre):
     pas = 1
-    abscisse_min=random.randrange(-10,-5)
-    abscisse_max=random.randrange(5,11)
+    abscisse_min=random.randrange(parametre[0],-4)
+    abscisse_max=random.randrange(5,parametre[1]+1)
     ecartGraduation = random.randrange(2,5)
     (exo, cor, question) = tex_distance(abscisse_min,abscisse_max,pas,ecartGraduation)
     return (exo, cor, question)
 
 def DistanceDecimal(parametre):
     pas = randrange_float(0.1, 0.2, 0.1)
-    abscisse_min=randrange_float(-3,-1,1)
-    abscisse_max=randrange_float(1,3,pas)
+    abscisse_min=randrange_float(parametre[0],-1,1)
+    abscisse_max=randrange_float(1,parametre[1],pas)
     ecartGraduation = 1
     (exo, cor, question) = tex_distance(abscisse_min,abscisse_max,pas,ecartGraduation)
     return (exo, cor, question)

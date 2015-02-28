@@ -34,21 +34,29 @@ def parametre():
 
 def tex_pourcentage(exo,cor):
     (objet, part, total, pourcentage)= parametre()
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
     exo.append("Je prends $ %s $ %s parmi $ %s $. \\newline" % (part, objet, total))
     cor.append("Je prends $ %s $ %s parmi $ %s $. \\newline" % (part, objet, total))
-    exo.append(u"J\'ai donc pris $ \\ldots $ des %s" % objet)
-    cor.append(u"J\'ai donc pris $ \\boxed{%s} $ des %s" % (pourcentage, objet))
+    exo.append(u"J\'ai donc pris $ \\ldots \\%% $ des %s" % objet)
+    cor.append(u"J\'ai donc pris $ \\boxed{%s \\%%} $ des %s" % (pourcentage, objet))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
 
 def tex_partie(exo,cor):
     (objet, part, total, pourcentage)= parametre()
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
     if random.randrange(0,2):
         exo.append("Je prends $ \\ldots $ %s parmi $ %s $. \\newline" % (objet, total))
         cor.append("Je prends $ \\boxed{%s} $ %s parmi $ %s $ \\newline" % (part, objet, total))   
     else:
         exo.append("Je prends $ %s $ %s parmi $ \\ldots $. \\newline" % (part, objet))
         cor.append("Je prends $ %s $ %s parmi $ \\boxed{%s} $ \\newline" % (part, objet, total))    
-    exo.append(u"J\'ai donc pris $ %s $ des %s." % (pourcentage, objet))
-    cor.append(u"J\'ai donc pris $ %s $ des %s." % (pourcentage, objet))
+    exo.append(u"J\'ai donc pris $ %s  \\%% $ des %s." % (pourcentage, objet))
+    cor.append(u"J\'ai donc pris $ %s  \\%% $ des %s." % (pourcentage, objet))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
 
 def CalculPartie(parametre):
     question = u"Compléter :"

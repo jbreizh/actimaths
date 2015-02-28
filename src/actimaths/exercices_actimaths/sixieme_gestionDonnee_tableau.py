@@ -22,17 +22,32 @@
 #
 
 import random
-
-def tex_tableau(texte, nombre):
-    texte.append("\\begin{center}")
-    texte.append("\\begin{tabular}{|c|c|c|c|}")
-    texte.append("\\hline")
-    texte.append("%s & %s & %s & %s \\\\" % (nombre[0][0], nombre[1][0], nombre[2][0], nombre[3][0]))
-    texte.append("\\hline")
-    texte.append("%s & %s & %s & %s \\\\" % (nombre[0][1], nombre[1][1], nombre[2][1], nombre[3][1]))
-    texte.append("\\hline")   
-    texte.append("\\end{tabular}")
-    texte.append("\\end{center}")
+#---------------methode--------------------------------
+def tex_tableau(tex, contenu):
+    nombreColonne = len(contenu)
+    if nombreColonne != 0:
+        nombreLigne = len(contenu[0])
+        # entete du tableau
+        tex.append("\\begin{center}")
+        ligne = "\\begin{tabular}{|"
+        for i in range(len(contenu)):
+            ligne += "c|"
+        ligne += "}"
+        tex.append(ligne)
+        # corps du tableau
+        for i in range(nombreLigne):
+            tex.append("\\hline")
+            ligne = ""
+            for j in range(nombreColonne):
+                ligne += "%s" % contenu[j][i]
+                if j != nombreColonne - 1:
+                   ligne += "&"
+            ligne += "\\\\"
+            tex.append(ligne)
+        tex.append("\\hline")
+        # fin du tableau
+        tex.append("\\end{tabular}")
+        tex.append("\\end{center}")
 
 def tex_calcul_coefficient(exo,cor):
     nombre = random.sample(range(1,11), 4)
@@ -51,7 +66,7 @@ def tex_calcul_coefficient(exo,cor):
     tex_tableau(cor, nombreCor)
     cor.append("$$ %s \\times \\ldots = %s $$" % (nombreExo[colonneCor][0], nombreExo[colonneCor][1]))    
     cor.append("$$ %s \\times \\textbf{%s} = %s $$" % (nombreExo[colonneCor][0], coefficient, nombreExo[colonneCor][1]))
-    cor.append("Le coefficient est \\textbf{%s}" % coefficient)
+    cor.append("Le coefficient est \\fbox{%s}" % coefficient)
 
 def tex_complete_tableau(exo,cor):
     nombre = random.sample(range(1,11), 4)
@@ -64,10 +79,10 @@ def tex_complete_tableau(exo,cor):
         if i == colonneExo:
             if ligneExo == 0:
                  nombreExo.append(["\\ldots",nombre[i]*coefficient])
-                 nombreCor.append(["\\textbf{%s}" % nombre[i],nombre[i]*coefficient])
+                 nombreCor.append(["%s" % nombre[i],nombre[i]*coefficient])
             else:
                 nombreExo.append([nombre[i],"\\ldots"])
-                nombreCor.append([nombre[i],"\\textbf{%s}" % (nombre[i]*coefficient)])
+                nombreCor.append([nombre[i],"%s" % (nombre[i]*coefficient)])
         else:
             nombreExo.append([nombre[i],nombre[i]*coefficient])
             nombreCor.append([nombre[i],nombre[i]*coefficient])
@@ -76,9 +91,10 @@ def tex_complete_tableau(exo,cor):
     tex_tableau(cor, nombreCor)
     cor.append("Le coefficient est %s donc" % coefficient)
     cor.append("$$ %s \\times %s = %s $$" % (nombreExo[colonneExo][0], coefficient, nombreExo[colonneExo][1]))    
-    cor.append("$$ %s \\times %s = %s $$" % (nombreCor[colonneExo][0], coefficient, nombreCor[colonneExo][1]))
-    cor.append("Le nombre est %s" % nombreCor[colonneExo][ligneExo])
+    cor.append("$$ \\textbf{%s} \\times %s = %s $$" % (nombreCor[colonneExo][0], coefficient, nombreCor[colonneExo][1]))
+    cor.append("Le nombre est \\fbox{%s}" % nombreCor[colonneExo][ligneExo])
 
+#---------------Construction--------------------------------
 def CalculCoefficient(parametre):
     question = u"Calculer le coefficient de proportionnalité :"
     exo = []

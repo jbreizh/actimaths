@@ -22,6 +22,8 @@
 #
 
 from random import randrange
+from operator import itemgetter
+
 def choix_points(n):
     """
     choisit n points parmi A, B, C, ..., Z
@@ -170,7 +172,7 @@ def trouve_couples_pythagore(max):
                 if z > max:
                     break
                 ls.append(tuple(sorted([x,y,z])))
-    ls.sort(key = operator.itemgetter(2))
+    ls.sort(key = itemgetter(2))
     cpt = 1
     while cpt < len(ls):
         if ls[cpt]==ls[cpt-1]:

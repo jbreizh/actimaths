@@ -1,12 +1,36 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # -*- coding: utf-8 -*-
-from os.path import join
-from actimaths.system import creation, lire_liste_exercice
-from subprocess import call
+#
+# Actimaths
+# Un programme en Python qui permet de créer des presentation de
+# mathématiques niveau collège ainsi que leur corrigé en LaTeX.
+# Copyright (C) 2013 -- Jean-Baptiste Le Coz (jb.lecoz@gmail.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+#
 
+## Import globaux
+from os.path import join, dirname
+from subprocess import call
+## Import locaux
+from actimaths.values import DATADIR
+from actimaths.system import lire_liste_exercice
+from actimaths.exercices import creation
 
 environnement = 'pyromaths'
-fichier_liste_exercice = join(dirname(__file__), "exercices_%s" % environnement, 'onglets' , 'niveau.xml')
+fichier_liste_exercice = join(DATADIR, 'onglets', environnement,'niveau.xml')
 liste_exercice = lire_liste_exercice(fichier_liste_exercice)
 parametres = {'sujet_presentation': True,
               'corrige_presentation': False,
@@ -22,11 +46,12 @@ parametres = {'sujet_presentation': True,
               'chemin_fichier': '/tmp/',
               'environnement': environnement,
               'affichage': 'niveau',
-              'chemin_csv': '',
               'modele_presentation': 'Vignette',
-              'modele_page': ''}
+              'modele_page': '',
+              'creer_pdf': True,
+              'effacer_tex': True,
+              'afficher_pdf' : False}
 
-log = open('/tmp/preview-actimaths.log' , 'w')
 for onglet in range(len(liste_exercice)):
     for categorie in range(len(liste_exercice[onglet][1])):
         for exercice in range(len(liste_exercice[onglet][1][categorie][1])):
@@ -35,11 +60,9 @@ for onglet in range(len(liste_exercice)):
             for parametre in range(len(liste_exercice[onglet][1][categorie][1][exercice][1])):
                 valeur_parametre.append(int(liste_exercice[onglet][1][categorie][1][exercice][1][parametre][3]))
             liste = ((commande, valeur_parametre),)
-            print liste
-            parametres['liste_exos'] = liste
+            parametres['liste_exercice'] = liste
             creation(parametres)
             if environnement == 'pyromaths':
-                call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf", "-resize", "25%", "-crop", "710x560+0+0", "-trim", "/tmp/%s.png" % commande], stdout=log)
+                call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf", "-alpha", "Opaque", "-resize", "25%", "-crop", "710x560+0+0", "-fuzz" , "1%" ,"-trim", "-resize", "200x70!", "/tmp/%s.jpg" % commande])
             elif environnement == 'actimaths':
-                call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf[1]", "-resize", "25%", "-crop", "182x210+0+40", "-trim", "/tmp/%s.png" % commande], stdout=log)
-log.close()
+                call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf[1]", "-alpha", "Opaque", "-resize", "25%", "-crop", "182x210+0+40", "-fuzz" , "1%" ,"-trim", "-resize", "200x70!", "/tmp/%s.jpg" % commande])

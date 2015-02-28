@@ -45,7 +45,7 @@ def fractions_egales(parametre):
         solution = [n * c, d * c, n, d]
     trou = random.randrange(4)
     enonce[trou] = "\\ldots"
-    solution[trou] = "\\mathbf{%s}" % solution[trou]
+    solution[trou] = "\\boxed{%s}" % solution[trou]
     if cas:
         solution.insert(2, c)
         solution.insert(1, c)

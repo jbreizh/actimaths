@@ -23,17 +23,20 @@
 
 import random
 
-def valeurs_diviseurs():
+def valeurs_diviseurs(nombre_min,nombre_max):
     diviseurs = [2, 3, 5, 9, 10]
-    liste = diviseurs.pop(random.randrange(len(diviseurs))) * random.randrange(11, 100)
-    return liste
+    while True:
+        choix_diviseur = random.randrange(len(diviseurs))
+        nombre = diviseurs[choix_diviseur] * random.randrange(nombre_min/diviseurs[choix_diviseur],nombre_max/diviseurs[choix_diviseur]+1)
+        if nombre!=0 and nombre>=nombre_min and nombre<=nombre_max:
+            break
+    return nombre
 
-
-def liste_diviseurs(l):
+def liste_diviseurs(nombre):
     diviseurs = (2, 3, 5, 9, 10)
-    reponse = [l]
+    reponse = [nombre]
     for j in range(len(diviseurs)):
-        if l % diviseurs[j]:  # n'est pas divisible
+        if nombre % diviseurs[j]:  # n'est pas divisible
             reponse.append("$\\Square$")
         else:
             reponse.append("$\\CheckedBox$")
@@ -44,8 +47,8 @@ def Divisible(parametre):
     question = u"Choisir les bonnes réponses :"
     exo = [ ]
     cor = [ ]
-    l = valeurs_diviseurs()
-    reponse = liste_diviseurs(l)
-    exo.append("%s est divisible : \\newline $\\square$ par 2 \\newline $\\square$ par 3 \\newline $\\square$ par 5 \\newline $\\square$ par 9 \\newline $\\square$ par 10 \\newline" % l)
+    nombre = valeurs_diviseurs(parametre[0],parametre[1])
+    reponse = liste_diviseurs(nombre)
+    exo.append("%s est divisible : \\newline $\\square$ par 2 \\newline $\\square$ par 3 \\newline $\\square$ par 5 \\newline $\\square$ par 9 \\newline $\\square$ par 10 \\newline" % nombre)
     cor.append("%s est divisible : \\newline %s par 2 \\newline %s par 3 \\newline %s par 5 \\newline %s par 9 \\newline %s par 10 \\newline" % tuple(reponse))
     return (exo, cor,question)

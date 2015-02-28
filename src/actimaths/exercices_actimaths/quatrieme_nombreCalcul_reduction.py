@@ -24,11 +24,7 @@
 from outils.Priorites3 import texify, priorites
 import random
 
-#----------------------------------------------------------------------
-# Simple
-#----------------------------------------------------------------------
-
-def valeurs_reduire(op):
+def valeurs_reduire(op,nbre_min,nbre_max):
     """Travail sur les bases du calcul littéral en quatrième"""
     var = "abcdfghkmnpqrstuvwxyz"
     var = var[random.randrange(len(var))]
@@ -45,51 +41,13 @@ def valeurs_reduire(op):
         deg2 = deg2.pop(random.randrange(len(deg2)))
     a1, a2 = 0, 0
     while not a1 or not a2:
-        a1 = random.randrange(-10, 11)
-        a2 = random.randrange(-10, 11)
+        a1 = random.randrange(nbre_min,nbre_max+1)
+        a2 = random.randrange(nbre_min,nbre_max+1)
     p1 = "Polynome(\"%s%s^%s\")" % (a1, var, deg1)
     p2 = "Polynome(\"%s%s^%s\")" % (a2, var, deg2)
     return p1 + op + p2
 
-
-def somme(parametre):
-    question = u"Réduire :"
-    exo = [ ]
-    cor = [ ]
-    a = valeurs_reduire('+')
-    solve = [a]
-    exo.append("$$A = " + texify(solve)[0] + "$$")
-    cor.append("$$A = " + texify(solve)[0] + "$$")
-    solve = priorites(a)
-    solve.insert(0, a)
-    solve = texify(solve)
-    if len(solve)>1:
-        for e in solve[1:]:
-            cor.append("$$A = "  + e + "$$")
-    return (exo, cor,question)
-
-def produit(parametre):
-    question = u"Réduire :"
-    exo = [ ]
-    cor = [ ]
-    a = valeurs_reduire('*')
-    solve = [a]
-    exo.append("$$A = " + texify(solve)[0] + "$$")
-    cor.append("$$A = " + texify(solve)[0] + "$$")
-    solve = priorites(a)
-    solve.insert(0, a)
-    solve = texify(solve)
-    if len(solve)>1:
-        for e in solve[1:]:
-            cor.append("$$A = "  + e + "$$")
-    return (exo, cor, question)
-
-#----------------------------------------------------------------------
-# Expression
-#----------------------------------------------------------------------
-
-
-def valeurs_reduire_somme():
+def valeurs_reduire_somme(nbre_min,nbre_max):
     """Réduire une somme de six monômes de degrés 0, 1 et 2"""
     import random
     var = "abcdfghkmnpqrstuvwxyz"
@@ -99,7 +57,7 @@ def valeurs_reduire_somme():
         a = 0
         degre = i//2
         while not a:
-            a = random.randrange(-10, 11)
+            a = random.randrange(nbre_min,nbre_max+1)
         l.append("Polynome(\"%s%s^%s\")" % (a, var, degre))
     random.shuffle(l)
     t = l[0]
@@ -107,7 +65,7 @@ def valeurs_reduire_somme():
         t += "+-"[random.randrange(2)] + l[i]
     return t
 
-def valeurs_reduire_prod():
+def valeurs_reduire_prod(nbre_min,nbre_max):
     """Réduire une expression de six monômes de degrés 0, 1 et 2"""
     import random
     var = "abcdfghkmnpqrstuvwxyz"
@@ -117,7 +75,7 @@ def valeurs_reduire_prod():
         a = 0
         degre = i//2
         while not a:
-            a = random.randrange(-10, 11)
+            a = random.randrange(nbre_min,nbre_max+1)
         l.append("Polynome(\"%s%s^%s\")" % (a, var, degre))
     random.shuffle(l)
     t = l[0]
@@ -125,7 +83,7 @@ def valeurs_reduire_prod():
         t += "*" + l[i]
     return t
 
-def valeurs_reduire_sommeprod():
+def valeurs_reduire_sommeprod(nbre_min,nbre_max):
     """Réduire une expression de six monômes de degrés 0, 1 et 2"""
     import random
     var = "abcdfghkmnpqrstuvwxyz"
@@ -135,56 +93,55 @@ def valeurs_reduire_sommeprod():
         a = 0
         degre = i//2
         while not a:
-            a = random.randrange(-10, 11)
+            a = random.randrange(nbre_min,nbre_max+1)
         l.append("Polynome(\"%s%s^%s\")" % (a, var, degre))
     random.shuffle(l)
     t = l[0]+ "+-"[random.randrange(2)]+ l[1] + "*" + l[2]
     return t
 
-def expressionSomme(parametre):
+def construction(a):
     question = u"Réduire :"
     exo = [ ]
     cor = [ ]
-    a = valeurs_reduire_somme()
     solve = [a]
-    exo.append("$$A = " + texify(solve)[0] + "$$")
-    cor.append("$$A = " + texify(solve)[0] + "$$")
+    exo.append("$$A = %s$$" %texify(solve)[0])
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" %texify(solve)[0])
     solve = priorites(a)
     solve.insert(0, a)
     solve = texify(solve)
     if len(solve)>1:
         for e in solve[1:]:
-            cor.append("$$A = "  + e + "$$")
+            if e == solve[-1]:
+                cor.append("A & = \\boxed{%s} \\\\" %e)
+            else:
+                cor.append("A & = %s \\\\" %e)
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
+    return (exo, cor,question)
+
+def somme(parametre):
+    a = valeurs_reduire('+',parametre[0],parametre[1])
+    (exo, cor,question) = construction(a)
+    return (exo, cor,question)
+
+def produit(parametre):
+    a = valeurs_reduire('*',parametre[0],parametre[1])
+    (exo, cor,question) = construction(a)
+    return (exo, cor, question)
+
+def expressionSomme(parametre):
+    a = valeurs_reduire_somme(parametre[0],parametre[1])
+    (exo, cor,question) = construction(a)
     return (exo, cor,question)
 
 def expressionProduit(parametre):
-    question = u"Réduire :"
-    exo = [ ]
-    cor = [ ]
-    a = valeurs_reduire_prod()
-    solve = [a]
-    exo.append("$$A = " + texify(solve)[0] + "$$")
-    cor.append("$$A = " + texify(solve)[0] + "$$")
-    solve = priorites(a)
-    solve.insert(0, a)
-    solve = texify(solve)
-    if len(solve)>1:
-        for e in solve[1:]:
-            cor.append("$$A = "  + e + "$$")
+    a = valeurs_reduire_prod(parametre[0],parametre[1])
+    (exo, cor,question) = construction(a)
     return (exo, cor, question)
 
 def expressionSommeProduit(parametre):
-    question = u"Développer et réduire :"
-    exo = [ ]
-    cor = [ ]
-    a = valeurs_reduire_sommeprod()
-    solve = [a]
-    exo.append("$$A = " + texify(solve)[0] + "$$")
-    cor.append("$$A = " + texify(solve)[0] + "$$")
-    solve = priorites(a)
-    solve.insert(0, a)
-    solve = texify(solve)
-    if len(solve)>1:
-        for e in solve[1:]:
-            cor.append("$$A = "  + e + "$$")
+    a = valeurs_reduire_sommeprod(parametre[0],parametre[1])
+    (exo, cor,question) = construction(a)
     return (exo, cor, question)

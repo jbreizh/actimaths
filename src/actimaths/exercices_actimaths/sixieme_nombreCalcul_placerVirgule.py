@@ -24,27 +24,12 @@
 import random
 from outils import Affichage, Arithmetique
 
-#===============================================================================
-# Placer une virgule
-#===============================================================================
-
-valeurs = ["milliers", "centaines", "dizaines", u"unités", u"dixièmes", u"centièmes", u"millièmes"]
-
-def valeurs_decimaux(nombre_min, nombre_max):
-    rang_max = random.randint(nombre_min, nombre_max)
-    nb = 0
-    chiffres = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    for i in range(rang_max):
-        nb = nb + chiffres.pop(random.randrange(len(chiffres))) * 10 ** i
-    return nb
+#valeurs = ["milliers", "centaines", "dizaines", u"unités", u"dixièmes", u"centièmes", u"millièmes"]
+rang = [u"cent-millionièmes", u"dix-millionièmes", u"millionièmes", u"cent-millièmes", u"dix-millièmes", u"millièmes", u"centièmes", u"dixièmes",
+        u"unités",
+        u"dizaines", u"centaines", u"milliers", u"dizaines de milliers", u"centaines de milliers", u"millions", u"dizaines de millions", u"centaines de millions"]
 
 def ecrit_nombre_decimal(dec, index):
-    """
-    Renvoie une chaine de caractère représentant le nombre dec avec la virgule à la place index. Ajoute les zéros nécessaires.
-    @param dec: décomposition d'un nombre entier
-    @param index: place de la virgule dans la liste dec
-    """
-
     if index < 1:
         dec.insert(0, '0')
         dec.insert(1, '.')
@@ -60,16 +45,32 @@ def ecrit_nombre_decimal(dec, index):
         strnb = strnb + dec[i]
     return strnb
 
+def valeurs_decimaux():
+    chiffres = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    longueur_nombre = random.randrange(1,4)
+    nombre = 0
+    for i in range(longueur_nombre):
+        nombre = nombre + chiffres.pop(random.randrange(len(chiffres))) * 10 ** i
+    nombre_list = [str(nombre)[i] for i in range(len(str(nombre)))]
+    return (nombre, longueur_nombre, nombre_list)
+
 def PlaceVirgule(parametre):
-    nombre = valeurs_decimaux(parametre[0], parametre[1])
-    question = u"Déplacer la virgule de %s pour que:" % nombre
+    # Parametres
+    while True:
+        (nombre, longueur_nombre, nombre_list) = valeurs_decimaux()
+        index_chiffre = random.randrange(longueur_nombre)
+        index_rang = random.randrange(parametre[0]+8, parametre[1]+8)
+        decallage = index_chiffre+index_rang-7
+        if longueur_nombre - decallage != 0:
+            break
+    # initialisa
+    question = u"Modifie %s pour que:" % nombre
     exo = []
     cor = []
-    longueur_nombre = len(str(nombre))
-    nombre_list = [str(nombre)[i] for i in range(longueur_nombre)]
-    index_nombre_list = random.randrange(longueur_nombre)
-    index_valeurs = random.randrange(len(valeurs))
-    exo.append(u"%s soit le chiffre des %s" % (nombre_list[index_nombre_list], valeurs[index_valeurs]))
-    resultat = ecrit_nombre_decimal(nombre_list, (index_nombre_list + 4) - index_valeurs)
-    cor.append(Affichage.decimaux(resultat, 0) + '')
+    exo.append("\\begin{center}")
+    exo.append(u"%s soit le chiffre des %s" % (nombre_list[index_chiffre], rang[index_rang]))
+    exo.append("\\end{center}")
+    cor.append(u"\\textbf{%s est le chiffre des %s de :}" % (nombre_list[index_chiffre], rang[index_rang]))
+    resultat = ecrit_nombre_decimal(nombre_list, decallage)
+    cor.append("$$%s$$" %Affichage.decimaux(resultat, 0))
     return (exo, cor, question)

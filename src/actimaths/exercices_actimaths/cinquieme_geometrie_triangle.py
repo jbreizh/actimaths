@@ -121,7 +121,7 @@ def tex_triangle(tex, sommet, mesure, tex_mesure):
            tex.append("\\pstRightAngle{%s}{%s}{%s}" % ( sommet[(i+1)%3], sommet[i], sommet[(i-1)%3]))
         elif mesure[0] == mesure[1] and i < 2:
            tex.append("\\pstMarkAngle{%s}{%s}{%s}{}" % ( sommet[(i+1)%3], sommet[i], sommet[(i-1)%3]))
-           tex.append("\\uput{0.75}[%s]{%s}(%s,%s){\\psline(0,0)(0.5,0)}" % ((angle[2*i]+angle[2*i+1])/2, (angle[2*i]+angle[2*i+1])/2, coordonnee[2*i], coordonnee[2*i+1]))
+           tex.append("\\uput{0.25}[%s]{%s}(%s,%s){\\psline(0,0)(0.5,0)}" % ((angle[2*i]+angle[2*i+1])/2, (angle[2*i]+angle[2*i+1])/2, coordonnee[2*i], coordonnee[2*i+1]))
            if i == 0:
                tex.append("\\pstMarkAngle{%s}{%s}{%s}{$%s$}" % ( sommet[(i+1)%3], sommet[i], sommet[(i-1)%3], tex_mesure[i]))
         else:
@@ -296,10 +296,10 @@ def ConstruireQuelconque(parametre):
     ## Corrigé
     if somme_angle == 180:
         cor.append("$$ \\widehat{%s} + \\widehat{%s} + \\widehat{%s} = %s + %s + %s = %s^\\circ$$" % (sommet[0], sommet[1], sommet[2], tex_mesure[0], tex_mesure[1], tex_mesure[2], somme_angle))
-        cor.append("Un triangle %s%s%s est constructible." % (sommet[0], sommet[1], sommet[2]))
+        cor.append("Un triangle %s%s%s \\fbox{est constructible}." % (sommet[0], sommet[1], sommet[2]))
     else:
         cor.append("$$ \\widehat{%s} + \\widehat{%s} + \\widehat{%s} = %s + %s + %s = %s^\\circ \\neq 180^\\circ$$" % (sommet[0], sommet[1], sommet[2], tex_mesure[0], tex_mesure[1], tex_mesure[2], somme_angle))
-        cor.append("Un triangle %s%s%s n'est pas constructible." % (sommet[0], sommet[1], sommet[2]))
+        cor.append("Un triangle %s%s%s \\fbox{n'est pas constructible}." % (sommet[0], sommet[1], sommet[2]))
     return (exo, cor, question)
 
 def ConstruireQuelconqueSchema(parametre):
@@ -327,10 +327,10 @@ def ConstruireQuelconqueSchema(parametre):
     ## Corrigé
     if somme_angle == 180:
         cor.append("$$ \\widehat{%s} + \\widehat{%s} + \\widehat{%s} = %s + %s + %s = %s^\\circ$$" % (sommet[0], sommet[1], sommet[2], tex_mesure[0], tex_mesure[1], tex_mesure[2], somme_angle))
-        cor.append("Un triangle %s%s%s est constructible." % (sommet[0], sommet[1], sommet[2]))
+        cor.append("On \\fbox{peut} construire un triangle %s%s%s." % (sommet[0], sommet[1], sommet[2]))
     else:
         cor.append("$$ \\widehat{%s} + \\widehat{%s} + \\widehat{%s} = %s + %s + %s = %s^\\circ \\neq 180^\\circ$$" % (sommet[0], sommet[1], sommet[2], tex_mesure[0], tex_mesure[1], tex_mesure[2], somme_angle))
-        cor.append("Un triangle %s%s%s n'est pas constructible." % (sommet[0], sommet[1], sommet[2]))
+        cor.append("On \\fbox{ne peut pas} construire un triangle %s%s%s." % (sommet[0], sommet[1], sommet[2]))
     return (exo, cor, question)
 
 def InequaliteTriangulaire(parametre):
@@ -362,12 +362,12 @@ def InequaliteTriangulaire(parametre):
     cor.append("$$ %s = \\unit[%s]{%s} $$" % (nomCote[cote[2]],c,'cm'))
     if possible == 0:
         cor.append("$$ %s + %s < %s $$" % (nomCote[cote[0]],nomCote[cote[1]],nomCote[cote[2]]))
-        cor.append("%s%s%s n'est pas constructible" % (sommet[0], sommet[1], sommet[2]))
+        cor.append("%s%s%s \\fbox{n'est pas constructible}" % (sommet[0], sommet[1], sommet[2]))
     elif possible == 1:
         cor.append("$$ %s + %s = %s $$" % (nomCote[cote[0]],nomCote[cote[1]],nomCote[cote[2]]))
-        cor.append("%s%s%s n'est pas constructible \\newline"  % (sommet[0], sommet[1], sommet[2]))
+        cor.append("%s%s%s \\fbox{n'est pas constructible} \\newline"  % (sommet[0], sommet[1], sommet[2]))
         cor.append(u"Les points %s, %s et %s sont alignés" % (sommet[0],sommet[1],sommet[2]))
     else:
         cor.append("$$ %s + %s > %s $$" % (nomCote[cote[0]],nomCote[cote[1]],nomCote[cote[2]]))
-        cor.append("%s%s%s est constructible" % (sommet[0], sommet[1], sommet[2]))
+        cor.append("%s%s%s \\fbox{est constructible}" % (sommet[0], sommet[1], sommet[2]))
     return (exo, cor, question)

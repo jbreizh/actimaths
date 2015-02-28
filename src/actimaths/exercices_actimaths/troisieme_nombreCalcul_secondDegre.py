@@ -63,26 +63,36 @@ def tex_frac(a):  #renvoie l'ecriture au format tex de la fraction a
 # ------------------- AFFICHAGE -------------------
 
 def tex_equations(valeurs, variable, cor):  # renvoie un tuple contenant les deux binomes egaux a 0
-    cor.append('$$ %s=0 \\text{ ou } %s=0 $$' % (tex_binome(valeurs[0], variable), tex_binome(valeurs[1], variable)))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("%s & =0 & & \\text{ou} & %s &= 0 \\\\" % (tex_binome(valeurs[0], variable), tex_binome(valeurs[1], variable)))
     eq = equations1(valeurs)
     if not isinstance(eq, tuple):
-        cor.append("\\fbox{Aucune solution.}")
+        cor.append("\\text{Aucune } & \\text{solution} & & \\text{ou} & \\text{Aucune } & \\text{solution} \\\\")
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
+        cor.append(u"L'équation a \\fbox{aucune solution.}")
     elif not isinstance(eq[0], tuple):
-        cor.append('$$ %s=%s $$' % (tex_coef(eq[1][0], variable), eq[1][1]))
+        cor.append("\\text{Aucune } & \\text{solution} & & \\text{ou} & %s & = %s \\\\" %(tex_coef(eq[1][0], variable), eq[1][1]))
         if eq[1][0] != 1:
-            cor.append('$$ x=%s $$' % tex_frac(equations2(eq)[1]))
+            cor.append("\\text{Aucune } & \\text{solution} & & \\text{ou} & x & = %s \\\\" %tex_frac(equations2(eq)[1]))
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
         cor.append(u'La solution est $\\boxed{%s}$' % tex_frac(equations3(eq)[1]))
     elif not isinstance(eq[1], tuple):
-        cor.append('$$ %s=%s $$' % (tex_coef(eq[0][0], variable), eq[0][1]))
+        cor.append(" %s & = %s & & \\text{ou} & \\text{Aucune } & \\text{solution} \\\\" %(tex_coef(eq[0][0], variable), eq[0][1]))
         if eq[0][0] != 1:
-            cor.append('$$ x=%s $$' % tex_frac(equations2(eq)[0]))
+            cor.append(" x & = %s & & \\text{ou} & \\text{Aucune } & \\text{solution} \\\\" %tex_frac(equations2(eq)[0]))
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
         cor.append(u'La solution est $\\boxed{%s}$' % tex_frac(equations3(eq)[0]))
     else:
-        cor.append('$$ %s=%s \\text{ ou } %s=%s $$' % (tex_coef(eq[0][0], variable), eq[0][1], tex_coef(eq[1][0], variable), eq[1][1]))
+        cor.append("%s & = %s & & \\text{ou} & %s & = %s \\\\" %(tex_coef(eq[0][0], variable), eq[0][1], tex_coef(eq[1][0], variable), eq[1][1]))
         if eq[0][0] != 1 or eq[1][0] != 1:
-            cor.append('$$ x=%s \\text{ ou } x=%s $$' % (tex_frac(equations2(eq)[0]), tex_frac(equations2(eq)[1])))
+            cor.append("x & = %s & & \\text{ou} & x & = %s \\\\" %(tex_frac(equations2(eq)[0]), tex_frac(equations2(eq)[1])))
+        cor.append("\\end{aligned}$")
+        cor.append("\\end{center}")
         cor.append(u'Les solutions sont $\\boxed{%s\\,\\text{ et }\\,%s}$' % (tex_frac(equations3(eq)[0]), tex_frac(equations3(eq)[1])))
-
 
 def equations1(a):  #renvoie ((9,5),(3,-7)) pour pouvoir ecrire 9x=5 ou 3x=-7
     if a[0][0] == 0:

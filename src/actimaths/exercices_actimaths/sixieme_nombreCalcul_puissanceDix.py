@@ -31,24 +31,24 @@ def tex_formule_dix(l, exo, cor):
         alea = random.randrange(0, 5)
         if alea > 1:
             exo.append('$$%s \\quad\\times\\quad %s \\quad = \\quad \\ldots$$' %(Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],1)))
-            cor.append('$$%s \\times %s = \\mathbf{%s}$$' %(Affichage.decimaux(l[0],1),Affichage.decimaux(l[1],1), Affichage.decimaux(l[0] * l[1], 1)))
+            cor.append('$$%s \\times %s = \\boxed{%s}$$' %(Affichage.decimaux(l[0],1),Affichage.decimaux(l[1],1), Affichage.decimaux(l[0] * l[1], 1)))
         elif alea > 0:
             exo.append('$$%s \\quad\\times\\quad \\ldots \\quad = \\quad %s$$' %(Affichage.decimaux(l[0], 1), Affichage.decimaux(l[0] *l[1], 1)))
-            cor.append('$$%s \\times \\mathbf{%s} = %s$$' % (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],1), Affichage.decimaux(l[0] * l[1], 1)))
+            cor.append('$$%s \\times \\boxed{%s} = %s$$' % (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],1), Affichage.decimaux(l[0] * l[1], 1)))
         else:
             exo.append('$$\\ldots \\quad\\times\\quad %s \\quad = \\quad %s$$' %(Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] *l[1], 1)))
-            cor.append('$$\\mathbf{%s} \\times %s = %s$$' %(Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],1), Affichage.decimaux(l[0] * l[1], 1)))
+            cor.append('$$\\boxed{%s} \\times %s = %s$$' %(Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],1), Affichage.decimaux(l[0] * l[1], 1)))
     else:
         alea = random.randrange(0, 5)
         if alea > 1:
             exo.append('$$%s \\quad\\div\\quad %s \\quad = \\quad \\ldots$$' % (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1],1)))
-            cor.append('$$%s \\div %s = \\mathbf{%s}$$' % (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / l[1], 1)))
+            cor.append('$$%s \\div %s = \\boxed{%s}$$' % (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / l[1], 1)))
         elif alea > 0:
             exo.append('$$%s \\quad\\div\\quad \\ldots \\quad = \\quad %s$$' % (Affichage.decimaux(l[0], 1), Affichage.decimaux(l[0] / l[1], 1)))
-            cor.append('$$%s \\div \\mathbf{%s} = %s$$' % (Affichage.decimaux(l[0],1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / l[1], 1)))
+            cor.append('$$%s \\div \\boxed{%s} = %s$$' % (Affichage.decimaux(l[0],1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / l[1], 1)))
         else:
             exo.append('$$\\ldots \\quad\\div\\quad %s \\quad = \\quad %s$$' % (Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / l[1], 1)))
-            cor.append('$$\\mathbf{%s} \\div %s = %s$$' % (Affichage.decimaux(l[0],1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / l[1], 1)))
+            cor.append('$$\\boxed{%s} \\div %s = %s$$' % (Affichage.decimaux(l[0],1), Affichage.decimaux(l[1], 1), Affichage.decimaux(l[0] / l[1], 1)))
 
 def valeurs10(operation):  # renvoie nb valeur de chaque type : *10, /10, *0.1, /0.1
     l = []

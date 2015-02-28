@@ -117,7 +117,7 @@ def Rectangle(parametre):
     return (exo, cor, question)
 
 def Disque(parametre):
-    question = u"Calculer le périmètre du cercle :"
+    question = u"Calculer le périmètre du cercle ($\\pi \\approx 3$) :"
     exo = []
     cor = []
     rayon = random.randrange(2,10)
@@ -125,9 +125,8 @@ def Disque(parametre):
     tex_disque(exo,rayon,unite)
     tex_disque(cor,rayon,unite)
     cor.append(u"Périmètre = $2 \\times \\text{rayon} \\times \\pi$ \\newline")
-    cor.append(u"Périmètre = $2 \\times %s \\times \\pi$ \\newline" % rayon)
-    cor.append(u"Périmètre = $\\boxed{\\unit[%s \\times\\pi]{%s}} $ \\newline" % (rayon*2,uniteLongueur[unite]))
-    cor.append(u"Périmètre $\\approx \\unit[%s]{%s}$" % (round(math.pi*rayon*2,2),uniteLongueur[unite]))
+    cor.append(u"Périmètre $\\approx 2 \\times %s \\times 3$ \\newline" % rayon)
+    cor.append(u"Périmètre $\\approx \\boxed{\\unit[%s]{%s}} $ \\newline" % (rayon*6,uniteLongueur[unite]))
     return (exo, cor, question)
 
 def Comptage(parametre):

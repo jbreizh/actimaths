@@ -141,7 +141,7 @@ def TriangleRectangle(parametre):
     return (exo, cor, question)
 
 def Disque(parametre):
-    question = u"Calculer l\'aire du disque :"
+    question = u"Calculer l\'aire du disque ($\\pi \\approx 3$) :"
     exo = []
     cor = []
     rayon = random.randrange(2,10)
@@ -149,9 +149,8 @@ def Disque(parametre):
     tex_disque(exo,rayon,unite)
     tex_disque(cor,rayon,unite)
     cor.append("Aire = $\\pi \\times \\text{rayon} \\times \\text{rayon}$ \\newline")
-    cor.append("Aire = $\\pi \\times %s \\times %s$ \\newline" % (rayon,rayon))
-    cor.append("Aire = $\\boxed{\\unit[%s \\pi]{%s}}$ \\newline" % (rayon*rayon,uniteAire[unite]))
-    cor.append("Aire $\\approx \\unit[%s]{%s}$" % (round(math.pi*rayon*rayon,2),uniteAire[unite]))
+    cor.append("Aire $ \\approx 3 \\times %s \\times %s$ \\newline" % (rayon,rayon))
+    cor.append("Aire $ \\approx \\boxed{\\unit[%s]{%s}}$" % (rayon*rayon*3,uniteAire[unite]))
     return (exo, cor, question)
 
 def Comptage(parametre):

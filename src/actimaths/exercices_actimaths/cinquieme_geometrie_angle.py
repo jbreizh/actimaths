@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Pyromaths
-# Un programme en Python qui permet de créer des fiches d'exercices types de
+# Actimaths
+# Un programme en Python qui permet de créer des presentation de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
-# Copyright (C) 2006 -- Jérôme Ortais (jerome.ortais@pyromaths.org)
+# Copyright (C) 2013 -- Jean-Baptiste Le Coz (jb.lecoz@gmail.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -51,26 +51,38 @@ def tex_schema(enonce, mesure, tex_mesure, choix):
     enonce.append("\\end{pspicture}")
     enonce.append("\\end{center}")
 
+def tex_paire_angle(enonce):
+    enonce.append("\\begin{center}")
+    enonce.append("\\psset{unit=0.5cm}")
+    enonce.append("\\begin{pspicture}(-5,-3)(5,3)")
+    # tracé des droites
+    enonce.append("\\psline[linewidth=0.05](-5,1)(5,1)")
+    enonce.append("\\psline[linewidth=0.05](-5,-1)(5,-1)")
+    enonce.append("\\psline[linewidth=0.05](-3,-3)(3,3)")
+    # angles du haut
+    enonce.append("\\psarc(1,1){0.4}{45}{180}")
+    enonce.append("\\psarc(1,1){0.5}{0}{45}")
+    enonce.append("\\psarc(1,1){0.4}{225}{360}")
+    enonce.append("\\psarc(1,1){0.5}{180}{225}")
+    enonce.append("\\uput{0.5}[112.5](1,1){0}")
+    enonce.append("\\uput{0.6}[22.5](1,1){1}")
+    enonce.append("\\uput{0.5}[-62.5](1,1){2}")
+    enonce.append("\\uput{0.6}[-157.5](1,1){3}")
+    # angles du bas
+    enonce.append("\\psarc(-1,-1){0.4}{45}{180}")
+    enonce.append("\\psarc(-1,-1){0.5}{0}{45}")
+    enonce.append("\\psarc(-1,-1){0.4}{225}{360}")
+    enonce.append("\\psarc(-1,-1){0.5}{180}{225}")
+    enonce.append("\\uput{0.5}[112.5](-1,-1){4}")
+    enonce.append("\\uput{0.6}[22.5](-1,-1){5}")
+    enonce.append("\\uput{0.5}[-62.5](-1,-1){6}")
+    enonce.append("\\uput{0.6}[-157.5](-1,-1){7}")
+    #
+    enonce.append("\\end{pspicture}")
+    enonce.append("\\end{center}")
+
 #------------------construction-----------------------------------------
 def Supplementaire(parametre):
-    # choix des variables
-    choix = random.randrange(2)
-    nomAngle = ["\\widehat{xOy}", "\\widehat{yOz}", "\\widehat{xOz}"]
-    angle = random.randrange(20,160,5)
-    mesureAngle = ["%s^\\circ" % angle, "%s^\\circ" % (180 - angle), "180^\\circ"]
-    # initialisation
-    question = u"$ %s $ et $ %s $ sont supplémentaires" % (nomAngle[0],nomAngle[1])
-    exo = []
-    cor = []
-    # affichage
-    exo.append("$ %s = %s $, calculer $ %s $" % (nomAngle[1 - choix],mesureAngle[1 - choix],nomAngle[choix]))
-    cor.append("$$ %s + %s = %s $$" % (nomAngle[choix],nomAngle[1 - choix], nomAngle[2]))
-    cor.append("$$ %s + %s = %s $$" % (nomAngle[choix],mesureAngle[1 - choix], mesureAngle[2]))
-    cor.append("$$ %s = %s - %s $$" % (nomAngle[choix], mesureAngle[2],mesureAngle[1 - choix]))
-    cor.append("$$ \\boxed{%s = %s} $$" % (nomAngle[choix],mesureAngle[choix]))
-    return (exo, cor, question)
-
-def SupplementaireSchema(parametre):
     # choix des variables
     choix = random.randrange(2)
     angle = random.randrange(20,160,5)
@@ -84,31 +96,17 @@ def SupplementaireSchema(parametre):
     tex_schema(exo, mesure, tex_mesure, choix)
     tex_schema(cor, mesure, tex_mesure, choix)
     # affichage
-    cor.append("$$ %s + %s = %s $$" % (tex_nom[choix],tex_nom[1 - choix], tex_nom[2]))
-    cor.append("$$ %s + %s = %s $$" % (tex_nom[choix],tex_mesure[1 - choix], tex_mesure[2]))
-    cor.append("$$ %s = %s - %s $$" % (tex_nom[choix], tex_mesure[2],tex_mesure[1 - choix]))
-    cor.append("$$ \\boxed{%s = %s} $$" % (tex_nom[choix],tex_mesure[choix]))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("%s + %s & = %s \\\\" % (tex_nom[choix],tex_nom[1 - choix], tex_nom[2]))
+    cor.append("%s + %s & = %s \\\\" % (tex_nom[choix],tex_mesure[1 - choix], tex_mesure[2]))
+    cor.append("%s & = %s - %s \\\\" % (tex_nom[choix], tex_mesure[2],tex_mesure[1 - choix]))
+    cor.append("%s & = \\boxed{%s} \\\\" % (tex_nom[choix],tex_mesure[choix]))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def Complementaire(parametre):
-    # choix des variables
-    choix = random.randrange(2)
-    nomAngle = ["\\widehat{xOy}", "\\widehat{yOz}", "\\widehat{xOz}"]
-    angle = random.randrange(20,80,5)
-    mesureAngle = ["%s^\\circ" % angle, "%s^\\circ" % (90 - angle), "90^\\circ"]
-    # initialisation
-    question = u"$ %s $ et $ %s $ sont complémentaires" % (nomAngle[0],nomAngle[1])
-    exo = []
-    cor = []
-    # affichage
-    exo.append("$ %s = %s $, calculer $ %s $" % (nomAngle[1 - choix],mesureAngle[1 - choix],nomAngle[choix]))
-    cor.append("$$ %s + %s = %s $$" % (nomAngle[choix],nomAngle[1 - choix], nomAngle[2]))
-    cor.append("$$ %s + %s = %s $$" % (nomAngle[choix],mesureAngle[1 - choix], mesureAngle[2]))
-    cor.append("$$ %s = %s - %s $$" % (nomAngle[choix], mesureAngle[2],mesureAngle[1 - choix]))
-    cor.append("$$ \\boxed{%s = %s} $$" % (nomAngle[choix],mesureAngle[choix]))
-    return (exo, cor, question)
-
-def ComplementaireSchema(parametre):
     # choix des variables
     choix = random.randrange(2)
     angle = random.randrange(20,80,5)
@@ -122,30 +120,48 @@ def ComplementaireSchema(parametre):
     tex_schema(exo, mesure, tex_mesure, choix)
     tex_schema(cor, mesure, tex_mesure, choix)
     # affichage
-    cor.append("$$ %s + %s = %s $$" % (tex_nom[choix],tex_nom[1 - choix], tex_nom[2]))
-    cor.append("$$ %s + %s = %s $$" % (tex_nom[choix],tex_mesure[1 - choix], tex_mesure[2]))
-    cor.append("$$ %s = %s - %s $$" % (tex_nom[choix], tex_mesure[2],tex_mesure[1 - choix]))
-    cor.append("$$ \\boxed{%s = %s} $$" % (tex_nom[choix],tex_mesure[choix]))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("%s + %s & = %s \\\\" % (tex_nom[choix],tex_nom[1 - choix], tex_nom[2]))
+    cor.append("%s + %s & = %s \\\\" % (tex_nom[choix],tex_mesure[1 - choix], tex_mesure[2]))
+    cor.append("%s & = %s - %s \\\\" % (tex_nom[choix], tex_mesure[2],tex_mesure[1 - choix]))
+    cor.append("%s & = \\boxed{%s} \\\\" % (tex_nom[choix],tex_mesure[choix]))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
-def CorrespondantSchema(parametre):
-    angle = random.randrange(20,80,5)
-    mesure = [angle, 180 - angle, angle, 180 - angle, angle, 180 - angle, angle, 180 - angle]
-    choix = random.randrange(8)
-    mesure_enonce = []
-    mesure_corrige = []
-    for i in range(len(mesure)):
-        if i == choix or i == choix+4 or i == choix - 4:
-            mesure_enonce.append("?")
-            mesure_corrige.append("%s^\\circ" % mesure[i])
-        else:
-            mesure_enonce.append("")
-            mesure_corrige.append("")
-    print mesure, choix, mesure_enonce, mesure_corrige
+def PaireAngle(parametre):
+    # choix des angles
+    angle1 = random.randrange(8)
+    angle2 = random.randrange(8)
+    while angle2 == angle1:
+        angle2 = random.randrange(8)
+    # reponse
+    opposeSommet = [(0,2),(1,3),(4,6),(5,7)]
+    supplementaire = [(0,1),(1,2),(2,3),(3,0),(4,5),(5,6),(6,7),(7,1)]
+    correspondant = [(0,4),(3,7),(1,5),(2,6)]
+    alterneInterne = [(3,5),(2,4)]
+    if ((angle1,angle2) in opposeSommet) or ((angle2,angle1) in opposeSommet):
+        reponse = u"opposés par le sommet"
+    elif((angle1,angle2) in supplementaire) or ((angle2,angle1) in supplementaire):
+        reponse = u"supplémentaires"
+    elif((angle1,angle2) in correspondant) or ((angle2,angle1) in correspondant):
+        reponse = u"correspondants"
+    elif((angle1,angle2) in alterneInterne) or ((angle2,angle1) in alterneInterne):
+        reponse = u"alternes-internes"
+    else:
+        reponse = u"rien du tout"
     # initialisation
-    question = u"Calculer la mesure de l'angle :"
+    question = u"Observe et répond :"
     exo = []
     cor = []
-
-
+    # affichage
+    tex_paire_angle(exo)
+    tex_paire_angle(cor)
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
+    exo.append("%s et %s sont ..." %(angle1,angle2))
+    cor.append("%s et %s sont \\fbox{%s}" %(angle1,angle2,reponse))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
     return (exo, cor, question)

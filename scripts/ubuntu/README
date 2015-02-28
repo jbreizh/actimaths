@@ -1,1 +1,5 @@
-dependance: python-stdeb, fakeroot, python-all
+dependance pour le build: python-stdeb, fakeroot, python-all
+
+build: ./build.sh
+
+installation: sudo dpkg -i python-actimaths_1.xx-1_all.deb

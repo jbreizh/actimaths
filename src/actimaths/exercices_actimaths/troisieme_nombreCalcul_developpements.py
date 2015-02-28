@@ -59,10 +59,14 @@ def construction(valeur):
     exo = []
     cor = []
     variable = variable_list[ random.randrange(7) ]
-    exo.append(u'$$ A = ' + tex_dev0(valeur, variable) + '$$')
-    cor.append(u'$$ A = ' + tex_dev0(valeur, variable) + '$$')
-    cor.append(u'$$ A = ' + tex_dev1(valeur, variable) + '$$')
-    cor.append(u'$$ A = ' + tex_trinome(dev(valeur), variable) + '$$')
+    exo.append("$$ A = %s $$" %tex_dev0(valeur, variable))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" %tex_dev0(valeur, variable))
+    cor.append("A & = %s \\\\" %tex_dev1(valeur, variable))
+    cor.append("A & = \\boxed{%s} \\\\" %tex_trinome(dev(valeur), variable))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def CarreSomme(parametre):

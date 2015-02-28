@@ -71,12 +71,16 @@ def construction(nombre_min, nombre_max, style):
     cor = [ ]
     (l, sol, res) = sommes_fractions_4e(nombre_min, nombre_max, style)
     exo.append("$$ A = %s $$" % Affichage(l))
-    cor.append("$$ A = %s $$" % Affichage(l))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" % Affichage(l))
     for l in sol:
         if l == sol[-1]:
-            cor.append("$$ \\boxed{A = %s} $$" % l)
+            cor.append("A & = \\boxed{%s} \\\\" % l)
         else:
-            cor.append("$$ A = %s $$" % l)
+            cor.append("A & = %s \\\\" % l)
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def RelatifCommun(parametre):

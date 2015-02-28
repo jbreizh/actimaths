@@ -24,56 +24,66 @@
 import random
 import string
 
-#
-# -------------------  -------------------
-
-
+################## Renvoie les 2 listes contenant les opérateurs et les opérandes.
 def valeurs(nombre_min, nombre_max, nb, entier, parenthese):  # renvoie les 2 listes contenant les opérateurs et les opérandes.
-    listoperateurs = ['+', '*', '-', '/', '(', '(', '(', '(', ')', ')', ')', ')']
-    loperateurs = []
-    loperandes = []
-    i = 0  #nombre d'opérateurs créés
-    p = 0  #nombre de parenthèses ouvertes
-    cpt = 0  #compteur pour éviter que le programme ne boucle.
-    while i < nb - 1:
-        cpt = cpt + 1
-        if cpt > 10:  #On recommence
-            (cpt, i, p, loperateurs) = (0, 0, 0, [])
-        if p:
-            if loperateurs[-1] == '(':  # On n'écrit pas 2 parenthèses à suivre
-                operateur = listoperateurs[random.randrange(4)]
-            else:
-                operateur = listoperateurs[random.randrange(12)]
-        elif loperateurs == []: # On ne commence pas par une parenthèse
-            operateur = listoperateurs[random.randrange(4)]
-        else:
-            if parenthese:
-                operateur = listoperateurs[random.randrange(8)]
-            else:
-                operateur = listoperateurs[random.randrange(4)]
-        if nb > 3:
-            test = ('-*/').find(operateur) >= 0 and loperateurs.count(operateur) < 1 or operateur == '+' and loperateurs.count(operateur) < 2
-        else:
-            test = ('-*/+').find(operateur) >= 0 and loperateurs.count(operateur) < 1
-        if test: #On n'accepte pas plus de 1 produit, différence, quotient et de 2 sommes ou parenthèses par calcul.
-            if i == 0 or loperateurs[-1] != '(' or ('*/').find(operateur) <  0:  #pas de * ou / dans une parenthèse.
-                i = i + 1
-                loperateurs.append(operateur)
-        elif operateur == '(' and (')+').find(loperateurs[-1]) < 0:  #Il ne peut y avoir de ( après une ) ou après un +
-            p = p + 1
-            loperateurs.append(operateur)
-        elif operateur == ')':
-            p = p - 1
-            loperateurs.append(operateur)
-    while p > 0:
-        loperateurs.append(')')
-        p = p - 1
-    if entier:
-        loperandes = [random.randrange(nombre_min, nombre_max) for i in range(nb)]
+    ## Initialisation
+    operateurs = ['+', '-', '*', '/']
+    liste_operateurs = []
+    liste_operandes = []
+    operateur_cree = 0
+    parenthese_ouverte = 0
+    position_parenthese = random.randrange(1,nb - 1)
+    if parenthese:
+        nombre_multiplication_division = 1
     else:
-        loperandes = [ random.randrange(nombre_min * 10, nombre_max * 10) / 10.0 for i in range(nb)]
-    return (loperateurs, loperandes)
+        nombre_multiplication_division = 0
+    ## Création des opérateurs
+    while operateur_cree < nb - 1:
+        # Creation de l'opérateur
+        if parenthese_ouverte:
+            # + ou - dans la parenthese
+            if liste_operateurs[-1] == '(':
+                operateur = operateurs[random.randrange(2)]
+                operateur_cree += 1
+            # on ferme la parenthèse
+            else:
+                operateur = ')'
+                parenthese_ouverte -= 1
+        else:
+            # à position_parenthese-1, * ou /
+            if parenthese and operateur_cree==position_parenthese-1:
+                operateur = operateurs[random.randrange(2,4)]
+                operateur_cree += 1
+            # à position_parenthese, on ouvre la parenthèse
+            elif parenthese and operateur_cree==position_parenthese:
+                operateur = '('
+                parenthese_ouverte += 1
+            # sinon on choisit un opérateur
+            else:
+                # nombre_multiplication_division plus petit que 2, +,-,*,/
+                if nombre_multiplication_division < 2:
+                    operateur = operateurs[random.randrange(4)]
+                    # si c'est un * ou / on incremente nombre_multiplication_division
+                    if ('*/').find(operateur) >= 0:
+                        nombre_multiplication_division += 1
+                # sinon + ou -
+                else:
+                    operateur = operateurs[random.randrange(2)]
+                operateur_cree += 1
+        # Ajout de l'opérateur
+        liste_operateurs.append(operateur)
+    ## On ferme les parentheses qui restent ouverte
+    while parenthese_ouverte > 0:
+        liste_operateurs.append(')')
+        parenthese_ouverte -= 1
+    ## Création des opérandes
+    if entier:
+        liste_operandes = random.sample(xrange(nombre_min, nombre_max),nb)
+    else:
+        liste_operandes = random.sample([x / 10.0 for x in range(nombre_min * 10, nombre_max * 10)],nb)
+    return (liste_operateurs, liste_operandes)
 
+##################
 def affichage(loperateurs, loperandes):
     j = 0  #compteur des operateurs
     calcul = '%s' % nb_decimal((loperandes[0], ))
@@ -98,7 +108,8 @@ def affichage(loperateurs, loperandes):
     calcul = ('\\div ').join(calcul.split('/', 2))
     return calcul
 
-def nb_decimal(a):  # verifie si des nombres décimaux dans le tuple a sont en fait des nombres entiers et change leur type
+################## Verifie si des nombres décimaux dans le tuple a sont en fait des nombres entiers et change leur type
+def nb_decimal(a):
     liste = []
     for i in range(len(a)):
         if str(a[i]).endswith('.0'):
@@ -107,7 +118,8 @@ def nb_decimal(a):  # verifie si des nombres décimaux dans le tuple a sont en f
             liste.append(('{,}').join(str(a[i]).split('.', 2)))
     return tuple(liste)
 
-def verifie_calcul(listoperateurs, listoperandes, entier=1):  #Vérifie que l'opération proposée est réalisable sans division décimale ni nombre négatif
+################## Vérifie que l'opération proposée est réalisable sans division décimale ni nombre négatif
+def verifie_calcul(listoperateurs, listoperandes, entier=1):
     p = 0
     loperateurs = listoperateurs[-1]
     loperandes = listoperandes[-1]
@@ -171,8 +183,8 @@ def verifie_calcul(listoperateurs, listoperandes, entier=1):  #Vérifie que l'op
                 listoperandes.append(loperandes)
                 return verifie_calcul(listoperateurs, listoperandes)
 
-
-def calcul(a, op, b, entier):  #retourne 'hp' (hors programme) ou le résultat de l'opération
+################## Retourne 'hp' (hors programme) ou le résultat de l'opération
+def calcul(a, op, b, entier):
     if op == '+':
         return a + b
     elif op == '*':
@@ -190,6 +202,7 @@ def calcul(a, op, b, entier):  #retourne 'hp' (hors programme) ou le résultat d
         else:
             return a / b
 
+################## Construit l'exercice
 def construction(nombre_min, nombre_max, nbre_operande, entier, parenthese):
     question = "Calculer :"
     exo = []
@@ -200,13 +213,17 @@ def construction(nombre_min, nombre_max, nbre_operande, entier, parenthese):
         liste = verifie_calcul([loperateurs], [loperandes], entier)
         if liste:
             i = False
+            cor.append("\\begin{center}")
+            cor.append("$\\begin{aligned}")
             for j in range(len(liste[0])):
                 if j == 0:
-                    exo.append("$$ A = %s $$" % affichage(liste[0][j], liste[1][j]))
+                    exo.append("$$A = %s$$" % affichage(liste[0][j], liste[1][j]))
                 if j == len(liste[0]) - 1:
-                    cor.append("$$ \\boxed{A = %s} $$" % affichage(liste[0][j], liste[1][j]))
+                    cor.append("A & = \\boxed{%s} \\\\" % affichage(liste[0][j], liste[1][j]))
                 else:
-                    cor.append("$$ A = %s $$" % affichage(liste[0][j], liste[1][j]))
+                    cor.append("A & = %s \\\\" % affichage(liste[0][j], liste[1][j]))
+            cor.append("\\end{aligned}$")
+            cor.append("\\end{center}")
     return (exo, cor, question)
 
 def Operande3Entiere(parametre):

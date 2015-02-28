@@ -90,15 +90,15 @@ def tex_exercice(nombre_min, nombre_max, operation, style):
 def choix_trou(nb1, nb2, tot, operateur, exo, cor, style):
     if style == 1:
         exo.append("$$%s %s %s = \\ldots\\ldots\\ldots$$" % (nb1, operateur, nb2))
-        cor.append("$$%s %s %s = \\mathbf{%s}$$" % (nb1, operateur, nb2, tot))
+        cor.append("$$%s %s %s = \\boxed{%s}$$" % (nb1, operateur, nb2, tot))
     else:
         nbaleatoire = random.randrange(2)
         if nbaleatoire == 0:
             exo.append("$$%s %s \\ldots\\ldots\\ldots = %s$$" % (nb1, operateur, tot))
-            cor.append("$$%s %s \\mathbf{%s} = %s$$" % (nb1, operateur, nb2, tot))
+            cor.append("$$%s %s \\boxed{%s} = %s$$" % (nb1, operateur, nb2, tot))
         else:
             exo.append("$$\\ldots\\ldots\\ldots %s %s = %s$$" % (operateur, nb2, tot))
-            cor.append("$$\\mathbf{%s} %s %s = %s$$" % (nb1, operateur, nb2, tot))
+            cor.append("$$\\boxed{%s} %s %s = %s$$" % (nb1, operateur, nb2, tot))
 
 #-----------------------Construction-----------------------
 

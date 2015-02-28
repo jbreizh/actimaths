@@ -33,7 +33,7 @@ def donne():
         b = random.randrange(2, 11)
     c = random.randrange(1, 6)
     enonce = [a,b,b*c,"\\ldots"]
-    solution = [a,b,b*c,"\\mathbf{%s}" % (a*c)]
+    solution = [a,b,b*c,"\\boxed{%s}" % (a*c)]
     return enonce,solution
 
 def donne_vocabulaire():
@@ -44,9 +44,9 @@ def donne_vocabulaire():
         b = random.randrange(2, 11)
     c = random.randrange(1, 6)
     enonce = [a,fraction[b-2],b*c,"\\ldots"]
-    solution1 = [a,fraction[b-2],b*c,"\\textbf{%s}" % (a*c)]
+    solution1 = [a,fraction[b-2],b*c,"\\boxed{%s}" % (a*c)]
     solution2 = [a,b,b*c,"\\ldots"]
-    solution3 = [a,b,b*c,"\\mathbf{%s}" % (a*c)]
+    solution3 = [a,b,b*c,"\\boxed{%s}" % (a*c)]
     return enonce,solution1,solution2,solution3
 
 def donne_complement():
@@ -59,7 +59,7 @@ def donne_complement():
     enonce = [a,b,b*c,a*c]
     solution = [a,b,b*c,a*c]
     enonce[trou] = "\\ldots"
-    solution[trou] = "\\mathbf{%s}" % solution[trou]
+    solution[trou] = "\\boxed{%s}" % solution[trou]
     return enonce,solution
 
 def FractionQuantite(parametre):
@@ -77,8 +77,12 @@ def VocubulaireFractionQuantite(parametre):
     exo = []
     cor = []
     (enonce,solution1,solution2,solution3) = donne_vocabulaire()
+    exo.append("\\begin{center}")
+    cor.append("\\begin{center}")
     exo.append("%s %s de %s valent %s" % tuple(enonce))
     cor.append("%s %s de %s valent %s" % tuple(solution1))
+    exo.append("\\end{center}")
+    cor.append("\\end{center}")
     cor.append("$$\\dfrac{%s}{%s} \\times %s = %s $$" % tuple(solution2))
     cor.append("$$\\dfrac{%s}{%s} \\times %s = %s $$" % tuple(solution3)) 
     return (exo, cor, question)

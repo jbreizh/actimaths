@@ -54,8 +54,13 @@ def Fraction(parametre):
     cor = []
     fraction = valeur_fraction(parametre[0], parametre[1])
     exo.append("$$ A = %s $$" % Fractions.TeX(fraction))
-    cor.append("$$ A = %s $$" % Fractions.TeX(fraction))
-    cor.append("$$ A = %s = %s$$" % (Fractions.TeXSimplifie(fraction), Fractions.simplifie(fraction)))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" % Fractions.TeX(fraction))
+    cor.append("A & = %s \\\\" %Fractions.TeXSimplifie(fraction))
+    cor.append("A & = \\boxed{%s} \\\\" %Fractions.simplifie(fraction))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)
 
 def Decimal(parametre):
@@ -64,6 +69,12 @@ def Decimal(parametre):
     cor = []
     (decimal, fraction) = valeur_decimal(parametre[0], parametre[1])
     exo.append("$$ A = %s $$" % decimal)
-    cor.append("$$ A = %s $$" % decimal)
-    cor.append("$$ A = %s = %s = %s$$" % (Fractions.TeX(fraction), Fractions.TeXSimplifie(fraction), Fractions.simplifie(fraction)))
+    cor.append("\\begin{center}")
+    cor.append("$\\begin{aligned}")
+    cor.append("A & = %s \\\\" % decimal)
+    cor.append("A & = %s \\\\" % Fractions.TeX(fraction))
+    cor.append("A & = %s \\\\" % Fractions.TeXSimplifie(fraction))
+    cor.append("A & = \\boxed{%s} \\\\" % Fractions.simplifie(fraction))
+    cor.append("\\end{aligned}$")
+    cor.append("\\end{center}")
     return (exo, cor, question)
