@@ -1,7 +1,7 @@
 # Maintainer: Jean-Baptiste Le Coz <jb.lecoz@gmail.com>
 
 pkgname=actimaths
-pkgver=1.20
+pkgver=1.21
 pkgrel=1
 pkgdesc="Generates math exercises with LaTeX/Pstricks (only in french)"
 url='http://mathsecaillou.ile.nc/'
