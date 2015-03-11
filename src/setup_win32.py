@@ -62,7 +62,7 @@ setup(name = "Actimaths",
     packages=['actimaths',
               'actimaths.exercices_actimaths','actimaths.exercices_actimaths.outils',
               'actimaths.exercices_pyromaths','actimaths.exercices_pyromaths.outils'],
-    data_files = find_data_files('data','data/',["*","*/*","*/*/*","*/*/*/*","*/*/*/*/*"]),
+    data_files = find_data_files('data','data/',["*","*/*","*/*/*","*/*/*/*","*/*/*/*/*"]) + [('imageformats',['C:\\Python27/Lib/site-packages/PyQt4/plugins/imageformats/qjpeg4.dll'])],
     platforms = ['windows'],
     options =
     {
