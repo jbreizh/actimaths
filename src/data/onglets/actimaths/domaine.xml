@@ -239,7 +239,14 @@
       <exercice commande="sixieme_nombreCalcul_quantite.FractionQuantite" description="Fractions" nom="Fractions d'une quantité (fractionnaire)"/>
       <exercice commande="sixieme_nombreCalcul_quantite.VocubulaireFractionQuantite" description="Fractions" nom="Fractions d'une quantité (litterale)"/>
       <exercice commande="sixieme_nombreCalcul_quantite.ComplementFractionQuantite" description="Fractions" nom="Complément de a/b*b=a"/>
-      <exercice commande="sixieme_nombreCalcul_decomposition.Decomposition" description="Fractions" nom="Décomposition de décimaux"/>
+      <exercice commande="sixieme_nombreCalcul_decomposition.Composition" description="Fractions" nom="Écrire un décimal à partir de sa decomposition">
+        <parametre defaut="-3" max="0" min="-8" nom="Rang minimal"/>
+        <parametre defaut="3" max="8" min="0" nom="Rang maximal"/>
+      </exercice>
+      <exercice commande="sixieme_nombreCalcul_decomposition.Decomposition" description="Fractions" nom="Écrire la décomposition d'un décimal">
+        <parametre defaut="-3" max="0" min="-8" nom="Rang minimal"/>
+        <parametre defaut="3" max="8" min="0" nom="Rang maximal"/>
+      </exercice>
     </categorie>
     <categorie nom = "Cinquième">
       <exercice commande="cinquieme_nombreCalcul_calcul.RelatifBinome" description="Calcul Litteral" nom="Calculer un binome avec un x relatif">

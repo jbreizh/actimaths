@@ -120,6 +120,7 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.barre_menu_fichier_tous_les_exercices, QtCore.SIGNAL("triggered()"), self.choisir_tous_les_exercices)
         ## Action Quitter
         self.barre_menu_fichier_quitter = QtGui.QAction(MainWindow)
+        self.barre_menu_fichier_quitter.setShortcut('Ctrl+Q')
         self.barre_menu_fichier_quitter.setText("Quitter")
         QtCore.QObject.connect(self.barre_menu_fichier_quitter, QtCore.SIGNAL("triggered()"), QtGui.qApp, QtCore.SLOT("quit()"))
         ## Construction du menu fichier
