@@ -20,10 +20,10 @@ Vous propose des versions compilées que vous trouverez à cette adresse : http:
 Environnement de développement sous Windows
 ===========================================
 
-Python 2 que vous trouverez http://www.python.org/download/ici
-PyQt4 pour python 2 que vous trouverez http://www.riverbankcomputing.co.uk/software/pyqt/downloadici
-Lxml que vous trouverez http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxmlici
-Ghostscript (version 1.0 et 1.1) que vous trouverez http://www.ghostscript.com/download/gsdnld.htmlici
-MiKteX (ou autre) que vous trouverez http://miktex.org/downloadici
+- Python 2 que vous trouverez http://www.python.org/download/
+- PyQt4 pour python 2 que vous trouverez http://www.riverbankcomputing.co.uk/software/pyqt/download
+- Lxml que vous trouverez http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml
+- Ghostscript (version 1.0 et 1.1) que vous trouverez http://www.ghostscript.com/download/gsdnld.html
+- MiKteX (ou autre) que vous trouverez http://miktex.org/download
 
 
