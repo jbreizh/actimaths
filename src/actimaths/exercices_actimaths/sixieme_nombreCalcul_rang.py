@@ -124,6 +124,6 @@ def EntierNom(parametre):
     cor.append("%s est le chiffre des :" % nombre_list[rang_nombre_list[0]])
     cor.append("\\begin{itemize}")
     for rang in rang_list:
-      cor.append("\\item %s" % nom_rang[rang])
+      cor.append("\\item \\fbox{%s}" % nom_rang[rang])
     cor.append("\\end{itemize}")
     return (exo, cor, question)

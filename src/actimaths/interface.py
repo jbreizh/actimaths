@@ -117,11 +117,12 @@ class Ui_MainWindow(object):
         ## Action Tous les Exercices 
         self.barre_menu_fichier_tous_les_exercices = QtGui.QAction(MainWindow)
         self.barre_menu_fichier_tous_les_exercices.setText("Choisir tous les exercices")
+        self.barre_menu_fichier_tous_les_exercices.setShortcut('Ctrl+A')
         QtCore.QObject.connect(self.barre_menu_fichier_tous_les_exercices, QtCore.SIGNAL("triggered()"), self.choisir_tous_les_exercices)
         ## Action Quitter
         self.barre_menu_fichier_quitter = QtGui.QAction(MainWindow)
-        self.barre_menu_fichier_quitter.setShortcut('Ctrl+Q')
         self.barre_menu_fichier_quitter.setText("Quitter")
+        self.barre_menu_fichier_quitter.setShortcut('Ctrl+Q')
         QtCore.QObject.connect(self.barre_menu_fichier_quitter, QtCore.SIGNAL("triggered()"), QtGui.qApp, QtCore.SLOT("quit()"))
         ## Construction du menu fichier
         self.barre_menu_fichier.addAction(self.barre_menu_fichier_tous_les_exercices)
@@ -745,7 +746,7 @@ class Ui_MainWindow(object):
         self.onglet_option_verticalLayout_1.addWidget(self.onglet_option_label_nom_auteur)
         ## Label temps d'un slide
         self.onglet_option_label_temps_slide = QtGui.QLabel(self.onglet_option_widget)
-        self.onglet_option_label_temps_slide.setText("Temps par question en seconde : ")
+        self.onglet_option_label_temps_slide.setText("Temps global par question en seconde : ")
         self.onglet_option_verticalLayout_1.addWidget(self.onglet_option_label_temps_slide)
         ## Label date de l'activité mentale
         self.onglet_option_label_date_activite = QtGui.QLabel(self.onglet_option_widget)
@@ -1063,11 +1064,12 @@ class Ui_MainWindow(object):
             # Création de la liste d'exercices
             self.parametres ['liste_exercice'] = []
             for exercice in range(len(self.liste_exercice_selectionner)):
+                temps_exercice = self.liste_exercice_selectionner[exercice][0]
                 commande_exercice = self.liste_exercice_selectionner[exercice][1]
                 parametre_exercice = []
                 for parametre in range(len(self.liste_exercice_selectionner[exercice][3])):
                     parametre_exercice.append(self.onglet_selection_spinBox_parametre[exercice][parametre].value())
-                self.parametres ['liste_exercice'].append((commande_exercice, parametre_exercice))
+                self.parametres ['liste_exercice'].append((temps_exercice, commande_exercice, parametre_exercice))
             # Test de l'existence de la liste
             if self.parametres ['liste_exercice'] == []:
                 QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Veuillez sélectionner des exercices...", QtGui.QMessageBox.Ok )    

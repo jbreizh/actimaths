@@ -81,7 +81,7 @@ def creation_liste(liste_exercice,environnement):
     ## creation des exercices
     (enonce_liste, correction_liste, question_liste) = ( [], [], [] )
     for i in range(len(liste_exercice)):
-        (commande, parametre) = liste_exercice[i]
+        (temps, commande, parametre) = liste_exercice[i]
         # on génère l'exercice et on recommence en cas de duplication
         repetition = True
         essai = 1
