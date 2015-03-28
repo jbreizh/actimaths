@@ -235,7 +235,7 @@ class Ui_MainWindow(object):
             for categorie in range(len(self.liste_exercice[onglet][1])):
                 for exercice in range(len(self.liste_exercice[onglet][1][categorie][1])):
                     self.onglet_exercice_spinBox_nombre[onglet][categorie][exercice].setValue(0)
-                    self.onglet_exercice_spinBox_temps[onglet][categorie][exercice].setValue(int(self.config['temps_slide']))
+                    self.onglet_exercice_spinBox_temps[onglet][categorie][exercice].setValue(int(self.liste_exercice[onglet][1][categorie][1][exercice][3]))
                     for parametre in range(len(self.liste_exercice[onglet][1][categorie][1][exercice][1])):
                         self.onglet_exercice_spinBox_parametre[onglet][categorie][exercice][parametre].setValue(int(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][3]))
         ## Mise à jour du message de la barre d'état
@@ -410,7 +410,7 @@ class Ui_MainWindow(object):
                     self.onglet_exercice_spinBox_temps[onglet][categorie][exercice].setToolTip(u"Choisissez le temps par slide entre 5 secondes et 90 secondes.")
                     self.onglet_exercice_spinBox_temps[onglet][categorie][exercice].setStyleSheet("background-color: rgb(255, 255, 255);")
                     self.onglet_exercice_spinBox_temps[onglet][categorie][exercice].setRange(5,90)
-                    self.onglet_exercice_spinBox_temps[onglet][categorie][exercice].setValue(int(self.config['temps_slide']))
+                    self.onglet_exercice_spinBox_temps[onglet][categorie][exercice].setValue(int(self.liste_exercice[onglet][1][categorie][1][exercice][3]))
                     self.onglet_exercice_gridLayout[onglet][categorie].addWidget(self.onglet_exercice_spinBox_temps[onglet][categorie][exercice], 2*exercice+1, 6)
                     ## Ajout d'une colonne redimensionnable en largeur
                     self.onglet_exercice_gridLayout[onglet][categorie].addItem(QtGui.QSpacerItem(20, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum), 2*exercice, 7)
@@ -735,10 +735,6 @@ class Ui_MainWindow(object):
         self.onglet_option_label_nom_auteur = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_nom_auteur.setText("Nom de l'auteur : ")
         self.onglet_option_verticalLayout_1.addWidget(self.onglet_option_label_nom_auteur)
-        ## Label temps d'un slide
-        self.onglet_option_label_temps_slide = QtGui.QLabel(self.onglet_option_widget)
-        self.onglet_option_label_temps_slide.setText("Temps par defaut en seconde : ")
-        self.onglet_option_verticalLayout_1.addWidget(self.onglet_option_label_temps_slide)
         ## Label date de l'activité mentale
         self.onglet_option_label_date_activite = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_date_activite.setText(u"Date de l\'activité mentale : ")
@@ -784,13 +780,6 @@ class Ui_MainWindow(object):
         self.nom_auteur.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.nom_auteur.setText(self.config['nom_auteur'])
         self.onglet_option_verticalLayout_2.addWidget(self.nom_auteur)
-        ## LineEdit temps d'un slide
-        self.temps_slide = QtGui.QSpinBox(self.onglet_option_widget)
-        self.temps_slide.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.temps_slide.setRange(5,90)
-        self.temps_slide.setToolTip(u"Choisissez le temps par defaut entre 5 secondes et 90 secondes.")
-        self.temps_slide.setValue(int(self.config['temps_slide']))
-        self.onglet_option_verticalLayout_2.addWidget(self.temps_slide)
         ## ComboBox date de l'activité mentale
         self.date_activite = QtGui.QComboBox(self.onglet_option_widget)
         self.date_activite.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -1002,7 +991,6 @@ class Ui_MainWindow(object):
         options .find('titre_fiche').text = unicode(self.titre_fiche.text())
         options .find('nom_etablissement').text = unicode(self.nom_etablissement.text())
         options .find('nom_auteur').text = unicode(self.nom_auteur.text())
-        options .find('temps_slide').text = unicode(self.temps_slide.text())
         options .find('sujet_presentation').text  = str(self.checkBox_sujet_presentation.isChecked())
         options .find('corrige_presentation').text = str(self.checkBox_corrige_presentation.isChecked())
         options .find('sujet_page').text  = str(self.checkBox_sujet_page.isChecked())
@@ -1031,7 +1019,6 @@ class Ui_MainWindow(object):
                            'titre': unicode(self.titre_fiche.text()),
                            'nom_etablissement': unicode(self.nom_etablissement.text()),
                            'nom_auteur': unicode(self.nom_auteur.text()),
-                           'temps_slide': unicode(self.temps_slide.text()),
                            'date_activite': unicode(self.date_activite.currentText()),
                            'niveau': unicode(self.comboBox_niveau.currentText()),
                            'nom_fichier': unicode(self.onglet_option_nom_fichier.text()),

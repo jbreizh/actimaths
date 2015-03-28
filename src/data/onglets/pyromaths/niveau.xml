@@ -3,54 +3,54 @@
     <categorie nom="Gestion de données">
     </categorie>
     <categorie nom="Nombres et Calculs">
-      <exercice commande="sixieme_nombreCalcul_operations.CalculMental" description="" nom="Calcul mental"/>     
-      <exercice commande="sixieme_nombreCalcul_decimaux.EcrireNombreLettre" description="" nom="Écrire un nombre décimal"/> 
-      <exercice commande="sixieme_nombreCalcul_decimaux.PlaceVirgule" description="" nom="Placer une virgule"/> 
-      <exercice commande="sixieme_nombreCalcul_decimaux.EcritureFractionnaire" description="" nom="Écriture fractionnaire ou décimale"/> 
-      <exercice commande="sixieme_nombreCalcul_decimaux.Decomposition" description="" nom="Décomposition de décimaux"/> 
-      <exercice commande="sixieme_nombreCalcul_operations.Operations" description="" nom="Poser des opérations (sauf divisions)"/> 
-      <exercice commande="sixieme_nombreCalcul_operations.ProduitPuissanceDix" description="" nom="Produits, quotients par 10, 100, 1000"/> 
-      <exercice commande="sixieme_nombreCalcul_decimaux.ClasserNombres" description="" nom="Classer des nombres décimaux"/> 
-      <exercice commande="sixieme_nombreCalcul_quotients.Divisible" description="" nom="Multiples de 2, 3, 5, 9, 10"/> 
-      <exercice commande="sixieme_nombreCalcul_fractions.FractionPartage" description="" nom="Fractions partage"/> 
-      <exercice commande="sixieme_nombreCalcul_fractions.QuestionsAbscisses" description="" nom="Fractions et abscisses"/>
-      <exercice commande="sixieme_nombreCalcul_arrondi.ArrondirNombreDecimal" description="" nom="Arrondir des nombres décimaux"/> 
+      <exercice commande="sixieme_nombreCalcul_operations.CalculMental" temps="0" description="" nom="Calcul mental"/>     
+      <exercice commande="sixieme_nombreCalcul_decimaux.EcrireNombreLettre" temps="0" description="" nom="Écrire un nombre décimal"/> 
+      <exercice commande="sixieme_nombreCalcul_decimaux.PlaceVirgule" temps="0" description="" nom="Placer une virgule"/> 
+      <exercice commande="sixieme_nombreCalcul_decimaux.EcritureFractionnaire" temps="0" description="" nom="Écriture fractionnaire ou décimale"/> 
+      <exercice commande="sixieme_nombreCalcul_decimaux.Decomposition" temps="0" description="" nom="Décomposition de décimaux"/> 
+      <exercice commande="sixieme_nombreCalcul_operations.Operations" temps="0" description="" nom="Poser des opérations (sauf divisions)"/> 
+      <exercice commande="sixieme_nombreCalcul_operations.ProduitPuissanceDix" temps="0" description="" nom="Produits, quotients par 10, 100, 1000"/> 
+      <exercice commande="sixieme_nombreCalcul_decimaux.ClasserNombres" temps="0" description="" nom="Classer des nombres décimaux"/> 
+      <exercice commande="sixieme_nombreCalcul_quotients.Divisible" temps="0" description="" nom="Multiples de 2, 3, 5, 9, 10"/> 
+      <exercice commande="sixieme_nombreCalcul_fractions.FractionPartage" temps="0" description="" nom="Fractions partage"/> 
+      <exercice commande="sixieme_nombreCalcul_fractions.QuestionsAbscisses" temps="0" description="" nom="Fractions et abscisses"/>
+      <exercice commande="sixieme_nombreCalcul_arrondi.ArrondirNombreDecimal" temps="0" description="" nom="Arrondir des nombres décimaux"/> 
     </categorie>
     <categorie nom="Géométrie">
-      <exercice commande="sixieme_geometrie_droites.Droites" description="" nom="Droites, demi-droites, segments"/>
-      <exercice commande="sixieme_geometrie_droites.Perpendiculaires" description="" nom="Droites perpendiculaires et parallèles"/>
-      <exercice commande="sixieme_geometrie_droites.Proprietes" description="" nom="Propriétés sur les droites"/>
-      <exercice commande="sixieme_geometrie_symetrie.SymetrieQuadrillage" description="" nom="Symétrie et quadrillages"/>
-      <exercice commande="sixieme_geometrie_espace.main" description="Espace" nom="Représentation dans l'espace"/>
+      <exercice commande="sixieme_geometrie_droites.Droites" temps="0" description="" nom="Droites, demi-droites, segments"/>
+      <exercice commande="sixieme_geometrie_droites.Perpendiculaires" temps="0" description="" nom="Droites perpendiculaires et parallèles"/>
+      <exercice commande="sixieme_geometrie_droites.Proprietes" temps="0" description="" nom="Propriétés sur les droites"/>
+      <exercice commande="sixieme_geometrie_symetrie.SymetrieQuadrillage" temps="0" description="" nom="Symétrie et quadrillages"/>
+      <exercice commande="sixieme_geometrie_espace.main" temps="0" description="Espace" nom="Représentation dans l'espace"/>
     </categorie>
     <categorie nom="Grandeurs et mesures">
-      <exercice commande="sixieme_grandeurMesure_conversion.exo_conversion_longueur" description="" nom="Conversions unités"/>
-      <exercice commande="sixieme_grandeurMesure_conversion.exo_conversion_surface" description="" nom="Conversions unités d'aires"/>
-      <exercice commande="sixieme_grandeurMesure_conversion.exo_conversion_volume" description="" nom="Conversions unités de volumes"/>
-      <exercice commande="sixieme_grandeurMesure_aires.main" description="" nom="Aires et quadrillage"/>
-      <exercice commande="sixieme_grandeurMesure_angles.MesureAngles" description="" nom="Mesurer des angles"/>
+      <exercice commande="sixieme_grandeurMesure_conversion.exo_conversion_longueur" temps="0" description="" nom="Conversions unités"/>
+      <exercice commande="sixieme_grandeurMesure_conversion.exo_conversion_surface" temps="0" description="" nom="Conversions unités d'aires"/>
+      <exercice commande="sixieme_grandeurMesure_conversion.exo_conversion_volume" temps="0" description="" nom="Conversions unités de volumes"/>
+      <exercice commande="sixieme_grandeurMesure_aires.main" temps="0" description="" nom="Aires et quadrillage"/>
+      <exercice commande="sixieme_grandeurMesure_angles.MesureAngles" temps="0" description="" nom="Mesurer des angles"/>
     </categorie>
   </onglet>
     <onglet nom="Cinquième">
     <categorie nom="Gestion de données">
-      <exercice commande="cinquieme_gestionDonnee_reperage.main" description="" nom="Repérage"/>
-      <exercice commande="cinquieme_gestionDonnee_proportionnalite.exo_echelles" description="" nom="Échelles"/>
-      <exercice commande="cinquieme_gestionDonnee_statistiques.statistiques" description="" nom="Statistiques"/>
+      <exercice commande="cinquieme_gestionDonnee_reperage.main" temps="0" description="" nom="Repérage"/>
+      <exercice commande="cinquieme_gestionDonnee_proportionnalite.exo_echelles" temps="0" description="" nom="Échelles"/>
+      <exercice commande="cinquieme_gestionDonnee_statistiques.statistiques" temps="0" description="" nom="Statistiques"/>
     </categorie>
     <categorie nom="Nombres et Calculs">
-       <exercice commande="cinquieme_nombreCalcul_priorites.main" description="" nom="Priorités opératoires"/>
-       <exercice commande="cinquieme_nombreCalcul_fractions.fractions_egales" description="" nom="Fractions égales"/>
-       <exercice commande="cinquieme_nombreCalcul_fractions.sommes_fractions" description="" nom="Sommes de fractions"/>
-       <exercice commande="cinquieme_nombreCalcul_fractions.produits_fractions" description="" nom="Produits de fractions"/>
-       <exercice commande="cinquieme_nombreCalcul_relatifs.main" description="" nom="Addition de relatifs"/>
+       <exercice commande="cinquieme_nombreCalcul_priorites.main" temps="0" description="" nom="Priorités opératoires"/>
+       <exercice commande="cinquieme_nombreCalcul_fractions.fractions_egales" temps="0" description="" nom="Fractions égales"/>
+       <exercice commande="cinquieme_nombreCalcul_fractions.sommes_fractions" temps="0" description="" nom="Sommes de fractions"/>
+       <exercice commande="cinquieme_nombreCalcul_fractions.produits_fractions" temps="0" description="" nom="Produits de fractions"/>
+       <exercice commande="cinquieme_nombreCalcul_relatifs.main" temps="0" description="" nom="Addition de relatifs"/>
     </categorie>
     <categorie nom="Géométrie">
-       <exercice commande="cinquieme_geometrie_symetrie.main" description="" nom="Symétrie centrale"/>
-       <exercice commande="cinquieme_geometrie_construction.exo_triangle" description="" nom="Construction de triangles"/>
-       <exercice commande="cinquieme_geometrie_construction.exo_quadrilatere" description="" nom="Construction de parallélogrammes"/>
+       <exercice commande="cinquieme_geometrie_symetrie.main" temps="0" description="" nom="Symétrie centrale"/>
+       <exercice commande="cinquieme_geometrie_construction.exo_triangle" temps="0" description="" nom="Construction de triangles"/>
+       <exercice commande="cinquieme_geometrie_construction.exo_quadrilatere" temps="0" description="" nom="Construction de parallélogrammes"/>
     </categorie>
     <categorie nom="Grandeurs et mesures">
-       <exercice commande="cinquieme_grandeurMesure_aires.exo_aire_diques" description="" nom="Aire de disques"/>
+       <exercice commande="cinquieme_grandeurMesure_aires.exo_aire_diques" temps="0" description="" nom="Aire de disques"/>
     </categorie>
   </onglet>
   <onglet nom="Quatrième">
@@ -58,24 +58,24 @@
 
     </categorie>
     <categorie nom="Nombres et Calculs">
-      <exercice commande="quatrieme_nombreCalcul_calculMental.main" description="" nom="Calcul mental"/>
-      <exercice commande="quatrieme_nombreCalcul_fractions.exo_sommes_fractions" description="" nom="Sommes de fractions"/> 
-      <exercice commande="quatrieme_nombreCalcul_fractions.exo_produits_fractions" description="" nom="Produits et quotients de fractions"/>
-      <exercice commande="quatrieme_nombreCalcul_fractions.exo_priorites_fractions" description="" nom="Fractions et priorités"/>
-      <exercice commande="quatrieme_nombreCalcul_litteral.reduire" description="" nom="Bases du calcul littéral"/>
-      <exercice commande="quatrieme_nombreCalcul_litteral.reduire_expressions" description="" nom="Réduire des expressions littérales"/> 
-      <exercice commande="quatrieme_nombreCalcul_puissances.tex_proprietes" description="" nom="Propriétés sur les puissances"/>
-      <exercice commande="quatrieme_nombreCalcul_puissances.tex_proprietes_neg" description="" nom="Propriétés sur les puissances de 10"/>
-      <exercice commande="quatrieme_nombreCalcul_puissances.ecr_sc" description="" nom="Écritures scientifiques"/>
-      <exercice commande="quatrieme_nombreCalcul_puissances.exo_puissances" description="" nom="Puissances de 10"/>
-      <exercice commande="quatrieme_nombreCalcul_developpements.exo_distributivite" description="" nom="Distributivité"/>
-      <exercice commande="quatrieme_nombreCalcul_developpements.exo_double_distributivite" description="" nom="Double distributivité"/>
+      <exercice commande="quatrieme_nombreCalcul_calculMental.main" temps="0" description="" nom="Calcul mental"/>
+      <exercice commande="quatrieme_nombreCalcul_fractions.exo_sommes_fractions" temps="0" description="" nom="Sommes de fractions"/> 
+      <exercice commande="quatrieme_nombreCalcul_fractions.exo_produits_fractions" temps="0" description="" nom="Produits et quotients de fractions"/>
+      <exercice commande="quatrieme_nombreCalcul_fractions.exo_priorites_fractions" temps="0" description="" nom="Fractions et priorités"/>
+      <exercice commande="quatrieme_nombreCalcul_litteral.reduire" temps="0" description="" nom="Bases du calcul littéral"/>
+      <exercice commande="quatrieme_nombreCalcul_litteral.reduire_expressions" temps="0" description="" nom="Réduire des expressions littérales"/> 
+      <exercice commande="quatrieme_nombreCalcul_puissances.tex_proprietes" temps="0" description="" nom="Propriétés sur les puissances"/>
+      <exercice commande="quatrieme_nombreCalcul_puissances.tex_proprietes_neg" temps="0" description="" nom="Propriétés sur les puissances de 10"/>
+      <exercice commande="quatrieme_nombreCalcul_puissances.ecr_sc" temps="0" description="" nom="Écritures scientifiques"/>
+      <exercice commande="quatrieme_nombreCalcul_puissances.exo_puissances" temps="0" description="" nom="Puissances de 10"/>
+      <exercice commande="quatrieme_nombreCalcul_developpements.exo_distributivite" temps="0" description="" nom="Distributivité"/>
+      <exercice commande="quatrieme_nombreCalcul_developpements.exo_double_distributivite" temps="0" description="" nom="Double distributivité"/>
     </categorie>
     <categorie nom="Géométrie">
-      <exercice commande="quatrieme_geometrie_geometrie.exo_pythagore" description="" nom="Théorème de Pythagore"/>
-      <exercice commande="quatrieme_geometrie_geometrie.exo_reciproque_pythagore" description="" nom="Réciproque du théorème de Pythagore"/>
-      <exercice commande="quatrieme_geometrie_geometrie.exo_triangle_cercle" description="" nom="Cercle et théorème de Pythagore"/>
-      <exercice commande="quatrieme_geometrie_geometrie.exo_trigo" description="" nom="Trigonométrie"/>
+      <exercice commande="quatrieme_geometrie_geometrie.exo_pythagore" temps="0" description="" nom="Théorème de Pythagore"/>
+      <exercice commande="quatrieme_geometrie_geometrie.exo_reciproque_pythagore" temps="0" description="" nom="Réciproque du théorème de Pythagore"/>
+      <exercice commande="quatrieme_geometrie_geometrie.exo_triangle_cercle" temps="0" description="" nom="Cercle et théorème de Pythagore"/>
+      <exercice commande="quatrieme_geometrie_geometrie.exo_trigo" temps="0" description="" nom="Trigonométrie"/>
     </categorie>
     <categorie nom="Grandeurs et mesures">
 
@@ -83,12 +83,12 @@
   </onglet>
   <onglet nom="Troisième">
     <categorie nom="Gestion de données">
-      <exercice commande="troisieme_gestionDonnee_affine.tex_affine" description="" nom="Fonctions affines"/>
-      <exercice commande="troisieme_gestionDonnee_proba.tex_proba" description="" nom="Probabilités"/>
+      <exercice commande="troisieme_gestionDonnee_affine.tex_affine" temps="0" description="" nom="Fonctions affines"/>
+      <exercice commande="troisieme_gestionDonnee_proba.tex_proba" temps="0" description="" nom="Probabilités"/>
     </categorie>
     <categorie nom="Nombres et Calculs">
-      <exercice commande="troisieme_nombreCalcul_fractions.tex_fractions" description="" nom="Fractions"/>
-      <exercice commande="troisieme_nombreCalcul_puissances.tex_puissances" description="" nom="Puissances"/>
+      <exercice commande="troisieme_nombreCalcul_fractions.tex_fractions" temps="0" description="" nom="Fractions"/>
+      <exercice commande="troisieme_nombreCalcul_puissances.tex_puissances" temps="0" description="" nom="Puissances"/>
     </categorie>
     <categorie nom="Géométrie">
 
@@ -99,18 +99,18 @@
   </onglet>
   <onglet nom="Lycée">
     <categorie nom="Gestion de données">
-      <exercice commande="lycee_gestionDonnee_polynome.exo_racines_degre2" description="" nom="Équations du second degré"/>
-      <exercice commande="lycee_gestionDonnee_polynome.exo_factorisation_degre2" description="" nom="Factorisations du second degré"/>
-      <exercice commande="lycee_gestionDonnee_polynome.exo_factorisation_degre3" description="" nom="Factorisations de degré 3"/>
-      <exercice commande="lycee_gestionDonnee_polynome.exo_tableau_de_signe" description="" nom="Étude de signe"/>
-      <exercice commande="lycee_gestionDonnee_polynome.exo_variation" description="" nom="Sens de variations"/>
-      <exercice commande="lycee_gestionDonnee_polynome.exo_variation_lim" description="" nom="Étude de fonctions"/>
+      <exercice commande="lycee_gestionDonnee_polynome.exo_racines_degre2" temps="0" description="" nom="Équations du second degré"/>
+      <exercice commande="lycee_gestionDonnee_polynome.exo_factorisation_degre2" temps="0" description="" nom="Factorisations du second degré"/>
+      <exercice commande="lycee_gestionDonnee_polynome.exo_factorisation_degre3" temps="0" description="" nom="Factorisations de degré 3"/>
+      <exercice commande="lycee_gestionDonnee_polynome.exo_tableau_de_signe" temps="0" description="" nom="Étude de signe"/>
+      <exercice commande="lycee_gestionDonnee_polynome.exo_variation" temps="0" description="" nom="Sens de variations"/>
+      <exercice commande="lycee_gestionDonnee_polynome.exo_variation_lim" temps="0" description="" nom="Étude de fonctions"/>
     </categorie>
     <categorie nom="Nombres et Calculs">
-      <exercice commande="lycee_nombreCalcul_trigonometrie.cercle_trigonometrique" description="" nom="Cercle trigonométrique"/>
+      <exercice commande="lycee_nombreCalcul_trigonometrie.cercle_trigonometrique" temps="0" description="" nom="Cercle trigonométrique"/>
     </categorie>
     <categorie nom="Géométrie">
-      <exercice commande="lycee_geometrie_vecteurs.vecteurs_add" description="" nom="Vecteurs"/>
+      <exercice commande="lycee_geometrie_vecteurs.vecteurs_add" temps="0" description="" nom="Vecteurs"/>
     </categorie>
     <categorie nom="Grandeurs et mesures">
 

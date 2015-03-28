@@ -1,267 +1,267 @@
 <liste>
   <onglet nom="Sixième">
     <categorie nom="Gestion de données">
-      <exercice commande="sixieme_gestionDonnee_pourcentage.CalculPartie" description="Proportionnalité" nom="Calculer une fraction à partir d'un pourcentage"/>
-      <exercice commande="sixieme_gestionDonnee_pourcentage.CalculPourcentage" description="Proportionnalité" nom="Calculer un pourcentage à partir d'une fraction"/>
-      <exercice commande="sixieme_gestionDonnee_tableau.CalculCoefficient" description="Proportionnalité" nom="Calculer le coefficient de proportionnalité"/>
-      <exercice commande="sixieme_gestionDonnee_tableau.CompleteTableau" description="Proportionnalité" nom="Compléter un tableau de proportionnalité"/>
-      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseEntierOrigine" description="Repérage" nom="Abscisse entière d'un point avec l'origine">
+      <exercice commande="sixieme_gestionDonnee_pourcentage.CalculPartie" temps="10" description="Proportionnalité" nom="Calculer une fraction à partir d'un pourcentage"/>
+      <exercice commande="sixieme_gestionDonnee_pourcentage.CalculPourcentage" temps="10" description="Proportionnalité" nom="Calculer un pourcentage à partir d'une fraction"/>
+      <exercice commande="sixieme_gestionDonnee_tableau.CalculCoefficient" temps="10" description="Proportionnalité" nom="Calculer le coefficient de proportionnalité"/>
+      <exercice commande="sixieme_gestionDonnee_tableau.CompleteTableau" temps="10" description="Proportionnalité" nom="Compléter un tableau de proportionnalité"/>
+      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseEntierOrigine" temps="10" description="Repérage" nom="Abscisse entière d'un point avec l'origine">
         <parametre defaut="8" max="12" min="5" nom="Abscisse maximale"/>
       </exercice>
-      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseEntier" description="Repérage" nom="Abscisse entière d'un point">
+      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseEntier" temps="10" description="Repérage" nom="Abscisse entière d'un point">
         <parametre defaut="50" max="99" min="1" nom="Abscisse minimale"/>
       </exercice>
-      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseDecimalOrigine" description="Repérage" nom="Abscisse décimale d'un point avec l'origine">
+      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseDecimalOrigine" temps="10" description="Repérage" nom="Abscisse décimale d'un point avec l'origine">
         <parametre defaut="3" max="5" min="2" nom="Abscisse maximale"/>
       </exercice>
-      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseDecimal" description="Repérage" nom="Abscisse decimale d'un point">
+      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseDecimal" temps="10" description="Repérage" nom="Abscisse decimale d'un point">
         <parametre defaut="50" max="99" min="1" nom="Abscisse minimale"/>
       </exercice>
-      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseFractionOrigine" description="Repérage" nom="Abscisse fractionnaire d'un point avec l'origine">
+      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseFractionOrigine" temps="10" description="Repérage" nom="Abscisse fractionnaire d'un point avec l'origine">
         <parametre defaut="3" max="5" min="2" nom="Abscisse maximale"/>
       </exercice>
-      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseFraction" description="Repérage" nom="Abscisse fractionnaire d'un point">
+      <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseFraction" temps="10" description="Repérage" nom="Abscisse fractionnaire d'un point">
         <parametre defaut="50" max="99" min="1" nom="Abscisse minimale"/>
       </exercice>
     </categorie>
     <categorie nom="Nombres et Calculs">
-      <exercice commande="sixieme_nombreCalcul_ecriture.EcritEnChiffreEntier" description="Numération" nom="Écrire un entier en chiffre">
+      <exercice commande="sixieme_nombreCalcul_ecriture.EcritEnChiffreEntier" temps="10" description="Numération" nom="Écrire un entier en chiffre">
         <parametre defaut="100" max="99999" min="0" nom="Valeur minimale"/>
         <parametre defaut="1000" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ecriture.EcritEnLettreEntier" description="Numération" nom="Écrire un entier en lettre">
+      <exercice commande="sixieme_nombreCalcul_ecriture.EcritEnLettreEntier" temps="10" description="Numération" nom="Écrire un entier en lettre">
         <parametre defaut="100" max="99999" min="0" nom="Valeur minimale"/>
         <parametre defaut="1000" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ecriture.EcritEnChiffreDecimal" description="Numération" nom="Écrire un décimal en chiffre">
+      <exercice commande="sixieme_nombreCalcul_ecriture.EcritEnChiffreDecimal" temps="10" description="Numération" nom="Écrire un décimal en chiffre">
         <parametre defaut="100" max="99999" min="0" nom="Valeur minimale"/>
         <parametre defaut="1000" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ecriture.EcritEnLettreDecimal" description="Numération" nom="Écrire un décimal en lettre">
+      <exercice commande="sixieme_nombreCalcul_ecriture.EcritEnLettreDecimal" temps="10" description="Numération" nom="Écrire un décimal en lettre">
         <parametre defaut="100" max="99999" min="0" nom="Valeur minimale"/>
         <parametre defaut="1000" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_placerVirgule.PlaceVirgule" description="Numération" nom="Placer une virgule">
+      <exercice commande="sixieme_nombreCalcul_placerVirgule.PlaceVirgule" temps="10" description="Numération" nom="Placer une virgule">
         <parametre defaut="-2" max="0" min="-8" nom="Rang minimal"/>
         <parametre defaut="2" max="8" min="0" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_rang.Chiffre" description="Numération" nom="Chiffre à un rang donné dans un nombre">
+      <exercice commande="sixieme_nombreCalcul_rang.Chiffre" temps="10" description="Numération" nom="Chiffre à un rang donné dans un nombre">
         <parametre defaut="-3" max="0" min="-8" nom="Rang minimal"/>
         <parametre defaut="3" max="8" min="0" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_rang.Nombre" description="Numération" nom="Nombre à un rang donné dans un nombre">
+      <exercice commande="sixieme_nombreCalcul_rang.Nombre" temps="10" description="Numération" nom="Nombre à un rang donné dans un nombre">
         <parametre defaut="-3" max="0" min="-8" nom="Rang minimal"/>
         <parametre defaut="3" max="8" min="0" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_rang.EntierNom" description="Numération" nom="Rang(s) d'un chiffre donné dans un nombre">
+      <exercice commande="sixieme_nombreCalcul_rang.EntierNom" temps="10" description="Numération" nom="Rang(s) d'un chiffre donné dans un nombre">
         <parametre defaut="-3" max="0" min="-8" nom="Rang minimal"/>
         <parametre defaut="3" max="8" min="0" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_classerNombres.ClasserNombres" description="Numération" nom="Classer des nombres décimaux"/>
-      <exercice commande="sixieme_nombreCalcul_arrondi.ArrondirDecimal" description="Numération" nom="Arrondir des nombres">
+      <exercice commande="sixieme_nombreCalcul_classerNombres.ClasserNombres" temps="10" description="Numération" nom="Classer des nombres décimaux"/>
+      <exercice commande="sixieme_nombreCalcul_arrondi.ArrondirDecimal" temps="10" description="Numération" nom="Arrondir des nombres">
         <parametre defaut="-3" max="-1" min="-8" nom="Rang minimal"/>
         <parametre defaut="3" max="8" min="1" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_arrondi.EncadrerDecimal" description="Numération" nom="Encadrer des nombres">
+      <exercice commande="sixieme_nombreCalcul_arrondi.EncadrerDecimal" temps="10" description="Numération" nom="Encadrer des nombres">
         <parametre defaut="-3" max="-1" min="-8" nom="Rang minimal"/>
         <parametre defaut="3" max="8" min="1" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_arrondi.IntercalerDecimal" description="Numération" nom="Intercaler un nombre">
+      <exercice commande="sixieme_nombreCalcul_arrondi.IntercalerDecimal" temps="10" description="Numération" nom="Intercaler un nombre">
         <parametre defaut="-3" max="-1" min="-8" nom="Rang minimal"/>
         <parametre defaut="3" max="8" min="1" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.NombreEntier" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'un nombre entier">
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.NombreEntier" temps="10" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'un nombre entier">
         <parametre defaut="10" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_mentale.AdditionEntier" description="Nombres Entiers" nom="Addition d'entier">
+      <exercice commande="sixieme_nombreCalcul_mentale.AdditionEntier" temps="10" description="Nombres Entiers" nom="Addition d'entier">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_complement.AdditionEntier" description="Nombres Entiers" nom="Complément additif">
+      <exercice commande="sixieme_nombreCalcul_complement.AdditionEntier" temps="10" description="Nombres Entiers" nom="Complément additif">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_pose.AdditionEntier" description="Nombres Entiers" nom="Addition entière posée">
+      <exercice commande="sixieme_nombreCalcul_pose.AdditionEntier" temps="10" description="Nombres Entiers" nom="Addition entière posée">
         <parametre defaut="0" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.AdditionEntier" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'une somme entière">
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.AdditionEntier" temps="10" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'une somme entière">
         <parametre defaut="10" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_mentale.SoustractionEntier" description="Nombres Entiers" nom="Soustraction d'entier">
+      <exercice commande="sixieme_nombreCalcul_mentale.SoustractionEntier" temps="10" description="Nombres Entiers" nom="Soustraction d'entier">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_complement.SoustractionEntier" description="Nombres Entiers" nom="Complément soustractif">
+      <exercice commande="sixieme_nombreCalcul_complement.SoustractionEntier" temps="10" description="Nombres Entiers" nom="Complément soustractif">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_pose.SoustractionEntier" description="Nombres Entiers" nom="Soustraction entière  posée">
+      <exercice commande="sixieme_nombreCalcul_pose.SoustractionEntier" temps="10" description="Nombres Entiers" nom="Soustraction entière  posée">
         <parametre defaut="0" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.SoustractionEntier" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'une différence entière">
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.SoustractionEntier" temps="10" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'une différence entière">
         <parametre defaut="10" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_mentale.MultiplicationEntier" description="Nombres Entiers" nom="Multiplication d'entier">
+      <exercice commande="sixieme_nombreCalcul_mentale.MultiplicationEntier" temps="10" description="Nombres Entiers" nom="Multiplication d'entier">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_complement.MultiplicationEntier" description="Nombres Entiers" nom="Complément multiplicatif">
+      <exercice commande="sixieme_nombreCalcul_complement.MultiplicationEntier" temps="10" description="Nombres Entiers" nom="Complément multiplicatif">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_pose.MultiplicationEntier" description="Nombres Entiers" nom="Multiplication entière posée">
+      <exercice commande="sixieme_nombreCalcul_pose.MultiplicationEntier" temps="10" description="Nombres Entiers" nom="Multiplication entière posée">
         <parametre defaut="0" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.MultiplicationEntier" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'un produit entier">
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.MultiplicationEntier" temps="10" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'un produit entier">
         <parametre defaut="10" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_mentale.DivisionEntier" description="Nombres Entiers" nom="Division d'entier">
+      <exercice commande="sixieme_nombreCalcul_mentale.DivisionEntier" temps="10" description="Nombres Entiers" nom="Division d'entier">
         <parametre defaut="10" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_complement.DivisionEntier" description="Nombres Entiers" nom="Complément divisif">
+      <exercice commande="sixieme_nombreCalcul_complement.DivisionEntier" temps="10" description="Nombres Entiers" nom="Complément divisif">
         <parametre defaut="10" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.DivisionEntier" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'un quotient entier">
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.DivisionEntier" temps="10" description="Nombres Entiers" nom="Donner l'ordre de grandeur d'un quotient entier">
         <parametre defaut="10" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="10" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_multiple.Divisible" description="Nombres Entiers" nom="Critères de divisibilité 2, 3, 5, 9, 10">
+      <exercice commande="sixieme_nombreCalcul_multiple.Divisible" temps="10" description="Nombres Entiers" nom="Critères de divisibilité 2, 3, 5, 9, 10">
         <parametre defaut="10" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="10" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.NombreDecimal" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'un nombre décimal">
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.NombreDecimal" temps="10" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'un nombre décimal">
         <parametre defaut="-2" max="1" min="-6" nom="Rang minimal"/>
         <parametre defaut="0" max="2" min="-5" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_mentale.AdditionDecimal" description="Nombres Décimaux" nom="Addition de décimaux">
+      <exercice commande="sixieme_nombreCalcul_mentale.AdditionDecimal" temps="10" description="Nombres Décimaux" nom="Addition de décimaux">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_complement.AdditionDecimal" description="Nombres Décimaux" nom="Complément additif">
+      <exercice commande="sixieme_nombreCalcul_complement.AdditionDecimal" temps="10" description="Nombres Décimaux" nom="Complément additif">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_pose.AdditionDecimal" description="Nombres Décimaux" nom="Addition décimale posée">
+      <exercice commande="sixieme_nombreCalcul_pose.AdditionDecimal" temps="10" description="Nombres Décimaux" nom="Addition décimale posée">
         <parametre defaut="0" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.AdditionDecimal" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'une somme décimale">
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.AdditionDecimal" temps="10" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'une somme décimale">
         <parametre defaut="-2" max="1" min="-6" nom="Rang minimal"/>
         <parametre defaut="0" max="2" min="-5" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_mentale.SoustractionDecimal" description="Nombres Décimaux" nom="Soustraction de décimaux">
+      <exercice commande="sixieme_nombreCalcul_mentale.SoustractionDecimal" temps="10" description="Nombres Décimaux" nom="Soustraction de décimaux">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_complement.SoustractionDecimal" description="Nombres Décimaux" nom="Complément soustractif">
+      <exercice commande="sixieme_nombreCalcul_complement.SoustractionDecimal" temps="10" description="Nombres Décimaux" nom="Complément soustractif">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_pose.SoustractionDecimal" description="Nombres Décimaux" nom="Soustraction décimale posée">
+      <exercice commande="sixieme_nombreCalcul_pose.SoustractionDecimal" temps="10" description="Nombres Décimaux" nom="Soustraction décimale posée">
         <parametre defaut="0" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.SoustractionDecimal" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'une différence décimale">
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.SoustractionDecimal" temps="10" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'une différence décimale">
         <parametre defaut="-2" max="1" min="-6" nom="Rang minimal"/>
         <parametre defaut="0" max="2" min="-5" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_mentale.MultiplicationDecimal" description="Nombres Décimaux" nom="Multiplication de décimaux">
+      <exercice commande="sixieme_nombreCalcul_mentale.MultiplicationDecimal" temps="10" description="Nombres Décimaux" nom="Multiplication de décimaux">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_complement.MultiplicationDecimal" description="Nombres Décimaux" nom="Complément multiplicatif">
+      <exercice commande="sixieme_nombreCalcul_complement.MultiplicationDecimal" temps="10" description="Nombres Décimaux" nom="Complément multiplicatif">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_pose.MultiplicationDecimal" description="Nombres Décimaux" nom="Multiplication décimale posée">
+      <exercice commande="sixieme_nombreCalcul_pose.MultiplicationDecimal" temps="10" description="Nombres Décimaux" nom="Multiplication décimale posée">
         <parametre defaut="0" max="100" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_puissanceDix.ProduitPuissanceDixPositive" description="Nombres Décimaux" nom="Multiplication par 10 ; 100 ; 1000"/>
-      <exercice commande="sixieme_nombreCalcul_puissanceDix.ProduitPuissanceDixNegative" description="Nombres Décimaux" nom="Multiplication par 0,1 ; 0,01 ; 0,001"/>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.MultiplicationDecimal" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'un produit décimal">
+      <exercice commande="sixieme_nombreCalcul_puissanceDix.ProduitPuissanceDixPositive" temps="10" description="Nombres Décimaux" nom="Multiplication par 10 ; 100 ; 1000"/>
+      <exercice commande="sixieme_nombreCalcul_puissanceDix.ProduitPuissanceDixNegative" temps="10" description="Nombres Décimaux" nom="Multiplication par 0,1 ; 0,01 ; 0,001"/>
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.MultiplicationDecimal" temps="10" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'un produit décimal">
         <parametre defaut="-2" max="1" min="-6" nom="Rang minimal"/>
         <parametre defaut="0" max="2" min="-5" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_mentale.DivisionDecimal" description="Nombres Décimaux" nom="Division de décimaux">
+      <exercice commande="sixieme_nombreCalcul_mentale.DivisionDecimal" temps="10" description="Nombres Décimaux" nom="Division de décimaux">
         <parametre defaut="10" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_complement.DivisionDecimal" description="Nombres Décimaux" nom="Complément divisif">
+      <exercice commande="sixieme_nombreCalcul_complement.DivisionDecimal" temps="10" description="Nombres Décimaux" nom="Complément divisif">
         <parametre defaut="10" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_puissanceDix.QuotientPuissanceDixPositive" description="Nombres Décimaux" nom="Division par 10 ; 100 ; 1000"/>
-      <exercice commande="sixieme_nombreCalcul_puissanceDix.QuotientPuissanceDixNegative" description="Nombres Décimaux" nom="Division par 0,1 ; 0,01 ; 0,001"/>
-      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.DivisionDecimal" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'un quotient décimal">
+      <exercice commande="sixieme_nombreCalcul_puissanceDix.QuotientPuissanceDixPositive" temps="10" description="Nombres Décimaux" nom="Division par 10 ; 100 ; 1000"/>
+      <exercice commande="sixieme_nombreCalcul_puissanceDix.QuotientPuissanceDixNegative" temps="10" description="Nombres Décimaux" nom="Division par 0,1 ; 0,01 ; 0,001"/>
+      <exercice commande="sixieme_nombreCalcul_ordreGrandeur.DivisionDecimal" temps="10" description="Nombres Décimaux" nom="Donner l'ordre de grandeur d'un quotient décimal">
         <parametre defaut="-2" max="1" min="-6" nom="Rang minimal"/>
         <parametre defaut="0" max="2" min="-5" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_ecritureFractionnaire.EcritureFractionnaire" description="Fractions" nom="Écriture fractionnaire ou décimale"/>
-      <exercice commande="sixieme_nombreCalcul_egale.fractions_egales" description="Fractions" nom="Fractions égales"/>
-      <exercice commande="sixieme_nombreCalcul_quantite.FractionQuantite" description="Fractions" nom="Fractions d'une quantité (fractionnaire)"/>
-      <exercice commande="sixieme_nombreCalcul_quantite.VocubulaireFractionQuantite" description="Fractions" nom="Fractions d'une quantité (litterale)"/>
-      <exercice commande="sixieme_nombreCalcul_quantite.ComplementFractionQuantite" description="Fractions" nom="Complément de a/b*b=a"/>
-      <exercice commande="sixieme_nombreCalcul_decomposition.Composition" description="Fractions" nom="Écrire un décimal à partir de sa decomposition">
+      <exercice commande="sixieme_nombreCalcul_ecritureFractionnaire.EcritureFractionnaire" temps="10" description="Fractions" nom="Écriture fractionnaire ou décimale"/>
+      <exercice commande="sixieme_nombreCalcul_egale.fractions_egales" temps="10" description="Fractions" nom="Fractions égales"/>
+      <exercice commande="sixieme_nombreCalcul_quantite.FractionQuantite" temps="10" description="Fractions" nom="Fractions d'une quantité (fractionnaire)"/>
+      <exercice commande="sixieme_nombreCalcul_quantite.VocubulaireFractionQuantite" temps="10" description="Fractions" nom="Fractions d'une quantité (litterale)"/>
+      <exercice commande="sixieme_nombreCalcul_quantite.ComplementFractionQuantite" temps="10" description="Fractions" nom="Complément de a/b*b=a"/>
+      <exercice commande="sixieme_nombreCalcul_decomposition.Composition" temps="10" description="Fractions" nom="Écrire un décimal à partir de sa decomposition">
         <parametre defaut="-3" max="0" min="-8" nom="Rang minimal"/>
         <parametre defaut="3" max="8" min="0" nom="Rang maximal"/>
       </exercice>
-      <exercice commande="sixieme_nombreCalcul_decomposition.Decomposition" description="Fractions" nom="Écrire la décomposition d'un décimal">
+      <exercice commande="sixieme_nombreCalcul_decomposition.Decomposition" temps="10" description="Fractions" nom="Écrire la décomposition d'un décimal">
         <parametre defaut="-3" max="0" min="-8" nom="Rang minimal"/>
         <parametre defaut="3" max="8" min="0" nom="Rang maximal"/>
       </exercice>
     </categorie>
     <categorie nom="Géométrie">
-      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Nature" description="Geometrie" nom="Donner la nature d'une droite, demi-droite ou segment"/>
-      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Nommer" description="Geometrie" nom="Nommer une droite, demi-droite ou segment"/>
-      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Appartient" description="Geometrie" nom="Appartenance à une droite, demi-droite ou segment"/>
-      <exercice commande="sixieme_geometrie_triangle.CodageCote" description="Geometrie" nom="Donner la nature d'un triangle d'après le codage de ses côtés"/>
-      <exercice commande="sixieme_geometrie_triangle.CodageAngle" description="Geometrie" nom="Donner la nature d'un triangle d'après le codage de ses angles"/>
-      <exercice commande="sixieme_geometrie_quadrilatere.CodageCote" description="Geometrie" nom="Donner la nature d'un quadrilatere d'après le codage de ses côtés et angles"/>
-      <exercice commande="sixieme_geometrie_quadrilatere.CodageDiagonale" description="Geometrie" nom="Donner la nature d'un quadrilatere d'après le codage de ses diagonales"/>
-      <exercice commande="sixieme_geometrie_cercle.Vocabulaire" description="Geometrie" nom="Reconnaitre rayon, diamètre, corde ou arc de cercle"/>
+      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Nature" temps="10" description="Geometrie" nom="Donner la nature d'une droite, demi-droite ou segment"/>
+      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Nommer" temps="10" description="Geometrie" nom="Nommer une droite, demi-droite ou segment"/>
+      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Appartient" temps="10" description="Geometrie" nom="Appartenance à une droite, demi-droite ou segment"/>
+      <exercice commande="sixieme_geometrie_triangle.CodageCote" temps="10" description="Geometrie" nom="Donner la nature d'un triangle d'après le codage de ses côtés"/>
+      <exercice commande="sixieme_geometrie_triangle.CodageAngle" temps="10" description="Geometrie" nom="Donner la nature d'un triangle d'après le codage de ses angles"/>
+      <exercice commande="sixieme_geometrie_quadrilatere.CodageCote" temps="10" description="Geometrie" nom="Donner la nature d'un quadrilatere d'après le codage de ses côtés et angles"/>
+      <exercice commande="sixieme_geometrie_quadrilatere.CodageDiagonale" temps="10" description="Geometrie" nom="Donner la nature d'un quadrilatere d'après le codage de ses diagonales"/>
+      <exercice commande="sixieme_geometrie_cercle.Vocabulaire" temps="10" description="Geometrie" nom="Reconnaitre rayon, diamètre, corde ou arc de cercle"/>
     </categorie>
     <categorie nom="Grandeurs et mesures">
-      <exercice commande="sixieme_grandeurMesure_angle.NatureQuestion" description="Angle" nom="Donner la nature d'un angle à partir de sa mesure"/>
-      <exercice commande="sixieme_grandeurMesure_angle.NatureSchema" description="Angle" nom="Donner la nature d'un angle à partir d'un schéma"/>
-      <exercice commande="sixieme_grandeurMesure_angle.MesureSimple" description="Angle" nom="Donner la mesure d'un angle partant de 0 ou 180"/>
-      <exercice commande="sixieme_grandeurMesure_angle.MesureComplique" description="Angle" nom="Donner la mesure d'un angle"/>
-      <exercice commande="sixieme_grandeurMesure_conversion.Conversion" description="Unité" nom="Conversion d'unités de longueur"/>
-      <exercice commande="sixieme_grandeurMesure_conversion.ConversionAire" description="Unité" nom="Conversion d'unités d'aire"/>
-      <exercice commande="sixieme_grandeurMesure_conversion.ConversionVolume" description="Unité" nom="Conversion unités de volume"/>
-      <exercice commande="sixieme_grandeurMesure_perimetre.Comptage" description="Périmètre" nom="Donner le périmètre par comptage"/>
-      <exercice commande="sixieme_grandeurMesure_perimetre.Carre" description="Périmètre" nom="Calculer le périmètre d'un carré"/>
-      <exercice commande="sixieme_grandeurMesure_perimetre.Rectangle" description="Périmètre" nom="Calculer le périmètre d'un rectangle"/>
-      <exercice commande="sixieme_grandeurMesure_perimetre.Disque" description="Périmètre" nom="Calculer le périmètre d'un cercle"/>   
-      <exercice commande="sixieme_grandeurMesure_aire.Comptage" description="Aire" nom="Donner l'aire par comptage"/>
-      <exercice commande="sixieme_grandeurMesure_aire.Carre" description="Aire" nom="Calculer l'aire d'un carré"/>
-      <exercice commande="sixieme_grandeurMesure_aire.Rectangle" description="Aire" nom="Calculer l'aire d'un rectangle"/>
-      <exercice commande="sixieme_grandeurMesure_aire.TriangleRectangle" description="Aire" nom="Calculer l'aire d'un triangle rectangle"/>
-      <exercice commande="sixieme_grandeurMesure_aire.Disque" description="Aire" nom="Calculer l'aire d'un disque"/> 
-      <exercice commande="sixieme_grandeurMesure_volume.PaveDroit" description="Volume" nom="Calculer le volume d'un pavé droit"/>
-      <exercice commande="sixieme_grandeurMesure_duree.LectureHorloge" description="Durée" nom="Lire l'heure sur une horloge"/>
-      <exercice commande="sixieme_grandeurMesure_duree.ConversionHeureMinute" description="Durée" nom="Convertir des heures en minutes et inversement"> 
+      <exercice commande="sixieme_grandeurMesure_angle.NatureQuestion" temps="10" description="Angle" nom="Donner la nature d'un angle à partir de sa mesure"/>
+      <exercice commande="sixieme_grandeurMesure_angle.NatureSchema" temps="10" description="Angle" nom="Donner la nature d'un angle à partir d'un schéma"/>
+      <exercice commande="sixieme_grandeurMesure_angle.MesureSimple" temps="10" description="Angle" nom="Donner la mesure d'un angle partant de 0 ou 180"/>
+      <exercice commande="sixieme_grandeurMesure_angle.MesureComplique" temps="10" description="Angle" nom="Donner la mesure d'un angle"/>
+      <exercice commande="sixieme_grandeurMesure_conversion.Conversion" temps="10" description="Unité" nom="Conversion d'unités de longueur"/>
+      <exercice commande="sixieme_grandeurMesure_conversion.ConversionAire" temps="10" description="Unité" nom="Conversion d'unités d'aire"/>
+      <exercice commande="sixieme_grandeurMesure_conversion.ConversionVolume" temps="10" description="Unité" nom="Conversion unités de volume"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Comptage" temps="10" description="Périmètre" nom="Donner le périmètre par comptage"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Carre" temps="10" description="Périmètre" nom="Calculer le périmètre d'un carré"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Rectangle" temps="10" description="Périmètre" nom="Calculer le périmètre d'un rectangle"/>
+      <exercice commande="sixieme_grandeurMesure_perimetre.Disque" temps="10" description="Périmètre" nom="Calculer le périmètre d'un cercle"/>   
+      <exercice commande="sixieme_grandeurMesure_aire.Comptage" temps="10" description="Aire" nom="Donner l'aire par comptage"/>
+      <exercice commande="sixieme_grandeurMesure_aire.Carre" temps="10" description="Aire" nom="Calculer l'aire d'un carré"/>
+      <exercice commande="sixieme_grandeurMesure_aire.Rectangle" temps="10" description="Aire" nom="Calculer l'aire d'un rectangle"/>
+      <exercice commande="sixieme_grandeurMesure_aire.TriangleRectangle" temps="10" description="Aire" nom="Calculer l'aire d'un triangle rectangle"/>
+      <exercice commande="sixieme_grandeurMesure_aire.Disque" temps="10" description="Aire" nom="Calculer l'aire d'un disque"/> 
+      <exercice commande="sixieme_grandeurMesure_volume.PaveDroit" temps="10" description="Volume" nom="Calculer le volume d'un pavé droit"/>
+      <exercice commande="sixieme_grandeurMesure_duree.LectureHorloge" temps="10" description="Durée" nom="Lire l'heure sur une horloge"/>
+      <exercice commande="sixieme_grandeurMesure_duree.ConversionHeureMinute" temps="10" description="Durée" nom="Convertir des heures en minutes et inversement"> 
         <parametre defaut="2" max="999" min="0" nom="Heure minimale"/>
         <parametre defaut="10" max="1000" min="1" nom="Heure maximale"/>
       </exercice>
-      <exercice commande="sixieme_grandeurMesure_duree.ConversionMinuteSeconde" description="Durée" nom="Convertir des minutes en secondes et inversement"> 
+      <exercice commande="sixieme_grandeurMesure_duree.ConversionMinuteSeconde" temps="10" description="Durée" nom="Convertir des minutes en secondes et inversement"> 
         <parametre defaut="2" max="999" min="0" nom="Minute minimale"/>
         <parametre defaut="10" max="1000" min="1" nom="Minute maximale"/>
       </exercice>
-      <exercice commande="sixieme_grandeurMesure_duree.AdditionHeure" description="Durée" nom="Addition posée d'heure"> 
+      <exercice commande="sixieme_grandeurMesure_duree.AdditionHeure" temps="10" description="Durée" nom="Addition posée d'heure"> 
        <parametre defaut="2" max="999" min="0" nom="Heure minimale"/>
         <parametre defaut="12" max="1000" min="1" nom="Heure maximale"/>
       </exercice>
-      <exercice commande="sixieme_grandeurMesure_duree.SoustractionHeure" description="Durée" nom="Soustraction posée d'heure"> 
+      <exercice commande="sixieme_grandeurMesure_duree.SoustractionHeure" temps="10" description="Durée" nom="Soustraction posée d'heure"> 
        <parametre defaut="2" max="999" min="0" nom="Heure minimale"/>
         <parametre defaut="12" max="1000" min="1" nom="Heure maximale"/>
       </exercice>
@@ -269,222 +269,222 @@
   </onglet>
   <onglet nom="Cinquième">
     <categorie nom="Gestion de données">
-      <exercice commande="cinquieme_gestionDonnee_abscisse.LireEntier" description="Repérage" nom="Abscisse entière relative d'un point">
+      <exercice commande="cinquieme_gestionDonnee_abscisse.LireEntier" temps="10" description="Repérage" nom="Abscisse entière relative d'un point">
         <parametre defaut="-8" max="-5" min="-10" nom="Abscisse minimale"/>
         <parametre defaut="8" max="10" min="5" nom="Abscisse maximale"/>
       </exercice>
-      <exercice commande="cinquieme_gestionDonnee_abscisse.LireDecimal" description="Repérage" nom="Abscisse décimale relative d'un point">
+      <exercice commande="cinquieme_gestionDonnee_abscisse.LireDecimal" temps="10" description="Repérage" nom="Abscisse décimale relative d'un point">
         <parametre defaut="-2" max="-1" min="-3" nom="Abscisse minimale"/>
         <parametre defaut="2" max="3" min="1" nom="Abscisse maximale"/>
       </exercice>
-      <exercice commande="cinquieme_gestionDonnee_abscisse.DistanceEntier" description="Repérage" nom="Distance entre 2 points d'abscisses entières relatives">
+      <exercice commande="cinquieme_gestionDonnee_abscisse.DistanceEntier" temps="10" description="Repérage" nom="Distance entre 2 points d'abscisses entières relatives">
         <parametre defaut="-8" max="-5" min="-10" nom="Abscisse minimale"/>
         <parametre defaut="8" max="10" min="5" nom="Abscisse maximale"/>
       </exercice>
-      <exercice commande="cinquieme_gestionDonnee_abscisse.DistanceDecimal" description="Repérage" nom="Distance entre 2 points d'abscisses décimales relatives">
+      <exercice commande="cinquieme_gestionDonnee_abscisse.DistanceDecimal" temps="10" description="Repérage" nom="Distance entre 2 points d'abscisses décimales relatives">
         <parametre defaut="-2" max="-1" min="-3" nom="Abscisse minimale"/>
         <parametre defaut="2" max="3" min="1" nom="Abscisse maximale"/>
       </exercice>
-      <exercice commande="cinquieme_gestionDonnee_plan.Lire" description="Repérage" nom="Lire les coordonnées d'un point"/>
+      <exercice commande="cinquieme_gestionDonnee_plan.Lire" temps="10" description="Repérage" nom="Lire les coordonnées d'un point"/>
     </categorie>
     <categorie nom="Nombres et Calculs">
-      <exercice commande="cinquieme_nombreCalcul_calcul.RelatifBinome" description="Calcul Litteral" nom="Calculer un binome avec un x relatif">
+      <exercice commande="cinquieme_nombreCalcul_calcul.RelatifBinome" temps="10" description="Calcul Litteral" nom="Calculer un binome avec un x relatif">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_calcul.FractionBinome" description="Calcul Litteral" nom="Calculer un binome avec un x fractionnaire">
+      <exercice commande="cinquieme_nombreCalcul_calcul.FractionBinome" temps="10" description="Calcul Litteral" nom="Calculer un binome avec un x fractionnaire">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_calcul.RelatifTrinome" description="Calcul Litteral" nom="Calculer un trinome avec un x relatif">
+      <exercice commande="cinquieme_nombreCalcul_calcul.RelatifTrinome" temps="10" description="Calcul Litteral" nom="Calculer un trinome avec un x relatif">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_calcul.FractionTrinome" description="Calcul Litteral" nom="Calculer un trinome avec un x fractionnaire">
+      <exercice commande="cinquieme_nombreCalcul_calcul.FractionTrinome" temps="10" description="Calcul Litteral" nom="Calculer un trinome avec un x fractionnaire">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_developpements.DistributiviteSimple" description="Calcul Littéral" nom="Développer une expression">
+      <exercice commande="cinquieme_nombreCalcul_developpements.DistributiviteSimple" temps="10" description="Calcul Littéral" nom="Développer une expression">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_developpements.CalculDistributivite" description="Calcul Littéral" nom="Calcul mental astucieux par développement">
+      <exercice commande="cinquieme_nombreCalcul_developpements.CalculDistributivite" temps="10" description="Calcul Littéral" nom="Calcul mental astucieux par développement">
         <parametre defaut="-10" max="100" min="-100" nom="Valeur minimale"/>
         <parametre defaut="20" max="100" min="-100" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_developpements.FactorisationSimple" description="Calcul Littéral" nom="Factorisation une expression">
+      <exercice commande="cinquieme_nombreCalcul_developpements.FactorisationSimple" temps="10" description="Calcul Littéral" nom="Factorisation une expression">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande3Entiere" description="Nombres Entiers" nom="Calcul avec 3 opérandes entières">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande3Entiere" temps="10" description="Nombres Entiers" nom="Calcul avec 3 opérandes entières">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande3EntiereParenthese" description="Nombres Entiers" nom="Calcul avec 3 opérandes entières avec parenthèses">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande3EntiereParenthese" temps="10" description="Nombres Entiers" nom="Calcul avec 3 opérandes entières avec parenthèses">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande4Entiere" description="Nombres Entiers" nom="Calcul avec 4 opérandes entières">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande4Entiere" temps="10" description="Nombres Entiers" nom="Calcul avec 4 opérandes entières">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande4EntiereParenthese" description="Nombres Entiers" nom="Calcul avec 4 opérandes entières avec parenthèses">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande4EntiereParenthese" temps="10" description="Nombres Entiers" nom="Calcul avec 4 opérandes entières avec parenthèses">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande5Entiere" description="Nombres Entiers" nom="Calcul avec 5 opérandes entières">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande5Entiere" temps="10" description="Nombres Entiers" nom="Calcul avec 5 opérandes entières">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande5EntiereParenthese" description="Nombres Entiers" nom="Calcul avec 5 opérandes entières avec parenthèses">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande5EntiereParenthese" temps="10" description="Nombres Entiers" nom="Calcul avec 5 opérandes entières avec parenthèses">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_ecrire.Expression" description="Nombres Entiers" nom="Écrire une expression">
+      <exercice commande="cinquieme_nombreCalcul_ecrire.Expression" temps="10" description="Nombres Entiers" nom="Écrire une expression">
         <parametre defaut="1" max="99" min="0" nom="Valeur minimale"/>
         <parametre defaut="50" max="100" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_ecrire.NomExpression" description="Nombres Entiers" nom="Écrire une suite de calcul">
+      <exercice commande="cinquieme_nombreCalcul_ecrire.NomExpression" temps="10" description="Nombres Entiers" nom="Écrire une suite de calcul">
         <parametre defaut="1" max="99" min="0" nom="Valeur minimale"/>
         <parametre defaut="50" max="100" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande3Decimale" description="Nombres Décimaux" nom="Calcul avec 3 opérandes décimales">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande3Decimale" temps="10" description="Nombres Décimaux" nom="Calcul avec 3 opérandes décimales">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande3DecimaleParenthese" description="Nombres Décimaux" nom="Calcul avec 3 opérandes décimales avec parenthèses">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande3DecimaleParenthese" temps="10" description="Nombres Décimaux" nom="Calcul avec 3 opérandes décimales avec parenthèses">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande4Decimale" description="Nombres Décimaux" nom="Calcul avec 4 opérandes décimales">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande4Decimale" temps="10" description="Nombres Décimaux" nom="Calcul avec 4 opérandes décimales">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande4DecimaleParenthese" description="Nombres Décimaux" nom="Calcul avec 4 opérandes décimales avec parenthèses">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande4DecimaleParenthese" temps="10" description="Nombres Décimaux" nom="Calcul avec 4 opérandes décimales avec parenthèses">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande5Decimale" description="Nombres Décimaux" nom="Calcul avec 5 opérandes décimales">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande5Decimale" temps="10" description="Nombres Décimaux" nom="Calcul avec 5 opérandes décimales">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_priorites.Operande5DecimaleParenthese" description="Nombres Décimaux" nom="Calcul avec 5 opérandes décimales avec parenthèses">
+      <exercice commande="cinquieme_nombreCalcul_priorites.Operande5DecimaleParenthese" temps="10" description="Nombres Décimaux" nom="Calcul avec 5 opérandes décimales avec parenthèses">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_numeration.Oppose" description="Nombres Relatifs" nom="Donner l'opposé d'un nombre relatif">
+      <exercice commande="cinquieme_nombreCalcul_numeration.Oppose" temps="10" description="Nombres Relatifs" nom="Donner l'opposé d'un nombre relatif">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_numeration.Signe" description="Nombres Relatifs" nom="Donner le signe d'un nombre relatif">
+      <exercice commande="cinquieme_nombreCalcul_numeration.Signe" temps="10" description="Nombres Relatifs" nom="Donner le signe d'un nombre relatif">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>  
-      <exercice commande="cinquieme_nombreCalcul_operations.Addition" description="Nombres Relatifs" nom="Addition d'entiers relatifs">
+      <exercice commande="cinquieme_nombreCalcul_operations.Addition" temps="10" description="Nombres Relatifs" nom="Addition d'entiers relatifs">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_operations.Soustraction" description="Nombres Relatifs" nom="Soustraction d'entiers relatifs">
+      <exercice commande="cinquieme_nombreCalcul_operations.Soustraction" temps="10" description="Nombres Relatifs" nom="Soustraction d'entiers relatifs">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_operations.Multiplication" description="Nombres Relatifs" nom="Multiplication d'entiers relatifs">
+      <exercice commande="cinquieme_nombreCalcul_operations.Multiplication" temps="10" description="Nombres Relatifs" nom="Multiplication d'entiers relatifs">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_operations.Division" description="Nombres Relatifs" nom="Division d'entiers relatifs">
+      <exercice commande="cinquieme_nombreCalcul_operations.Division" temps="10" description="Nombres Relatifs" nom="Division d'entiers relatifs">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_operations.ComplementAddition" description="Nombres Relatifs" nom="Complement additif d'entiers relatifs">
+      <exercice commande="cinquieme_nombreCalcul_operations.ComplementAddition" temps="10" description="Nombres Relatifs" nom="Complement additif d'entiers relatifs">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_operations.ComplementSoustraction" description="Nombres Relatifs" nom="Complement soustractif d'entiers relatifs">
+      <exercice commande="cinquieme_nombreCalcul_operations.ComplementSoustraction" temps="10" description="Nombres Relatifs" nom="Complement soustractif d'entiers relatifs">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_operations.ComplementMultiplication" description="Nombres Relatifs" nom="Complement multiplicatif d'entiers relatifs">
+      <exercice commande="cinquieme_nombreCalcul_operations.ComplementMultiplication" temps="10" description="Nombres Relatifs" nom="Complement multiplicatif d'entiers relatifs">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_operations.ComplementDivision" description="Nombres Relatifs" nom="Complement divisif d'entiers relatifs">
+      <exercice commande="cinquieme_nombreCalcul_operations.ComplementDivision" temps="10" description="Nombres Relatifs" nom="Complement divisif d'entiers relatifs">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_egale.Fraction" description="Fractions" nom="Fractions égales">
+      <exercice commande="cinquieme_nombreCalcul_egale.Fraction" temps="10" description="Fractions" nom="Fractions égales">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_simplifier.Fraction" description="Fractions" nom="Simplifier une fraction">
+      <exercice commande="cinquieme_nombreCalcul_simplifier.Fraction" temps="10" description="Fractions" nom="Simplifier une fraction">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_simplifier.Decimal" description="Fractions" nom="Convertir un décimal en fraction irréductible">
+      <exercice commande="cinquieme_nombreCalcul_simplifier.Decimal" temps="10" description="Fractions" nom="Convertir un décimal en fraction irréductible">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_somme.RelatifCommun" description="Fractions" nom="Somme de fractions avec le dénominateur commun">
+      <exercice commande="cinquieme_nombreCalcul_somme.RelatifCommun" temps="10" description="Fractions" nom="Somme de fractions avec le dénominateur commun">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_somme.RelatifMultiple" description="Fractions" nom="Somme de fractions avec dénominateur multiple">
+      <exercice commande="cinquieme_nombreCalcul_somme.RelatifMultiple" temps="10" description="Fractions" nom="Somme de fractions avec dénominateur multiple">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_somme.Relatif" description="Fractions" nom="Somme de fractions">
+      <exercice commande="cinquieme_nombreCalcul_somme.Relatif" temps="10" description="Fractions" nom="Somme de fractions">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_somme.RelatifSimplifiable" description="Fractions" nom="Somme de fractions avec resultat simplifiable">
+      <exercice commande="cinquieme_nombreCalcul_somme.RelatifSimplifiable" temps="10" description="Fractions" nom="Somme de fractions avec resultat simplifiable">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_difference.RelatifCommun" description="Fractions" nom="Différence de fractions avec le dénominateur commun">
+      <exercice commande="cinquieme_nombreCalcul_difference.RelatifCommun" temps="10" description="Fractions" nom="Différence de fractions avec le dénominateur commun">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_difference.RelatifMultiple" description="Fractions" nom="Différence de fractions avec dénominateur multiple">
+      <exercice commande="cinquieme_nombreCalcul_difference.RelatifMultiple" temps="10" description="Fractions" nom="Différence de fractions avec dénominateur multiple">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_difference.Relatif" description="Fractions" nom="Différence de fractions">
+      <exercice commande="cinquieme_nombreCalcul_difference.Relatif" temps="10" description="Fractions" nom="Différence de fractions">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_difference.RelatifSimplifiable" description="Fractions" nom="Différence de fractions avec resultat simplifiable">
+      <exercice commande="cinquieme_nombreCalcul_difference.RelatifSimplifiable" temps="10" description="Fractions" nom="Différence de fractions avec resultat simplifiable">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_produit.Relatif" description="Fractions" nom="Produit de fractions">
+      <exercice commande="cinquieme_nombreCalcul_produit.Relatif" temps="10" description="Fractions" nom="Produit de fractions">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_produit.RelatifSimplifiable" description="Fractions" nom="Produit de fractions avec resultat simplifiable">
+      <exercice commande="cinquieme_nombreCalcul_produit.RelatifSimplifiable" temps="10" description="Fractions" nom="Produit de fractions avec resultat simplifiable">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
     </categorie>
     <categorie nom="Géométrie">
-      <exercice commande="cinquieme_geometrie_angle.Supplementaire" description="Angle" nom="Calculer la valeur de l'angle supplémentaire"/>
-      <exercice commande="cinquieme_geometrie_angle.Complementaire" description="Angle" nom="Calculer la valeur de l'angle complémentaire"/>
-      <exercice commande="cinquieme_geometrie_angle.PaireAngle" description="Angle" nom="Position relative d'une paire d'angle (alterne-interne, supplémentaire...)"/>    
-      <exercice commande="cinquieme_geometrie_triangle.SommeQuelconque" description="Géometrie" nom="Somme des angles dans un triangle quelconque (texte)"/>
-      <exercice commande="cinquieme_geometrie_triangle.SommeQuelconqueSchema" description="Géometrie" nom="Somme des angles dans un triangle quelconque (schéma)"/>  
-      <exercice commande="cinquieme_geometrie_triangle.SommeIsocele" description="Géometrie" nom="Somme des angles dans un triangle isocèle (texte)"/>
-      <exercice commande="cinquieme_geometrie_triangle.SommeIsoceleSchema" description="Géometrie" nom="Somme des angles dans un triangle isocèle (schéma)"/>  
-      <exercice commande="cinquieme_geometrie_triangle.SommeRectangle" description="Géometrie" nom="Somme des angles dans un triangle rectangle (texte)"/>
-      <exercice commande="cinquieme_geometrie_triangle.SommeRectangleSchema" description="Géometrie" nom="Somme des angles dans un triangle rectangle (schéma)"/>    
-      <exercice commande="cinquieme_geometrie_triangle.ConstruireQuelconque" description="Géometrie" nom="Constructibilité d'un triangle quelconque (texte)"/>
-      <exercice commande="cinquieme_geometrie_triangle.ConstruireQuelconqueSchema" description="Géometrie" nom="Constructibilité d'un triangle quelconque (schema)"/>    
-      <exercice commande="cinquieme_geometrie_triangle.InequaliteTriangulaire" description="Géometrie" nom="Inégalité triangulaire (texte)"/>
+      <exercice commande="cinquieme_geometrie_angle.Supplementaire" temps="10" description="Angle" nom="Calculer la valeur de l'angle supplémentaire"/>
+      <exercice commande="cinquieme_geometrie_angle.Complementaire" temps="10" description="Angle" nom="Calculer la valeur de l'angle complémentaire"/>
+      <exercice commande="cinquieme_geometrie_angle.PaireAngle" temps="10" description="Angle" nom="Position relative d'une paire d'angle (alterne-interne, supplémentaire...)"/>    
+      <exercice commande="cinquieme_geometrie_triangle.SommeQuelconque" temps="10" description="Géometrie" nom="Somme des angles dans un triangle quelconque (texte)"/>
+      <exercice commande="cinquieme_geometrie_triangle.SommeQuelconqueSchema" temps="10" description="Géometrie" nom="Somme des angles dans un triangle quelconque (schéma)"/>  
+      <exercice commande="cinquieme_geometrie_triangle.SommeIsocele" temps="10" description="Géometrie" nom="Somme des angles dans un triangle isocèle (texte)"/>
+      <exercice commande="cinquieme_geometrie_triangle.SommeIsoceleSchema" temps="10" description="Géometrie" nom="Somme des angles dans un triangle isocèle (schéma)"/>  
+      <exercice commande="cinquieme_geometrie_triangle.SommeRectangle" temps="10" description="Géometrie" nom="Somme des angles dans un triangle rectangle (texte)"/>
+      <exercice commande="cinquieme_geometrie_triangle.SommeRectangleSchema" temps="10" description="Géometrie" nom="Somme des angles dans un triangle rectangle (schéma)"/>    
+      <exercice commande="cinquieme_geometrie_triangle.ConstruireQuelconque" temps="10" description="Géometrie" nom="Constructibilité d'un triangle quelconque (texte)"/>
+      <exercice commande="cinquieme_geometrie_triangle.ConstruireQuelconqueSchema" temps="10" description="Géometrie" nom="Constructibilité d'un triangle quelconque (schema)"/>    
+      <exercice commande="cinquieme_geometrie_triangle.InequaliteTriangulaire" temps="10" description="Géometrie" nom="Inégalité triangulaire (texte)"/>
     </categorie>
     <categorie nom="Grandeurs et mesures">
-      <exercice commande="cinquieme_grandeurMesure_aire.Parallelogramme" description="Aire" nom="Calculer l'aire d'un parallélogramme"/>
-      <exercice commande="cinquieme_grandeurMesure_aire.Triangle" description="Aire" nom="Calculer l'aire d'un triangle"/>
-      <exercice commande="cinquieme_grandeurMesure_volume.Cylindre" description="Volume" nom="Calculer le volume d'un cylindre"/>
-      <exercice commande="cinquieme_grandeurMesure_volume.PrismeTriangleRectangle" description="Volume" nom="Calculer le volume d'un prisme à base triangulaire rectangle"/>
-      <exercice commande="cinquieme_grandeurMesure_volume.PrismeTriangle" description="Volume" nom="Calculer le volume d'un prisme à base triangulaire"/>
+      <exercice commande="cinquieme_grandeurMesure_aire.Parallelogramme" temps="10" description="Aire" nom="Calculer l'aire d'un parallélogramme"/>
+      <exercice commande="cinquieme_grandeurMesure_aire.Triangle" temps="10" description="Aire" nom="Calculer l'aire d'un triangle"/>
+      <exercice commande="cinquieme_grandeurMesure_volume.Cylindre" temps="10" description="Volume" nom="Calculer le volume d'un cylindre"/>
+      <exercice commande="cinquieme_grandeurMesure_volume.PrismeTriangleRectangle" temps="10" description="Volume" nom="Calculer le volume d'un prisme à base triangulaire rectangle"/>
+      <exercice commande="cinquieme_grandeurMesure_volume.PrismeTriangle" temps="10" description="Volume" nom="Calculer le volume d'un prisme à base triangulaire"/>
     </categorie>
   </onglet>
   <onglet nom="Quatrième">
@@ -493,139 +493,139 @@
 
     </categorie>
     <categorie nom="Nombres et Calculs">
-      <exercice commande="quatrieme_nombreCalcul_quotient.Relatif" description="Fractions" nom="Quotient de fractions">
+      <exercice commande="quatrieme_nombreCalcul_quotient.Relatif" temps="10" description="Fractions" nom="Quotient de fractions">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_quotient.RelatifSimplifiable" description="Fractions" nom="Quotient de fractions avec resultat simplifiable">
+      <exercice commande="quatrieme_nombreCalcul_quotient.RelatifSimplifiable" temps="10" description="Fractions" nom="Quotient de fractions avec resultat simplifiable">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_priorite.Relatif3Operande" description="Fractions" nom="Priorités fractionnaires à 3 opérandes">
+      <exercice commande="quatrieme_nombreCalcul_priorite.Relatif3Operande" temps="10" description="Fractions" nom="Priorités fractionnaires à 3 opérandes">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_priorite.Relatif4Operande" description="Fractions" nom="Priorités fractionnaires à 4 opérandes">
+      <exercice commande="quatrieme_nombreCalcul_priorite.Relatif4Operande" temps="10" description="Fractions" nom="Priorités fractionnaires à 4 opérandes">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_puissance.produitNombreIdentique" description="Puissance" nom="Produit de puissance (même nombre)">
+      <exercice commande="quatrieme_nombreCalcul_puissance.produitNombreIdentique" temps="10" description="Puissance" nom="Produit de puissance (même nombre)">
         <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
         <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_puissance.produitExposantIdentique" description="Puissance" nom="Produit de puissance (même exposant)">
+      <exercice commande="quatrieme_nombreCalcul_puissance.produitExposantIdentique" temps="10" description="Puissance" nom="Produit de puissance (même exposant)">
         <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
         <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_puissance.quotient" description="Puissance" nom="Quotient de puissance">
+      <exercice commande="quatrieme_nombreCalcul_puissance.quotient" temps="10" description="Puissance" nom="Quotient de puissance">
         <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
         <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_puissance.puissance" description="Puissance" nom="Puissance de puissance">
+      <exercice commande="quatrieme_nombreCalcul_puissance.puissance" temps="10" description="Puissance" nom="Puissance de puissance">
         <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
         <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_puissance.produitDix" description="Puissance" nom="Produit de puissance de 10">
+      <exercice commande="quatrieme_nombreCalcul_puissance.produitDix" temps="10" description="Puissance" nom="Produit de puissance de 10">
         <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
         <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_puissance.quotientDix" description="Puissance" nom="Quotient de puissance de 10">
+      <exercice commande="quatrieme_nombreCalcul_puissance.quotientDix" temps="10" description="Puissance" nom="Quotient de puissance de 10">
         <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
         <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_puissance.puissanceDix" description="Puissance" nom="Puissance de puissance de 10">
+      <exercice commande="quatrieme_nombreCalcul_puissance.puissanceDix" temps="10" description="Puissance" nom="Puissance de puissance de 10">
         <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
         <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_ecritureScientifique.ecritureScientifique" description="Puissance" nom="Écriture scientifique"/>
-      <exercice commande="quatrieme_nombreCalcul_reduction.somme" description="Calcul Litteral" nom="Réduction de somme (2 termes)">
+      <exercice commande="quatrieme_nombreCalcul_ecritureScientifique.ecritureScientifique" temps="10" description="Puissance" nom="Écriture scientifique"/>
+      <exercice commande="quatrieme_nombreCalcul_reduction.somme" temps="10" description="Calcul Litteral" nom="Réduction de somme (2 termes)">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_reduction.expressionSomme" description="Calcul Litteral" nom="Réduction de somme (3 termes)">
+      <exercice commande="quatrieme_nombreCalcul_reduction.expressionSomme" temps="10" description="Calcul Litteral" nom="Réduction de somme (3 termes)">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_reduction.produit" description="Calcul Litteral" nom="Réduction de produit (2 termes)">
+      <exercice commande="quatrieme_nombreCalcul_reduction.produit" temps="10" description="Calcul Litteral" nom="Réduction de produit (2 termes)">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_reduction.expressionProduit" description="Calcul Litteral" nom="Réduction de produit (3 termes)">
+      <exercice commande="quatrieme_nombreCalcul_reduction.expressionProduit" temps="10" description="Calcul Litteral" nom="Réduction de produit (3 termes)">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_reduction.expressionSommeProduit" description="Calcul Litteral" nom="Réduction de somme/produit (3 termes)">
+      <exercice commande="quatrieme_nombreCalcul_reduction.expressionSommeProduit" temps="10" description="Calcul Litteral" nom="Réduction de somme/produit (3 termes)">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_developpements.DistributiviteSimple" description="Calcul Litteral" nom="Développement d'une simple distributivité">
+      <exercice commande="quatrieme_nombreCalcul_developpements.DistributiviteSimple" temps="10" description="Calcul Litteral" nom="Développement d'une simple distributivité">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_developpements.DistributiviteDouble" description="Calcul Litteral" nom="Développement d'une double distributivité">
+      <exercice commande="quatrieme_nombreCalcul_developpements.DistributiviteDouble" temps="10" description="Calcul Litteral" nom="Développement d'une double distributivité">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_equation.BiTerme" description="Equation" nom="Résoudre une équation de la forme a*x=b">
+      <exercice commande="quatrieme_nombreCalcul_equation.BiTerme" temps="10" description="Equation" nom="Résoudre une équation de la forme a*x=b">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_equation.TriTerme" description="Equation" nom="Résoudre une équation de la forme x + b = c">
+      <exercice commande="quatrieme_nombreCalcul_equation.TriTerme" temps="10" description="Equation" nom="Résoudre une équation de la forme x + b = c">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_equation.QuadriTerme" description="Equation" nom="Résoudre une équation de la forme a*x + b = c*x +d">
+      <exercice commande="quatrieme_nombreCalcul_equation.QuadriTerme" temps="10" description="Equation" nom="Résoudre une équation de la forme a*x + b = c*x +d">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
     </categorie>
     <categorie nom="Géométrie">
-      <exercice commande="quatrieme_geometrie_triangle.PythagoreTexte" description="Geometrie" nom="Théorème de Pythagore (version texte)">
+      <exercice commande="quatrieme_geometrie_triangle.PythagoreTexte" temps="10" description="Geometrie" nom="Théorème de Pythagore (version texte)">
         <parametre defaut="20" max="1000" min="10" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_geometrie_triangle.PythagoreSchema" description="Geometrie" nom="Théorème de Pythagore (version schema)">
+      <exercice commande="quatrieme_geometrie_triangle.PythagoreSchema" temps="10" description="Geometrie" nom="Théorème de Pythagore (version schema)">
         <parametre defaut="20" max="1000" min="10" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_geometrie_triangle.DroiteMilieu" description="Geometrie" nom="Propriété des milieux">
+      <exercice commande="quatrieme_geometrie_triangle.DroiteMilieu" temps="10" description="Geometrie" nom="Propriété des milieux">
         <parametre defaut="1" max="1000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="5" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_geometrie_triangle.DroiteParticuliere" description="Géometrie" nom="Reconnaître les droites particulières du triangle"/>
+      <exercice commande="quatrieme_geometrie_triangle.DroiteParticuliere" temps="10" description="Géometrie" nom="Reconnaître les droites particulières du triangle"/>
     </categorie>
     <categorie nom="Grandeurs et mesures">
-      <exercice commande="quatrieme_grandeurMesure_perimetre.Carre" description="Périmètre" nom="Donner la mesure du côté d'un carré à partir de son périmètre">
+      <exercice commande="quatrieme_grandeurMesure_perimetre.Carre" temps="10" description="Périmètre" nom="Donner la mesure du côté d'un carré à partir de son périmètre">
         <parametre defaut="2" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="0" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_grandeurMesure_aire.Carre" description="Aire" nom="Donner la mesure du côté d'un carré à partir de son aire">
+      <exercice commande="quatrieme_grandeurMesure_aire.Carre" temps="10" description="Aire" nom="Donner la mesure du côté d'un carré à partir de son aire">
         <parametre defaut="2" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="0" nom="Valeur maximale"/>
       </exercice>
-     <exercice commande="quatrieme_grandeurMesure_perimetre.Rectangle" description="Périmètre" nom="Donner la mesure du côté d'un rectangle à partir de son périmètre">
+     <exercice commande="quatrieme_grandeurMesure_perimetre.Rectangle" temps="10" description="Périmètre" nom="Donner la mesure du côté d'un rectangle à partir de son périmètre">
         <parametre defaut="2" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="0" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_grandeurMesure_aire.Rectangle" description="Aire" nom="Donner la mesure du côté d'un rectangle à partir de son aire">
+      <exercice commande="quatrieme_grandeurMesure_aire.Rectangle" temps="10" description="Aire" nom="Donner la mesure du côté d'un rectangle à partir de son aire">
         <parametre defaut="2" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="0" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_grandeurMesure_perimetre.Disque" description="Périmètre" nom="Donner la mesure du rayon d'un disque à partir de son périmètre">
+      <exercice commande="quatrieme_grandeurMesure_perimetre.Disque" temps="10" description="Périmètre" nom="Donner la mesure du rayon d'un disque à partir de son périmètre">
         <parametre defaut="2" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="0" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_grandeurMesure_aire.Disque" description="Aire" nom="Donner la mesure du rayon d'un disque à partir de son aire">
+      <exercice commande="quatrieme_grandeurMesure_aire.Disque" temps="10" description="Aire" nom="Donner la mesure du rayon d'un disque à partir de son aire">
         <parametre defaut="2" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="0" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_grandeurMesure_volume.PyramideRectangle" description="Volume" nom="Calculer le volume d'une pyramide à base rectangulaire">
+      <exercice commande="quatrieme_grandeurMesure_volume.PyramideRectangle" temps="10" description="Volume" nom="Calculer le volume d'une pyramide à base rectangulaire">
         <parametre defaut="2" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="0" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_grandeurMesure_volume.PyramideTriangle" description="Volume" nom="Calculer le volume d'une pyramide à base triangulaire">
+      <exercice commande="quatrieme_grandeurMesure_volume.PyramideTriangle" temps="10" description="Volume" nom="Calculer le volume d'une pyramide à base triangulaire">
         <parametre defaut="2" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_grandeurMesure_volume.Cone" description="Volume" nom="Calculer le volume d'un cône">
+      <exercice commande="quatrieme_grandeurMesure_volume.Cone" temps="10" description="Volume" nom="Calculer le volume d'un cône">
         <parametre defaut="2" max="1000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
@@ -636,71 +636,71 @@
 
     </categorie>
     <categorie nom="Nombres et Calculs">
-      <exercice commande="troisieme_nombreCalcul_developpements.CarreSomme" description="Calcul Litteral" nom="Développement du carré d'une somme">
+      <exercice commande="troisieme_nombreCalcul_developpements.CarreSomme" temps="10" description="Calcul Litteral" nom="Développement du carré d'une somme">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_developpements.CarreDifference" description="Calcul Litteral" nom="Développement du carré d'une différence">
+      <exercice commande="troisieme_nombreCalcul_developpements.CarreDifference" temps="10" description="Calcul Litteral" nom="Développement du carré d'une différence">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_developpements.ProduitMixte" description="Calcul Litteral" nom="Développement d'un produit mixte">
+      <exercice commande="troisieme_nombreCalcul_developpements.ProduitMixte" temps="10" description="Calcul Litteral" nom="Développement d'un produit mixte">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_factorisations.Type0" description="Calcul Litteral" nom="Factorisation par facteur commun (ax+b)(cx+d)+(ax+b)">
+      <exercice commande="troisieme_nombreCalcul_factorisations.Type0" temps="10" description="Calcul Litteral" nom="Factorisation par facteur commun (ax+b)(cx+d)+(ax+b)">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_factorisations.Type1" description="Calcul Litteral" nom="Factorisation par facteur commun (ax+b)(cx+d)+(ax+b)e">
+      <exercice commande="troisieme_nombreCalcul_factorisations.Type1" temps="10" description="Calcul Litteral" nom="Factorisation par facteur commun (ax+b)(cx+d)+(ax+b)e">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_factorisations.Type2" description="Calcul Litteral" nom="Factorisation par facteur commun (ax+b)(cx+d)+(ax+b)(ex+f)">
+      <exercice commande="troisieme_nombreCalcul_factorisations.Type2" temps="10" description="Calcul Litteral" nom="Factorisation par facteur commun (ax+b)(cx+d)+(ax+b)(ex+f)">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_factorisations.Type3" description="Calcul Litteral" nom="Factorisation par facteur commun (ax+b)(cx+d)+(ax+b)²">
+      <exercice commande="troisieme_nombreCalcul_factorisations.Type3" temps="10" description="Calcul Litteral" nom="Factorisation par facteur commun (ax+b)(cx+d)+(ax+b)²">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_factorisations.Type4" description="Calcul Litteral" nom="Factorisation par identitée a²-b²">
+      <exercice commande="troisieme_nombreCalcul_factorisations.Type4" temps="10" description="Calcul Litteral" nom="Factorisation par identitée a²-b²">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_factorisations.Type5" description="Calcul Litteral" nom="Factorisation par identitée b²-(x-a)²">
+      <exercice commande="troisieme_nombreCalcul_factorisations.Type5" temps="10" description="Calcul Litteral" nom="Factorisation par identitée b²-(x-a)²">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_factorisations.Type6" description="Calcul Litteral" nom="Factorisation par identitée ax²+bx+c">
+      <exercice commande="troisieme_nombreCalcul_factorisations.Type6" temps="10" description="Calcul Litteral" nom="Factorisation par identitée ax²+bx+c">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_factorisations.Type7" description="Calcul Litteral" nom="Factorisation par identitée ax²-bx +c">
+      <exercice commande="troisieme_nombreCalcul_factorisations.Type7" temps="10" description="Calcul Litteral" nom="Factorisation par identitée ax²-bx +c">
         <parametre defaut="1" max="100000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="2" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_secondDegre.Produit" description="Équation" nom="Équation Produit">
+      <exercice commande="troisieme_nombreCalcul_secondDegre.Produit" temps="10" description="Équation" nom="Équation Produit">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_modification.CarreParfait" description="Racine Carré" nom="Racine carrée d'un carré parfait">
+      <exercice commande="troisieme_nombreCalcul_modification.CarreParfait" temps="10" description="Racine Carré" nom="Racine carrée d'un carré parfait">
         <parametre defaut="10" max="999" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_modification.Simplifier" description="Racine Carré" nom="Simplifier une racine">
+      <exercice commande="troisieme_nombreCalcul_modification.Simplifier" temps="10" description="Racine Carré" nom="Simplifier une racine">
         <parametre defaut="10" max="999" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_operation.Addition" description="Racine Carré" nom="Addition de racine carrée">
+      <exercice commande="troisieme_nombreCalcul_operation.Addition" temps="10" description="Racine Carré" nom="Addition de racine carrée">
         <parametre defaut="10" max="999" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_operation.Soustraction" description="Racine Carré" nom="Soustraction de racine carrée">
+      <exercice commande="troisieme_nombreCalcul_operation.Soustraction" temps="10" description="Racine Carré" nom="Soustraction de racine carrée">
         <parametre defaut="10" max="999" min="0" nom="Valeur minimale"/>
         <parametre defaut="100" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="troisieme_nombreCalcul_operation.Multiplication" description="Racine Carré" nom="Multiplication de racine carrée">
+      <exercice commande="troisieme_nombreCalcul_operation.Multiplication" temps="10" description="Racine Carré" nom="Multiplication de racine carrée">
         <parametre defaut="2" max="999" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="1" nom="Valeur maximale"/>
       </exercice>

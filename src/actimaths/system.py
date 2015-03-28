@@ -43,13 +43,12 @@ def create_config_file():
     etree.SubElement(child, "titre_fiche").text=u"Activite Mentale"
     etree.SubElement(child, "nom_etablissement").text=u"Établissement X"
     etree.SubElement(child, "nom_auteur").text="Mr. X"
-    etree.SubElement(child, "temps_slide").text="10"
     etree.SubElement(child, "sujet_presentation").text="True"
     etree.SubElement(child, "corrige_presentation").text="True"
-    etree.SubElement(child, "modele_presentation").text="BiColonneIdentique"
+    etree.SubElement(child, "modele_presentation").text="monoColonneCompteur(2)"
     etree.SubElement(child, "sujet_page").text="True"
     etree.SubElement(child, "corrige_page").text="True"
-    etree.SubElement(child, "modele_page").text="BiColonneIdentique"
+    etree.SubElement(child, "modele_page").text="monoColonne"
     etree.SubElement(child, "environnement").text="actimaths"
     etree.SubElement(child, "affichage").text="niveau"
     etree.SubElement(child, "creer_pdf").text="True"
@@ -151,6 +150,7 @@ def lire_liste_exercice(file):
             for exercice in categorie.iter("exercice"):
                 nom_exercice = exercice.get("nom")
                 commande_exercice = exercice.get("commande")
+                temps_exercice = exercice.get("temps")
                 liste_parametre = []
                 for parametre in exercice.iter("parametre"):
                     nom_parametre = parametre.get("nom")
@@ -158,7 +158,7 @@ def lire_liste_exercice(file):
                     max_parametre = parametre.get("max")
                     defaut_parametre = parametre.get("defaut")
                     liste_parametre.append([nom_parametre, min_parametre, max_parametre, defaut_parametre])
-                liste_exercice.append([nom_exercice, liste_parametre, commande_exercice])
+                liste_exercice.append([nom_exercice, liste_parametre, commande_exercice, temps_exercice])
             liste_categorie.append([nom_categorie, liste_exercice])
         liste.append([nom_onglet, liste_categorie])
     return liste
