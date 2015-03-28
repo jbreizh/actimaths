@@ -60,7 +60,7 @@ def creation_exercice(environnement,commande,valeur_parametre):
                   'chemin_fichier': '/tmp/',
                   'environnement': environnement,
                   'affichage': 'niveau',
-                  'modele_presentation': 'Vignette',
+                  'modele_presentation': 'vignette',
                   'modele_page': '',
                   'creer_pdf': True,
                   'effacer_tex': True,
@@ -74,7 +74,7 @@ def creation_vignette(environnement,commande):
     if environnement == 'pyromaths':
         call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf", "-alpha", "Opaque", "-resize", "25%", "-crop", "710x560+0+0", "-fuzz" , "1%" ,"-trim", "-resize", "200x70!", "/tmp/%s.jpg" % commande])
     elif environnement == 'actimaths':
-        call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf[1]", "-alpha", "Opaque", "-resize", "25%", "-crop", "182x210+0+40", "-fuzz" , "1%" ,"-trim", "-resize", "200x70!", "/tmp/%s.jpg" % commande])
+        call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf", "-alpha", "Opaque", "-resize", "25%", "-crop", "182x210+0+40", "-fuzz" , "1%" ,"-trim", "-resize", "200x70!", "/tmp/%s.jpg" % commande])
 
 ###==============================================================
 ###                            Main

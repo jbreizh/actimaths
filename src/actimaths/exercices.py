@@ -138,15 +138,12 @@ def generation(parametres, temps, question, enonce, correction, fiche, type):
             affichage_pdf(dossierTex, nomTex)
 
 ############## Copie des modèles latex en remplacant certaines variables
-def copie_modele(tex, parametres, type, master, texte=''):
+def copie_modele(tex, parametres, type, master, texte_original='', texte_identique='', texte_inverse=''):
     ## Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
     etablissement = parametres['nom_etablissement']
     auteur = parametres['nom_auteur']
-    tempsslide = parametres['temps_slide']
-    tempscompteur = str(float(parametres['temps_slide'])/3)
-    tempsframe = str(50/float(parametres['temps_slide']))
     dateactivite = parametres['date_activite']
     ## ouverture du modele
     source = join(DATADIR, 'modeles', parametres['environnement'],type, parametres['modele_%s' % type] + '.tex' )
@@ -156,10 +153,10 @@ def copie_modele(tex, parametres, type, master, texte=''):
     master_fin = '% fin ' + master
     n = 0
     for ligne in modele:
-        # 
+        # On arrete la copie
         if master_fin in ligne:
             break
-        # 
+        # On copie
         if n > 0:
             # Substitution des variables
             variableSubstituableListe = findall('##{{[A-Z]*}}##',ligne)
@@ -167,14 +164,26 @@ def copie_modele(tex, parametres, type, master, texte=''):
                 for variableSubstituable in variableSubstituableListe:
                     occ = variableSubstituable[ 4 : len(variableSubstituable)- 4 ].lower()
                     ligne = ligne.replace(variableSubstituable, eval(occ))
-            # Substitution du texte
-            texteSubstituableListe = findall('##{{[0-9]*}}##',ligne)
+            # Substitution du texte original
+            texteSubstituableListe = findall('##{{ORIGINAL[0-9]*}}##',ligne)
             if texteSubstituableListe:
                 for texteSubstituable in texteSubstituableListe:
-                    occ = texteSubstituable[ 4 : len(texteSubstituable)- 4 ]
-                    ligne = ligne.replace(texteSubstituable, texte[int(occ)])
+                    occ = texteSubstituable[ 12 : len(texteSubstituable)- 4 ]
+                    ligne = ligne.replace(texteSubstituable, texte_original[int(occ)])
+            # Substitution du texte identique
+            texteSubstituableListe = findall('##{{IDENTIQUE[0-9]*}}##',ligne)
+            if texteSubstituableListe:
+                for texteSubstituable in texteSubstituableListe:
+                    occ = texteSubstituable[ 13 : len(texteSubstituable)- 4 ]
+                    ligne = ligne.replace(texteSubstituable, texte_identique[int(occ)])
+            # Substitution du texte inverse
+            texteSubstituableListe = findall('##{{INVERSE[0-9]*}}##',ligne)
+            if texteSubstituableListe:
+                for texteSubstituable in texteSubstituableListe:
+                    occ = texteSubstituable[ 11 : len(texteSubstituable)- 4 ]
+                    ligne = ligne.replace(texteSubstituable, texte_inverse[int(occ)])
             tex.write(ligne)
-        # 
+        # On peut débuter la copie
         if master_debut in ligne:
             n = 1
     modele.close()
@@ -186,13 +195,13 @@ def creation_latex(tex, parametres, temps, question, enonce, correction, fiche, 
     longueur_liste_exercice = len(question[0])
     ## Copie du corps
     for numero in range(longueur_liste_exercice):
-        # Enoncé des exercices pour la substitution (original, inverse et original(2))
+        # Enoncé des exercices pour la substitution (original, inverse et indentique)
         inverse = longueur_liste_exercice - numero - 1
-        texte = [str(temps[0][numero]) , str(numero + 1) , question[0][numero]  , enonce[0][numero] , correction[0][numero] ,
-                 str(temps[0][inverse]), str(inverse + 1), question[0][inverse] , enonce[0][inverse], correction[0][inverse],
-                 str(temps[1][numero]) , str(numero + 1) , question[1][numero]  , enonce[1][numero] , correction[1][numero]]
+        texte_original = [question[0][numero] , enonce[0][numero] , correction[0][numero] , str(numero + 1) , str(temps[0][numero]) , str(float(temps[0][numero])/3) , str(50/float(temps[0][numero])) ]
+        texte_identique = [question[1][numero], enonce[1][numero] , correction[1][numero] , str(numero + 1) , str(temps[0][numero]) , str(float(temps[0][numero])/3) , str(50/float(temps[0][numero])) ]
+        texte_inverse = [question[0][inverse] , enonce[0][inverse], correction[0][inverse], str(inverse + 1), str(temps[0][inverse]), str(float(temps[0][inverse])/3), str(50/float(temps[0][inverse]))]
         # Copie de l'exercice
-        copie_modele(tex, parametres, type, fiche, texte)
+        copie_modele(tex, parametres, type, fiche, texte_original, texte_identique, texte_inverse)
     ## Copie du pied
     copie_modele(tex, parametres, type, 'pied')
 

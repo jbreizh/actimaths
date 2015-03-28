@@ -24,13 +24,6 @@
 \institute{##{{ETABLISSEMENT}}##}
 \date{##{{DATEACTIVITE}}##}
 
-% Fonction
-\newcommand \question{
-  \refstepcounter{exo}
-  \stepcounter{nocalcul}
-  \frametitle{Question \theexo}
-  \transduration{##{{TEMPSSLIDE}}##}}
-
 % Theme
 \usetheme{Warsaw}
 \setbeamertemplate{navigation symbols}{}
@@ -38,8 +31,6 @@
 \setbeamersize{text margin right=0.5cm}
 
 \begin{document}
-\newcounter{nocalcul}[exo]
-\renewcommand{\thenocalcul}{\Alph{nocalcul}}
 
 % fin entete
 
@@ -47,21 +38,19 @@
 % sujet
 
 \begin{frame}
-\question{}
-\only<2->{
+\frametitle{Question ##{{ORIGINAL3}}##}
 \begin{columns}[t]
-    \begin{column}{.5\textwidth}
-        \begin{exampleblock}{##{{2}}##}
-            ##{{3}}##
-        \end{exampleblock}
-     \end{column}
-    \begin{column}{.5\textwidth}
-        \begin{alertblock}{##{{7}}##}
-            ##{{8}}##
-        \end{alertblock}
+   \begin{column}{.5\textwidth}
+      \begin{exampleblock}{##{{ORIGINAL0}}##}
+         ##{{ORIGINAL1}}##
+       \end{exampleblock}
     \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{alertblock}{##{{IDENTIQUE0}}##}
+         ##{{IDENTIQUE1}}##
+      \end{alertblock}
+   \end{column}
 \end{columns}
-}
 \end{frame}
 
 % fin sujet
@@ -76,4 +65,4 @@
 % pied
 
 \end{document}
-%fin pied
+% fin pied

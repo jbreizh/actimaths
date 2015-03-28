@@ -25,29 +25,39 @@
 \institute{##{{ETABLISSEMENT}}##}
 \date{##{{DATEACTIVITE}}##}
 
-% Fonction
-\newcounter{exo}
+% Theme
+\usetheme{Warsaw}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.5cm}
+\setbeamersize{text margin right=0.5cm}
 
-\newcommand \question{
-  \only<1>{
-    \refstepcounter{exo}
-	\stepcounter{nocalcul}
-	\begin{center}
-		\begin{minipage}{50mm}
-		      \begin{block}{}
-		            \begin{center}
-		                  \textbf{Question \theexo}
-		            \end{center}
-		      \end{block}
-		\end{minipage}
-	\end{center}
-    \transduration{1}}
-  \only<2>{
-    \frametitle{Question \theexo \hfill \progress}
-    \transduration{2}}}
+\begin{document}
 
-\newcommand \progress{
-  \begin{animateinline}[poster=none, autoplay]{##{{TEMPSFRAME}}##}
+\begin{frame}
+	\titlepage
+\end{frame}
+
+% fin entete
+
+
+% sujet
+
+\begin{frame}
+\only<1>{
+\begin{center}
+   \begin{minipage}{50mm}
+      \begin{block}{}
+         \begin{center}
+            \textbf{Question ##{{ORIGINAL3}}##} \newline
+             Vous avez ##{{ORIGINAL4}}## secondes
+         \end{center}
+      \end{block}
+   \end{minipage}
+\end{center}
+\transduration{1}}
+\only<2->{
+\frametitle{Question ##{{ORIGINAL3}}## \hfill 
+  \begin{animateinline}[poster=none, autoplay]{##{{ORIGINAL6}}##}
     \multiframe{50}{i=1+1,dbleu=0.1cm+0.1cm}{%
       \begin{pspicture}(0,0)(5,0.5)
         \psframe*[linecolor=white,framearc=0.2](0,0)(5,0.3)
@@ -64,53 +74,13 @@
           \rput[b](2.5,0){Attention !!!}
         \fi
       \end{pspicture}}
-  \end{animateinline}}
-
-\newcommand \corrige{
-  \only<1>{
-    \refstepcounter{exo}
-	\stepcounter{nocalcul}
-	\begin{center}
-		\begin{minipage}{50mm}
-		      \begin{block}{}
-		            \begin{center}
-		                  \textbf{Corrigé \theexo}
-		            \end{center}
-		      \end{block}
-		\end{minipage}
-	\end{center}}
-  \only<2>{
-    \frametitle{Corrigé \theexo}}}
-
-% Theme
-\usetheme{Warsaw}
-\setbeamertemplate{navigation symbols}{}
-\setbeamersize{text margin left=0.5cm}
-\setbeamersize{text margin right=0.5cm}
-
-\begin{document}
-\newcounter{nocalcul}[exo]
-\renewcommand{\thenocalcul}{\Alph{nocalcul}}
-
-\begin{frame}
-	\titlepage
-	\begin{center}
-	Vous avez ##{{TEMPSSLIDE}}## secondes par question
-	\end{center}
-\end{frame}
-
-% fin entete
-
-
-% sujet
-
-\begin{frame}
-\question{}
-\only<2->{
-\begin{exampleblock}{##{{2}}##}
-    ##{{3}}##
-\end{exampleblock}
+  \end{animateinline}
 }
+\transduration{2}
+
+\begin{exampleblock}{##{{ORIGINAL0}}##}
+    ##{{ORIGINAL1}}##
+\end{exampleblock}}
 \end{frame}
 
 % fin sujet
@@ -119,12 +89,22 @@
 % corrige
 
 \begin{frame}
-\corrige{}
+\only<1>{
+\begin{center}
+   \begin{minipage}{50mm}
+      \begin{block}{}
+         \begin{center}
+            \textbf{Corrigé ##{{ORIGINAL3}}##}
+         \end{center}
+      \end{block}
+   \end{minipage}
+\end{center}}
+
 \only<2->{
-\begin{exampleblock}{##{{2}}##}
-   ##{{4}}##
-\end{exampleblock}
-}
+\frametitle{Corrigé ##{{ORIGINAL3}}##}
+\begin{exampleblock}{##{{ORIGINAL0}}##}
+   ##{{ORIGINAL2}}##
+\end{exampleblock}}
 \end{frame}
 
 % fin corrige
@@ -145,5 +125,4 @@
 \end{frame}
 
 \end{document}
-
 % fin pied
