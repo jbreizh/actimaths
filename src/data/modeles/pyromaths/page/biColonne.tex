@@ -1,0 +1,91 @@
+% entete
+%%!TEX TS-program = latex
+\RequirePackage{etex}
+\documentclass[11pt]{article}
+
+% Package
+\usepackage[utf8]{inputenc} % UTF-8
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel} % francisation
+\usepackage{amssymb} % the amsfont symbols
+\usepackage{amsmath} % the amsfont symbols
+\usepackage[table, usenames, svgnames]{xcolor} % Couleurs
+\usepackage{multicol} % Multi-colonnes
+\usepackage{calc} % Opérations
+\usepackage{cancel} % draw diagonal lines
+\usepackage{units} % typesetting units and nice fractions
+\usepackage{tabularx} % creates a paragraph-like column whose width
+                          % automatically expands
+\usepackage{wrapfig} % allows figures or tables to have text wrapped around
+\usepackage{pst-all,pst-eucl}
+\usepackage{wasysym} % Symbole Euro
+\DecimalMathComma
+
+% Package externe
+\input{tabvar.tex}
+
+%theme
+\usepackage[a2paper, dvips, left=0.5cm, right=0.5cm, top=1cm,bottom=2cm]{geometry}
+
+\begin{document}
+
+% fin entete
+
+
+% sujet
+
+\begin{minipage}{\linewidth}
+
+\raggedcolumns
+\setlength{\columnseprule}{0.5pt}
+\begin{multicols}{2}
+
+\refstepcounter{exo}
+\stepcounter{nocalcul}
+\textbf{Question ##{{1}}##} \par
+##{{3}}##
+
+\columnbreak
+
+\refstepcounter{exo}
+\stepcounter{nocalcul}
+\textbf{Question ##{{1}}##} \par
+##{{3}}##
+
+\end{multicols}
+\end{minipage}
+
+% fin sujet
+
+
+% corrige
+
+\begin{minipage}{\linewidth}
+
+\raggedcolumns
+\setlength{\columnseprule}{0.5pt}
+\begin{multicols}{2}
+
+\refstepcounter{exo}
+\stepcounter{nocalcul}
+\textbf{Corrigé ##{{1}}##} \par
+##{{4}}##
+
+\columnbreak
+
+\refstepcounter{exo}
+\stepcounter{nocalcul}
+\textbf{Corrigé ##{{1}}##} \par
+##{{4}}##
+
+\end{multicols}
+\end{minipage}
+
+% fin corrige
+
+
+% pied
+
+\end{document}
+% fin pied

@@ -1,0 +1,59 @@
+% entete
+%%!TEX TS-program = latex
+\RequirePackage{etex}
+\documentclass[11pt]{article}
+
+% Package
+\usepackage[utf8]{inputenc} % UTF-8
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel} % francisation
+\usepackage{amssymb} % the amsfont symbols
+\usepackage{amsmath} % the amsfont symbols
+\usepackage[table, usenames, svgnames]{xcolor} % Couleurs
+\usepackage{multicol} % Multi-colonnes
+\usepackage{calc} % Opérations
+\usepackage{cancel} % draw diagonal lines
+\usepackage{units} % typesetting units and nice fractions
+\usepackage{tabularx} % creates a paragraph-like column whose width
+                          % automatically expands
+\usepackage{wrapfig} % allows figures or tables to have text wrapped around
+\usepackage{pst-all,pst-eucl}
+\usepackage{wasysym} % Symbole Euro
+\DecimalMathComma
+
+% Package externe
+\input{tabvar.tex}
+
+%theme
+\usepackage[a4paper, dvips, left=0.5cm, right=0.5cm, top=1cm,bottom=2cm]{geometry}
+
+\begin{document}
+
+% fin entete
+
+
+% sujet
+
+\refstepcounter{exo}
+\stepcounter{nocalcul}
+\textbf{Question ##{{1}}##} \par
+##{{3}}## \par
+
+% fin sujet
+
+
+% corrige
+
+\refstepcounter{exo}
+\stepcounter{nocalcul}
+\textbf{Corrigé ##{{1}}##} \par
+##{{4}}## \par
+
+% fin corrige
+
+
+% pied
+
+\end{document}
+% fin pied

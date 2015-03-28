@@ -1,0 +1,61 @@
+% entete
+%%!TEX TS-program = latex
+\RequirePackage{etex}
+\documentclass[a4paper,11pt]{article}
+
+% Package
+\usepackage[utf8]{inputenc} % UTF-8
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel} % francisation
+\usepackage{amssymb} % the amsfont symbols
+\usepackage{amsmath} % the amsfont symbols
+\usepackage{multicol} % Multi-colonnes
+\usepackage{calc} % Opérations
+\usepackage{cancel} % draw diagonal lines
+\usepackage{units} % typesetting units and nice fractions
+\usepackage{wrapfig} % allows figures or tables to have text wrapped around
+\usepackage{pst-all,pst-eucl}
+\usepackage{wasysym} % Symbole Euro
+\DecimalMathComma
+\usepackage{longtable}
+\usepackage{fancyhdr} % Mise en page, en-tête et pied de page
+
+%theme
+\usepackage[a4paper, dvips, left=0.5cm, right=0.5cm, top=2cm,bottom=2cm]{geometry}
+\usepackage[pdfauthor={##{{AUTEUR}}##},pdftitle={##{{TITRE}}##} ]{hyperref}
+
+\pagestyle{fancy}
+\lfoot{\textsl{##{{ETABLISSEMENT}}##}}
+\rfoot{\textsl{##{{AUTEUR}}##}}
+\lhead{\textsl{##{{DATEACTIVITE}}##}}
+\chead{\Large{\textsc{##{{TITRE}}##}}}
+\rhead{\textsl{##{{NIVEAU}}##}}
+
+\begin{document}
+
+\begin{longtable}{|p{3cm}|p{7.5cm}|p{7.5cm}|}
+\hline 
+ & Gauche & Droite \\
+% fin entete
+ 
+% sujet
+
+\hline 
+\textbf{Question ##{{1}}##} & \underline{##{{2}}##} \newline ##{{3}}## & \underline{##{{12}}##} \newline ##{{13}}## \\
+
+% fin sujet
+
+% corrige
+
+\hline 
+\textbf{Corrigé ##{{1}}##} & \underline{##{{2}}##} \newline ##{{4}}## & \underline{##{{12}}##} \newline ##{{14}}## \\
+
+% fin corrige
+
+% pied 
+ 
+\hline 
+\end{longtable} 
+\end{document}
+% fin pied
