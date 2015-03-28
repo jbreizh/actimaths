@@ -42,24 +42,24 @@ import exercices_pyromaths
 ############## Créer, lance la compilation des fichiers TeX et affiche les PDF
 def creation(parametres):
     ## Creation de la liste de question, sujet, corrigé
-    (question, enonce, correction) = (['',''], ['',''], ['',''])
+    (temps, question, enonce, correction) = (['',''], ['',''], ['',''], ['',''])
     for i in range(2):
         if parametres['affichage'] == "csv":
-            (question[i], enonce[i], correction[i]) = creation_liste_csv(parametres['chemin_csv'])
+            (temps[i], question[i], enonce[i], correction[i]) = creation_liste_csv(parametres['chemin_csv'])
         else:
-            (question[i], enonce[i], correction[i]) = creation_liste(parametres['liste_exercice'],parametres['environnement'])
+            (temps[i], question[i], enonce[i], correction[i]) = creation_liste(parametres['liste_exercice'],parametres['environnement'])
     ## Création et affichage de la présentation sujet en PDF
     if parametres['sujet_presentation']:
-        generation(parametres, question, enonce, correction, 'sujet','presentation')
+        generation(parametres, temps, question, enonce, correction, 'sujet','presentation')
     ## Création et affichage de la présentation corrigé en PDF
     if parametres['corrige_presentation']:
-        generation(parametres, question, enonce, correction, 'corrige','presentation')
+        generation(parametres, temps, question, enonce, correction, 'corrige','presentation')
     ## Création et affichage du sujet papier en PDF
     if parametres['sujet_page']:
-        generation(parametres, question, enonce, correction, 'sujet','page')
+        generation(parametres, temps, question, enonce, correction, 'sujet','page')
     ## Création et affichage du corrigé papier en PDF
     if parametres['corrige_page']:
-        generation(parametres, question, enonce, correction, 'corrige','page')
+        generation(parametres, temps, question, enonce, correction, 'corrige','page')
 
 ############## Génère les exercice à partir du CSV
 def creation_liste_csv(chemin_csv):
@@ -67,19 +67,20 @@ def creation_liste_csv(chemin_csv):
     fichier_csv = open(chemin_csv, "rb")
     tableau_csv = reader(fichier_csv)
     ## creation des exercices
-    (enonce_liste, correction_liste, question_liste) = ( [], [], [] )
+    (temps_liste, question_liste, enonce_liste, correction_liste) = ( [], [], [], [] )
     for ligne in tableau_csv:
         if ligne[0]:
-            enonce_liste.append(ligne[1])
-            correction_liste.append(ligne[2])
-            question_liste.append(ligne[0])
+            temps_liste.append(ligne[0])
+            question_liste.append(ligne[1])
+            enonce_liste.append(ligne[2])
+            correction_liste.append(ligne[3])
     fichier_csv.close()
-    return  question_liste, enonce_liste, correction_liste
+    return  temps_liste, question_liste, enonce_liste, correction_liste
 
 ############## Génère les exercice à partir de la liste
 def creation_liste(liste_exercice,environnement):
     ## creation des exercices
-    (enonce_liste, correction_liste, question_liste) = ( [], [], [] )
+    (temps_liste, question_liste, enonce_liste, correction_liste) = ( [], [], [], [] )
     for i in range(len(liste_exercice)):
         (temps, commande, parametre) = liste_exercice[i]
         # on génère l'exercice et on recommence en cas de duplication
@@ -103,16 +104,19 @@ def creation_liste(liste_exercice,environnement):
                     break
             # Au bout de 50 essai on considère qu'il est impossible de créer un nouvel exercice différent
             if essai == 50:
-                (enonce, correction, question) = (u"Impossible de générer un nouvel exercice différent avec les paramètres donnés", u"Impossible de générer un nouvel exercice différent avec les paramètres donnés","Erreur :")
+                question = "Erreur :"
+                enonce = u"Impossible de générer un nouvel exercice différent avec les paramètres donnés"
+                correction = u"Impossible de générer un nouvel exercice différent avec les paramètres donnés"
                 break
         # on range l'exercice dans la liste
+        temps_liste.append(temps)
+        question_liste.append(question)
         enonce_liste.append(enonce)
         correction_liste.append(correction)
-        question_liste.append(question)
-    return  question_liste, enonce_liste, correction_liste
+    return  temps_liste, question_liste, enonce_liste, correction_liste
 
 ############## Generation complete
-def generation(parametres, question, enonce, correction, fiche, type):
+def generation(parametres, temps, question, enonce, correction, fiche, type):
     ## Dossiers et fichiers d'enregistrement
     dossierTex = unicode(parametres['chemin_fichier'])
     nomTex= u"%s-%s-%s" % (parametres['nom_fichier'],fiche, type)
@@ -120,7 +124,7 @@ def generation(parametres, question, enonce, correction, fiche, type):
     ## Ouverture du fichier teX
     tex = open(cheminTex, encoding='utf-8', mode='w')
     ## creation du fichier teX
-    creation_latex(tex, parametres, question, enonce, correction, fiche, type)
+    creation_latex(tex, parametres, temps, question, enonce, correction, fiche, type)
     ## fermeture du fichier teX
     tex.close()
     ## indentation des fichiers teX créés
@@ -134,9 +138,7 @@ def generation(parametres, question, enonce, correction, fiche, type):
             affichage_pdf(dossierTex, nomTex)
 
 ############## Copie des modèles latex en remplacant certaines variables
-def copie_modele(tex, parametres, fiche, type, master, texte=''):
-    ## chemin du modele
-    source = join(DATADIR, 'modeles', parametres['environnement'],type, parametres['modele_%s' % type] , fiche + '_' + master  + '.tex' )
+def copie_modele(tex, parametres, type, master, texte=''):
     ## Les variables à remplacer :
     titre = parametres['titre']
     niveau = parametres['niveau']
@@ -146,40 +148,53 @@ def copie_modele(tex, parametres, fiche, type, master, texte=''):
     tempscompteur = str(float(parametres['temps_slide'])/3)
     tempsframe = str(50/float(parametres['temps_slide']))
     dateactivite = parametres['date_activite']
-    ## Remplacement des variables et copie dans le fichier latex
+    ## ouverture du modele
+    source = join(DATADIR, 'modeles', parametres['environnement'],type, parametres['modele_%s' % type] + '.tex' )
     modele = open(source, encoding='utf-8', mode='r')
+    ## Remplacement des variables et copie dans le fichier latex
+    master_debut = '% ' + master
+    master_fin = '% fin ' + master
+    n = 0
     for ligne in modele:
-        # Substitution des variables
-        variableSubstituableListe = findall('##{{[A-Z]*}}##',ligne)
-        if variableSubstituableListe:
-            for variableSubstituable in variableSubstituableListe:
-                occ = variableSubstituable[ 4 : len(variableSubstituable)- 4 ].lower()
-                ligne = ligne.replace(variableSubstituable, eval(occ))
-        # Substitution du texte
-        texteSubstituableListe = findall('##{{[0-9]*}}##',ligne)
-        if texteSubstituableListe:
-            for texteSubstituable in texteSubstituableListe:
-                occ = texteSubstituable[ 4 : len(texteSubstituable)- 4 ]
-                ligne = ligne.replace(texteSubstituable, texte[int(occ)])
-        tex.write(ligne)
+        # 
+        if master_fin in ligne:
+            break
+        # 
+        if n > 0:
+            # Substitution des variables
+            variableSubstituableListe = findall('##{{[A-Z]*}}##',ligne)
+            if variableSubstituableListe:
+                for variableSubstituable in variableSubstituableListe:
+                    occ = variableSubstituable[ 4 : len(variableSubstituable)- 4 ].lower()
+                    ligne = ligne.replace(variableSubstituable, eval(occ))
+            # Substitution du texte
+            texteSubstituableListe = findall('##{{[0-9]*}}##',ligne)
+            if texteSubstituableListe:
+                for texteSubstituable in texteSubstituableListe:
+                    occ = texteSubstituable[ 4 : len(texteSubstituable)- 4 ]
+                    ligne = ligne.replace(texteSubstituable, texte[int(occ)])
+            tex.write(ligne)
+        # 
+        if master_debut in ligne:
+            n = 1
     modele.close()
 
 ############## Génère le code latex
-def creation_latex(tex, parametres, question, enonce, correction, fiche, type):
+def creation_latex(tex, parametres, temps, question, enonce, correction, fiche, type):
     ## Copie de l'entête
-    copie_modele(tex, parametres, fiche, type, 'entete')
+    copie_modele(tex, parametres, type, 'entete')
     longueur_liste_exercice = len(question[0])
     ## Copie du corps
     for numero in range(longueur_liste_exercice):
         # Enoncé des exercices pour la substitution (original, inverse et original(2))
         inverse = longueur_liste_exercice - numero - 1
-        texte = [str(numero + 1) , question[0][numero]  , enonce[0][numero] , correction[0][numero],
-                 str(inverse + 1), question[0][inverse] , enonce[0][inverse], correction[0][inverse],
-                 str(numero + 1) , question[1][numero]  , enonce[1][numero] , correction[1][numero]]
+        texte = [str(temps[0][numero]) , str(numero + 1) , question[0][numero]  , enonce[0][numero] , correction[0][numero] ,
+                 str(temps[0][inverse]), str(inverse + 1), question[0][inverse] , enonce[0][inverse], correction[0][inverse],
+                 str(temps[1][numero]) , str(numero + 1) , question[1][numero]  , enonce[1][numero] , correction[1][numero]]
         # Copie de l'exercice
-        copie_modele(tex, parametres, fiche, type, 'exercice', texte)
+        copie_modele(tex, parametres, type, fiche, texte)
     ## Copie du pied
-    copie_modele(tex, parametres, fiche, type, 'pied')
+    copie_modele(tex, parametres, type, 'pied')
 
 ############## Créé les fichiers PDF
 def creation_pdf(dossier, fichier):
