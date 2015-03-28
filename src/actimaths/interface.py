@@ -23,7 +23,7 @@
 
 ## Import globaux
 from os import listdir
-from os.path import join, isfile, isdir
+from os.path import join, isfile, isdir, splitext
 from PyQt4 import QtGui, QtCore
 from codecs import open
 from lxml import etree
@@ -368,6 +368,8 @@ class Ui_MainWindow(object):
                 self.onglet_exercice_label_categorie[onglet].append(QtGui.QLabel(self.onglet_exercice_widget[onglet]))
                 self.onglet_exercice_label_categorie[onglet][categorie].setText(u"%s" % self.liste_exercice[onglet][1][categorie][0])
                 self.onglet_exercice_label_categorie[onglet][categorie].setStyleSheet("font: bold 20px; qproperty-alignment: AlignCenter")
+                if len(self.liste_exercice[onglet][1][categorie][1]) == 0:
+                    self.onglet_exercice_label_categorie[onglet][categorie].setVisible(False)
                 self.onglet_exercice_verticalLayout[onglet].addWidget(self.onglet_exercice_label_categorie[onglet][categorie])
                 ## Creation d'une grille dans le QWidget
                 self.onglet_exercice_gridLayout[onglet].append(QtGui.QGridLayout())
@@ -415,6 +417,8 @@ class Ui_MainWindow(object):
                     ## Label Nombre d'exercice
                     self.onglet_exercice_label_parametre[onglet][categorie].append(QtGui.QLabel(self.onglet_exercice_ligne[onglet][categorie][exercice]))
                     self.onglet_exercice_label_parametre[onglet][categorie][exercice].setText(u"<u>Paramètre</u> :" )
+                    if len(self.liste_exercice[onglet][1][categorie][1][exercice][1]) == 0:
+                        self.onglet_exercice_label_parametre[onglet][categorie][exercice].setVisible(False)
                     self.onglet_exercice_gridLayout[onglet][categorie].addWidget(self.onglet_exercice_label_parametre[onglet][categorie][exercice], 2*exercice+1, 8)
                     ## Pour tous les paramètres
                     for parametre in range(len(self.liste_exercice[onglet][1][categorie][1][exercice][1])):
@@ -511,30 +515,16 @@ class Ui_MainWindow(object):
         self.onglet_selection_label_categorie.setText(u"<center><strong>Liste de sélection</strong></center>")
         self.onglet_selection_verticalLayout.addWidget(self.onglet_selection_label_categorie)
 
-    ############## Actualise l'onglet des exercices sélectionnés
-    def actualiser_onglet_selection(self):
-        ## Actualisation de la liste de sélection
-        self.liste_exercice_selectionner = []
-        for onglet in range(len(self.liste_exercice)):
-            for categorie in range(len(self.liste_exercice[onglet][1])):
-                for exercice in range(len(self.liste_exercice[onglet][1][categorie][1])):
-                    nombre_exercice = self.onglet_exercice_spinBox_nombre[onglet][categorie][exercice].value()
-                    temps_exercice = self.onglet_exercice_spinBox_temps[onglet][categorie][exercice].value()
-                    label_exercice = self.onglet_exercice_label_nom[onglet][categorie][exercice].text()
-                    commande_exercice = self.liste_exercice[onglet][1][categorie][1][exercice][2]
-                    parametre_exercice = []
-                    for parametre in range(len(self.liste_exercice[onglet][1][categorie][1][exercice][1])):
-                        temp = []
-                        temp.append(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][0])
-                        temp.append(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][1])
-                        temp.append(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][2])
-                        temp.append(self.onglet_exercice_spinBox_parametre[onglet][categorie][exercice][parametre].value())
-                        parametre_exercice.append(temp)
-                    for i in range(nombre_exercice):
-                        self.liste_exercice_selectionner.append((temps_exercice,commande_exercice,label_exercice,parametre_exercice))
+    ############## remplit l'onglet des exercices sélectionnés
+    def remplissage_onglet_selection(self):
         ## Test de l'existence de la liste de sélection
         if self.liste_exercice_selectionner == []:
-            QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Veuillez choisir des exercices...", QtGui.QMessageBox.Ok )    
+            QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Veuillez choisir des exercices...", QtGui.QMessageBox.Ok )
+            ## On supprime le contenu de l'onglet selection
+            delete(self.onglet_selection_widget)
+            self.onglet_selection_widget = None
+            ## initialisation de l'onglet selection
+            self.initialisation_onglet_selection()    
         else:
             ## On supprime le contenu de l'onglet selection
             delete(self.onglet_selection_widget)
@@ -557,10 +547,11 @@ class Ui_MainWindow(object):
             self.onglet_selection_label_temps = []
             self.onglet_selection_label_parametre = []
             self.onglet_selection_spinBox_parametre = []
+            self.onglet_selection_bouton_supprimer = []
             for exercice in range(len(self.liste_exercice_selectionner)):
                 ## Ligne pour la couleur
                 self.onglet_selection_ligne.append(QtGui.QWidget(self.onglet_selection_widget))
-                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_ligne[exercice], 2*exercice, 1, 2, 12)
+                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_ligne[exercice], 2*exercice, 1, 2, 13)
                 ## Bouton Monter
                 self.onglet_selection_bouton_monter.append(QtGui.QPushButton(self.onglet_selection_ligne[exercice]))
                 self.onglet_selection_bouton_monter[exercice].setIcon(QtGui.QIcon(join(DATADIR,'images','haut.png')))
@@ -577,35 +568,43 @@ class Ui_MainWindow(object):
                 QtCore.QObject.connect(self.onglet_selection_bouton_descendre[exercice],QtCore.SIGNAL("clicked()"), partial(self.deplacer_exercice,exercice,"bas"))
                 if exercice == (len(self.liste_exercice_selectionner)-1):
                     self.onglet_selection_bouton_descendre[exercice].setEnabled(False)
+                ## Bouton Supprimer
+                self.onglet_selection_bouton_supprimer.append(QtGui.QPushButton(self.onglet_selection_ligne[exercice]))
+                self.onglet_selection_bouton_supprimer[exercice].setIcon(QtGui.QIcon(join(DATADIR,'images','supprimer.png')))
+                self.onglet_selection_bouton_supprimer[exercice].setToolTip(u"Supprimer l'exercice de la liste")
+                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_bouton_supprimer[exercice], 2*exercice, 3,2,1)
+                QtCore.QObject.connect(self.onglet_selection_bouton_supprimer[exercice],QtCore.SIGNAL("clicked()"), partial(self.supprimer_exercice,exercice))
                 ## Ajout d'une colonne redimensionnable en largeur
-                self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(20, 20), 2*exercice, 3, 2, 1)
+                self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(20, 20), 2*exercice, 4, 2, 1)
                 ## Bulle d'aide
                 self.onglet_selection_label_aide.append(QtGui.QLabel(self.onglet_selection_ligne[exercice]))
                 self.onglet_selection_label_aide[exercice].setText(r'<img src="%s" />' %join(DATADIR, "vignettes" ,"%s" % self.environnement,'%s.jpg' % self.liste_exercice_selectionner[exercice][1]))
-                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_aide[exercice], 2*exercice, 4,2,1)
+                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_aide[exercice], 2*exercice, 5,2,1)
                 ## Ajout d'une colonne redimensionnable en largeur
-                self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum), 2*exercice, 5, 2, 1)
+                self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum), 2*exercice, 6, 2, 1)
                 ## Intitulé de l'exercice
                 self.onglet_selection_label_nom.append(QtGui.QLabel(self.onglet_selection_ligne[exercice]))
                 self.onglet_selection_label_nom[exercice].setText(u"%s" % self.liste_exercice_selectionner[exercice][2])
-                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_nom[exercice], 2*exercice, 5,1,8)
+                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_nom[exercice], 2*exercice, 6,1,8)
                 ## Label temps de l'exercice
                 self.onglet_selection_label_temps.append(QtGui.QLabel(self.onglet_selection_ligne[exercice]))
                 self.onglet_selection_label_temps[exercice].setText(u"<u>Temps</u> :" )
-                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_temps[exercice], 2*exercice+1, 6)
+                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_temps[exercice], 2*exercice+1, 7)
                 ## Temps de l'exercice
                 self.onglet_selection_spinBox_temps.append(QtGui.QSpinBox(self.onglet_selection_ligne[exercice]))
                 self.onglet_selection_spinBox_temps[exercice].setToolTip(u"Choisissez le temps par slide entre 5 secondes et 90 secondes.")
                 self.onglet_selection_spinBox_temps[exercice].setStyleSheet("background-color: rgb(255, 255, 255);")
                 self.onglet_selection_spinBox_temps[exercice].setRange(5,90)
                 self.onglet_selection_spinBox_temps[exercice].setValue(self.liste_exercice_selectionner[exercice][0])
-                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_spinBox_temps[exercice], 2*exercice+1, 7)
+                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_spinBox_temps[exercice], 2*exercice+1, 8)
                 ## Ajout d'une colonne redimensionnable en largeur
-                self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum), 2*exercice+1, 8)
+                self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum), 2*exercice+1, 9)
                 ## Label Nombre d'exercice
                 self.onglet_selection_label_parametre.append(QtGui.QLabel(self.onglet_selection_ligne[exercice]))
                 self.onglet_selection_label_parametre[exercice].setText(u"<u>Paramètre</u> :" )
-                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_parametre[exercice], 2*exercice+1, 9)
+                if len(self.liste_exercice_selectionner[exercice][3]) == 0:
+                    self.onglet_selection_label_parametre[exercice].setVisible(False)
+                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_parametre[exercice], 2*exercice+1, 10)
                 ## Initialisation
                 self.onglet_selection_spinBox_parametre.append([])
                 ## Pour tous les paramètres
@@ -616,14 +615,15 @@ class Ui_MainWindow(object):
                     self.onglet_selection_spinBox_parametre[exercice][parametre].setToolTip(u"Choisissez %s entre %s et %s." % (self.liste_exercice_selectionner[exercice][3][parametre][0],self.liste_exercice_selectionner[exercice][3][parametre][1],self.liste_exercice_selectionner[exercice][3][parametre][2]))
                     self.onglet_selection_spinBox_parametre[exercice][parametre].setRange(int(self.liste_exercice_selectionner[exercice][3][parametre][1]), int(self.liste_exercice_selectionner[exercice][3][parametre][2])) 
                     self.onglet_selection_spinBox_parametre[exercice][parametre].setValue(int(self.liste_exercice_selectionner[exercice][3][parametre][3]))
-                    self.onglet_selection_gridLayout.addWidget(self.onglet_selection_spinBox_parametre[exercice][parametre], 2*exercice+1, 10 + parametre)
+                    self.onglet_selection_gridLayout.addWidget(self.onglet_selection_spinBox_parametre[exercice][parametre], 2*exercice+1, 11 + parametre)
                 ## Ajout d'une colonne redimensionnable en largeur
-                self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum), 2*exercice, 12, 2, 1)
+                self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum), 2*exercice, 13, 2, 1)
                 ## Mise en couleur pour faire une alternance de ligne claire et fonçée
                 if exercice%2:
                     self.onglet_selection_ligne[exercice].setStyleSheet("background-color: rgb(255, 247, 177);")
                     self.onglet_selection_bouton_monter[exercice].setStyleSheet("background-color: rgb(255, 247, 177);")
                     self.onglet_selection_bouton_descendre[exercice].setStyleSheet("background-color: rgb(255, 247, 177);")
+                    self.onglet_selection_bouton_supprimer[exercice].setStyleSheet("background-color: rgb(255, 247, 177);")
                     self.onglet_selection_label_aide[exercice].setStyleSheet("background-color: rgb(255, 247, 177);")
                     self.onglet_selection_label_nom[exercice].setStyleSheet("background-color: rgb(255, 247, 177);")
                     self.onglet_selection_label_temps[exercice].setStyleSheet("background-color: rgb(255, 247, 177);")
@@ -632,6 +632,7 @@ class Ui_MainWindow(object):
                     self.onglet_selection_ligne[exercice].setStyleSheet("background-color: rgb(251, 231, 178);")
                     self.onglet_selection_bouton_monter[exercice].setStyleSheet("background-color: rgb(251, 231, 178);")
                     self.onglet_selection_bouton_descendre[exercice].setStyleSheet("background-color: rgb(251, 231, 178);")
+                    self.onglet_selection_bouton_supprimer[exercice].setStyleSheet("background-color: rgb(251, 231, 178);")
                     self.onglet_selection_label_aide[exercice].setStyleSheet("background-color: rgb(251, 231, 178);")
                     self.onglet_selection_label_nom[exercice].setStyleSheet("background-color: rgb(251, 231, 178);")
                     self.onglet_selection_label_temps[exercice].setStyleSheet("background-color: rgb(251, 231, 178);")
@@ -641,62 +642,52 @@ class Ui_MainWindow(object):
             ## Mise à jour du message de la barre d'état
             self.barre_etat_label.setText(u"%s exercice(s) sélectionné(s). En attente..." %len(self.liste_exercice_selectionner))
 
-    ############## Monte l'exercice d'un ligne dans la liste de sélection
+    ############## Actualise l'onglet des exercices sélectionnés
+    def actualiser_onglet_selection(self):
+        ## Actualisation de la liste de sélection
+        self.liste_exercice_selectionner = []
+        for onglet in range(len(self.liste_exercice)):
+            for categorie in range(len(self.liste_exercice[onglet][1])):
+                for exercice in range(len(self.liste_exercice[onglet][1][categorie][1])):
+                    nombre_exercice = self.onglet_exercice_spinBox_nombre[onglet][categorie][exercice].value()
+                    for i in range(nombre_exercice):
+                        temps_exercice = self.onglet_exercice_spinBox_temps[onglet][categorie][exercice].value()
+                        commande_exercice = self.liste_exercice[onglet][1][categorie][1][exercice][2]
+                        label_exercice = self.onglet_exercice_label_nom[onglet][categorie][exercice].text()
+                        parametre_exercice = []
+                        for parametre in range(len(self.liste_exercice[onglet][1][categorie][1][exercice][1])):
+                            temp = []
+                            temp.append(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][0])
+                            temp.append(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][1])
+                            temp.append(self.liste_exercice[onglet][1][categorie][1][exercice][1][parametre][2])
+                            temp.append(self.onglet_exercice_spinBox_parametre[onglet][categorie][exercice][parametre].value())
+                            parametre_exercice.append(temp)
+                        self.liste_exercice_selectionner.append([temps_exercice,commande_exercice,label_exercice,parametre_exercice])
+        ## Remplissage de l'onglet selection
+        self.remplissage_onglet_selection()
+
+    ############## Deplace l'exercice d'une ligne dans la liste de sélection
     def deplacer_exercice(self, index_exercice, direction):
-        ## Choix du deuxieme Widget pour l'inversion
+        ## Sauvegarde des Widgets
+        for exercice in range(len(self.liste_exercice_selectionner)):
+            self.liste_exercice_selectionner[exercice][0] =  self.onglet_selection_spinBox_temps[exercice].value()
+            for parametre in range(len(self.liste_exercice_selectionner[exercice][3])):
+                self.liste_exercice_selectionner[exercice][3][parametre][3] = self.onglet_selection_spinBox_parametre[exercice][parametre].value()
+        ## Inversion des exercices concerné dans la liste de sélection
         if direction == "haut":
             liste_exercice = [index_exercice-1,index_exercice]
         else:
             liste_exercice = [index_exercice,index_exercice+1]
-        ## Suppression des Widgets à inverser
-        for exercice in liste_exercice:
-            self.onglet_selection_gridLayout.removeWidget(self.onglet_selection_spinBox_temps[exercice])
-            self.onglet_selection_spinBox_temps[exercice].close()
-            self.onglet_selection_gridLayout.removeWidget(self.onglet_selection_label_aide[exercice])
-            self.onglet_selection_label_aide[exercice].close()
-            self.onglet_selection_gridLayout.removeWidget(self.onglet_selection_label_nom[exercice])
-            self.onglet_selection_label_nom[exercice].close()
-            for parametre in range(len(self.liste_exercice_selectionner[exercice][3])):
-                self.onglet_selection_gridLayout.removeWidget(self.onglet_selection_spinBox_parametre[exercice][parametre])
-                self.onglet_selection_spinBox_parametre[exercice][parametre].close()
-            self.onglet_selection_spinBox_parametre[exercice] = []
-        ## Inversion des exercices concerné dans la liste de sélection
         self.liste_exercice_selectionner[liste_exercice[0]],self.liste_exercice_selectionner[liste_exercice[1]]= self.liste_exercice_selectionner[liste_exercice[1]],self.liste_exercice_selectionner[liste_exercice[0]]
-        for exercice in liste_exercice:
-            ## Recréation de la spinBox de temps
-            self.onglet_selection_spinBox_temps[exercice] = QtGui.QSpinBox(self.onglet_selection_ligne[exercice])
-            self.onglet_selection_spinBox_temps[exercice].setToolTip(u"Choisissez le temps par slide entre 5 secondes et 90 secondes.")
-            self.onglet_selection_spinBox_temps[exercice].setStyleSheet("background-color: rgb(255, 255, 255);")
-            self.onglet_selection_spinBox_temps[exercice].setRange(5,90)
-            self.onglet_selection_spinBox_temps[exercice].setValue(self.liste_exercice_selectionner[exercice][0])
-            self.onglet_selection_gridLayout.addWidget(self.onglet_selection_spinBox_temps[exercice], 2*exercice+1, 7)
-            ## Recréation de la Bulle d'aide
-            self.onglet_selection_label_aide[exercice] = QtGui.QLabel(self.onglet_selection_ligne[exercice])
-            self.onglet_selection_label_aide[exercice].setText(r'<img src="%s" />' %join(DATADIR, "vignettes" ,"%s" % self.environnement,'%s.jpg' % self.liste_exercice_selectionner[exercice][1]))
-            self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_aide[exercice],  2*exercice, 4,2,1)
-            ## Recréation de l' Intitulé de l'exercice
-            self.onglet_selection_label_nom[exercice] = QtGui.QLabel(self.onglet_selection_ligne[exercice])
-            self.onglet_selection_label_nom[exercice].setText(u"%s" % self.liste_exercice_selectionner[exercice][2])
-            self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_nom[exercice], 2*exercice, 5,1,8)
-            ## Pour tous les paramètres
-            for parametre in range(len(self.liste_exercice_selectionner[exercice][3])):
-                ## Recréation de la spinBox de paramètre
-                self.onglet_selection_spinBox_parametre[exercice].append(QtGui.QSpinBox(self.onglet_selection_ligne[exercice]))
-                self.onglet_selection_spinBox_parametre[exercice][parametre].setStyleSheet("background-color: rgb(255, 255, 255);")
-                self.onglet_selection_spinBox_parametre[exercice][parametre].setKeyboardTracking(False)
-                self.onglet_selection_spinBox_parametre[exercice][parametre].setToolTip(u"Choisissez %s entre %s et %s." % (self.liste_exercice_selectionner[exercice][3][parametre][0],self.liste_exercice_selectionner[exercice][3][parametre][1],self.liste_exercice_selectionner[exercice][3][parametre][2]))
-                self.onglet_selection_spinBox_parametre[exercice][parametre].setRange(int(self.liste_exercice_selectionner[exercice][3][parametre][1]), int(self.liste_exercice_selectionner[exercice][3][parametre][2])) 
-                self.onglet_selection_spinBox_parametre[exercice][parametre].setValue(int(self.liste_exercice_selectionner[exercice][3][parametre][3]))
-                self.onglet_selection_gridLayout.addWidget(self.onglet_selection_spinBox_parametre[exercice][parametre], 2*exercice+1, 10 + parametre)
-            ## Mise en couleur pour faire une alternance de ligne claire et fonçée
-            if exercice%2:
-                self.onglet_selection_label_aide[exercice].setStyleSheet("background-color: rgb(255, 247, 177);")
-                self.onglet_selection_label_nom[exercice].setStyleSheet("background-color: rgb(255, 247, 177);")
-            else:
-                self.onglet_selection_label_aide[exercice].setStyleSheet("background-color: rgb(251, 231, 178);")
-                self.onglet_selection_label_nom[exercice].setStyleSheet("background-color: rgb(251, 231, 178);")
-        ## Actualisation de la grille
-        self.onglet_selection_gridLayout.update()
+        ## Remplissage de l'onglet selection
+        self.remplissage_onglet_selection()
+
+    ############## Supprime un exercice de la liste de sélection
+    def supprimer_exercice(self, index_exercice):
+        ## Mise à jour de la liste de sélection
+        del self.liste_exercice_selectionner[index_exercice]
+        ## Remplissage de l'onglet selection
+        self.remplissage_onglet_selection()
 
     ###========================================================================
     ### Fonctions de l'onglet Option
@@ -746,7 +737,7 @@ class Ui_MainWindow(object):
         self.onglet_option_verticalLayout_1.addWidget(self.onglet_option_label_nom_auteur)
         ## Label temps d'un slide
         self.onglet_option_label_temps_slide = QtGui.QLabel(self.onglet_option_widget)
-        self.onglet_option_label_temps_slide.setText("Temps global par question en seconde : ")
+        self.onglet_option_label_temps_slide.setText("Temps par defaut en seconde : ")
         self.onglet_option_verticalLayout_1.addWidget(self.onglet_option_label_temps_slide)
         ## Label date de l'activité mentale
         self.onglet_option_label_date_activite = QtGui.QLabel(self.onglet_option_widget)
@@ -797,7 +788,7 @@ class Ui_MainWindow(object):
         self.temps_slide = QtGui.QSpinBox(self.onglet_option_widget)
         self.temps_slide.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.temps_slide.setRange(5,90)
-        self.temps_slide.setToolTip(u"Choisissez le temps par slide entre 5 secondes et 90 secondes.")
+        self.temps_slide.setToolTip(u"Choisissez le temps par defaut entre 5 secondes et 90 secondes.")
         self.temps_slide.setValue(int(self.config['temps_slide']))
         self.onglet_option_verticalLayout_2.addWidget(self.temps_slide)
         ## ComboBox date de l'activité mentale
@@ -950,13 +941,14 @@ class Ui_MainWindow(object):
     def option_cherche_modele(self,presentation):
         modeles = []
         for fichier in listdir(join(DATADIR,'modeles',self.environnement,presentation)):
-            if isdir(join(join(DATADIR,'modeles',self.environnement,presentation,fichier))):
-                modeles.append(fichier)
+            if splitext(fichier)[1] == ".tex":
+                modeles.append(str(fichier[:len(fichier) - 4]))
         modeles.sort()
         for i in range(len(modeles)):
-            exec("self.comboBox_modele_%s.addItem(str(modeles[i]))" %presentation)
-            if modeles[i] == self.config['modele_%s' %presentation]:
-                exec("self.comboBox_modele_%s.setCurrentIndex(i)" %presentation)
+            if modeles[i] != "vignette":
+                exec("self.comboBox_modele_%s.addItem(str(modeles[i]))" %presentation)
+                if modeles[i] == self.config['modele_%s' %presentation]:
+                    exec("self.comboBox_modele_%s.setCurrentIndex(i)" %presentation)
 
     ############## Active les modèles de présentation selon l'environnement
     def option_environnement(self):
@@ -1064,7 +1056,7 @@ class Ui_MainWindow(object):
             # Création de la liste d'exercices
             self.parametres ['liste_exercice'] = []
             for exercice in range(len(self.liste_exercice_selectionner)):
-                temps_exercice = self.liste_exercice_selectionner[exercice][0]
+                temps_exercice =  self.onglet_selection_spinBox_temps[exercice].value()
                 commande_exercice = self.liste_exercice_selectionner[exercice][1]
                 parametre_exercice = []
                 for parametre in range(len(self.liste_exercice_selectionner[exercice][3])):
