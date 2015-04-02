@@ -25,16 +25,16 @@ import random
 uniteLongueur = [ "mm", "cm", "dm", "m", "dam", "hm", "km"]
 uniteVolume = [ "mm^3", "cm^3", "dm^3", "m^3", "dam^3", "hm^3", "km^3"]
 
-def dimension():
-    i = random.randrange(2,10)
-    j = random.randrange(2,10)
+def dimension(nbre_min,nbre_max):
+    i = random.randrange(nbre_min,nbre_max)
+    j = random.randrange(nbre_min,nbre_max)
     if i > j:
         longueur = i
         largeur = j
     else:
         longueur = j
         largeur = i 
-    hauteur = random.randrange(2,6)
+    hauteur = random.randrange(nbre_min,nbre_max)
     unite = random.randrange(7)
     return longueur,largeur,hauteur,unite
 
@@ -59,7 +59,7 @@ def PaveDroit(parametre):
     question = u"Calculer le volume du pavé droit :"
     exo = []
     cor = []
-    (longueur,largeur,hauteur,unite) = dimension()
+    (longueur,largeur,hauteur,unite) = dimension(parametre[0],parametre[1])
     tex_pave_droit(exo,longueur,largeur,hauteur,unite)
     tex_pave_droit(cor,longueur,largeur,hauteur,unite)
     cor.append("Volume = $L \\times l \\times h$ \\newline")

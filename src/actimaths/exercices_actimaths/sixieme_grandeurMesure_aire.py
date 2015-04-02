@@ -25,9 +25,9 @@ import random, math
 uniteLongueur = [ "mm", "cm", "dm", "m", "dam", "hm", "km"]
 uniteAire = [ "mm^2", "cm^2", "dm^2", "m^2", "dam^2", "hm^2", "km^2"]
 
-def dimension():
-    i = random.randrange(2,10)
-    j = random.randrange(2,10)
+def dimension(nbre_min,nbre_max):
+    i = random.randrange(nbre_min,nbre_max)
+    j = random.randrange(nbre_min,nbre_max)
     if i > j:
         longueur = i
         largeur = j
@@ -107,7 +107,7 @@ def Carre(parametre):
     question = u"Calculer l\'aire du carré :"
     exo = []
     cor = []
-    (longueur,largeur,unite) = dimension()
+    (longueur,largeur,unite) = dimension(parametre[0],parametre[1])
     tex_carre(exo,longueur,unite)
     tex_carre(cor,longueur,unite)
     cor.append(u"Aire = $\\text{côté} \\times \\text{côté}$ \\newline")
@@ -119,7 +119,7 @@ def Rectangle(parametre):
     question = "Calculer l\'aire du rectangle :"
     exo = []
     cor = []
-    (longueur,largeur,unite) = dimension()
+    (longueur,largeur,unite) = dimension(parametre[0],parametre[1])
     tex_rectangle(exo,longueur,largeur,unite)
     tex_rectangle(cor,longueur,largeur,unite)
     cor.append("Aire = $\\text{Longueur} \\times \\text{largeur}$ \\newline")
@@ -131,7 +131,7 @@ def TriangleRectangle(parametre):
     question = "Calculer l\'aire du triangle rectangle :"
     exo = []
     cor = []
-    (base,hauteur,unite) = dimension()
+    (base,hauteur,unite) = dimension(parametre[0],parametre[1])
     tex_triangle_rectangle(exo,base,hauteur,unite)
     tex_triangle_rectangle(cor,base,hauteur,unite)
     cor.append("Aire = $(\\text{Base} \\times \\text{hauteur}) \\div 2$ \\newline")
@@ -144,8 +144,7 @@ def Disque(parametre):
     question = u"Calculer l\'aire du disque ($\\pi \\approx 3$) :"
     exo = []
     cor = []
-    rayon = random.randrange(2,10)
-    unite = random.randrange(7)
+    (rayon,largeur,unite) = dimension(parametre[0],parametre[1])
     tex_disque(exo,rayon,unite)
     tex_disque(cor,rayon,unite)
     cor.append("Aire = $\\pi \\times \\text{rayon} \\times \\text{rayon}$ \\newline")
