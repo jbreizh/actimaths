@@ -182,6 +182,7 @@ class Ui_MainWindow(object):
         #============================================================
         #        Barre d'état
         #============================================================
+        ## Construction de la barre d'état
         self.barre_etat = QtGui.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.barre_etat)
         ## Barre d'avancement
