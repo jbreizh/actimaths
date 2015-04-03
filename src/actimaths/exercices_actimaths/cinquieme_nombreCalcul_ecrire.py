@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Pyromaths
-# Un programme en Python qui permet de créer des fiches d'exercices types de
+# Un programme en Python qui permet de créer des fiches d"exercices types de
 # mathématiques niveau collège ainsi que leur corrigé en LaTeX.
 # Copyright (C) 2006 -- Jérôme Ortais (jerome.ortais@pyromaths.org)
 #
@@ -25,17 +25,17 @@ import random
 import string
 
 def valeurs(nombre_min, nombre_max):  # renvoie les 2 listes contenant les opérateurs et les opérandes.
-    operateur = [' + ', ' - ', ' \\times ', ' \\div ', '']
-    nom_operateur = ['de la somme ', u'de la différence ', 'du produit ', 'du quotient ', '']
-    nom_operateur1 = ['la somme ', u'la différence ', 'le produit ', 'le quotient ', '']
-    separateur_operateur = [' et ', ' et ', ' par ', ' par ', '']
+    operateur = [" + ", " - ", " \\times ", " \\div ", ""]
+    nom_operateur = ["de la somme ", u"de la différence ", "du produit ", "du quotient ", ""]
+    nom_operateur1 = ["la somme ", u"la différence ", "le produit ", "le quotient ", ""]
+    separateur_operateur = [" et ", " et ", " par ", " par ", ""]
     choix = random.sample(range(5),3)
     while choix[0] == 4:
 	choix = random.sample(range(5),3)
     operande = [random.randint(nombre_min, nombre_max) for i in range(4)]
 
-    expression = ['' for i in range(11)]
-    nom_expression = ['' for i in range(10)]
+    expression = ["" for i in range(11)]
+    nom_expression = ["" for i in range(10)]
     # on place les opérateurs
     expression[2]= operateur[choix[1]]
     expression[5]= operateur[choix[0]]
@@ -50,11 +50,11 @@ def valeurs(nombre_min, nombre_max):  # renvoie les 2 listes contenant les opér
     if choix[0] > 0:
         nom_expression[6]= nom_operateur1[choix[2]]
         if choix[1] < 2:
-            expression[0]= '('
-            expression[4]= ')'
+            expression[0]= "("
+            expression[4]= ")"
         if choix[2] < 2:
-            expression[6]= '('
-            expression[10]= ')'
+            expression[6]= "("
+            expression[10]= ")"
     else:
         nom_expression[6]= nom_operateur[choix[2]]
 
@@ -70,7 +70,10 @@ def valeurs(nombre_min, nombre_max):  # renvoie les 2 listes contenant les opér
 
     if choix[2] == 4:
         expression[7]= "%s" % operande[2]
-        nom_expression[7] = "de %s" % operande[2]
+        if nom_expression[5] == " par ":
+            nom_expression[7] = "%s" % operande[2]
+        else:
+            nom_expression[7] = "de %s" % operande[2]
     else:
         expression[7]= "%s" % operande[2]    
         expression[9]= "%s" % operande[3]
