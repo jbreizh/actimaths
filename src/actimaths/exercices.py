@@ -182,6 +182,7 @@ def copie_modele(tex, parametres, type, master, texte_original='', texte_identiq
                 for texteSubstituable in texteSubstituableListe:
                     occ = texteSubstituable[ 11 : len(texteSubstituable)- 4 ]
                     ligne = ligne.replace(texteSubstituable, texte_inverse[int(occ)])
+            # ecriture de la ligne
             tex.write(ligne)
         # On peut débuter la copie
         if master_debut in ligne:

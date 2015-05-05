@@ -58,7 +58,11 @@
         <parametre defaut="3" max="8" min="0" nom="Rang maximal"/>
       </exercice>
       <exercice commande="sixieme_nombreCalcul_classerNombres.ClasserNombres" temps="10" description="Numération" nom="Classer des nombres décimaux"/>
-      <exercice commande="sixieme_nombreCalcul_arrondi.ArrondirDecimal" temps="10" description="Numération" nom="Arrondir des nombres">
+      <exercice commande="sixieme_nombreCalcul_arrondi.ApprocherDecimal" temps="10" description="Numération" nom="Donner la valeur approchée d'un nombre">
+        <parametre defaut="-3" max="-1" min="-8" nom="Rang minimal"/>
+        <parametre defaut="3" max="8" min="1" nom="Rang maximal"/>
+      </exercice>
+      <exercice commande="sixieme_nombreCalcul_arrondi.ArrondirDecimal" temps="10" description="Numération" nom="Donner la valeur arrondie d'un nombre">
         <parametre defaut="-3" max="-1" min="-8" nom="Rang minimal"/>
         <parametre defaut="3" max="8" min="1" nom="Rang maximal"/>
       </exercice>
@@ -440,15 +444,15 @@
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_egale.Fraction" temps="10" description="Fractions" nom="Fractions égales">
+      <exercice commande="cinquieme_nombreCalcul_fraction.FractionEgale" temps="10" description="Fractions" nom="Fractions égales">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_simplifier.Fraction" temps="10" description="Fractions" nom="Simplifier une fraction">
+      <exercice commande="cinquieme_nombreCalcul_fraction.SimplifierFraction" temps="10" description="Fractions" nom="Simplifier une fraction">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="cinquieme_nombreCalcul_simplifier.Decimal" temps="10" description="Fractions" nom="Convertir un décimal en fraction irréductible">
+      <exercice commande="cinquieme_nombreCalcul_fraction.SimplifierDecimal" temps="10" description="Fractions" nom="Convertir un décimal en fraction irréductible">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
@@ -521,11 +525,19 @@
 
     </categorie>
     <categorie nom="Nombres et Calculs">
-      <exercice commande="quatrieme_nombreCalcul_quotient.Relatif" temps="10" description="Fractions" nom="Quotient de fractions">
+      <exercice commande="quatrieme_nombreCalcul_fraction.InverseEntier" temps="10" description="Fractions" nom="Inverse d'un entier">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_nombreCalcul_quotient.RelatifSimplifiable" temps="10" description="Fractions" nom="Quotient de fractions avec resultat simplifiable">
+      <exercice commande="quatrieme_nombreCalcul_fraction.InverseFraction" temps="10" description="Fractions" nom="Inverse d'une fraction">
+        <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="quatrieme_nombreCalcul_fraction.Quotient" temps="10" description="Fractions" nom="Quotient de fractions">
+        <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="quatrieme_nombreCalcul_fraction.QuotientSimplifiable" temps="10" description="Fractions" nom="Quotient de fractions avec resultat simplifiable">
         <parametre defaut="-10" max="100000" min="-100000" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>

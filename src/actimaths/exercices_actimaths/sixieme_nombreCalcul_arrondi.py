@@ -64,28 +64,45 @@ def valeurs(rang_partie_decimale, rang_partie_entiere):
 ##----------------Construction--------------------------------
 
 def ArrondirDecimal(parametre):
-    question = "Arrondir :"
+    question = "Donner la valeur arrondie de :"
+    exo = []
+    cor = []
+    # Génération des variables
+    (nombre, index_precision, defaut, exces, arrondi) = valeurs(parametre[0], parametre[1])
+    # Affichage
+    exo.append("\\begin{center}")
+    exo.append("%s %s au plus proche" % (decimaux(nombre),nom_precision[index_precision]))
+    exo.append("\\end{center}")
+    cor.append("$$ %s < %s < %s $$" % (decimaux(defaut),decimaux(nombre),decimaux(exces)))
+    cor.append("\\begin{center}")
+    cor.append("La valeur arrondie %s au plus proche est $ \\boxed{%s} $" % (nom_precision[index_precision], decimaux(arrondi)))
+    cor.append("\\end{center}")
+    return (exo, cor, question)
+
+def ApprocherDecimal(parametre):
+    question = u"Donner la valeur approchée de :"
     exo = []
     cor = []
     # Génération des variables
     (nombre, index_precision, defaut, exces, arrondi) = valeurs(parametre[0], parametre[1])
     # Choix du type d'arrondi
-    type = randrange(3)
+    type = randrange(2)
     if type == 0:
-        solution = arrondi
-    elif type == 1:
         solution = defaut
-    elif type == 2:
+        nom_type = u'par défaut'
+    elif type == 1:
         solution = exces
+        nom_type = u'par excès'
     # Affichage
     exo.append("\\begin{center}")
-    exo.append("%s %s %s" % (decimaux(nombre),nom_precision[index_precision],nom_type[type]))
+    exo.append("%s %s %s" % (decimaux(nombre),nom_precision[index_precision],nom_type))
     exo.append("\\end{center}")
     cor.append("$$ %s < %s < %s $$" % (decimaux(defaut),decimaux(nombre),decimaux(exces)))
     cor.append("\\begin{center}")
-    cor.append("L\'arrondi %s %s est $ \\boxed{%s} $" % (nom_precision[index_precision], nom_type[type], decimaux(solution)))
+    cor.append(u"La valeur approchée %s %s est $ \\boxed{%s} $" % (nom_precision[index_precision], nom_type, decimaux(solution)))
     cor.append("\\end{center}")
     return (exo, cor, question)
+
 
 def EncadrerDecimal(parametre):
     question = u"Compléter l\'encadrement de :"
