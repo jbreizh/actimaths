@@ -39,6 +39,8 @@ import cinquieme_nombreCalcul_operations
 import cinquieme_nombreCalcul_priorites
 import cinquieme_nombreCalcul_produit
 import cinquieme_nombreCalcul_somme
+import quatrieme_geometrie_pythagore
+import quatrieme_geometrie_thales
 import quatrieme_geometrie_triangle
 import quatrieme_grandeurMesure_aire
 import quatrieme_grandeurMesure_perimetre
