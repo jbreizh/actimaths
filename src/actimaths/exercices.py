@@ -87,10 +87,34 @@ def creation_liste(liste_exercice,environnement):
         repetition = True
         essai = 1
         while repetition:
+            # On essaye de creer un exercice      
+#            try:
+#                # On incrémente le nombre d'essai
+#                essai += 1
+#                repetition = False
+#                # création de l'exercice
+#                (enonceTemp, correctionTemp, question ) = eval("exercices_%s.%s" %(environnement,commande))(parametre)
+#                (enonce, correction) = ("", "")
+#                for ligne in enonceTemp:
+#                    enonce = enonce + ligne + "\n"
+#                for ligne in correctionTemp:
+#                    correction = correction + ligne + "\n"
+#                # On teste pour voir si on a déjà créé un exercice totalement identique
+#                for enonceValide in enonce_liste:
+#                    if enonceValide == enonce:
+#                        repetition = True
+#                        break
+#            # message d'erreur en cas d'echec          
+#            except:
+#                question = "Erreur :"
+#                enonce = u"Erreur interne vérifier vos paramètres"
+#                correction = u"Erreur interne vérifier vos paramètres"
+#                break
+
             # On incrémente le nombre d'essai
             essai += 1
             repetition = False
-            # crétion de l'exercice
+            # création de l'exercice
             (enonceTemp, correctionTemp, question ) = eval("exercices_%s.%s" %(environnement,commande))(parametre)
             (enonce, correction) = ("", "")
             for ligne in enonceTemp:
@@ -102,6 +126,7 @@ def creation_liste(liste_exercice,environnement):
                 if enonceValide == enonce:
                     repetition = True
                     break
+
             # Au bout de 50 essai on considère qu'il est impossible de créer un nouvel exercice différent
             if essai == 50:
                 question = "Erreur :"
