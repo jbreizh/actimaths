@@ -550,32 +550,32 @@
         <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
       </exercice>
       <exercice commande="quatrieme_nombreCalcul_puissance.produitNombreIdentique" temps="10" description="Puissance" nom="Produit de puissance (même nombre)">
-        <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
-        <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
+        <parametre defaut="-10" max="100000" min="-100000" nom="Exposant minimal"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Exposant maximal"/>
       </exercice>
       <exercice commande="quatrieme_nombreCalcul_puissance.produitExposantIdentique" temps="10" description="Puissance" nom="Produit de puissance (même exposant)">
-        <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
-        <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
+        <parametre defaut="-10" max="100000" min="-100000" nom="Exposant minimal"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Exposant maximal"/>
       </exercice>
       <exercice commande="quatrieme_nombreCalcul_puissance.quotient" temps="10" description="Puissance" nom="Quotient de puissance">
-        <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
-        <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
+        <parametre defaut="-10" max="100000" min="-100000" nom="Exposant minimal"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Exposant maximal"/>
       </exercice>
       <exercice commande="quatrieme_nombreCalcul_puissance.puissance" temps="10" description="Puissance" nom="Puissance de puissance">
-        <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
-        <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
+        <parametre defaut="-10" max="100000" min="-100000" nom="Exposant minimal"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Exposant maximal"/>
       </exercice>
       <exercice commande="quatrieme_nombreCalcul_puissance.produitDix" temps="10" description="Puissance" nom="Produit de puissance de 10">
-        <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
-        <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
+        <parametre defaut="-10" max="100000" min="-100000" nom="Exposant minimal"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Exposant maximal"/>
       </exercice>
       <exercice commande="quatrieme_nombreCalcul_puissance.quotientDix" temps="10" description="Puissance" nom="Quotient de puissance de 10">
-        <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
-        <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
+        <parametre defaut="-10" max="100000" min="-100000" nom="Exposant minimal"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Exposant maximal"/>
       </exercice>
       <exercice commande="quatrieme_nombreCalcul_puissance.puissanceDix" temps="10" description="Puissance" nom="Puissance de puissance de 10">
-        <parametre defaut="10" max="1000" min="4" nom="Exposant maximal"/>
-        <parametre defaut="10" max="1000" min="4" nom="Valeur maximale"/>
+        <parametre defaut="-10" max="100000" min="-100000" nom="Exposant minimal"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Exposant maximal"/>
       </exercice>
       <exercice commande="quatrieme_nombreCalcul_ecritureScientifique.ecritureScientifique" temps="10" description="Puissance" nom="Écriture scientifique"/>
       <exercice commande="quatrieme_nombreCalcul_reduction.somme" temps="10" description="Calcul Litteral" nom="Réduction de somme (2 termes)">
@@ -620,17 +620,23 @@
       </exercice>
     </categorie>
     <categorie nom="Géométrie">
-      <exercice commande="quatrieme_geometrie_triangle.PythagoreTexte" temps="10" description="Geometrie" nom="Théorème de Pythagore (version texte)">
+      <exercice commande="quatrieme_geometrie_triangle.DroiteParticuliere" temps="10" description="Géometrie" nom="Reconnaître les droites particulières du triangle"/>
+      <exercice commande="quatrieme_geometrie_pythagore.PythagoreTexte" temps="10" description="Geometrie" nom="Théorème de Pythagore (version texte)">
         <parametre defaut="20" max="1000" min="10" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_geometrie_triangle.PythagoreSchema" temps="10" description="Geometrie" nom="Théorème de Pythagore (version schema)">
+      <exercice commande="quatrieme_geometrie_pythagore.PythagoreSchema" temps="10" description="Geometrie" nom="Théorème de Pythagore (version schema)">
         <parametre defaut="20" max="1000" min="10" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_geometrie_triangle.DroiteMilieu" temps="10" description="Geometrie" nom="Propriété des milieux">
+      <exercice commande="quatrieme_geometrie_thales.DroiteMilieu" temps="10" description="Geometrie" nom="Calculer une longueur manquante avec la propriété des milieux">
         <parametre defaut="1" max="1000" min="1" nom="Valeur minimale"/>
         <parametre defaut="10" max="1000" min="5" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_geometrie_triangle.DroiteParticuliere" temps="10" description="Géometrie" nom="Reconnaître les droites particulières du triangle"/>
+      <exercice commande="quatrieme_geometrie_thales.ThalesQuotient" temps="10" description="Geometrie" nom="Écrire l'égalité de Thalès (quotient)"/>
+      <exercice commande="quatrieme_geometrie_thales.ThalesTableau" temps="10" description="Geometrie" nom="Écrire l'égalité de Thalès (tableau de proportionnalité)"/>
+      <exercice commande="quatrieme_geometrie_thales.ThalesQuotientMesure" temps="10" description="Geometrie" nom="Calculer une longueur manquante avec le théorème de Thalès">
+        <parametre defaut="1" max="1000" min="1" nom="Valeur minimale"/>
+        <parametre defaut="10" max="1000" min="5" nom="Valeur maximale"/>
+      </exercice>
     </categorie>
     <categorie nom="Grandeurs et mesures">
       <exercice commande="quatrieme_grandeurMesure_perimetre.Carre" temps="10" description="Périmètre" nom="Donner la mesure du côté d'un carré à partir de son périmètre">
