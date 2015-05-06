@@ -21,37 +21,29 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-from outils.Arithmetique import pgcd, valeur_alea
-from outils.Affichage import decimaux, tex_coef
 from random import choice, randrange
-import string
 
-
-def tex_proprietes_val(exp_max, nb_max, type):
+def tex_proprietes_val(exp_min, exp_max, type):
     """
     Renvoie des valeurs pour l'exercice sur les propriétés des puissances
-    @param exp_max: valeur maximale pour les exposants
-    @type exp_max: Integer
-    @param nb_max: Valeur maximale pour les nombres
-    @type nb_max: integer
     @param type: 0 : 2 exposants et 1 nombre ; 1 : 1 exposant et 2 nombres
     @type type: integer
     """
 
     if type:
         while 1:
-            nb1 = randrange(2, nb_max)
-            nb2 = randrange(2, nb_max)
-            exp1 = randrange(2, exp_max)
+            nb1 = randrange(2, 10)
+            nb2 = randrange(2, 10)
+            exp1 = randrange(exp_min, exp_max)
             exp2 = exp1
             if nb1 != nb2:
                 break
     else:
         while 1:
-            nb1 = randrange(2, nb_max)
+            nb1 = randrange(2, 10)
             nb2 = nb1
-            exp1 = randrange(2, exp_max)
-            exp2 = randrange(2, exp_max)
+            exp1 = randrange(exp_min, exp_max)
+            exp2 = randrange(exp_min, exp_max)
             if exp1 != exp2:
                 break
     return (nb1, exp1, nb2, exp2)
