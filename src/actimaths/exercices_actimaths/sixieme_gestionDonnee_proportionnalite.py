@@ -79,10 +79,10 @@ def tex_complete_tableau(exo,cor):
         if i == colonneExo:
             if ligneExo == 0:
                  nombreExo.append(["\\ldots",nombre[i]*coefficient])
-                 nombreCor.append(["%s" % nombre[i],nombre[i]*coefficient])
+                 nombreCor.append(["\\textbf{%s}" % nombre[i],nombre[i]*coefficient])
             else:
                 nombreExo.append([nombre[i],"\\ldots"])
-                nombreCor.append([nombre[i],"%s" % (nombre[i]*coefficient)])
+                nombreCor.append([nombre[i],"\\textbf{%s}" % (nombre[i]*coefficient)])
         else:
             nombreExo.append([nombre[i],nombre[i]*coefficient])
             nombreCor.append([nombre[i],nombre[i]*coefficient])

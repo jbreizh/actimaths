@@ -58,7 +58,7 @@ import sixieme_geometrie_quadrilatere
 import sixieme_geometrie_triangle
 import sixieme_gestionDonnee_abscisse
 import sixieme_gestionDonnee_pourcentage
-import sixieme_gestionDonnee_tableau
+import sixieme_gestionDonnee_proportionnalite
 import sixieme_grandeurMesure_perimetre
 import sixieme_grandeurMesure_aire
 import sixieme_grandeurMesure_angle

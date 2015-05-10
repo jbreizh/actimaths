@@ -34,6 +34,22 @@ def plus(nombre_min, nombre_max):
     (a, b) = (Arithmetique.valeur_alea(nombre_min, nombre_max), Arithmetique.valeur_alea(nombre_min, nombre_max))
     return (a, b)
 
+def plus_cinq(nombre_min, nombre_max):
+    choix = random.randrange(2)
+    if choix:
+        (a, b) = (Arithmetique.valeur_alea(nombre_min, nombre_max), 5)
+    else:
+        (a, b) = (5, Arithmetique.valeur_alea(nombre_min, nombre_max))
+    return (a, b)
+
+def plus_neuf(nombre_min, nombre_max):
+    choix = random.randrange(2)
+    if choix:
+        (a, b) = (Arithmetique.valeur_alea(nombre_min, nombre_max), 9)
+    else:
+        (a, b) = (9, Arithmetique.valeur_alea(nombre_min, nombre_max))
+    return (a, b)
+
 def plus_dec(nombre_min, nombre_max):
     (a, b) = (Arithmetique.valeur_alea(nombre_min*10, nombre_max*10), Arithmetique.valeur_alea(nombre_min*10, nombre_max*10))
     return (a/10.0, b/10.0)
@@ -53,6 +69,14 @@ def moins_dec(nombre_min, nombre_max):
         return (a/10.0, b/10.0)
     else:
         return (b/10.0, a/10.0)
+
+def moins_neuf(nombre_min, nombre_max):
+    a = Arithmetique.valeur_alea(nombre_min, nombre_max)
+    b = 9
+    if a >=b:
+        return (a, b)
+    else:
+        return (b, a)
 
 def div(nombre_min, nombre_max):
     a = 2
@@ -110,6 +134,15 @@ def tex_calcul_mental(operation, nombre_min, nombre_max):
     if operation == 7:
         (a, b) = div_dec(nombre_min, nombre_max)
         choix_trou(a, b, a // b, '\\div', exo, cor)
+    if operation == 8:
+        (a, b) = plus_neuf(nombre_min, nombre_max)
+        choix_trou(a, b, a + b, '+', exo, cor)
+    if operation == 9:
+        (a, b) = moins_neuf(nombre_min, nombre_max)
+        choix_trou(a, b, a - b, '-', exo, cor)
+    if operation == 10:
+        (a, b) = plus_cinq(nombre_min, nombre_max)
+        choix_trou(a, b, a * b, '\\times', exo, cor)
     return (exo, cor, question)
 
 def choix_trou(nb1, nb2, tot, operateur, exo, cor):
@@ -148,4 +181,16 @@ def MultiplicationDecimal(parametre):
 
 def DivisionDecimal(parametre):
     (exo, cor, question) = tex_calcul_mental(7, parametre[0], parametre[1])
+    return (exo, cor, question)
+
+def AdditionNeuf(parametre):
+    (exo, cor, question) = tex_calcul_mental(8, parametre[0], parametre[1])
+    return (exo, cor, question)
+
+def SoustractionNeuf(parametre):
+    (exo, cor, question) = tex_calcul_mental(9, parametre[0], parametre[1])
+    return (exo, cor, question)
+
+def MultiplicationCinq(parametre):
+    (exo, cor, question) = tex_calcul_mental(10, parametre[0], parametre[1])
     return (exo, cor, question)

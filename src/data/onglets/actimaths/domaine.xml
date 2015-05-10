@@ -2,10 +2,20 @@
 <liste>
   <onglet nom = "Gestion de données">
     <categorie nom = "Sixième">
-      <exercice commande="sixieme_gestionDonnee_pourcentage.CalculPartie" temps="10" description="Proportionnalité" nom="Calculer une fraction à partir d'un pourcentage"/>
-      <exercice commande="sixieme_gestionDonnee_pourcentage.CalculPourcentage" temps="10" description="Proportionnalité" nom="Calculer un pourcentage à partir d'une fraction"/>
-      <exercice commande="sixieme_gestionDonnee_tableau.CalculCoefficient" temps="10" description="Proportionnalité" nom="Calculer le coefficient de proportionnalité"/>
-      <exercice commande="sixieme_gestionDonnee_tableau.CompleteTableau" temps="10" description="Proportionnalité" nom="Compléter un tableau de proportionnalité"/>
+      <exercice commande="sixieme_gestionDonnee_pourcentage.CalculPartie" temps="10" description="Proportionnalité" nom="Calculer une fraction à partir d'un pourcentage">
+        <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="sixieme_gestionDonnee_pourcentage.CalculPourcentage" temps="10" description="Proportionnalité" nom="Calculer un pourcentage à partir d'une fraction">
+        <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="sixieme_gestionDonnee_pourcentage.AppliquerPourcentage" temps="10" description="Proportionnalité" nom="Appliquer un pourcentage">
+        <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="sixieme_gestionDonnee_proportionnalite.CalculCoefficient" temps="10" description="Proportionnalité" nom="Calculer le coefficient de proportionnalité"/>
+      <exercice commande="sixieme_gestionDonnee_proportionnalite.CompleteTableau" temps="10" description="Proportionnalité" nom="Compléter un tableau de proportionnalité"/>
       <exercice commande="sixieme_gestionDonnee_abscisse.LireAbscisseEntierOrigine" temps="10" description="Repérage" nom="Abscisse entière d'un point avec l'origine">
         <parametre defaut="8" max="12" min="5" nom="Abscisse maximale"/>
       </exercice>
@@ -110,6 +120,10 @@
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
+      <exercice commande="sixieme_nombreCalcul_mentale.AdditionNeuf" temps="10" description="Nombres Entiers" nom="Addition d'un entier avec 9">
+        <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
+      </exercice>
       <exercice commande="sixieme_nombreCalcul_complement.AdditionEntier" temps="10" description="Nombres Entiers" nom="Complément additif">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
@@ -126,6 +140,10 @@
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
+      <exercice commande="sixieme_nombreCalcul_mentale.SoustractionNeuf" temps="10" description="Nombres Entiers" nom="Soustraction d'un entier avec 9">
+        <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
+      </exercice>
       <exercice commande="sixieme_nombreCalcul_complement.SoustractionEntier" temps="10" description="Nombres Entiers" nom="Complément soustractif">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
@@ -139,6 +157,10 @@
         <parametre defaut="100" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
       <exercice commande="sixieme_nombreCalcul_mentale.MultiplicationEntier" temps="10" description="Nombres Entiers" nom="Multiplication d'entier">
+        <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="sixieme_nombreCalcul_mentale.MultiplicationCinq" temps="10" description="Nombres Entiers" nom="Multiplication d'un entier par 5">
         <parametre defaut="0" max="100000" min="0" nom="Valeur minimale"/>
         <parametre defaut="10" max="100000" min="1" nom="Valeur maximale"/>
       </exercice>
