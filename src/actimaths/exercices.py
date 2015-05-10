@@ -30,6 +30,7 @@ from codecs import open
 from csv import reader
 from re import findall
 from subprocess import call
+from traceback import print_exc
 
 ## Import locaux
 from values import DATADIR
@@ -88,45 +89,32 @@ def creation_liste(liste_exercice,environnement):
         essai = 1
         while repetition:
             # On essaye de creer un exercice      
-#            try:
-#                # On incrémente le nombre d'essai
-#                essai += 1
-#                repetition = False
-#                # création de l'exercice
-#                (enonceTemp, correctionTemp, question ) = eval("exercices_%s.%s" %(environnement,commande))(parametre)
-#                (enonce, correction) = ("", "")
-#                for ligne in enonceTemp:
-#                    enonce = enonce + ligne + "\n"
-#                for ligne in correctionTemp:
-#                    correction = correction + ligne + "\n"
-#                # On teste pour voir si on a déjà créé un exercice totalement identique
-#                for enonceValide in enonce_liste:
-#                    if enonceValide == enonce:
-#                        repetition = True
-#                        break
-#            # message d'erreur en cas d'echec          
-#            except:
-#                question = "Erreur :"
-#                enonce = u"Erreur interne vérifier vos paramètres"
-#                correction = u"Erreur interne vérifier vos paramètres"
-#                break
-
-            # On incrémente le nombre d'essai
-            essai += 1
-            repetition = False
-            # création de l'exercice
-            (enonceTemp, correctionTemp, question ) = eval("exercices_%s.%s" %(environnement,commande))(parametre)
-            (enonce, correction) = ("", "")
-            for ligne in enonceTemp:
-                enonce = enonce + ligne + "\n"
-            for ligne in correctionTemp:
-                correction = correction + ligne + "\n"
-            # On teste pour voir si on a déjà créé un exercice totalement identique
-            for enonceValide in enonce_liste:
-                if enonceValide == enonce:
-                    repetition = True
-                    break
-
+            try:
+                # On incrémente le nombre d'essai
+                essai += 1
+                repetition = False
+                # création de l'exercice
+                (enonceTemp, correctionTemp, question ) = eval("exercices_%s.%s" %(environnement,commande))(parametre)
+                (enonce, correction) = ("", "")
+                for ligne in enonceTemp:
+                    enonce = enonce + ligne + "\n"
+                for ligne in correctionTemp:
+                    correction = correction + ligne + "\n"
+                # On teste pour voir si on a déjà créé un exercice totalement identique
+                for enonceValide in enonce_liste:
+                    if enonceValide == enonce:
+                        repetition = True
+                        break
+            # message d'erreur en cas d'echec          
+            except:
+                # retour de l'erreur dans la console
+                print "Erreur :"
+                print_exc()
+                # message à l'utilisateur
+                question = "Erreur :"
+                enonce = u"Vérifier vos paramètres"
+                correction = u"Vérifier vos paramètres"
+                break
             # Au bout de 50 essai on considère qu'il est impossible de créer un nouvel exercice différent
             if essai == 50:
                 question = "Erreur :"
@@ -143,6 +131,7 @@ def creation_liste(liste_exercice,environnement):
 ############## Generation complete
 def generation(parametres, temps, question, enonce, correction, fiche, type):
     ## Dossiers et fichiers d'enregistrement
+    dossierExecutable = unicode(parametres['chemin_executable'])
     dossierTex = unicode(parametres['chemin_fichier'])
     nomTex= u"%s-%s-%s" % (parametres['nom_fichier'],fiche, type)
     cheminTex = unicode(join(dossierTex, "%s.tex" % nomTex))
@@ -156,7 +145,7 @@ def generation(parametres, temps, question, enonce, correction, fiche, type):
     mise_en_forme(cheminTex)
     ## creation du pdf
     if parametres['creer_pdf']:
-        creation_pdf(dossierTex, nomTex)
+        creation_pdf(dossierExecutable, dossierTex, nomTex)
         nettoyage(dossierTex, nomTex, parametres['effacer_tex'])
         # affichage du pdf
         if parametres['afficher_pdf']:
@@ -232,7 +221,7 @@ def creation_latex(tex, parametres, temps, question, enonce, correction, fiche, 
     copie_modele(tex, parametres, type, 'pied')
 
 ############## Créé les fichiers PDF
-def creation_pdf(dossier, fichier):
+def creation_pdf(dossierExecutable, dossier, fichier):
     ## Import des packages locaux
     ligne = ""
     for package in listdir(join(DATADIR, 'packages')):
@@ -242,10 +231,24 @@ def creation_pdf(dossier, fichier):
     ## Changement de dossier
     chdir(dossier)
     ## Compilation latex(x2)+dvips+ps2pdf
-    for i in range(2):
-        call(["latex", "-interaction=batchmode", "%s.tex" % fichier])
-    call(["dvips", "-q", "%s.dvi" % fichier, "-o%s.ps" % fichier])
-    call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % fichier, "%s.pdf" % fichier])
+    try:
+        #on essaye d'abord si les commandes sont dans le path
+        for i in range(2):
+            call(["latex", "-interaction=batchmode", "%s.tex" % fichier])
+        call(["dvips", "-q", "%s.dvi" % fichier, "-o%s.ps" % fichier])
+        call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % fichier, "%s.pdf" % fichier])
+        # Retour de l'erreur dans la console
+        print "Information :"
+        print "Les executables sont dans le path"
+    except:
+        #sinon on prend en compte parametres['chemin_executable']
+        for i in range(2):
+            call([unicode(join(dossierExecutable, "latex")), "-interaction=batchmode", "%s.tex" % fichier])
+        call([unicode(join(dossierExecutable, "dvips")), "-q", "%s.dvi" % fichier, "-o%s.ps" % fichier])
+        call([unicode(join(dossierExecutable, "ps2pdf")), "-sPAPERSIZE#a4", "%s.ps" % fichier, "%s.pdf" % fichier])
+        # Retour de l'erreur dans la console
+        print "Information :"
+        print "Les executables ne sont pas dans le path"
 
 ############## Supprime les fichiers temporaires créés par la compilation
 def nettoyage(dossier, fichier, effacer_tex):

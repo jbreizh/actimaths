@@ -478,13 +478,13 @@ class Ui_MainWindow(object):
         self.onglet_csv_pushButton_parcourir_csv = QtGui.QPushButton(self.onglet_csv_widget)
         self.onglet_csv_pushButton_parcourir_csv.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0  rgba(255, 127, 0, 255), stop:1 rgba(255, 247, 177, 255));")
         self.onglet_csv_pushButton_parcourir_csv.setText("Parcourir")
-        QtCore.QObject.connect(self.onglet_csv_pushButton_parcourir_csv,QtCore.SIGNAL("clicked()"), self.option_parcourir_csv)
+        QtCore.QObject.connect(self.onglet_csv_pushButton_parcourir_csv,QtCore.SIGNAL("clicked()"), self.option_parcourir_chemin_csv)
         self.onglet_csv_horizontalLayout_chemin.addWidget(self.onglet_csv_pushButton_parcourir_csv)
         self.onglet_csv_verticalLayout.addLayout(self.onglet_csv_horizontalLayout_chemin)
 
     ############## Modifie le chemin vers le fichier csv
-    def option_parcourir_csv(self):
-        chemin_csv = unicode(QtGui.QFileDialog().getOpenFileName(self.centralwidget, 'Fichier .csv',  unicode(self.onglet_option_chemin.text()), "Documents csv (*.csv)"))
+    def option_parcourir_chemin_csv(self):
+        chemin_csv = unicode(QtGui.QFileDialog().getOpenFileName(self.centralwidget, 'Fichier .csv',  unicode(self.onglet_option_chemin_fichier.text()), "Documents csv (*.csv)"))
         if chemin_csv:
             self.onglet_csv_chemin.setText(chemin_csv)
 
@@ -707,6 +707,64 @@ class Ui_MainWindow(object):
         ## Creation d'une grille verticale dans le QWidget
         self.onglet_option_verticalLayout = QtGui.QVBoxLayout(self.onglet_option_widget)
         ## Intitulé du categorie
+        self.onglet_option_label_categorie_0 = QtGui.QLabel(self.onglet_option_widget)
+        self.onglet_option_label_categorie_0.setText(u"<center><strong>Système</strong></center>")
+        self.onglet_option_verticalLayout.addWidget(self.onglet_option_label_categorie_0)
+        ## Conteneur horizontal
+        self.onglet_option_horizontalLayout_01 = QtGui.QHBoxLayout()
+        self.onglet_option_verticalLayout.addLayout(self.onglet_option_horizontalLayout_01)
+        ## Conteneur vertical
+        self.onglet_option_verticalLayout_01 = QtGui.QVBoxLayout()
+        self.onglet_option_horizontalLayout_01.addLayout(self.onglet_option_verticalLayout_01)
+        ## Label nom du fichier
+        self.onglet_option_label_nom_fichier = QtGui.QLabel(self.onglet_option_widget)
+        self.onglet_option_label_nom_fichier.setText(u"Nom par défaut du fichier : ")
+        self.onglet_option_verticalLayout_01.addWidget(self.onglet_option_label_nom_fichier)
+        ## Label chemin_fichier par défaut pour l'enregistrement des fichiers
+        self.onglet_option_label_chemin_fichier = QtGui.QLabel(self.onglet_option_widget)
+        self.onglet_option_label_chemin_fichier.setText(u"Chemin pour enregistrer les fichiers : ")
+        self.onglet_option_verticalLayout_01.addWidget(self.onglet_option_label_chemin_fichier)
+        ## Label chemin_executable par défaut pour la compilation Latex
+        self.onglet_option_label_chemin_executable = QtGui.QLabel(self.onglet_option_widget)
+        self.onglet_option_label_chemin_executable.setText(u"Chemin vers les executables Latex : ")
+        self.onglet_option_verticalLayout_01.addWidget(self.onglet_option_label_chemin_executable)
+        ## Layout pour les noms d'options, en haut à droite
+        self.onglet_option_verticalLayout_02 = QtGui.QVBoxLayout()
+        self.onglet_option_horizontalLayout_01.addLayout(self.onglet_option_verticalLayout_02)
+        ## LineEdit nom du fichier
+        self.onglet_option_nom_fichier = QtGui.QLineEdit(self.onglet_option_widget)
+        self.onglet_option_nom_fichier.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.onglet_option_nom_fichier.setText(self.config['nom_fichier'])
+        self.onglet_option_verticalLayout_02.addWidget(self.onglet_option_nom_fichier)
+        ## Conteneur horizontal
+        self.onglet_option_horizontalLayout_02 = QtGui.QHBoxLayout()
+        self.onglet_option_verticalLayout_02.addLayout(self.onglet_option_horizontalLayout_02)
+        ## LineEdit chemin par défaut pour l'enregistrement des fichiers
+        self.onglet_option_chemin_fichier = QtGui.QLineEdit(self.onglet_option_widget)
+        self.onglet_option_chemin_fichier.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.onglet_option_chemin_fichier.setText(self.config['chemin_fichier'])
+        self.onglet_option_horizontalLayout_02.addWidget(self.onglet_option_chemin_fichier)
+        ## Bouton parcourir
+        self.onglet_option_pushButton_parcourir_chemin_fichier = QtGui.QPushButton(self.onglet_option_widget)
+        self.onglet_option_pushButton_parcourir_chemin_fichier.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0  rgba(255, 127, 0, 255), stop:1 rgba(255, 247, 177, 255));")
+        self.onglet_option_pushButton_parcourir_chemin_fichier.setText("Parcourir")
+        QtCore.QObject.connect(self.onglet_option_pushButton_parcourir_chemin_fichier,QtCore.SIGNAL("clicked()"), self.option_parcourir_chemin_fichier)
+        self.onglet_option_horizontalLayout_02.addWidget(self.onglet_option_pushButton_parcourir_chemin_fichier)
+        ## Conteneur horizontal
+        self.onglet_option_horizontalLayout_03 = QtGui.QHBoxLayout()
+        self.onglet_option_verticalLayout_02.addLayout(self.onglet_option_horizontalLayout_03)
+        ## LineEdit chemin_executable par défaut pour la compilation Latex
+        self.onglet_option_chemin_executable = QtGui.QLineEdit(self.onglet_option_widget)
+        self.onglet_option_chemin_executable.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.onglet_option_chemin_executable.setText(self.config['chemin_executable'])
+        self.onglet_option_horizontalLayout_03.addWidget(self.onglet_option_chemin_executable)
+        ## Bouton parcourir
+        self.onglet_option_pushButton_parcourir_chemin_executable = QtGui.QPushButton(self.onglet_option_widget)
+        self.onglet_option_pushButton_parcourir_chemin_executable.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0  rgba(255, 127, 0, 255), stop:1 rgba(255, 247, 177, 255));")
+        self.onglet_option_pushButton_parcourir_chemin_executable.setText("Parcourir")
+        QtCore.QObject.connect(self.onglet_option_pushButton_parcourir_chemin_executable,QtCore.SIGNAL("clicked()"), self.option_parcourir_chemin_executable)
+        self.onglet_option_horizontalLayout_03.addWidget(self.onglet_option_pushButton_parcourir_chemin_executable)
+        ## Intitulé du categorie
         self.onglet_option_label_categorie_1 = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_categorie_1.setText(u"<center><strong>Informations</strong></center>")
         self.onglet_option_verticalLayout.addWidget(self.onglet_option_label_categorie_1)
@@ -716,14 +774,6 @@ class Ui_MainWindow(object):
         ## Conteneur vertical
         self.onglet_option_verticalLayout_1 = QtGui.QVBoxLayout()
         self.onglet_option_horizontalLayout_1.addLayout(self.onglet_option_verticalLayout_1)
-        ## Label nom du fichier
-        self.onglet_option_label_nom_fichier = QtGui.QLabel(self.onglet_option_widget)
-        self.onglet_option_label_nom_fichier.setText(u"Nom par défaut du fichier : ")
-        self.onglet_option_verticalLayout_1.addWidget(self.onglet_option_label_nom_fichier)
-        ## Label chemin par défaut pour l'enregistrement des fichiers
-        self.onglet_option_label_chemin_fichier = QtGui.QLabel(self.onglet_option_widget)
-        self.onglet_option_label_chemin_fichier.setText(u"Chemin pour enregistrer les fichiers : ")
-        self.onglet_option_verticalLayout_1.addWidget(self.onglet_option_label_chemin_fichier)
         ## Label titre des fiches
         self.onglet_option_label_titre_fiche = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_titre_fiche.setText("Titre de la fiche d'exercices : ")
@@ -747,25 +797,6 @@ class Ui_MainWindow(object):
         ## Layout pour les noms d'options, en haut à droite
         self.onglet_option_verticalLayout_2 = QtGui.QVBoxLayout()
         self.onglet_option_horizontalLayout_1.addLayout(self.onglet_option_verticalLayout_2)
-        ## LineEdit nom du fichier
-        self.onglet_option_nom_fichier = QtGui.QLineEdit(self.onglet_option_widget)
-        self.onglet_option_nom_fichier.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.onglet_option_nom_fichier.setText(self.config['nom_fichier'])
-        self.onglet_option_verticalLayout_2.addWidget(self.onglet_option_nom_fichier)
-        ## Conteneur horizontal
-        self.onglet_option_horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.onglet_option_verticalLayout_2.addLayout(self.onglet_option_horizontalLayout_2)
-        ## LineEdit chemin par défaut pour l'enregistrement des fichiers
-        self.onglet_option_chemin = QtGui.QLineEdit(self.onglet_option_widget)
-        self.onglet_option_chemin.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.onglet_option_chemin.setText(self.config['chemin_fichier'])
-        self.onglet_option_horizontalLayout_2.addWidget(self.onglet_option_chemin)
-        ## Bouton parcourir
-        self.onglet_option_pushButton_parcourir_chemin = QtGui.QPushButton(self.onglet_option_widget)
-        self.onglet_option_pushButton_parcourir_chemin.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0  rgba(255, 127, 0, 255), stop:1 rgba(255, 247, 177, 255));")
-        self.onglet_option_pushButton_parcourir_chemin.setText("Parcourir")
-        QtCore.QObject.connect(self.onglet_option_pushButton_parcourir_chemin,QtCore.SIGNAL("clicked()"), self.option_parcourir_chemin)
-        self.onglet_option_horizontalLayout_2.addWidget(self.onglet_option_pushButton_parcourir_chemin)
         ## LineEdit titre des fiches
         self.titre_fiche = QtGui.QLineEdit(self.onglet_option_widget)
         self.titre_fiche.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -922,10 +953,16 @@ class Ui_MainWindow(object):
         self.option_modele_page()
 
     ############## Modifie le chemin d'enregistrement des fiches
-    def option_parcourir_chemin(self):
-        chemin = unicode(QtGui.QFileDialog().getExistingDirectory (self.centralwidget, u"Dossier où créer les fiches", unicode(self.onglet_option_chemin.text()), QtGui.QFileDialog.ShowDirsOnly))
-        if chemin:
-            self.onglet_option_chemin.setText(chemin)
+    def option_parcourir_chemin_fichier(self):
+        chemin_fichier = unicode(QtGui.QFileDialog().getExistingDirectory (self.centralwidget, u"Dossier où créer les fiches", unicode(self.onglet_option_chemin_fichier.text()), QtGui.QFileDialog.ShowDirsOnly))
+        if chemin_fichier:
+            self.onglet_option_chemin_fichier.setText(chemin_fichier)
+
+    ############## Modifie le chemin vers les executables Latex
+    def option_parcourir_chemin_executable(self):
+        chemin_executable = unicode(QtGui.QFileDialog().getExistingDirectory (self.centralwidget, u"Dossier où trouver les exécutables Latex", unicode(self.onglet_option_chemin_executable.text()), QtGui.QFileDialog.ShowDirsOnly))
+        if chemin_executable:
+            self.onglet_option_chemin_executable.setText(chemin_executable)
 
     ############## Active les modèles de présentation selon l'environnement
     def option_cherche_modele(self,presentation):
@@ -988,7 +1025,8 @@ class Ui_MainWindow(object):
         root = tree.getroot()
         options = root.find('options')
         options .find('nom_fichier').text = unicode(self.onglet_option_nom_fichier.text())
-        options .find('chemin_fichier').text = unicode(self.onglet_option_chemin.text())
+        options .find('chemin_fichier').text = unicode(self.onglet_option_chemin_fichier.text())
+        options .find('chemin_executable').text = unicode(self.onglet_option_chemin_executable.text())
         options .find('titre_fiche').text = unicode(self.titre_fiche.text())
         options .find('nom_etablissement').text = unicode(self.nom_etablissement.text())
         options .find('nom_auteur').text = unicode(self.nom_auteur.text())
@@ -1023,7 +1061,8 @@ class Ui_MainWindow(object):
                            'date_activite': unicode(self.date_activite.currentText()),
                            'niveau': unicode(self.comboBox_niveau.currentText()),
                            'nom_fichier': unicode(self.onglet_option_nom_fichier.text()),
-                           'chemin_fichier': unicode(self.onglet_option_chemin.text()),
+                           'chemin_fichier': unicode(self.onglet_option_chemin_fichier.text()),
+                           'chemin_executable': unicode(self.onglet_option_chemin_executable.text()),
                            'environnement': self.environnement,
                            'affichage': self.affichage,
                            'modele_presentation': unicode(self.comboBox_modele_presentation.currentText()),

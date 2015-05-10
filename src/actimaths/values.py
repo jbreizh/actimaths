@@ -57,11 +57,20 @@ def configdir():
 	else:
 		return join(home(), ".config", "actimaths")
 
+def latexdir():
+	if name == 'nt':
+		return join(unicode(environ['APPDATA'], getfilesystemencoding()),"actimaths")
+	elif platform == "darwin":	
+		return join(home(), "Library", "Application Support", "Actimaths")
+	else:
+		return '/bin'
+
 VERSION = "1.23"
 WEBSITE = "http://mathecailloux.ile.nc"
 DATADIR = data_dir()
 HOME = home()
 CONFIGDIR = configdir()
+LATEXDIR = latexdir()
 DESCRIPTION = u"Actimaths est un fork de Pyromaths qui permet de créer des fiches d'activités mentales avec leurs corrigés au format LaTeX et PDF."
 COPYRIGHT_YEAR = strftime("%Y")
 COPYRIGHTS = "Jean-Baptiste Le Coz"
