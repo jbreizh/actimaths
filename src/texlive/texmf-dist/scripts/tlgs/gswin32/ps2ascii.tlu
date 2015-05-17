@@ -1,0 +1,74 @@
+#!/usr/bin/env texlua
+--*-Lua-*-
+-- $Id: ps2ascii.tlu 21278 2011-02-04 01:28:00Z reinhardk $
+
+-- Copyright (C) 2008 Reinhard Kotucha.
+-- You may freely use, modify and/or distribute this file.
+
+-- Replacement for ps2ascii.bat.
+-- Convert PostScript to ASCII
+
+function fixwin (args_unix)
+   if os.type == 'windows' then
+      local args_win={}  -- new table
+      args_win[0]=args_unix[1]
+      for i=1, #args_unix do  
+	 args_win[i]='"'..args_unix[i]..'"'
+      end
+      return args_win
+   else
+      return args_unix
+   end
+end
+
+function remove_tmpfiles (tmpfiles)
+   for i=1, #tmpfiles do
+      if lfs.isfile(tmpfiles[i]) then
+	 os.remove(tmpfiles[i])
+      end
+   end
+end
+
+if os.type == 'windows' then
+   gs='gswin32c'
+else
+   gs='gs'
+end
+
+command={gs, '-q', '-dNODISPLAY', '-dBATCH', '-dSAFER', '-dDELAYBIND', 
+	 '-dWRITESYSTEMDICT', '-dSIMPLE', '-c', 'save', 
+	 '-f', 'ps2ascii.ps'}
+
+if #arg < 2 then
+   if #arg == 0 then
+      command[#command+1]='-'
+   elseif #arg == 1 then
+      command[#command+1]=arg[1]
+   end
+   command=fixwin(command)
+elseif #arg == 2 then
+   -- We need a shell for I/O redirection.
+   command=gs..' -q -dNODISPLAY -dBATCH -dSAFER -dDELAYBIND '.. 
+      '-dWRITESYSTEMDICT -dSIMPLE -c save '.. 
+      '-f ps2ascii.ps "'..arg[1]..'" > "'..arg[2]..'"'
+end
+
+--[[ prepend an additional hyphen to activate this code
+if type(command) == 'string' then
+   print(command)
+else
+   for i=0, #command do
+      print (command[i])
+   end
+end
+os.exit(ret)
+--]]
+
+if type(command) == 'string' then
+   ret=os.execute(command)
+else
+   ret=os.spawn(command)
+end
+
+remove_tmpfiles{'_temp_.err', '_temp_.out'}
+os.exit(ret)

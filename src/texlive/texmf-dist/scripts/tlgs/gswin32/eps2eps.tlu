@@ -1,0 +1,70 @@
+#!/usr/bin/env texlua
+--*-Lua-*-
+-- $Id: eps2eps.tlu 35354 2014-10-11 10:16:46Z kakuto $
+
+-- Copyright (C) 2008 Reinhard Kotucha.
+-- You may freely use, modify and/or distribute this file.
+
+-- Replacement for eps2eps.bat.
+-- 'Distill' Encapsulated PostScript.
+
+function fixwin(args_unix)
+   if os.type == 'windows' then
+      local args_win={}  -- new table
+      args_win[0]=args_unix[1]
+      for i=1, #args_unix do  
+	 args_win[i]='"'..args_unix[i]..'"'
+      end
+      return args_win
+   else
+      return args_unix
+   end
+end
+
+if os.type == 'windows' then
+   gs='gswin32c'
+else
+   gs='gs'
+end
+
+command={gs, '-q', '-sDEVICE=eps2write'}
+
+if os.type=='unix' then
+   command[#command+1]='-sstdout=%stderr'
+end
+
+
+for _,v in ipairs{'-dNOPAUSE', '-sOutputFile='..arg[#arg], 
+		  '-dBATCH', '-dSAFER', '-dDEVICEWIDTH=250000', 
+		  '-dDEVICEHEIGHT=250000'} do
+   command[#command+1]=v
+end
+
+
+files=0
+
+for i=1, #arg do
+   if not string.find(arg[i], '^%-') then
+      files=files+1
+   end
+   command[#command+1]=arg[i]
+end
+
+if files < 2 then
+   io.stderr:write('Usage: eps2eps [options] input.eps output.eps\n')
+   os.exit(1)
+end
+
+command[#command]=nil -- already processed at -sOutputFile
+
+command=fixwin(command)
+
+--[[ prepend an additional hyphen to activate this code
+for i=0, #command do
+   print (command[i])
+end
+os.exit(ret)
+--]]
+
+ret=os.spawn(command)
+os.exit(ret)

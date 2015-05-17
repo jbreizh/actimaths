@@ -1,0 +1,79 @@
+#!/usr/bin/env texlua
+--*-Lua-*-
+-- $Id: ps2ps2.tlu 21278 2011-02-04 01:28:00Z reinhardk $
+
+-- Copyright (C) 2010 Reinhard Kotucha.
+-- You may freely use, modify and/or distribute this file.
+
+-- Replacement for ps2ps2.bat.
+-- Converting PostScript 3 or PDF into PostScript 2 with the
+-- Ghostscript 'ps2write' device.
+-- This generates a PDF-style stream with an attached 
+-- PostScript program to interpret it.
+
+function fixwin(args_unix)
+   if os.type == 'windows' then
+      local args_win={}  -- new table
+      args_win[0]=args_unix[1]
+      for i=1, #args_unix do  
+	 args_win[i]='"'..args_unix[i]..'"'
+      end
+      return args_win
+   else
+      return args_unix
+   end
+end
+
+if os.type == 'windows' then
+   gs='gswin32c'
+else
+   gs='gs'
+end
+
+
+files={}
+options={'-dNOPAUSE', '-dBATCH', '-dSAFER'}
+
+for i=1, #arg do
+   if string.find(arg[i], '^%-$') then
+      files[#files+1]=arg[i]
+   elseif string.find(arg[i], '^%-') then
+      options[#options+1]=arg[i]
+   else
+      files[#files+1]=arg[i]
+   end
+end
+
+
+if #files ~= 2 then
+   io.stderr:write('Usage: ps2ps2 [options] input.ps output.ps\n')
+   io.stderr:write('  e.g. ps2ps2 -sPAPERSIZE=a4 input.ps output.ps\n')
+   os.exit(1)
+end
+
+
+command={gs, '-q', '-sDEVICE=ps2write'}
+
+if os.type=='unix' then
+   command[#command+1]='-sstdout=%stderr'
+end
+
+command[#command+1]='-sOutputFile='..files[2] 
+
+for i=1, #options do
+   command[#command+1]=options[i]
+end
+
+command[#command+1]=files[1]
+
+command=fixwin(command)
+
+--[[ prepend an additional hyphen to activate this code
+for i=0, #command do
+   print (command[i])
+end
+os.exit(ret)
+--]]
+
+ret=os.spawn(command)
+os.exit(ret)
