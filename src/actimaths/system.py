@@ -28,7 +28,7 @@ from lxml import etree
 from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 
 ## Import spécifique à Actimaths
-from values import CONFIGDIR, HOME, LATEXDIR
+from values import CONFIGDIR, HOME
 
 ###==============================================================
 ###        Gestion du fichier de configuration de actimaths
@@ -39,7 +39,8 @@ def create_config_file():
     child = etree.SubElement(root, "options")
     etree.SubElement(child, "nom_fichier").text="ActiviteMentale"
     etree.SubElement(child, "chemin_fichier").text="%s" % HOME
-    etree.SubElement(child, "chemin_executable").text="%s" % LATEXDIR
+    etree.SubElement(child, "compilateur_externe").text="False"
+    etree.SubElement(child, "chemin_compilateur_externe").text="%s" % HOME
     etree.SubElement(child, "chemin_csv").text="%s" % HOME
     etree.SubElement(child, "titre_fiche").text=u"Activite Mentale"
     etree.SubElement(child, "nom_etablissement").text=u"Établissement X"

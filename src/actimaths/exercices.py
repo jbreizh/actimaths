@@ -43,24 +43,24 @@ import exercices_pyromaths
 ############## Créer, lance la compilation des fichiers TeX et affiche les PDF
 def creation(parametres):
     ## Creation de la liste de question, sujet, corrigé
-    (temps, question, enonce, correction) = (['',''], ['',''], ['',''], ['',''])
+    (temps, question, enonce, correction) = (["",""], ["",""], ["",""], ["",""])
     for i in range(2):
-        if parametres['affichage'] == "csv":
-            (temps[i], question[i], enonce[i], correction[i]) = creation_liste_csv(parametres['chemin_csv'])
+        if parametres["affichage"] == "csv":
+            (temps[i], question[i], enonce[i], correction[i]) = creation_liste_csv(parametres["chemin_csv"])
         else:
-            (temps[i], question[i], enonce[i], correction[i]) = creation_liste(parametres['liste_exercice'],parametres['environnement'])
+            (temps[i], question[i], enonce[i], correction[i]) = creation_liste(parametres["liste_exercice"],parametres["environnement"])
     ## Création et affichage de la présentation sujet en PDF
-    if parametres['sujet_presentation']:
-        generation(parametres, temps, question, enonce, correction, 'sujet','presentation')
+    if parametres["sujet_presentation"]:
+        generation(parametres, temps, question, enonce, correction, "sujet","presentation")
     ## Création et affichage de la présentation corrigé en PDF
-    if parametres['corrige_presentation']:
-        generation(parametres, temps, question, enonce, correction, 'corrige','presentation')
+    if parametres["corrige_presentation"]:
+        generation(parametres, temps, question, enonce, correction, "corrige","presentation")
     ## Création et affichage du sujet papier en PDF
-    if parametres['sujet_page']:
-        generation(parametres, temps, question, enonce, correction, 'sujet','page')
+    if parametres["sujet_page"]:
+        generation(parametres, temps, question, enonce, correction, "sujet","page")
     ## Création et affichage du corrigé papier en PDF
-    if parametres['corrige_page']:
-        generation(parametres, temps, question, enonce, correction, 'corrige','page')
+    if parametres["corrige_page"]:
+        generation(parametres, temps, question, enonce, correction, "corrige","page")
 
 ############## Génère les exercice à partir du CSV
 def creation_liste_csv(chemin_csv):
@@ -131,12 +131,11 @@ def creation_liste(liste_exercice,environnement):
 ############## Generation complete
 def generation(parametres, temps, question, enonce, correction, fiche, type):
     ## Dossiers et fichiers d'enregistrement
-    dossierExecutable = unicode(parametres['chemin_executable'])
-    dossierTex = unicode(parametres['chemin_fichier'])
-    nomTex= u"%s-%s-%s" % (parametres['nom_fichier'],fiche, type)
+    dossierTex = unicode(parametres["chemin_fichier"])
+    nomTex= u"%s-%s-%s" % (parametres["nom_fichier"],fiche, type)
     cheminTex = unicode(join(dossierTex, "%s.tex" % nomTex))
     ## Ouverture du fichier teX
-    tex = open(cheminTex, encoding='utf-8', mode='w')
+    tex = open(cheminTex, encoding="utf-8", mode="w")
     ## creation du fichier teX
     creation_latex(tex, parametres, temps, question, enonce, correction, fiche, type)
     ## fermeture du fichier teX
@@ -144,27 +143,27 @@ def generation(parametres, temps, question, enonce, correction, fiche, type):
     ## indentation des fichiers teX créés
     mise_en_forme(cheminTex)
     ## creation du pdf
-    if parametres['creer_pdf']:
-        creation_pdf(dossierExecutable, dossierTex, nomTex)
-        nettoyage(dossierTex, nomTex, parametres['effacer_tex'])
+    if parametres["creer_pdf"]:
+        creation_pdf(dossierTex, nomTex, unicode(parametres["chemin_compilateur_externe"]), parametres["compilateur_externe"])
+        nettoyage(dossierTex, nomTex, parametres["effacer_tex"])
         # affichage du pdf
-        if parametres['afficher_pdf']:
+        if parametres["afficher_pdf"]:
             affichage_pdf(dossierTex, nomTex)
 
 ############## Copie des modèles latex en remplacant certaines variables
-def copie_modele(tex, parametres, type, master, texte_original='', texte_identique='', texte_inverse=''):
+def copie_modele(tex, parametres, type, master, texte_original="", texte_identique="", texte_inverse=""):
     ## Les variables à remplacer :
-    titre = parametres['titre']
-    niveau = parametres['niveau']
-    etablissement = parametres['nom_etablissement']
-    auteur = parametres['nom_auteur']
-    dateactivite = parametres['date_activite']
+    titre = parametres["titre"]
+    niveau = parametres["niveau"]
+    etablissement = parametres["nom_etablissement"]
+    auteur = parametres["nom_auteur"]
+    dateactivite = parametres["date_activite"]
     ## ouverture du modele
-    source = join(DATADIR, 'modeles', parametres['environnement'],type, parametres['modele_%s' % type] + '.tex' )
-    modele = open(source, encoding='utf-8', mode='r')
+    source = join(DATADIR, "modeles", parametres["environnement"],type, parametres["modele_%s" % type] + ".tex" )
+    modele = open(source, encoding="utf-8", mode="r")
     ## Remplacement des variables et copie dans le fichier latex
-    master_debut = '% ' + master
-    master_fin = '% fin ' + master
+    master_debut = "% " + master
+    master_fin = "% fin " + master
     n = 0
     for ligne in modele:
         # On arrete la copie
@@ -173,25 +172,25 @@ def copie_modele(tex, parametres, type, master, texte_original='', texte_identiq
         # On copie
         if n > 0:
             # Substitution des variables
-            variableSubstituableListe = findall('##{{[A-Z]*}}##',ligne)
+            variableSubstituableListe = findall("##{{[A-Z]*}}##",ligne)
             if variableSubstituableListe:
                 for variableSubstituable in variableSubstituableListe:
                     occ = variableSubstituable[ 4 : len(variableSubstituable)- 4 ].lower()
                     ligne = ligne.replace(variableSubstituable, eval(occ))
             # Substitution du texte original
-            texteSubstituableListe = findall('##{{ORIGINAL[0-9]*}}##',ligne)
+            texteSubstituableListe = findall("##{{ORIGINAL[0-9]*}}##",ligne)
             if texteSubstituableListe:
                 for texteSubstituable in texteSubstituableListe:
                     occ = texteSubstituable[ 12 : len(texteSubstituable)- 4 ]
                     ligne = ligne.replace(texteSubstituable, texte_original[int(occ)])
             # Substitution du texte identique
-            texteSubstituableListe = findall('##{{IDENTIQUE[0-9]*}}##',ligne)
+            texteSubstituableListe = findall("##{{IDENTIQUE[0-9]*}}##",ligne)
             if texteSubstituableListe:
                 for texteSubstituable in texteSubstituableListe:
                     occ = texteSubstituable[ 13 : len(texteSubstituable)- 4 ]
                     ligne = ligne.replace(texteSubstituable, texte_identique[int(occ)])
             # Substitution du texte inverse
-            texteSubstituableListe = findall('##{{INVERSE[0-9]*}}##',ligne)
+            texteSubstituableListe = findall("##{{INVERSE[0-9]*}}##",ligne)
             if texteSubstituableListe:
                 for texteSubstituable in texteSubstituableListe:
                     occ = texteSubstituable[ 11 : len(texteSubstituable)- 4 ]
@@ -206,7 +205,7 @@ def copie_modele(tex, parametres, type, master, texte_original='', texte_identiq
 ############## Génère le code latex
 def creation_latex(tex, parametres, temps, question, enonce, correction, fiche, type):
     ## Copie de l'entête
-    copie_modele(tex, parametres, type, 'entete')
+    copie_modele(tex, parametres, type, "entete")
     longueur_liste_exercice = len(question[0])
     ## Copie du corps
     for numero in range(longueur_liste_exercice):
@@ -218,46 +217,42 @@ def creation_latex(tex, parametres, temps, question, enonce, correction, fiche, 
         # Copie de l'exercice
         copie_modele(tex, parametres, type, fiche, texte_original, texte_identique, texte_inverse)
     ## Copie du pied
-    copie_modele(tex, parametres, type, 'pied')
+    copie_modele(tex, parametres, type, "pied")
 
 ############## Créé les fichiers PDF
-def creation_pdf(dossierExecutable, dossier, fichier):
+def creation_pdf(dossier, fichier, chemin_compilateur_externe, compilateur_externe):
     ## Import des packages locaux
     ligne = ""
-    for package in listdir(join(DATADIR, 'packages')):
-        ligne += normpath(join(DATADIR, 'packages', package))
-        ligne += ';'
-    environ['TEXINPUTS']= ligne
+    for package in listdir(join(DATADIR, "packages")):
+        ligne += normpath(join(DATADIR, "packages", package))
+        ligne += ";"
+    environ["TEXINPUTS"]= ligne
+    ## Chemin vers le compilateur
+    if compilateur_externe:
+        #on prend en compte parametres["chemin_compilateur_externe"]
+        chemin_compilateur = chemin_compilateur_externe
+    else:
+        #on utilise le compilateur interne
+        if name == "nt":
+            chemin_compilateur = join(DATADIR, "texlive", "bin", "win32")
+        else:
+            chemin_compilateur = ""
     ## Changement de dossier
     chdir(dossier)
     ## Compilation latex(x2)+dvips+ps2pdf
-    try:
-        #on essaye d'abord si les commandes sont dans le path
-        for i in range(2):
-            call(["latex", "-interaction=batchmode", "%s.tex" % fichier])
-        call(["dvips", "-q", "%s.dvi" % fichier, "-o%s.ps" % fichier])
-        call(["ps2pdf", "-sPAPERSIZE#a4", "%s.ps" % fichier, "%s.pdf" % fichier])
-        # Retour de l'erreur dans la console
-        print "Information :"
-        print "Les executables sont dans le path"
-    except:
-        #sinon on prend en compte parametres['chemin_executable']
-        for i in range(2):
-            call([unicode(join(dossierExecutable, "latex")), "-interaction=batchmode", "%s.tex" % fichier])
-        call([unicode(join(dossierExecutable, "dvips")), "-q", "%s.dvi" % fichier, "-o%s.ps" % fichier])
-        call([unicode(join(dossierExecutable, "ps2pdf")), "-sPAPERSIZE#a4", "%s.ps" % fichier, "%s.pdf" % fichier])
-        # Retour de l'erreur dans la console
-        print "Information :"
-        print "Les executables ne sont pas dans le path"
+    for i in range(2):
+        call([unicode(join(chemin_compilateur, "latex")), "-interaction=batchmode", "%s.tex" % fichier])
+    call([unicode(join(chemin_compilateur, "dvips")), "-q", "%s.dvi" % fichier, "-o%s.ps" % fichier])
+    call([unicode(join(chemin_compilateur, "ps2pdf")), "-sPAPERSIZE#a4", "%s.ps" % fichier, "%s.pdf" % fichier])
 
 ############## Supprime les fichiers temporaires créés par la compilation
 def nettoyage(dossier, fichier, effacer_tex):
     ## Changement de dossier
     chdir(dossier)
     ## Liste des extensions à supprimer
-    extensions = ['.aux','.dvi','.out','.ps','.nav','.snm','.toc','.log']
+    extensions = [".aux",".dvi",".out",".ps",".nav",".snm",".toc",".log"]
     if effacer_tex:
-        extensions.append('.tex')
+        extensions.append(".tex")
     ## Suppression des fichiers
     for extension in extensions:
         try:
@@ -294,7 +289,7 @@ def mise_en_forme(file):
     lline : last line
     cline : current line
     """
-    f = open(file, encoding='utf-8', mode='r')
+    f = open(file, encoding="utf-8", mode="r")
     old_tex = f.readlines()
     new_tex=[]
     indent = 0
@@ -314,7 +309,7 @@ def mise_en_forme(file):
         else:
             new_tex.append("")
     f.close()
-    f = open(file, encoding='utf-8', mode='w')
+    f = open(file, encoding="utf-8", mode="w")
     f.write("\n".join(new_tex))
     f.close()
 

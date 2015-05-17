@@ -31,14 +31,15 @@ from lxml import _elementpath as DONTUSE # Astuce pour inclure lxml dans Py2exe
 from datetime import date, timedelta
 from sip import delete
 from functools import partial
+from locale import setlocale, LC_TIME
+
+## On utilise le pays de l'utilisateur (pour la date)
+setlocale(LC_TIME,"")
+
 ## Import spécifique à Actimaths
 from system import lire_config, lire_liste_exercice
 from values import CONFIGDIR, COPYRIGHTS, VERSION, WEBSITE, DESCRIPTION, CREDITS, DATADIR
 from exercices import creation
-from locale import setlocale, LC_TIME
-
-############## On utilise le pays de l'utilisateur (pour la date)
-setlocale(LC_TIME,'')
 
 ###========================================================================
 ### Class MainWindow
@@ -52,9 +53,9 @@ class Ui_MainWindow(object):
         self.fichier_configuration = join(CONFIGDIR,  "actimaths.xml")
         self.config = lire_config(self.fichier_configuration)
         ## Fenètre principale
-        MainWindow.setWindowIcon(QtGui.QIcon(join(DATADIR, 'images','actimaths.png')))
+        MainWindow.setWindowIcon(QtGui.QIcon(join(DATADIR, "images","actimaths.png")))
         MainWindow.setWindowTitle("Actimaths")
-        MainWindow.setGeometry(0, 44, 1100, 670)
+        MainWindow.setGeometry(0, 44, 1100, 700)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         ## Widget principal
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -102,7 +103,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setAutoFillBackground(True)
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
         ## Construction des onglets
-        self.construction_onglet(self.config['environnement'],self.config['affichage'])
+        self.construction_onglet(self.config["environnement"],self.config["affichage"])
 
         #============================================================
         #        Barre de menus
@@ -117,12 +118,12 @@ class Ui_MainWindow(object):
         ## Action Tous les Exercices 
         self.barre_menu_fichier_tous_les_exercices = QtGui.QAction(MainWindow)
         self.barre_menu_fichier_tous_les_exercices.setText("Choisir tous les exercices")
-        self.barre_menu_fichier_tous_les_exercices.setShortcut('Ctrl+A')
+        self.barre_menu_fichier_tous_les_exercices.setShortcut("Ctrl+A")
         QtCore.QObject.connect(self.barre_menu_fichier_tous_les_exercices, QtCore.SIGNAL("triggered()"), self.choisir_tous_les_exercices)
         ## Action Quitter
         self.barre_menu_fichier_quitter = QtGui.QAction(MainWindow)
         self.barre_menu_fichier_quitter.setText("Quitter")
-        self.barre_menu_fichier_quitter.setShortcut('Ctrl+Q')
+        self.barre_menu_fichier_quitter.setShortcut("Ctrl+Q")
         QtCore.QObject.connect(self.barre_menu_fichier_quitter, QtCore.SIGNAL("triggered()"), QtGui.qApp, QtCore.SLOT("quit()"))
         ## Construction du menu fichier
         self.barre_menu_fichier.addAction(self.barre_menu_fichier_tous_les_exercices)
@@ -215,7 +216,7 @@ class Ui_MainWindow(object):
         credits = "\n"
         for nom in CREDITS:
             credits += "<li>" + nom + "</li>" + "\n"
-        QtGui.QMessageBox.about(self.centralwidget, u'À propos de Actimaths', text % (VERSION, DESCRIPTION, credits, COPYRIGHTS))
+        QtGui.QMessageBox.about(self.centralwidget, u"À propos de Actimaths", text % (VERSION, DESCRIPTION, credits, COPYRIGHTS))
 
     ############## Ouvre le navigateur internet par défaut sur la page d'aide en ligne du site d'Actimaths
     def site(self):
@@ -246,7 +247,7 @@ class Ui_MainWindow(object):
     def choisir_tous_les_exercices(self):
         ## Creation
         if self.affichage == "csv":
-            QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Il n'a pas d'exercices à choisir pour l'affichage CSV.", QtGui.QMessageBox.Ok ) 
+            QtGui.QMessageBox.warning(self.centralwidget, "Attention !", u"Il n'a pas d'exercices à choisir pour l'affichage CSV.", QtGui.QMessageBox.Ok ) 
         else:
             # On choisit tous les exercices
             for onglet in range(len(self.liste_exercice)):
@@ -295,16 +296,24 @@ class Ui_MainWindow(object):
         self.affichage = affichage
         ## Construction des onglets selon l'affichage
         if self.affichage == "csv":
+            # On désactive les boutons sélectionner et réinitialiser
+            self.bouton_selectionner.setEnabled(False)
+            self.bouton_reinitialiser.setEnabled(False)
+            # On vide la liste d'exercice
             self.liste_exercice = []
             # On construit l'onglet Csv
             self.construction_onglet_csv()
         else:
+            # On désactive les boutons sélectionner et réinitialiser
+            self.bouton_selectionner.setEnabled(True)
+            self.bouton_reinitialiser.setEnabled(True)
+            # On remplit la liste d'exercice
             self.fichier_liste_exercice = join(DATADIR,"onglets", self.environnement, "%s.xml" %self.affichage)
             self.liste_exercice = lire_liste_exercice(self.fichier_liste_exercice)
             # On construit les onglets des exercices
             self.construction_onglet_exercice()
-        ## On construit les onglets des exercices sélectionnés
-        self.construction_onglet_selection()
+            ## On construit les onglets des exercices sélectionnés
+            self.construction_onglet_selection()
         ## On construit l'onglet options
         self.construction_onglet_option()
 
@@ -394,7 +403,7 @@ class Ui_MainWindow(object):
                     self.onglet_exercice_gridLayout[onglet][categorie].addItem(QtGui.QSpacerItem(20, 20), 2*exercice, 2, 2, 1)
                     ## Vignette
                     self.onglet_exercice_label_aide[onglet][categorie].append(QtGui.QLabel(self.onglet_exercice_ligne[onglet][categorie][exercice]))
-                    self.onglet_exercice_label_aide[onglet][categorie][exercice].setText(r'<img src="%s" />' %  join(DATADIR, "vignettes" ,"%s" % self.environnement,'%s.jpg' % self.liste_exercice[onglet][1][categorie][1][exercice][2]))
+                    self.onglet_exercice_label_aide[onglet][categorie][exercice].setText(r'<img src="%s" />' %  join(DATADIR, "vignettes" ,"%s" % self.environnement,"%s.jpg" % self.liste_exercice[onglet][1][categorie][1][exercice][2]))
                     self.onglet_exercice_gridLayout[onglet][categorie].addWidget(self.onglet_exercice_label_aide[onglet][categorie][exercice], 2*exercice, 3, 2, 1)
                     ## Ajout d'une colonne redimensionnable en largeur
                     self.onglet_exercice_gridLayout[onglet][categorie].addItem(QtGui.QSpacerItem(20, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum), 2*exercice, 4, 2, 1)
@@ -472,7 +481,7 @@ class Ui_MainWindow(object):
         ## LineEdit chemin du fichier csv
         self.onglet_csv_chemin = QtGui.QLineEdit(self.onglet_csv_widget)
         self.onglet_csv_chemin.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.onglet_csv_chemin.setText(self.config['chemin_csv'])
+        self.onglet_csv_chemin.setText(self.config["chemin_csv"])
         self.onglet_csv_horizontalLayout_chemin.addWidget(self.onglet_csv_chemin)
         ## Bouton parcourir du fichier csv
         self.onglet_csv_pushButton_parcourir_csv = QtGui.QPushButton(self.onglet_csv_widget)
@@ -484,7 +493,7 @@ class Ui_MainWindow(object):
 
     ############## Modifie le chemin vers le fichier csv
     def option_parcourir_chemin_csv(self):
-        chemin_csv = unicode(QtGui.QFileDialog().getOpenFileName(self.centralwidget, 'Fichier .csv',  unicode(self.onglet_option_chemin_fichier.text()), "Documents csv (*.csv)"))
+        chemin_csv = unicode(QtGui.QFileDialog().getOpenFileName(self.centralwidget, "Fichier .csv",  unicode(self.onglet_option_chemin_fichier.text()), "Documents csv (*.csv)"))
         if chemin_csv:
             self.onglet_csv_chemin.setText(chemin_csv)
 
@@ -520,7 +529,7 @@ class Ui_MainWindow(object):
     def remplissage_onglet_selection(self):
         ## Test de l'existence de la liste de sélection
         if self.liste_exercice_selectionner == []:
-            QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Veuillez choisir des exercices...", QtGui.QMessageBox.Ok )
+            QtGui.QMessageBox.warning(self.centralwidget, "Attention !", u"Veuillez choisir des exercices...", QtGui.QMessageBox.Ok )
             ## On supprime le contenu de l'onglet selection
             delete(self.onglet_selection_widget)
             self.onglet_selection_widget = None
@@ -555,7 +564,7 @@ class Ui_MainWindow(object):
                 self.onglet_selection_gridLayout.addWidget(self.onglet_selection_ligne[exercice], 2*exercice, 1, 2, 13)
                 ## Bouton Monter
                 self.onglet_selection_bouton_monter.append(QtGui.QPushButton(self.onglet_selection_ligne[exercice]))
-                self.onglet_selection_bouton_monter[exercice].setIcon(QtGui.QIcon(join(DATADIR,'images','haut.png')))
+                self.onglet_selection_bouton_monter[exercice].setIcon(QtGui.QIcon(join(DATADIR,"images","haut.png")))
                 self.onglet_selection_bouton_monter[exercice].setToolTip(u"Monter l'exercice dans la liste")
                 self.onglet_selection_gridLayout.addWidget(self.onglet_selection_bouton_monter[exercice], 2*exercice, 1,2,1)
                 QtCore.QObject.connect(self.onglet_selection_bouton_monter[exercice],QtCore.SIGNAL("clicked()"), partial(self.deplacer_exercice,exercice,"haut"))
@@ -563,7 +572,7 @@ class Ui_MainWindow(object):
                     self.onglet_selection_bouton_monter[exercice].setEnabled(False)
                 ## Bouton Descendre
                 self.onglet_selection_bouton_descendre.append(QtGui.QPushButton(self.onglet_selection_ligne[exercice]))
-                self.onglet_selection_bouton_descendre[exercice].setIcon(QtGui.QIcon(join(DATADIR,'images','bas.png')))
+                self.onglet_selection_bouton_descendre[exercice].setIcon(QtGui.QIcon(join(DATADIR,"images","bas.png")))
                 self.onglet_selection_bouton_descendre[exercice].setToolTip(u"Descendre l'exercice dans la liste")
                 self.onglet_selection_gridLayout.addWidget(self.onglet_selection_bouton_descendre[exercice], 2*exercice, 2,2,1)
                 QtCore.QObject.connect(self.onglet_selection_bouton_descendre[exercice],QtCore.SIGNAL("clicked()"), partial(self.deplacer_exercice,exercice,"bas"))
@@ -571,7 +580,7 @@ class Ui_MainWindow(object):
                     self.onglet_selection_bouton_descendre[exercice].setEnabled(False)
                 ## Bouton Supprimer
                 self.onglet_selection_bouton_supprimer.append(QtGui.QPushButton(self.onglet_selection_ligne[exercice]))
-                self.onglet_selection_bouton_supprimer[exercice].setIcon(QtGui.QIcon(join(DATADIR,'images','supprimer.png')))
+                self.onglet_selection_bouton_supprimer[exercice].setIcon(QtGui.QIcon(join(DATADIR,"images","supprimer.png")))
                 self.onglet_selection_bouton_supprimer[exercice].setToolTip(u"Supprimer l'exercice de la liste")
                 self.onglet_selection_gridLayout.addWidget(self.onglet_selection_bouton_supprimer[exercice], 2*exercice, 3,2,1)
                 QtCore.QObject.connect(self.onglet_selection_bouton_supprimer[exercice],QtCore.SIGNAL("clicked()"), partial(self.supprimer_exercice,exercice))
@@ -579,7 +588,7 @@ class Ui_MainWindow(object):
                 self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(20, 20), 2*exercice, 4, 2, 1)
                 ## Bulle d'aide
                 self.onglet_selection_label_aide.append(QtGui.QLabel(self.onglet_selection_ligne[exercice]))
-                self.onglet_selection_label_aide[exercice].setText(r'<img src="%s" />' %join(DATADIR, "vignettes" ,"%s" % self.environnement,'%s.jpg' % self.liste_exercice_selectionner[exercice][1]))
+                self.onglet_selection_label_aide[exercice].setText(r'<img src="%s" />' %join(DATADIR, "vignettes" ,"%s" % self.environnement,"%s.jpg" % self.liste_exercice_selectionner[exercice][1]))
                 self.onglet_selection_gridLayout.addWidget(self.onglet_selection_label_aide[exercice], 2*exercice, 5,2,1)
                 ## Ajout d'une colonne redimensionnable en largeur
                 self.onglet_selection_gridLayout.addItem(QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum), 2*exercice, 6, 2, 1)
@@ -706,7 +715,8 @@ class Ui_MainWindow(object):
         self.onglet_option_scroll.setWidget(self.onglet_option_widget)
         ## Creation d'une grille verticale dans le QWidget
         self.onglet_option_verticalLayout = QtGui.QVBoxLayout(self.onglet_option_widget)
-        ## Intitulé du categorie
+        ############## Catégorie Système
+        ## Intitulé de la categorie
         self.onglet_option_label_categorie_0 = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_categorie_0.setText(u"<center><strong>Système</strong></center>")
         self.onglet_option_verticalLayout.addWidget(self.onglet_option_label_categorie_0)
@@ -724,17 +734,21 @@ class Ui_MainWindow(object):
         self.onglet_option_label_chemin_fichier = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_chemin_fichier.setText(u"Chemin pour enregistrer les fichiers : ")
         self.onglet_option_verticalLayout_01.addWidget(self.onglet_option_label_chemin_fichier)
-        ## Label chemin_executable par défaut pour la compilation Latex
-        self.onglet_option_label_chemin_executable = QtGui.QLabel(self.onglet_option_widget)
-        self.onglet_option_label_chemin_executable.setText(u"Chemin vers les executables Latex : ")
-        self.onglet_option_verticalLayout_01.addWidget(self.onglet_option_label_chemin_executable)
+        ## Label compilateur_externe
+        self.onglet_option_label_compilateur_externe = QtGui.QLabel(self.onglet_option_widget)
+        self.onglet_option_label_compilateur_externe.setText(u"Utiliser le compilateur externe : ")
+        self.onglet_option_verticalLayout_01.addWidget(self.onglet_option_label_compilateur_externe)
+        ## Label chemin_compilateur_externe
+        self.onglet_option_label_chemin_compilateur_externe = QtGui.QLabel(self.onglet_option_widget)
+        self.onglet_option_label_chemin_compilateur_externe.setText(u"Chemin vers le compilateur externe : ")
+        self.onglet_option_verticalLayout_01.addWidget(self.onglet_option_label_chemin_compilateur_externe)
         ## Layout pour les noms d'options, en haut à droite
         self.onglet_option_verticalLayout_02 = QtGui.QVBoxLayout()
         self.onglet_option_horizontalLayout_01.addLayout(self.onglet_option_verticalLayout_02)
         ## LineEdit nom du fichier
         self.onglet_option_nom_fichier = QtGui.QLineEdit(self.onglet_option_widget)
         self.onglet_option_nom_fichier.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.onglet_option_nom_fichier.setText(self.config['nom_fichier'])
+        self.onglet_option_nom_fichier.setText(self.config["nom_fichier"])
         self.onglet_option_verticalLayout_02.addWidget(self.onglet_option_nom_fichier)
         ## Conteneur horizontal
         self.onglet_option_horizontalLayout_02 = QtGui.QHBoxLayout()
@@ -742,7 +756,7 @@ class Ui_MainWindow(object):
         ## LineEdit chemin par défaut pour l'enregistrement des fichiers
         self.onglet_option_chemin_fichier = QtGui.QLineEdit(self.onglet_option_widget)
         self.onglet_option_chemin_fichier.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.onglet_option_chemin_fichier.setText(self.config['chemin_fichier'])
+        self.onglet_option_chemin_fichier.setText(self.config["chemin_fichier"])
         self.onglet_option_horizontalLayout_02.addWidget(self.onglet_option_chemin_fichier)
         ## Bouton parcourir
         self.onglet_option_pushButton_parcourir_chemin_fichier = QtGui.QPushButton(self.onglet_option_widget)
@@ -750,21 +764,28 @@ class Ui_MainWindow(object):
         self.onglet_option_pushButton_parcourir_chemin_fichier.setText("Parcourir")
         QtCore.QObject.connect(self.onglet_option_pushButton_parcourir_chemin_fichier,QtCore.SIGNAL("clicked()"), self.option_parcourir_chemin_fichier)
         self.onglet_option_horizontalLayout_02.addWidget(self.onglet_option_pushButton_parcourir_chemin_fichier)
+        ## CheckBox "Compilateur externe"
+        self.checkBox_compilateur_externe = QtGui.QCheckBox(self.onglet_option_widget)
+        self.checkBox_compilateur_externe.setToolTip(u"Actimaths doit-il utiliser le compilateur externe pour la compilation ?")
+        self.checkBox_compilateur_externe.setChecked(int(self.config["compilateur_externe"]))
+        QtCore.QObject.connect(self.checkBox_compilateur_externe,QtCore.SIGNAL("stateChanged(int)"), self.option_compilateur_externe)
+        self.onglet_option_verticalLayout_02.addWidget(self.checkBox_compilateur_externe)
         ## Conteneur horizontal
         self.onglet_option_horizontalLayout_03 = QtGui.QHBoxLayout()
         self.onglet_option_verticalLayout_02.addLayout(self.onglet_option_horizontalLayout_03)
-        ## LineEdit chemin_executable par défaut pour la compilation Latex
-        self.onglet_option_chemin_executable = QtGui.QLineEdit(self.onglet_option_widget)
-        self.onglet_option_chemin_executable.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.onglet_option_chemin_executable.setText(self.config['chemin_executable'])
-        self.onglet_option_horizontalLayout_03.addWidget(self.onglet_option_chemin_executable)
+        ## LineEdit chemin_compilateur_externe par défaut pour la compilation Latex
+        self.onglet_option_chemin_compilateur_externe = QtGui.QLineEdit(self.onglet_option_widget)
+        self.onglet_option_chemin_compilateur_externe.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.onglet_option_chemin_compilateur_externe.setText(self.config["chemin_compilateur_externe"])
+        self.onglet_option_horizontalLayout_03.addWidget(self.onglet_option_chemin_compilateur_externe)
         ## Bouton parcourir
-        self.onglet_option_pushButton_parcourir_chemin_executable = QtGui.QPushButton(self.onglet_option_widget)
-        self.onglet_option_pushButton_parcourir_chemin_executable.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0  rgba(255, 127, 0, 255), stop:1 rgba(255, 247, 177, 255));")
-        self.onglet_option_pushButton_parcourir_chemin_executable.setText("Parcourir")
-        QtCore.QObject.connect(self.onglet_option_pushButton_parcourir_chemin_executable,QtCore.SIGNAL("clicked()"), self.option_parcourir_chemin_executable)
-        self.onglet_option_horizontalLayout_03.addWidget(self.onglet_option_pushButton_parcourir_chemin_executable)
-        ## Intitulé du categorie
+        self.onglet_option_pushButton_parcourir_chemin_compilateur_externe = QtGui.QPushButton(self.onglet_option_widget)
+        self.onglet_option_pushButton_parcourir_chemin_compilateur_externe.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0  rgba(255, 127, 0, 255), stop:1 rgba(255, 247, 177, 255));")
+        self.onglet_option_pushButton_parcourir_chemin_compilateur_externe.setText("Parcourir")
+        QtCore.QObject.connect(self.onglet_option_pushButton_parcourir_chemin_compilateur_externe,QtCore.SIGNAL("clicked()"), self.option_parcourir_chemin_compilateur_externe)
+        self.onglet_option_horizontalLayout_03.addWidget(self.onglet_option_pushButton_parcourir_chemin_compilateur_externe)
+        ############## Catégorie Information
+        ## Intitulé de la categorie
         self.onglet_option_label_categorie_1 = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_categorie_1.setText(u"<center><strong>Informations</strong></center>")
         self.onglet_option_verticalLayout.addWidget(self.onglet_option_label_categorie_1)
@@ -800,26 +821,26 @@ class Ui_MainWindow(object):
         ## LineEdit titre des fiches
         self.titre_fiche = QtGui.QLineEdit(self.onglet_option_widget)
         self.titre_fiche.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.titre_fiche.setText(self.config['titre_fiche'])
+        self.titre_fiche.setText(self.config["titre_fiche"])
         self.onglet_option_verticalLayout_2.addWidget(self.titre_fiche)
         ## LineEdit nom de l'établissement
         self.nom_etablissement = QtGui.QLineEdit(self.onglet_option_widget)
         self.nom_etablissement.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.nom_etablissement.setText(self.config['nom_etablissement'])
+        self.nom_etablissement.setText(self.config["nom_etablissement"])
         self.onglet_option_verticalLayout_2.addWidget(self.nom_etablissement)
         ## LineEdit nom de l'auteur
         self.nom_auteur = QtGui.QLineEdit(self.onglet_option_widget)
         self.nom_auteur.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.nom_auteur.setText(self.config['nom_auteur'])
+        self.nom_auteur.setText(self.config["nom_auteur"])
         self.onglet_option_verticalLayout_2.addWidget(self.nom_auteur)
         ## ComboBox date de l'activité mentale
         self.date_activite = QtGui.QComboBox(self.onglet_option_widget)
         self.date_activite.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.date_activite.setEditable(True)
-        self.date_activite.addItem(date.today().strftime("%A %d %B %Y").decode('utf-8','replace'))
-        self.date_activite.addItem((date.today()+timedelta(days=1)).strftime("%A %d %B %Y").decode('utf-8','replace'))
-        self.date_activite.addItem((date.today()+timedelta(days=2)).strftime("%A %d %B %Y").decode('utf-8','replace'))
-        self.date_activite.addItem((date.today()+timedelta(days=3)).strftime("%A %d %B %Y").decode('utf-8','replace'))
+        self.date_activite.addItem(date.today().strftime("%A %d %B %Y").decode("utf-8","replace"))
+        self.date_activite.addItem((date.today()+timedelta(days=1)).strftime("%A %d %B %Y").decode("utf-8","replace"))
+        self.date_activite.addItem((date.today()+timedelta(days=2)).strftime("%A %d %B %Y").decode("utf-8","replace"))
+        self.date_activite.addItem((date.today()+timedelta(days=3)).strftime("%A %d %B %Y").decode("utf-8","replace"))
         self.onglet_option_verticalLayout_2.addWidget(self.date_activite)
         ## ComboBox niveau
         self.comboBox_niveau = QtGui.QComboBox(self.onglet_option_widget)
@@ -835,7 +856,8 @@ class Ui_MainWindow(object):
         self.ligne_separation_1.setFrameShape(QtGui.QFrame.HLine)
         self.ligne_separation_1.setFrameShadow(QtGui.QFrame.Sunken)
         self.onglet_option_verticalLayout.addWidget(self.ligne_separation_1)
-        ## Intitulé du categorie
+        ############## Catégorie Modèle et sortie
+        ## Intitulé de la categorie
         self.onglet_option_label_categorie_2 = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_categorie_2.setText(u"<center><strong>Modèles et sorties</strong></center>")
         self.onglet_option_verticalLayout.addWidget(self.onglet_option_label_categorie_2)
@@ -849,14 +871,14 @@ class Ui_MainWindow(object):
         self.checkBox_sujet_presentation = QtGui.QCheckBox(self.onglet_option_widget)
         self.checkBox_sujet_presentation.setText(u"Créer le sujet vidéoprojetable")
         self.checkBox_sujet_presentation.setToolTip(u"Actimaths doit-il créer le sujet vidéoprojetable ?")
-        self.checkBox_sujet_presentation.setChecked(int(self.config['sujet_presentation']))
+        self.checkBox_sujet_presentation.setChecked(int(self.config["sujet_presentation"]))
         QtCore.QObject.connect(self.checkBox_sujet_presentation,QtCore.SIGNAL("stateChanged(int)"), self.option_modele_presentation)
         self.onglet_option_verticalLayout_3.addWidget(self.checkBox_sujet_presentation)
         ## CheckBox "page sujet ou non"
         self.checkBox_sujet_page = QtGui.QCheckBox(self.onglet_option_widget)
         self.checkBox_sujet_page.setText(u"Créer le sujet papier")
         self.checkBox_sujet_page.setToolTip(u"Actimaths doit-il créer le sujet papier imprimable ?")
-        self.checkBox_sujet_page.setChecked(int(self.config['sujet_page']))
+        self.checkBox_sujet_page.setChecked(int(self.config["sujet_page"]))
         QtCore.QObject.connect(self.checkBox_sujet_page,QtCore.SIGNAL("stateChanged(int)"), self.option_modele_page)
         self.onglet_option_verticalLayout_3.addWidget(self.checkBox_sujet_page)
         ## Conteneur vertical
@@ -866,14 +888,14 @@ class Ui_MainWindow(object):
         self.checkBox_corrige_presentation = QtGui.QCheckBox(self.onglet_option_widget)
         self.checkBox_corrige_presentation.setText(u"Créer le corrigé vidéoprojetable")
         self.checkBox_corrige_presentation.setToolTip(u"Actimaths doit-il créer le corrigé vidéoprojetable ?")
-        self.checkBox_corrige_presentation.setChecked(int(self.config['corrige_presentation']))
+        self.checkBox_corrige_presentation.setChecked(int(self.config["corrige_presentation"]))
         QtCore.QObject.connect(self.checkBox_corrige_presentation,QtCore.SIGNAL("stateChanged(int)"), self.option_modele_presentation)
         self.onglet_option_verticalLayout_4.addWidget(self.checkBox_corrige_presentation)
         ## CheckBox "page corrigés ou non"
         self.checkBox_corrige_page = QtGui.QCheckBox(self.onglet_option_widget)
         self.checkBox_corrige_page.setText(u"Créer le corrigé papier")
         self.checkBox_corrige_page.setToolTip(u"Actimaths doit-il créer le corrigé papier imprimable ?")
-        self.checkBox_corrige_page.setChecked(int(self.config['corrige_page']))
+        self.checkBox_corrige_page.setChecked(int(self.config["corrige_page"]))
         QtCore.QObject.connect(self.checkBox_corrige_page,QtCore.SIGNAL("stateChanged(int)"), self.option_modele_page)
         self.onglet_option_verticalLayout_4.addWidget(self.checkBox_corrige_page)
         ## Espace horizontal
@@ -895,19 +917,20 @@ class Ui_MainWindow(object):
         ## ComboBox modèles de présentation
         self.comboBox_modele_presentation = QtGui.QComboBox(self.onglet_option_widget)
         self.comboBox_modele_presentation.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.option_cherche_modele('presentation')
+        self.option_cherche_modele("presentation")
         self.onglet_option_verticalLayout_6.addWidget(self.comboBox_modele_presentation)
         ## ComboBox modèles de page papier
         self.comboBox_modele_page = QtGui.QComboBox(self.onglet_option_widget)
         self.comboBox_modele_page.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.option_cherche_modele('page')
+        self.option_cherche_modele("page")
         self.onglet_option_verticalLayout_6.addWidget(self.comboBox_modele_page)
         ## Ligne de séparation
         self.ligne_separation_2 = QtGui.QFrame(self.onglet_option_widget)
         self.ligne_separation_2.setFrameShape(QtGui.QFrame.HLine)
         self.ligne_separation_2.setFrameShadow(QtGui.QFrame.Sunken)
         self.onglet_option_verticalLayout.addWidget(self.ligne_separation_2)
-        ## Intitulé du categorie
+        ############## Catégorie Paramètre de compilation
+        ## Intitulé de la categorie
         self.onglet_option_label_categorie_3 = QtGui.QLabel(self.onglet_option_widget)
         self.onglet_option_label_categorie_3.setText(u"<center><strong>Paramètres de compilation</strong></center>")
         self.onglet_option_verticalLayout.addWidget(self.onglet_option_label_categorie_3)
@@ -918,20 +941,20 @@ class Ui_MainWindow(object):
         self.checkBox_creer_pdf = QtGui.QCheckBox(self.onglet_option_widget)
         self.checkBox_creer_pdf.setText(u"Créer les PDF")
         self.checkBox_creer_pdf.setToolTip(u"Actimaths doit-il créer les PDF à partir des sources TeX ?")
-        self.checkBox_creer_pdf.setChecked(int(self.config['creer_pdf']))
+        self.checkBox_creer_pdf.setChecked(int(self.config["creer_pdf"]))
         QtCore.QObject.connect(self.checkBox_creer_pdf,QtCore.SIGNAL("stateChanged(int)"), self.option_creer_pdf)
         self.onglet_option_horizontalLayout_4.addWidget(self.checkBox_creer_pdf)
         ## CheckBox "Effacer les TeX"
         self.checkBox_effacer_tex = QtGui.QCheckBox(self.onglet_option_widget)
         self.checkBox_effacer_tex.setText(u"Effacer les TeX")
         self.checkBox_effacer_tex.setToolTip(u"Actimaths doit-il supprimer les sources TeX ?")
-        self.checkBox_effacer_tex.setChecked(int(self.config['effacer_tex']))
+        self.checkBox_effacer_tex.setChecked(int(self.config["effacer_tex"]))
         self.onglet_option_horizontalLayout_4.addWidget(self.checkBox_effacer_tex)
         ## CheckBox "afficher les PDF ou non"
         self.checkBox_afficher_pdf = QtGui.QCheckBox(self.onglet_option_widget)
         self.checkBox_afficher_pdf.setText(u"Afficher les PDF")
         self.checkBox_afficher_pdf.setToolTip(u"Actimaths doit-il afficher les PDF à la fin de la création ?")
-        self.checkBox_afficher_pdf.setChecked(int(self.config['afficher_pdf']))
+        self.checkBox_afficher_pdf.setChecked(int(self.config["afficher_pdf"]))
         self.onglet_option_horizontalLayout_4.addWidget(self.checkBox_afficher_pdf)
         ## Espace vertical
         self.onglet_option_verticalLayout.addItem(QtGui.QSpacerItem(20, 177, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding))
@@ -948,9 +971,10 @@ class Ui_MainWindow(object):
         self.onglet_option_horizontalLayout_5.addWidget(self.pushButton_enr_opt)
         ## Configuration de l'affichage selon le fichier de configuration ou l'environnement
         self.option_environnement()
-        self.option_creer_pdf()
+        self.option_compilateur_externe()
         self.option_modele_presentation()
         self.option_modele_page()
+        self.option_creer_pdf()
 
     ############## Modifie le chemin d'enregistrement des fiches
     def option_parcourir_chemin_fichier(self):
@@ -958,28 +982,28 @@ class Ui_MainWindow(object):
         if chemin_fichier:
             self.onglet_option_chemin_fichier.setText(chemin_fichier)
 
-    ############## Modifie le chemin vers les executables Latex
-    def option_parcourir_chemin_executable(self):
-        chemin_executable = unicode(QtGui.QFileDialog().getExistingDirectory (self.centralwidget, u"Dossier où trouver les exécutables Latex", unicode(self.onglet_option_chemin_executable.text()), QtGui.QFileDialog.ShowDirsOnly))
-        if chemin_executable:
-            self.onglet_option_chemin_executable.setText(chemin_executable)
+    ############## Modifie le chemin vers le compilateur externe
+    def option_parcourir_chemin_compilateur_externe(self):
+        chemin_compilateur_externe = unicode(QtGui.QFileDialog().getExistingDirectory (self.centralwidget, u"Dossier où trouver les exécutables Latex", unicode(self.onglet_option_chemin_compilateur_externe.text()), QtGui.QFileDialog.ShowDirsOnly))
+        if chemin_compilateur_externe:
+            self.onglet_option_chemin_compilateur_externe.setText(chemin_compilateur_externe)
 
     ############## Active les modèles de présentation selon l'environnement
     def option_cherche_modele(self,presentation):
         modeles = []
-        for fichier in listdir(join(DATADIR,'modeles',self.environnement,presentation)):
+        for fichier in listdir(join(DATADIR,"modeles",self.environnement,presentation)):
             if splitext(fichier)[1] == ".tex":
                 modeles.append(str(fichier[:len(fichier) - 4]))
         modeles.sort()
         for i in range(len(modeles)):
             if modeles[i] != "vignette":
                 exec("self.comboBox_modele_%s.addItem(str(modeles[i]))" %presentation)
-                if modeles[i] == self.config['modele_%s' %presentation]:
+                if modeles[i] == self.config["modele_%s" %presentation]:
                     exec("self.comboBox_modele_%s.setCurrentIndex(i)" %presentation)
 
     ############## Active les modèles de présentation selon l'environnement
     def option_environnement(self):
-        if self.environnement != 'actimaths':
+        if self.environnement != "actimaths":
             self.checkBox_sujet_presentation.setChecked(False)
             self.checkBox_sujet_presentation.setEnabled(False)
             self.checkBox_corrige_presentation.setChecked(False)
@@ -988,15 +1012,15 @@ class Ui_MainWindow(object):
             self.comboBox_modele_presentation.setEnabled(False)
 
     ############## Active l'affichage des PDF de l'onglet des options
-    def option_creer_pdf(self):
-        if not self.checkBox_creer_pdf.isChecked():
-            self.checkBox_effacer_tex.setChecked(False)
-            self.checkBox_effacer_tex.setEnabled(False)
-            self.checkBox_afficher_pdf.setChecked(False)
-            self.checkBox_afficher_pdf.setEnabled(False)
+    def option_compilateur_externe(self):
+        if not self.checkBox_compilateur_externe.isChecked():
+            self.onglet_option_chemin_compilateur_externe.setEnabled(False)
+            self.onglet_option_pushButton_parcourir_chemin_compilateur_externe.setEnabled(False)
+            self.onglet_option_label_chemin_compilateur_externe.setEnabled(False)
         else:
-            self.checkBox_effacer_tex.setEnabled(True)
-            self.checkBox_afficher_pdf.setEnabled(True)
+            self.onglet_option_chemin_compilateur_externe.setEnabled(True)
+            self.onglet_option_pushButton_parcourir_chemin_compilateur_externe.setEnabled(True)
+            self.onglet_option_label_chemin_compilateur_externe.setEnabled(True)
 
     ############## Active le choix du modèle de présentation de l'onglet des options
     def option_modele_presentation(self):
@@ -1016,6 +1040,17 @@ class Ui_MainWindow(object):
             self.label_modele_page.setEnabled(True)
             self.comboBox_modele_page.setEnabled(True)
 
+    ############## Active l'affichage des PDF de l'onglet des options
+    def option_creer_pdf(self):
+        if not self.checkBox_creer_pdf.isChecked():
+            self.checkBox_effacer_tex.setChecked(False)
+            self.checkBox_effacer_tex.setEnabled(False)
+            self.checkBox_afficher_pdf.setChecked(False)
+            self.checkBox_afficher_pdf.setEnabled(False)
+        else:
+            self.checkBox_effacer_tex.setEnabled(True)
+            self.checkBox_afficher_pdf.setEnabled(True)
+
     ###========================================================================
     ### Fonctions de gestion du fichier de configuration
     ###========================================================================
@@ -1023,26 +1058,27 @@ class Ui_MainWindow(object):
     def enregistrer_config(self):
         tree = etree.parse(self.fichier_configuration)
         root = tree.getroot()
-        options = root.find('options')
-        options .find('nom_fichier').text = unicode(self.onglet_option_nom_fichier.text())
-        options .find('chemin_fichier').text = unicode(self.onglet_option_chemin_fichier.text())
-        options .find('chemin_executable').text = unicode(self.onglet_option_chemin_executable.text())
-        options .find('titre_fiche').text = unicode(self.titre_fiche.text())
-        options .find('nom_etablissement').text = unicode(self.nom_etablissement.text())
-        options .find('nom_auteur').text = unicode(self.nom_auteur.text())
-        options .find('sujet_presentation').text  = str(self.checkBox_sujet_presentation.isChecked())
-        options .find('corrige_presentation').text = str(self.checkBox_corrige_presentation.isChecked())
-        options .find('sujet_page').text  = str(self.checkBox_sujet_page.isChecked())
-        options .find('corrige_page').text = str(self.checkBox_corrige_page.isChecked())
-        options .find('creer_pdf').text = str(self.checkBox_creer_pdf.isChecked())
-        options .find('effacer_tex').text = str(self.checkBox_effacer_tex.isChecked())
-        options .find('afficher_pdf').text = str(self.checkBox_afficher_pdf.isChecked())
-        options .find('modele_presentation').text = unicode(self.comboBox_modele_presentation.currentText())
-        options .find('modele_page').text = unicode(self.comboBox_modele_page.currentText())
-        options .find('environnement').text = self.environnement
-        options .find('affichage').text = self.affichage
-        f = open(self.fichier_configuration, encoding='utf-8', mode='w')
-        f.write(etree.tostring(root, pretty_print=True, encoding="UTF-8", xml_declaration=True).decode('utf-8', 'strict'))
+        options = root.find("options")
+        options .find("nom_fichier").text = unicode(self.onglet_option_nom_fichier.text())
+        options .find("chemin_fichier").text = unicode(self.onglet_option_chemin_fichier.text())
+        options .find("compilateur_externe").text = str(self.checkBox_compilateur_externe.isChecked())
+        options .find("chemin_compilateur_externe").text = unicode(self.onglet_option_chemin_compilateur_externe.text())
+        options .find("titre_fiche").text = unicode(self.titre_fiche.text())
+        options .find("nom_etablissement").text = unicode(self.nom_etablissement.text())
+        options .find("nom_auteur").text = unicode(self.nom_auteur.text())
+        options .find("sujet_presentation").text  = str(self.checkBox_sujet_presentation.isChecked())
+        options .find("corrige_presentation").text = str(self.checkBox_corrige_presentation.isChecked())
+        options .find("sujet_page").text  = str(self.checkBox_sujet_page.isChecked())
+        options .find("corrige_page").text = str(self.checkBox_corrige_page.isChecked())
+        options .find("creer_pdf").text = str(self.checkBox_creer_pdf.isChecked())
+        options .find("effacer_tex").text = str(self.checkBox_effacer_tex.isChecked())
+        options .find("afficher_pdf").text = str(self.checkBox_afficher_pdf.isChecked())
+        options .find("modele_presentation").text = unicode(self.comboBox_modele_presentation.currentText())
+        options .find("modele_page").text = unicode(self.comboBox_modele_page.currentText())
+        options .find("environnement").text = self.environnement
+        options .find("affichage").text = self.affichage
+        f = open(self.fichier_configuration, encoding="utf-8", mode="w")
+        f.write(etree.tostring(root, pretty_print=True, encoding="UTF-8", xml_declaration=True).decode("utf-8", "strict"))
         f.close()
 
     ###========================================================================
@@ -1051,49 +1087,50 @@ class Ui_MainWindow(object):
     ############## Crée les fiches à partir de la liste d'exercices
     def creer_exercices(self):
         ## synchronisation des paramètres
-        self.parametres = {'sujet_presentation': self.checkBox_sujet_presentation.isChecked(),
-                           'corrige_presentation': self.checkBox_corrige_presentation.isChecked(),
-                           'sujet_page': self.checkBox_sujet_page.isChecked(),
-                           'corrige_page': self.checkBox_corrige_page.isChecked(),
-                           'titre': unicode(self.titre_fiche.text()),
-                           'nom_etablissement': unicode(self.nom_etablissement.text()),
-                           'nom_auteur': unicode(self.nom_auteur.text()),
-                           'date_activite': unicode(self.date_activite.currentText()),
-                           'niveau': unicode(self.comboBox_niveau.currentText()),
-                           'nom_fichier': unicode(self.onglet_option_nom_fichier.text()),
-                           'chemin_fichier': unicode(self.onglet_option_chemin_fichier.text()),
-                           'chemin_executable': unicode(self.onglet_option_chemin_executable.text()),
-                           'environnement': self.environnement,
-                           'affichage': self.affichage,
-                           'modele_presentation': unicode(self.comboBox_modele_presentation.currentText()),
-                           'modele_page': unicode(self.comboBox_modele_page.currentText()),
-                           'creer_pdf' : self.checkBox_creer_pdf.isChecked(),
-                           'effacer_tex' : self.checkBox_effacer_tex.isChecked(),
-                           'afficher_pdf' : self.checkBox_afficher_pdf.isChecked()}
+        self.parametres = {"sujet_presentation": self.checkBox_sujet_presentation.isChecked(),
+                           "corrige_presentation": self.checkBox_corrige_presentation.isChecked(),
+                           "sujet_page": self.checkBox_sujet_page.isChecked(),
+                           "corrige_page": self.checkBox_corrige_page.isChecked(),
+                           "titre": unicode(self.titre_fiche.text()),
+                           "nom_etablissement": unicode(self.nom_etablissement.text()),
+                           "nom_auteur": unicode(self.nom_auteur.text()),
+                           "date_activite": unicode(self.date_activite.currentText()),
+                           "niveau": unicode(self.comboBox_niveau.currentText()),
+                           "nom_fichier": unicode(self.onglet_option_nom_fichier.text()),
+                           "chemin_fichier": unicode(self.onglet_option_chemin_fichier.text()),
+                           "compilateur_externe" : self.checkBox_compilateur_externe.isChecked(),
+                           "chemin_compilateur_externe": unicode(self.onglet_option_chemin_compilateur_externe.text()),
+                           "environnement": self.environnement,
+                           "affichage": self.affichage,
+                           "modele_presentation": unicode(self.comboBox_modele_presentation.currentText()),
+                           "modele_page": unicode(self.comboBox_modele_page.currentText()),
+                           "creer_pdf" : self.checkBox_creer_pdf.isChecked(),
+                           "effacer_tex" : self.checkBox_effacer_tex.isChecked(),
+                           "afficher_pdf" : self.checkBox_afficher_pdf.isChecked()}
         ## Creation
         if self.affichage == "csv":
             # Test de l'existence du fichier
             if not(isfile(unicode(self.onglet_csv_chemin.text()))):
-                QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Fichier csv non valide.", QtGui.QMessageBox.Ok ) 
+                QtGui.QMessageBox.warning(self.centralwidget, "Attention !", u"Fichier csv non valide.", QtGui.QMessageBox.Ok ) 
             else:
-                self.parametres ['liste_exercice'] = []
-                self.parametres ['chemin_csv'] = unicode(self.onglet_csv_chemin.text())
+                self.parametres ["liste_exercice"] = []
+                self.parametres ["chemin_csv"] = unicode(self.onglet_csv_chemin.text())
                 self.creer()
         else:
             # Création de la liste d'exercices
-            self.parametres ['liste_exercice'] = []
+            self.parametres ["liste_exercice"] = []
             for exercice in range(len(self.liste_exercice_selectionner)):
                 temps_exercice =  self.onglet_selection_spinBox_temps[exercice].value()
                 commande_exercice = self.liste_exercice_selectionner[exercice][1]
                 parametre_exercice = []
                 for parametre in range(len(self.liste_exercice_selectionner[exercice][3])):
                     parametre_exercice.append(self.onglet_selection_spinBox_parametre[exercice][parametre].value())
-                self.parametres ['liste_exercice'].append((temps_exercice, commande_exercice, parametre_exercice))
+                self.parametres ["liste_exercice"].append((temps_exercice, commande_exercice, parametre_exercice))
             # Test de l'existence de la liste
-            if self.parametres ['liste_exercice'] == []:
-                QtGui.QMessageBox.warning(self.centralwidget, 'Attention !', u"Veuillez sélectionner des exercices...", QtGui.QMessageBox.Ok )    
+            if self.parametres ["liste_exercice"] == []:
+                QtGui.QMessageBox.warning(self.centralwidget, "Attention !", u"Veuillez sélectionner des exercices...", QtGui.QMessageBox.Ok )    
             else:
-                self.parametres ['chemin_csv'] = ""
+                self.parametres ["chemin_csv"] = ""
                 self.creer()
 
     ############## Fonction qui lance le Thread de création
