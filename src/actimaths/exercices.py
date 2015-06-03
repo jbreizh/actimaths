@@ -31,6 +31,7 @@ from csv import reader
 from re import findall
 from subprocess import call
 from traceback import print_exc
+#from threading import Thread
 
 ## Import locaux
 from values import DATADIR
@@ -51,15 +52,24 @@ def creation(parametres):
             (temps[i], question[i], enonce[i], correction[i]) = creation_liste(parametres["liste_exercice"],parametres["environnement"])
     ## Création et affichage de la présentation sujet en PDF
     if parametres["sujet_presentation"]:
+        # Lancement de la création
+        #creation_sujet_presentation = Thread(None, generation, "creation_sujet_presentation", (parametres, temps, question, enonce, correction, "sujet","presentation", ), None)
+        #creation_sujet_presentation.start()
         generation(parametres, temps, question, enonce, correction, "sujet","presentation")
     ## Création et affichage de la présentation corrigé en PDF
     if parametres["corrige_presentation"]:
+        #creation_corrige_presentation = Thread(None, generation, "creation_corrige_presentation", (parametres, temps, question, enonce, correction, "corrige","presentation", ), None)
+        #creation_corrige_presentation.start()
         generation(parametres, temps, question, enonce, correction, "corrige","presentation")
     ## Création et affichage du sujet papier en PDF
     if parametres["sujet_page"]:
+        #creation_sujet_page = Thread(None, generation, "creation_sujet_page", (parametres, temps, question, enonce, correction, "sujet","page", ), None)
+        #creation_sujet_page.start()
         generation(parametres, temps, question, enonce, correction, "sujet","page")
     ## Création et affichage du corrigé papier en PDF
     if parametres["corrige_page"]:
+        #creation_corrige_page = Thread(None, generation, "creation_corrige_page", (parametres, temps, question, enonce, correction, "corrige","page", ), None)
+        #creation_corrige_page.start()
         generation(parametres, temps, question, enonce, correction, "corrige","page")
 
 ############## Génère les exercice à partir du CSV
