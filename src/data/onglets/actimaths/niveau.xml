@@ -247,6 +247,8 @@
       </exercice>
     </categorie>
     <categorie nom="Géométrie">
+      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Parallele" temps="10" description="Geometrie" nom="Dire si des doites sont parallèles ou non"/>
+      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Perpendiculaire" temps="10" description="Geometrie" nom="Dire si des doites sont perpendiculaires ou non"/>
       <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Nature" temps="10" description="Geometrie" nom="Donner la nature d'une droite, demi-droite ou segment"/>
       <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Nommer" temps="10" description="Geometrie" nom="Nommer une droite, demi-droite ou segment"/>
       <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Appartient" temps="10" description="Geometrie" nom="Appartenance à une droite, demi-droite ou segment"/>

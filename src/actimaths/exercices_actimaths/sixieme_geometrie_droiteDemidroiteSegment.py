@@ -57,7 +57,7 @@ def carateristique_duo_point(nom_point):
 def tex_figure(enonce,nom_point,coordonnee_point,duo_point,nature_duo_point,choix_duo_point):
     enonce.append("\\begin{center}")
     enonce.append("\\psset{unit=0.5cm}")
-    enonce.append('\\begin{pspicture*}(-5,-5)(5,5)')
+    enonce.append("\\begin{pspicture*}(-5,-5)(5,5)")
     for i in range(len(nom_point)-1):
         enonce.append("\\pstGeonode(%s,%s){%s}" %(coordonnee_point[i][0],coordonnee_point[i][1],nom_point[i]))
     for i in range(len(duo_point)):
@@ -73,7 +73,53 @@ def tex_figure(enonce,nom_point,coordonnee_point,duo_point,nature_duo_point,choi
         ligne +="{%s}{%s}" %(duo_point[i][0],duo_point[i][1])
         enonce.append(ligne)
     enonce.append("\\pstInterLL{%s}{%s}{%s}{%s}{%s}" %(nom_point[0],nom_point[2],nom_point[1],nom_point[3],nom_point[4]))
-    enonce.append('\\end{pspicture*}')
+    enonce.append("\\end{pspicture*}")
+    enonce.append("\\end{center}")
+
+def tex_perpendiculaire(enonce,angle,corrige):
+    enonce.append("\\begin{center}")
+    enonce.append("\\psset{unit=0.5cm}")
+    enonce.append("\\begin{pspicture*}(-5,-5)(5,5)")
+    # point statique
+    enonce.append("\\pstGeonode[PointSymbol=none,PointName=none](0,0){A}")
+    enonce.append("\\pstGeonode[PointSymbol=none,PointName=none](0,1){B}")
+    # droite de depart
+    enonce.append("\\pstRotation[RotAngle=%s,PointSymbol=none,PointName=none]{A}{B}[C]" %angle[0])
+    enonce.append("\\pstLineAB[nodesepA=-6, nodesepB=-6]{A}{C}")
+    # droite "perpendiculaire"
+    enonce.append("\\pstRotation[RotAngle=%s,PointSymbol=none,PointName=none]{A}{C}[D]" %angle[1])
+    enonce.append("\\pstLineAB[nodesepA=-6, nodesepB=-6]{A}{D}")
+    # Affichage du corrige
+    if corrige:
+        enonce.append("\\pstRotation[RotAngle=90,PointSymbol=none,PointName=none]{A}{C}[E]")
+        enonce.append("\\pstLineAB[nodesepA=-6, nodesepB=-6,linecolor=red]{A}{E}")
+        enonce.append("\\pstRightAngle[linecolor=red]{C}{A}{E}")
+
+    enonce.append("\\end{pspicture*}")
+    enonce.append("\\end{center}")
+
+def tex_parallele(enonce,angle,corrige):
+    enonce.append("\\begin{center}")
+    enonce.append("\\psset{unit=0.5cm}")
+    enonce.append("\\begin{pspicture*}(-5,-5)(5,5)")
+    # point statique
+    enonce.append("\\pstGeonode[PointSymbol=none,PointName=none](0,0){O}")
+    enonce.append("\\pstGeonode[PointSymbol=none,PointName=none](0,-1){A}")
+    enonce.append("\\pstGeonode[PointSymbol=none,PointName=none](0,1){B}")
+
+    enonce.append("\\pstRotation[RotAngle=%s,PointSymbol=none,PointName=none]{O}{A}[C]" %angle[0])
+    enonce.append("\\pstRotation[RotAngle=%s,PointSymbol=none,PointName=none]{O}{B}[D]" %angle[0])
+
+    enonce.append("\\pstRotation[RotAngle=90,PointSymbol=none,PointName=none]{C}{D}[E]")
+    enonce.append("\\pstRotation[RotAngle=%s,PointSymbol=none,PointName=none]{D}{C}[F]" %angle[1])
+
+    enonce.append("\\pstLineAB[nodesepA=-6, nodesepB=-6]{C}{E}")
+    enonce.append("\\pstLineAB[nodesepA=-6, nodesepB=-6]{D}{F}")
+    # Affichage du corrige
+    if corrige:
+        enonce.append("\\pstRotation[RotAngle=90,PointSymbol=none,PointName=none]{D}{C}[G]")
+        enonce.append("\\pstLineAB[nodesepA=-6, nodesepB=-6,linecolor=red]{D}{G}")
+    enonce.append("\\end{pspicture*}")
     enonce.append("\\end{center}")
 
 #------------------construction-----------------------------------------
@@ -152,4 +198,50 @@ def Appartient(parametre):
     else:
          exo.append("$$ %s \\ldots [%s%s] $$" %(nom_point[4],diagonale[choix_diagonale][0],diagonale[choix_diagonale][1]))
          cor.append("$$ %s \\boxed{\\in} [%s%s] $$" %(nom_point[4],diagonale[choix_diagonale][0],diagonale[choix_diagonale][1]))
+    return (exo, cor, question)
+
+def Perpendiculaire(parametre):
+    ## ---Initialisation---
+    question = u"Les deux droites sont elles perpendiculaires :"
+    exo = []
+    cor = []
+    ## ---Calcul des paramètres---
+    perpendiculaire = random.randrange(2)
+    angle=[]
+    angle.append(random.randrange(90))
+    if perpendiculaire:
+        angle.append(90)
+        reponse = "Les droites sont perpendiculaires"
+    else:
+        angle.append(80)
+        reponse = "Les droites ne sont pas perpendiculaires"
+    ## ---Redaction---
+    tex_perpendiculaire(exo, angle, False)
+    tex_perpendiculaire(cor, angle, True)
+    cor.append("\\begin{center}")
+    cor.append("\\fbox{%s}" %reponse)
+    cor.append("\\end{center}")
+    return (exo, cor, question)
+
+def Parallele(parametre):
+    ## ---Initialisation---
+    question = u"Les deux droites sont elles parallèles :"
+    exo = []
+    cor = []
+    ## ---Calcul des paramètres---
+    parallele = random.randrange(2)
+    angle=[]
+    angle.append(random.randrange(90))
+    if parallele:
+        angle.append(90)
+        reponse = u"Les droites sont parallèles"
+    else:
+        angle.append(85)
+        reponse = u"Les droites ne sont pas parallèles"
+    ## ---Redaction---
+    tex_parallele(exo, angle, False)
+    tex_parallele(cor, angle, True)
+    cor.append("\\begin{center}")
+    cor.append("\\fbox{%s}" %reponse)
+    cor.append("\\end{center}")
     return (exo, cor, question)
