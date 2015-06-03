@@ -41,39 +41,41 @@ def creation_menu(liste_exercice):
             # Construction de la ligne correspondant à un exercice
             for exercice in range(len(liste_exercice[onglet][1][categorie][1])):
                 html += u"Commande = \"%s\" \n" % liste_exercice[onglet][1][categorie][1][exercice][2]
-    print html.encode('utf-8')
+    print html.encode("utf-8")
 
 ############## Creation des exercices
 def creation_exercice(environnement,commande,valeur_parametre):
     ## Creation de parametre
-    parametres = {'sujet_presentation': True,
-                  'corrige_presentation': False,
-                  'sujet_page': False,
-                  'corrige_page': False,
-                  'titre': 'test',
-                  'nom_etablissement': 'test',
-                  'nom_auteur': 'test',
-                  'temps_slide': '1',
-                  'date_activite': '1',
-                  'niveau': 'test',
-                  'nom_fichier': 'test',
-                  'chemin_fichier': '/tmp/',
-                  'environnement': environnement,
-                  'affichage': 'niveau',
-                  'modele_presentation': 'vignette',
-                  'modele_page': '',
-                  'creer_pdf': True,
-                  'effacer_tex': True,
-                  'afficher_pdf' : False}
-    parametres['liste_exercice'] = [(10, commande, valeur_parametre)]
+    parametres = {"sujet_presentation": True,
+                  "corrige_presentation": False,
+                  "sujet_page": False,
+                  "corrige_page": False,
+                  "titre": "test",
+                  "nom_etablissement": "test",
+                  "nom_auteur": "test",
+                  "temps_slide": "1",
+                  "date_activite": "1",
+                  "niveau": "test",
+                  "nom_fichier": "test",
+                  "chemin_fichier": "/tmp/",
+                  "compilateur_externe" : False,
+                  "chemin_compilateur_externe": "/tmp/",
+                  "environnement": environnement,
+                  "affichage": "niveau",
+                  "modele_presentation": "vignette",
+                  "modele_page": "",
+                  "creer_pdf": True,
+                  "effacer_tex": True,
+                  "afficher_pdf" : False}
+    parametres["liste_exercice"] = [(10, commande, valeur_parametre)]
     ## Creation des exercices
     creation(parametres)
 
 def creation_vignette(environnement,commande):
     ## Creation de parametre
-    if environnement == 'pyromaths':
+    if environnement == "pyromaths":
         call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf", "-alpha", "Opaque", "-resize", "25%", "-crop", "710x560+0+0", "-fuzz" , "1%" ,"-trim", "-resize", "200x70!", "/tmp/%s.jpg" % commande])
-    elif environnement == 'actimaths':
+    elif environnement == "actimaths":
         call(["convert", "-density", "288", "/tmp/test-sujet-presentation.pdf", "-alpha", "Opaque", "-resize", "25%", "-crop", "182x210+0+40", "-fuzz" , "1%" ,"-trim", "-resize", "200x70!", "/tmp/%s.jpg" % commande])
 
 ###==============================================================
@@ -83,16 +85,16 @@ def main():
     #choix de l'environnement
     choix_environnement = raw_input("Choisir l'environnement : [1]Actimaths [2]Pyromaths ?")
     if choix_environnement == "1":
-        environnement = 'actimaths'
+        environnement = "actimaths"
     else:
-        environnement = 'pyromaths'
+        environnement = "pyromaths"
     #creation de variable
-    liste_exercice = lire_liste_exercice(join(DATADIR, 'onglets', environnement,'niveau.xml'))
+    liste_exercice = lire_liste_exercice(join(DATADIR, "onglets", environnement,"niveau.xml"))
     #choix de l'action
     choix_action = raw_input("Creer la vignette de : [1]Un exercice [2]Tous les exercices ?")
     if choix_action == "1":
         creation_menu(liste_exercice)
-        choix_commande = raw_input("Entrez la commande de l\'exercice : ")
+        choix_commande = raw_input("Entrez la commande de l'exercice : ")
 
     for onglet in range(len(liste_exercice)):
         for categorie in range(len(liste_exercice[onglet][1])):
