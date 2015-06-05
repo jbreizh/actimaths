@@ -80,6 +80,7 @@ import sixieme_nombreCalcul_pose
 import sixieme_nombreCalcul_puissanceDix
 import sixieme_nombreCalcul_quantite
 import sixieme_nombreCalcul_rang
+import troisieme_geometrie_thales
 import troisieme_gestionDonnee_affine
 import troisieme_nombreCalcul_developpements
 import troisieme_nombreCalcul_factorisations

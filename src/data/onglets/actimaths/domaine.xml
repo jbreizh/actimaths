@@ -667,7 +667,12 @@
       </exercice>
     </categorie>
     <categorie nom = "Troisième">
-
+      <exercice commande="troisieme_geometrie_thales.ThalesQuotient" temps="10" description="Geometrie" nom="Écrire l'égalité de Thalès (quotient)"/>
+      <exercice commande="troisieme_geometrie_thales.ThalesTableau" temps="10" description="Geometrie" nom="Écrire l'égalité de Thalès (tableau de proportionnalité)"/>
+      <exercice commande="troisieme_geometrie_thales.ThalesQuotientMesure" temps="10" description="Geometrie" nom="Calculer une longueur manquante avec le théorème de Thalès">
+        <parametre defaut="1" max="1000" min="1" nom="Valeur minimale"/>
+        <parametre defaut="10" max="1000" min="5" nom="Valeur maximale"/>
+      </exercice>
     </categorie>
   </onglet>
   <onglet nom = "Grandeurs et mesures">
