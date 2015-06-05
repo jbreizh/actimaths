@@ -647,10 +647,12 @@
     </categorie>
     <categorie nom = "Quatrième">
       <exercice commande="quatrieme_geometrie_triangle.DroiteParticuliere" temps="10" description="Géometrie" nom="Reconnaître les droites particulières du triangle"/>
-      <exercice commande="quatrieme_geometrie_pythagore.PythagoreTexte" temps="10" description="Geometrie" nom="Théorème de Pythagore (version texte)">
+      <exercice commande="quatrieme_geometrie_pythagore.EgalitePythagoreTexte" temps="10" description="Geometrie" nom="Donner l'égalité de Pythagore (version texte)"/>
+      <exercice commande="quatrieme_geometrie_pythagore.CalculPythagoreTexte" temps="10" description="Geometrie" nom="Calculer une mesure avec Pythagore (version texte)">
         <parametre defaut="20" max="1000" min="10" nom="Valeur maximale"/>
       </exercice>
-      <exercice commande="quatrieme_geometrie_pythagore.PythagoreSchema" temps="10" description="Geometrie" nom="Théorème de Pythagore (version schema)">
+      <exercice commande="quatrieme_geometrie_pythagore.EgalitePythagoreSchema" temps="10" description="Geometrie" nom="Donner l'égalité de Pythagore (version schema)"/>
+      <exercice commande="quatrieme_geometrie_pythagore.CalculPythagoreSchema" temps="10" description="Geometrie" nom="Calculer une mesure avec Pythagore (version schema)">
         <parametre defaut="20" max="1000" min="10" nom="Valeur maximale"/>
       </exercice>
       <exercice commande="quatrieme_geometrie_thales.DroiteMilieu" temps="10" description="Geometrie" nom="Calculer une longueur manquante avec la propriété des milieux">
