@@ -247,8 +247,10 @@
       </exercice>
     </categorie>
     <categorie nom="Géométrie">
-      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Parallele" temps="10" description="Geometrie" nom="Dire si des doites sont parallèles ou non"/>
-      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Perpendiculaire" temps="10" description="Geometrie" nom="Dire si des doites sont perpendiculaires ou non"/>
+      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Parallele" temps="10" description="Geometrie" nom="Reconnaitre des doites parallèles"/>
+      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Perpendiculaire" temps="10" description="Geometrie" nom="Reconnaitre des doites perpendiculaires"/>
+      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.ParallelePropriete" temps="10" description="Geometrie" nom="Reconnaitre des droites parallèles à l'aide des propriétés"/>
+      <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.PerpendiculairePropriete" temps="10" description="Geometrie" nom="Reconnaitre des droites perpendiculaires à l'aide des propriétés"/>
       <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Nature" temps="10" description="Geometrie" nom="Donner la nature d'une droite, demi-droite ou segment"/>
       <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Nommer" temps="10" description="Geometrie" nom="Nommer une droite, demi-droite ou segment"/>
       <exercice commande="sixieme_geometrie_droiteDemidroiteSegment.Appartient" temps="10" description="Geometrie" nom="Appartenance à une droite, demi-droite ou segment"/>
@@ -342,6 +344,26 @@
         <parametre defaut="2" max="3" min="1" nom="Abscisse maximale"/>
       </exercice>
       <exercice commande="cinquieme_gestionDonnee_plan.Lire" temps="10" description="Repérage" nom="Lire les coordonnées d'un point"/>
+      <exercice commande="cinquieme_gestionDonnee_statistique.CalculEffectifSerie" temps="10" description="Statistique" nom="Compléter un tableau caractère-effectif à partir de la série">
+        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="cinquieme_gestionDonnee_statistique.CalculEffectifTableau" temps="10" description="Statistique" nom="Calculer un effectif manquant dans un tableau caractère-effectif">
+        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="cinquieme_gestionDonnee_statistique.CalculEffectifTotal" temps="10" description="Statistique" nom="Calculer l'effectif total dans un tableau caractère-effectif">
+        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="cinquieme_gestionDonnee_statistique.CalculFrequence" temps="10" description="Statistique" nom="Calculer une fréquence manquante dans un tableau caractère-effectif-fréquence">
+        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="cinquieme_gestionDonnee_statistique.CalculAngleDiagramme" temps="10" description="Statistique" nom="Calculer l'angle d'un diagramme dans un tableau caractère-effectif-angle">
+        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+      </exercice>
     </categorie>
     <categorie nom="Nombres et Calculs">
       <exercice commande="cinquieme_nombreCalcul_calcul.RelatifBinome" temps="10" description="Calcul Litteral" nom="Calculer un binome avec un x relatif">
