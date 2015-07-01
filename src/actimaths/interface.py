@@ -227,7 +227,7 @@ class Ui_MainWindow(object):
     def reinitialiser_onglet(self):
         ## On supprime le contenu de l'onglet sélection
         delete(self.onglet_selection_widget)
-        self.onglet_selection_widget = None
+        #self.onglet_selection_widget = None
         ## On vide la liste de sélection
         self.liste_exercice_selectionner = []
         ## initialisation de l'onglet selection
@@ -286,7 +286,7 @@ class Ui_MainWindow(object):
         ## On supprime tous les onglets et on les supprime pour recuperer la memoire
         self.tabWidget.clear()
         delete(self.tabWidget)
-        self.tabWidget = None
+        #self.tabWidget = None
         ## On reconstruit les onglets
         self.tabWidget = QtGui.QTabWidget(self.centralwidget)
         self.tabWidget.setAutoFillBackground(True)
@@ -532,13 +532,13 @@ class Ui_MainWindow(object):
             QtGui.QMessageBox.warning(self.centralwidget, "Attention !", u"Veuillez choisir des exercices...", QtGui.QMessageBox.Ok )
             ## On supprime le contenu de l'onglet selection
             delete(self.onglet_selection_widget)
-            self.onglet_selection_widget = None
+            #self.onglet_selection_widget = None
             ## initialisation de l'onglet selection
             self.initialisation_onglet_selection()    
         else:
             ## On supprime le contenu de l'onglet selection
             delete(self.onglet_selection_widget)
-            self.onglet_selection_widget = None
+            #self.onglet_selection_widget = None
             ## initialisation de l'onglet selection
             self.initialisation_onglet_selection()
             ## Creation d'une grille dans le QWidget
