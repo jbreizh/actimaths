@@ -42,6 +42,7 @@ import cinquieme_nombreCalcul_somme
 import quatrieme_geometrie_pythagore
 import quatrieme_geometrie_thales
 import quatrieme_geometrie_triangle
+import quatrieme_gestionDonnee_statistique
 import quatrieme_grandeurMesure_aire
 import quatrieme_grandeurMesure_perimetre
 import quatrieme_grandeurMesure_volume

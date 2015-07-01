@@ -54,28 +54,35 @@
       </exercice>
       <exercice commande="cinquieme_gestionDonnee_plan.Lire" temps="10" description="Repérage" nom="Lire les coordonnées d'un point"/>
       <exercice commande="cinquieme_gestionDonnee_statistique.CalculEffectifSerie" temps="10" description="Statistique" nom="Compléter un tableau caractère-effectif à partir de la série">
-        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
-        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+        <parametre defaut="1" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="0" nom="Valeur maximale"/>
       </exercice>
       <exercice commande="cinquieme_gestionDonnee_statistique.CalculEffectifTableau" temps="10" description="Statistique" nom="Calculer un effectif manquant dans un tableau caractère-effectif">
-        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
-        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+        <parametre defaut="1" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="0" nom="Valeur maximale"/>
       </exercice>
       <exercice commande="cinquieme_gestionDonnee_statistique.CalculEffectifTotal" temps="10" description="Statistique" nom="Calculer l'effectif total dans un tableau caractère-effectif">
-        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
-        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+        <parametre defaut="1" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="0" nom="Valeur maximale"/>
       </exercice>
       <exercice commande="cinquieme_gestionDonnee_statistique.CalculFrequence" temps="10" description="Statistique" nom="Calculer une fréquence manquante dans un tableau caractère-effectif-fréquence">
-        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
-        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+        <parametre defaut="1" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="0" nom="Valeur maximale"/>
       </exercice>
       <exercice commande="cinquieme_gestionDonnee_statistique.CalculAngleDiagramme" temps="10" description="Statistique" nom="Calculer l'angle d'un diagramme dans un tableau caractère-effectif-angle">
-        <parametre defaut="0" max="100000" min="-100000" nom="Valeur minimale"/>
-        <parametre defaut="10" max="100000" min="-100000" nom="Valeur maximale"/>
+        <parametre defaut="1" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="0" nom="Valeur maximale"/>
       </exercice>
     </categorie>
     <categorie nom = "Quatrième">
-
+      <exercice commande="quatrieme_gestionDonnee_statistique.CalculMoyenne" temps="10" description="Statistique" nom="Calculer la moyenne d'une série statistique">
+        <parametre defaut="1" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="0" nom="Valeur maximale"/>
+      </exercice>
+      <exercice commande="quatrieme_gestionDonnee_statistique.CalculMoyennePonderee" temps="10" description="Statistique" nom="Calculer la moyenne ponderée d'une série statistique">
+        <parametre defaut="1" max="100000" min="0" nom="Valeur minimale"/>
+        <parametre defaut="10" max="100000" min="0" nom="Valeur maximale"/>
+      </exercice>
     </categorie>
     <categorie nom = "Troisième">
 
