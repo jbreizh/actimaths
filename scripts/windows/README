@@ -1,4 +1,5 @@
-dependance:
+dependance de l'environnement de développement :
+
 python (version 2.7.3 OK)
 pyQT (version 4.9.6 pour python 2.7 OK)
 lxml (version 3.0.2 pour python 2.7 OK)
@@ -6,3 +7,7 @@ py2exe (version 0.6.10 pour python 2.7 OK)
 pywin32 (version 218 pour python 2.7 OK)
 innosetup (version 5.4.3 OK)
 
+
+dependance pour texlive :
+
+tlmgr.bat install babel-french beamer cancel ec filehook fontname lm ms multido pgf pst-3d pst-coil pst-eps pst-eucl pst-fill pst-grad pst-math pst-node pst-plot pst-text pst-tools pst-tree pstricks pstricks-add sansmathaccent units wasy wasysym wrapfig xcolor xkeyval

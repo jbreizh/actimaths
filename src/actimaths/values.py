@@ -57,7 +57,7 @@ def configdir():
 	else:
 		return join(home(), ".config", "actimaths")
 
-VERSION = "1.24"
+VERSION = "1.25"
 WEBSITE = "http://mathecailloux.ile.nc"
 DATADIR = data_dir()
 HOME = home()
