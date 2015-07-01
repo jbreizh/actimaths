@@ -116,8 +116,8 @@ def CalculEffectifSerie(parametre):
     tableauSujet = copy.deepcopy(tableau)
     tableauSujet[manquant][1] = "$\\ldots$"
     ## ---Redaction---
-    exo.append(u"Série statistique : \\newline")
-    cor.append(u"Série statistique : \\newline")
+    exo.append(u"Série statistique :")
+    cor.append(u"Série statistique :")
     exo.append("\\begin{center}")
     cor.append("\\begin{center}")
     ligne = ""
@@ -166,11 +166,11 @@ def CalculEffectifTableau(parametre):
             ligne1 += "%s" % tableau[i][1]
         if i != len(tableau)-2:
             ligne1 += "+"
-    ligne1 += "& = & %s \\\\" % effectifTotal
+    ligne1 += "& = %s \\\\" % effectifTotal
     cor.append(ligne1)
-    cor.append("\\ldots + %s & = & %s \\\\" %(somme, effectifTotal))
-    cor.append("\\ldots & = & %s - %s \\\\" %(effectifTotal, somme))
-    cor.append("\\ldots & = & \\boxed{%s} \\\\" %(effectifTotal- somme))
+    cor.append("\\ldots + %s & = %s \\\\" %(somme, effectifTotal))
+    cor.append("\\ldots & = %s - %s \\\\" %(effectifTotal, somme))
+    cor.append("\\ldots & = \\boxed{%s} \\\\" %(effectifTotal- somme))
     cor.append("\\end{aligned}$")
     cor.append("\\end{center}")
     return (exo, cor, question)
@@ -190,7 +190,7 @@ def CalculEffectifTotal(parametre):
     tex_tableau(cor, tableauSujet)
     cor.append("\\begin{center}")
     cor.append("$\\begin{aligned}")
-    ligne1 = "\\ldots & = & "
+    ligne1 = "\\ldots & = "
     for i in range(1, len(tableau)-1):
         ligne1 += "%s" % tableau[i][1]
         if i != len(tableau)-2:
@@ -198,7 +198,7 @@ def CalculEffectifTotal(parametre):
         else:
             ligne1 += "\\\\"
     cor.append(ligne1)
-    cor.append("\\ldots & = & \\boxed{%s} \\\\" %tableau[len(tableau)-1][1])
+    cor.append("\\ldots & = \\boxed{%s} \\\\" %tableau[len(tableau)-1][1])
     cor.append("\\end{aligned}$")
     cor.append("\\end{center}")
     return (exo, cor, question)
@@ -219,8 +219,8 @@ def CalculFrequence(parametre):
     tex_tableau(cor, tableauSujet)
     cor.append("\\begin{center}")
     cor.append("$\\begin{aligned}")
-    cor.append("\\ldots & = & %s \\div %s \\\\" %(tableau[manquant][1],tableau[len(tableau)-1][1]))
-    cor.append("\\ldots & = & \\boxed{%s} \\\\" %tableau[manquant][2])
+    cor.append("\\ldots & = %s \\div %s \\\\" %(tableau[manquant][1],tableau[len(tableau)-1][1]))
+    cor.append("\\ldots & \\approx \\boxed{%s} \\\\" %tableau[manquant][2])
     cor.append("\\end{aligned}$")
     cor.append("\\end{center}")
     return (exo, cor, question)
@@ -241,8 +241,8 @@ def CalculAngleDiagramme(parametre):
     tex_tableau(cor, tableauSujet)
     cor.append("\\begin{center}")
     cor.append("$\\begin{aligned}")
-    cor.append("\\ldots & = & %s \\div %s \\times 360 \\\\" %(tableau[manquant][1],tableau[len(tableau)-1][1]))
-    cor.append("\\ldots & = & \\boxed{%s} \\\\" %tableau[manquant][2])
+    cor.append("\\ldots & = %s \\div %s \\times 360 \\\\" %(tableau[manquant][1],tableau[len(tableau)-1][1]))
+    cor.append("\\ldots & \\approx \\boxed{%s} \\\\" %tableau[manquant][2])
     cor.append("\\end{aligned}$")
     cor.append("\\end{center}")
     return (exo, cor, question)
